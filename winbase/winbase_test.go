@@ -2,7 +2,7 @@ package winbase
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside/windows/types"
+	. "github.com/tHinqa/outside-windows/types"
 	"syscall"
 	"testing"
 )

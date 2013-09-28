@@ -1,7 +1,7 @@
 package winuser
 
 import . "github.com/tHinqa/outside"
-import . "github.com/tHinqa/outside/windows/types"
+import . "github.com/tHinqa/outside-windows/types"
 import "testing"
 import . "fmt"
 
