@@ -1,4 +1,4 @@
-## *windows*: Win32 API definitions for the Go language (*PRERELEASE*)
+## *outside-windows*: Win32 API definitions for the Go language *(PRERELEASE)*
 
 #### Fire off quick questions to [@tHinqa](http://twitter.com/tHinqa) on Twitter
 
