@@ -1,8 +1,12 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package ole2 provides API definitions for accessing
+//ole32aut32.dll and ole32.dll.
 package ole2
 
 import (
 	. "github.com/tHinqa/outside"
-	//	_ "github.com/tHinqa/outside/win32/ole32"
 	. "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/oleaut32"
 )

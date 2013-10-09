@@ -1,3 +1,8 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package winsock2 provides API definitions for accessing
+//ws2_32.dll.
 package winsock2
 
 import (

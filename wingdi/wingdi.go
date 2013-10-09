@@ -1,3 +1,8 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package wingdi provides API definitions for accessing
+//gdi32.dll and opengl32.dll.
 package wingdi
 
 import (

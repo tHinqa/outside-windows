@@ -1,3 +1,8 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package lzexpand provides API definitions for accessing
+//the lz functions in kernel32.dll.
 package lzexpand
 
 import (

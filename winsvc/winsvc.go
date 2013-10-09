@@ -1,3 +1,8 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package winsvc provides API definitions for accessing
+//advapi32.dll.
 package winsvc
 
 import (

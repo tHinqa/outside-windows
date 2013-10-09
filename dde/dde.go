@@ -1,3 +1,8 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package dde provides API definitions for accessing dde
+//functions of user32.dll.
 package dde
 
 import (

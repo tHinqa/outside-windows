@@ -1,3 +1,8 @@
+// Copyright (c) 2013 Tony Wilson. All rights reserved.
+// See LICENSE file for permissions and restrictions.
+
+//Package shellapi provides API definitions for accessing
+//shell32.dll.
 package shellapi
 
 import (
