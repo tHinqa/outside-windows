@@ -2361,6 +2361,7 @@ type LOGFONTA struct {
 	PitchAndFamily BYTE
 	FaceName       [LF_FACESIZE]AChar
 }
+
 type LOGFONTW struct {
 	Height         LONG
 	Width          LONG

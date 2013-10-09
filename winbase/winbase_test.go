@@ -7,7 +7,6 @@ import (
 	"testing"
 )
 
-import . "fmt"
 import . "unsafe"
 
 func init() {
@@ -24,18 +23,18 @@ func Test(t *testing.T) {
 	Buffer := new(MEMORYSTATUSEX)
 	SetStructSize(Buffer)
 	ret := GlobalMemoryStatusEx(Buffer)
-	Printf("%v %+v\n", ret, *Buffer)
+	t.Logf("%v %+v\n", ret, *Buffer)
 
 	var a, i DWORD
 	var b BOOL
-	Printf("%v %v %v %v\n", GetSystemTimeAdjustment(&a, &i, &b), a, i, b)
+	t.Logf("%v %v %v %v\n", GetSystemTimeAdjustment(&a, &i, &b), a, i, b)
 
 	GetStartupInfo(&SI)
 	GetStartupInfo(&SI)
-	Printf("%+v\n%s\n%s\n", SI, *SI.Desktop, *SI.Title)
+	t.Logf("%+v\n%s\n%s\n", SI, *SI.Desktop, *SI.Title)
 
 	GetLocalTime(&ST)
-	Printf("%+v\n", ST)
+	t.Logf("%+v\n", ST)
 }
 
 func BenchmarkSyscall(b *testing.B) {
