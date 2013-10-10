@@ -7,1479 +7,1478 @@ package winuser
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/user32"
 )
 
-func CopyCursor(cur HCURSOR) HCURSOR {
-	return HCURSOR(CopyIcon(HICON(cur)))
+func CopyCursor(cur T.HCURSOR) T.HCURSOR {
+	return T.HCURSOR(CopyIcon(T.HICON(cur)))
 }
 
-func CreateDialog(Instance HINSTANCE, TemplateName VString, WndParent HWND, DialogFunc DLGPROC) HWND {
-	return CreateDialogParam(Instance, TemplateName, WndParent, DialogFunc, 0)
+func CreateDialog(instance T.HINSTANCE, templateName VString, wndParent T.HWND, dialogFunc T.DLGPROC) T.HWND {
+	return CreateDialogParam(instance, templateName, wndParent, dialogFunc, 0)
 }
 
-func CreateDialogIndirect(Instance HINSTANCE, Template DLGTEMPLATE, WndParent HWND, DialogFunc DLGPROC) HWND {
-	return CreateDialogIndirectParam(Instance, Template, WndParent, DialogFunc, 0)
+func CreateDialogIndirect(instance T.HINSTANCE, template T.DLGTEMPLATE, wndParent T.HWND,dialogFunc T.DLGPROC) T.HWND {
+	return CreateDialogIndirectParam(instance, template, wndParent, dialogFunc, 0)
 }
 
-func CreateWindow(className, WindowName VString, Style WINDOW_STYLE, X, Y, Width, Height int, WndParent HWND, Menu HMENU, Instance HINSTANCE, Param *VOID) HWND {
-	return CreateWindowEx(0, className, WindowName, Style, X, Y, Width, Height, WndParent, Menu, Instance, Param)
+func CreateWindow(className, windowName VString, style T.WINDOW_STYLE, x, y, width, height int, wndParent T.HWND, menu T.HMENU, instance T.HINSTANCE, param *T.VOID) T.HWND {
+	return CreateWindowEx(0, className, windowName, style, x, y, width, height, wndParent, menu, instance, param)
 }
 
-func DialogBox(Instance HINSTANCE, Template VString, WndParent HWND, DialogFunc DLGPROC) INT_PTR {
-	return DialogBoxParam(Instance, Template, WndParent, DialogFunc, 0)
+func DialogBox(instance T.HINSTANCE, template VString, wndParent T.HWND, dialogFunc T.DLGPROC) T.INT_PTR {
+	return DialogBoxParam(instance, template, wndParent, dialogFunc, 0)
 }
 
-func DialogBoxIndirect(Instance HINSTANCE, Template DLGTEMPLATE, WndParent HWND, DialogFunc DLGPROC) INT_PTR {
-	return DialogBoxIndirectParam(Instance, Template, WndParent, DialogFunc, 0)
+func DialogBoxIndirect(instance T.HINSTANCE, template T.DLGTEMPLATE, wndParent T.HWND, dialogFunc T.DLGPROC) T.INT_PTR {
+	return DialogBoxIndirectParam(instance, template, wndParent, dialogFunc, 0)
 }
 
-func EnumTaskWindows(Task DWORD, fn WNDENUMPROC, Param LPARAM) BOOL {
-	return EnumThreadWindows(Task, fn, Param)
+func EnumTaskWindows(task T.DWORD, fn T.WNDENUMPROC, param T.LPARAM) T.BOOL {
+	return EnumThreadWindows(task, fn, param)
 }
 
-func GetNextWindow(Wnd HWND, cmd UINT) HWND {
+func GetNextWindow(Wnd T.HWND, cmd T.UINT) T.HWND {
 	return GetWindow(Wnd, cmd)
 }
 
 func GetSysModalWindow() {}
 
-func GetWindowTask(Wnd HWND) HANDLE {
-	return HANDLE(GetWindowThreadProcessId(Wnd, nil))
+func GetWindowTask(Wnd T.HWND) T.HANDLE {
+	return T.HANDLE(GetWindowThreadProcessId(Wnd, nil))
 }
 
-func SetSysModalWindow(Wnd HWND) {}
+func SetSysModalWindow(Wnd T.HWND) {}
 
 type (
-	va_list  Fake_type_Fix_me
-	variadic Fake_type_Fix_me
+	va_list  T.Fake_type_Fix_me
+	variadic T.Fake_type_Fix_me
 )
 
 var (
-	ActivateKeyboardLayout func(hkl HKL, flags UINT) HKL
+	ActivateKeyboardLayout func(hkl T.HKL, flags T.UINT) T.HKL
 
 	AdjustWindowRect func(
-		rect *RECT, style DWORD, menu BOOL) BOOL
+		rect *T.RECT, style T.DWORD, menu T.BOOL) T.BOOL
 
 	AdjustWindowRectEx func(
-		rect *RECT, style DWORD, menu BOOL, exStyle DWORD) BOOL
+		rect *T.RECT, style T.DWORD, menu T.BOOL, exStyle T.DWORD) T.BOOL
 
-	AllowSetForegroundWindow func(processId DWORD) BOOL
+	AllowSetForegroundWindow func(processId T.DWORD) T.BOOL
 
-	AnimateWindow func(w HWND, time DWORD, flags DWORD) BOOL
+	AnimateWindow func(w T.HWND, time T.DWORD, flags T.DWORD) T.BOOL
 
-	AnyPopup func() BOOL
+	AnyPopup func() T.BOOL
 
 	AppendMenu func(
-		m HMENU,
-		flags UINT,
-		idNewItem UINT_PTR,
-		newItem VString) BOOL
+		m T.HMENU,
+		flags T.UINT,
+		idNewItem T.UINT_PTR,
+		newItem VString) T.BOOL
 
-	ArrangeIconicWindows func(w HWND) UINT
+	ArrangeIconicWindows func(w T.HWND) T.UINT
 
-	AttachThreadInput func(attach, to DWORD, flag BOOL) BOOL
+	AttachThreadInput func(attach, to T.DWORD, flag T.BOOL) T.BOOL
 
-	BeginDeferWindowPos func(numWindows int) HDWP
+	BeginDeferWindowPos func(numWindows int) T.HDWP
 
-	BeginPaint func(w HWND, paint *PAINTSTRUCT) HDC
+	BeginPaint func(w T.HWND, paint *T.PAINTSTRUCT) T.HDC
 
-	BringWindowToTop func(w HWND) BOOL
+	BringWindowToTop func(w T.HWND) T.BOOL
 
 	BroadcastSystemMessage func(
-		flags DWORD,
-		info *DWORD,
-		msg UINT,
-		w WPARAM,
-		l LPARAM) LONG
+		flags T.DWORD,
+		info *T.DWORD,
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM) T.LONG
 
 	BroadcastSystemMessageEx func(
-		flags BSM_FLAGS,
-		recipients *DWORD,
-		msg UINT,
-		w WPARAM,
-		l LPARAM,
-		info *BSMINFO) LONG
+		flags T.BSM_FLAGS,
+		recipients *T.DWORD,
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM,
+		info *T.BSMINFO) T.LONG
 
-	CallMsgFilter func(msg *MSG, code int) BOOL
+	CallMsgFilter func(msg *T.MSG, code int) T.BOOL
 
 	CallNextHookEx func(
-		hk HHOOK, code int, w WPARAM, l LPARAM) LRESULT
+		hk T.HHOOK, code int, w T.WPARAM, l T.LPARAM) T.LRESULT
 
 	CallWindowProc func(
-		prevWndFunc WNDPROC,
-		win HWND,
-		msg UINT,
-		w WPARAM,
-		l LPARAM) LRESULT
+		prevWndFunc T.WNDPROC,
+		win T.HWND,
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM) T.LRESULT
 
 	CascadeWindows func(
-		wndParent HWND,
-		how UINT,
-		rect *RECT,
-		nKids UINT,
-		kids *HWND) WORD
+		wndParent T.HWND,
+		how T.UINT,
+		rect *T.RECT,
+		nKids T.UINT,
+		kids *T.HWND) T.WORD
 
-	ChangeClipboardChain func(wndRemove, wndNewNext HWND) BOOL
+	ChangeClipboardChain func(wndRemove, wndNewNext T.HWND) T.BOOL
 
-	ChangeDisplaySettingsA func(dm *DEVMODEA, flags DWORD) LONG
+	ChangeDisplaySettingsA func(dm *T.DEVMODEA, flags T.DWORD) T.LONG
 
-	ChangeDisplaySettingsW func(dm *DEVMODEW, flags DWORD) LONG
+	ChangeDisplaySettingsW func(dm *T.DEVMODEW, flags T.DWORD) T.LONG
 
 	ChangeDisplaySettingsExA func(
 		deviceName VString,
-		dm *DEVMODEA,
-		w HWND,
-		flags DWORD,
-		lParam *VOID) LONG
+		dm *T.DEVMODEA,
+		w T.HWND,
+		flags T.DWORD,
+		lParam *T.VOID) T.LONG
 
 	ChangeDisplaySettingsExW func(
 		deviceName VString,
-		dm *DEVMODEW,
-		w HWND,
-		flags DWORD,
-		lParam *VOID) LONG
+		dm *T.DEVMODEW,
+		w T.HWND,
+		flags T.DWORD,
+		lParam *T.VOID) T.LONG
 
 	ChangeMenu func(
-		m HMENU,
-		cmd UINT,
+		m T.HMENU,
+		cmd T.UINT,
 		NewItem VString,
-		insert UINT,
-		flags UINT) BOOL
+		insert T.UINT,
+		flags T.UINT) T.BOOL
 
 	CharLower func(VString) OVString
 
-	CharLowerBuff func(buff IOAString, length DWORD) DWORD
+	CharLowerBuff func(buff T.IOAString, length T.DWORD) T.DWORD
 
 	CharNext func(VString) OVString
 
 	CharNextExA func(
-		codePage WORD, currentChar AString, flags DWORD) AString
+		codePage T.WORD, currentChar T.AString, flags T.DWORD) T.AString
 
 	CharPrev func(start, current VString) VString
 
 	CharPrevExA func(
-		codePage WORD,
-		start, currentChar AString,
-		flags DWORD) AString
+		codePage T.WORD,
+		start, currentChar T.AString,
+		flags T.DWORD) T.AString
 
-	CharToOem func(src VString, dst OVString) BOOL
+	CharToOem func(src VString, dst OVString) T.BOOL
 
-	CharToOemBuff func(src, dst OVString, dstLength DWORD) BOOL
+	CharToOemBuff func(src, dst OVString, dstLength T.DWORD) T.BOOL
 
 	CharUpper func(VString) OVString
 
-	CharUpperBuff func(buff IOAString, length DWORD) DWORD
+	CharUpperBuff func(buff T.IOAString, length T.DWORD) T.DWORD
 
-	CheckDlgButton func(dlg HWND, idButton int, check UINT) BOOL
+	CheckDlgButton func(dlg T.HWND, idButton int, check T.UINT) T.BOOL
 
-	CheckMenuItem func(m HMENU, idCheckItem, check UINT) DWORD
+	CheckMenuItem func(m T.HMENU, idCheckItem, check T.UINT) T.DWORD
 
 	CheckMenuRadioItem func(
-		m HMENU, first, last, check, flags UINT) BOOL
+		m T.HMENU, first, last, check, flags T.UINT) T.BOOL
 
 	CheckRadioButton func(
-		dlg HWND, idFirst, idLast, idCheck int) BOOL
+		dlg T.HWND, idFirst, idLast, idCheck int) T.BOOL
 
-	ChildWindowFromPoint func(wndParent HWND, point POINT) HWND
+	ChildWindowFromPoint func(wndParent T.HWND, point T.POINT) T.HWND
 
 	ChildWindowFromPointEx func(
-		w HWND, p POINT, flags UINT) HWND
+		w T.HWND, p T.POINT, flags T.UINT) T.HWND
 
-	ClientToScreen func(w HWND, p *POINT) BOOL
+	ClientToScreen func(w T.HWND, p *T.POINT) T.BOOL
 
-	ClipCursor func(rect *RECT) BOOL
+	ClipCursor func(rect *T.RECT) T.BOOL
 
-	CloseClipboard func() BOOL
+	CloseClipboard func() T.BOOL
 
-	CloseDesktop func(desktop HDESK) BOOL
+	CloseDesktop func(desktop T.HDESK) T.BOOL
 
-	CloseWindow func(w HWND) BOOL
+	CloseWindow func(w T.HWND) T.BOOL
 
-	CloseWindowStation func(winSta HWINSTA) BOOL
+	CloseWindowStation func(winSta T.HWINSTA) T.BOOL
 
 	CopyAcceleratorTable func(
-		src HACCEL, dst *ACCEL, entries int) int
+		src T.HACCEL, dst *T.ACCEL, entries int) int
 
-	CopyIcon func(icon HICON) HICON
+	CopyIcon func(icon T.HICON) T.HICON
 
 	CopyImage func(
-		h HANDLE, typ UINT, X, y int, flags UINT) HANDLE
+		h T.HANDLE, typ T.UINT, T.X, y int, flags T.UINT) T.HANDLE
 
-	CopyRect func(dst, src *RECT) BOOL
+	CopyRect func(dst, src *T.RECT) T.BOOL
 
 	CountClipboardFormats func() int
 
-	CreateAcceleratorTable func(accel *ACCEL, nAccel int) HACCEL
+	CreateAcceleratorTable func(accel *T.ACCEL, nAccel int) T.HACCEL
 
 	CreateCaret func(
-		w HWND, bitmap HBITMAP, width int, height int) BOOL
+		w T.HWND, bitmap T.HBITMAP, width int, height int) T.BOOL
 
 	CreateCursor func(
-		inst HINSTANCE,
+		inst T.HINSTANCE,
 		xHotSpot, yHotSpot, width, height int,
-		andPlane, xorPlane *VOID) HCURSOR
+		andPlane, xorPlane *T.VOID) T.HCURSOR
 
 	CreateDesktopA func(
 		desktop, device VString,
-		devmode *DEVMODEA,
-		flags DWORD,
-		desiredAccess ACCESS_MASK,
-		sa *SECURITY_ATTRIBUTES) HDESK
+		devmode *T.DEVMODEA,
+		flags T.DWORD,
+		desiredAccess T.ACCESS_MASK,
+		sa *T.SECURITY_ATTRIBUTES) T.HDESK
 
 	CreateDesktopW func(
 		desktop, device VString,
-		devmode *DEVMODEW,
-		flags DWORD,
-		desiredAccess ACCESS_MASK,
-		sa *SECURITY_ATTRIBUTES) HDESK
+		devmode *T.DEVMODEW,
+		flags T.DWORD,
+		desiredAccess T.ACCESS_MASK,
+		sa *T.SECURITY_ATTRIBUTES) T.HDESK
 
 	CreateDialogIndirectParam func(
-		instance HINSTANCE,
-		template DLGTEMPLATE,
-		wndParent HWND,
-		dialogFunc DLGPROC,
-		initParam LPARAM) HWND
+		instance T.HINSTANCE,
+		template T.DLGTEMPLATE,
+		wndParent T.HWND,
+		dialogFunc T.DLGPROC,
+		initParam T.LPARAM) T.HWND
 
 	CreateDialogParam func(
-		instance HINSTANCE,
+		instance T.HINSTANCE,
 		templateName VString,
-		wndParent HWND,
-		dialogFunc DLGPROC,
-		initParam LPARAM) HWND
+		wndParent T.HWND,
+		dialogFunc T.DLGPROC,
+		initParam T.LPARAM) T.HWND
 
 	CreateIcon func(
-		instance HINSTANCE,
+		instance T.HINSTANCE,
 		width, height int,
-		planes, bitsPixel BYTE,
-		andbits, xorbits *BYTE) HICON
+		planes, bitsPixel T.BYTE,
+		andbits, xorbits *T.BYTE) T.HICON
 
 	CreateIconFromResource func(
-		resbits *BYTE,
-		resSize DWORD,
-		icon BOOL,
-		ver DWORD) HICON
+		resbits *T.BYTE,
+		resSize T.DWORD,
+		icon T.BOOL,
+		ver T.DWORD) T.HICON
 
 	CreateIconFromResourceEx func(
-		resbits *BYTE,
-		resSize DWORD,
-		icon BOOL,
-		ver DWORD,
+		resbits *T.BYTE,
+		resSize T.DWORD,
+		icon T.BOOL,
+		ver T.DWORD,
 		xDesired, yDesired int,
-		flags UINT) HICON
+		flags T.UINT) T.HICON
 
-	CreateIconIndirect func(iconinfo *ICONINFO) HICON
+	CreateIconIndirect func(iconinfo *T.ICONINFO) T.HICON
 
 	CreateMDIWindow func(
 		className, windowName VString,
-		style DWORD,
+		style T.DWORD,
 		x, y, width,
 		height int,
-		wndParent HWND,
-		instance HINSTANCE,
-		l LPARAM) HWND
+		wndParent T.HWND,
+		instance T.HINSTANCE,
+		l T.LPARAM) T.HWND
 
-	CreateMenu func() HMENU
+	CreateMenu func() T.HMENU
 
-	CreatePopupMenu func() HMENU
+	CreatePopupMenu func() T.HMENU
 
 	CreateWindowEx func(
-		exStyle WINDOW_STYLE_EX,
+		exStyle T.WINDOW_STYLE_EX,
 		className, windowName VString,
-		style WINDOW_STYLE,
+		style T.WINDOW_STYLE,
 		x, y, width, height int,
-		wndParent HWND,
-		m HMENU,
-		instance HINSTANCE,
-		param *VOID) HWND
+		wndParent T.HWND,
+		m T.HMENU,
+		instance T.HINSTANCE,
+		param *T.VOID) T.HWND
 
 	CreateWindowStation func(
 		winsta VString,
-		flags DWORD,
-		desiredAccess ACCESS_MASK,
-		sa *SECURITY_ATTRIBUTES) HWINSTA
+		flags T.DWORD,
+		desiredAccess T.ACCESS_MASK,
+		sa *T.SECURITY_ATTRIBUTES) T.HWINSTA
 
 	DefDlgProc func(
-		dlg HWND, msg UINT, w WPARAM, l LPARAM) LRESULT
+		dlg T.HWND, msg T.UINT, w T.WPARAM, l T.LPARAM) T.LRESULT
 
 	DeferWindowPos func(
-		winPosInfo HDWP,
-		w HWND,
-		wndInsertAfter HWND,
+		winPosInfo T.HDWP,
+		w T.HWND,
+		wndInsertAfter T.HWND,
 		x, y, cx, cy int,
-		flags UINT) HDWP
+		flags T.UINT) T.HDWP
 
 	DefFrameProc func(
-		win HWND,
-		mdiClient HWND,
-		msg UINT,
-		w WPARAM,
-		l LPARAM) LRESULT
+		win T.HWND,
+		mdiClient T.HWND,
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM) T.LRESULT
 
 	DefMDIChildProc func(
-		win HWND, msg UINT, w WPARAM, l LPARAM) LRESULT
+		win T.HWND, msg T.UINT, w T.WPARAM, l T.LPARAM) T.LRESULT
 
-	DefRawInputProc func(rawInput *RAWINPUT, input INT, sizeHeader INT) LRESULT
+	DefRawInputProc func(rawInput *T.RAWINPUT, input T.INT, sizeHeader T.INT) T.LRESULT
 
-	DefWindowProc func(h HWND, m WINDOW_MESSAGE, w WPARAM, l LPARAM) LRESULT
+	DefWindowProc func(h T.HWND, m T.WINDOW_MESSAGE, w T.WPARAM, l T.LPARAM) T.LRESULT
 
-	DeleteMenu func(m HMENU, position UINT, flags UINT) BOOL
+	DeleteMenu func(m T.HMENU, position T.UINT, flags T.UINT) T.BOOL
 
-	DeregisterShellHookWindow func(w HWND) BOOL
+	DeregisterShellHookWindow func(w T.HWND) T.BOOL
 
-	DestroyAcceleratorTable func(accel HACCEL) BOOL
+	DestroyAcceleratorTable func(accel T.HACCEL) T.BOOL
 
-	DestroyCaret func() BOOL
+	DestroyCaret func() T.BOOL
 
-	DestroyCursor func(cursor HCURSOR) BOOL
+	DestroyCursor func(cursor T.HCURSOR) T.BOOL
 
-	DestroyIcon func(icon HICON) BOOL
+	DestroyIcon func(icon T.HICON) T.BOOL
 
-	DestroyMenu func(m HMENU) BOOL
+	DestroyMenu func(m T.HMENU) T.BOOL
 
-	DestroyWindow func(w HWND) BOOL
+	DestroyWindow func(w T.HWND) T.BOOL
 
 	DialogBoxIndirectParam func(
-		instance HINSTANCE,
-		dialogTemplate DLGTEMPLATE,
-		wndParent HWND,
-		dialogFunc DLGPROC,
-		initParam LPARAM) INT_PTR
+		instance T.HINSTANCE,
+		dialogTemplate T.DLGTEMPLATE,
+		wndParent T.HWND,
+		dialogFunc T.DLGPROC,
+		initParam T.LPARAM) T.INT_PTR
 
 	DialogBoxParam func(
-		instance HINSTANCE,
+		instance T.HINSTANCE,
 		templateName VString,
-		wndParent HWND,
-		dialogFunc DLGPROC,
-		initParam LPARAM) INT_PTR
+		wndParent T.HWND,
+		dialogFunc T.DLGPROC,
+		initParam T.LPARAM) T.INT_PTR
 
 	DisableProcessWindowsGhosting func()
 
-	DispatchMessage func(msg *MSG) LRESULT
+	DispatchMessage func(msg *T.MSG) T.LRESULT
 
 	DlgDirList func(
-		dlg HWND,
+		dlg T.HWND,
 		pathSpec VString,
 		idListBox, idStaticPath int,
-		fileType UINT) int
+		fileType T.UINT) int
 
 	DlgDirListComboBox func(
-		dlg HWND,
+		dlg T.HWND,
 		pathSpec VString,
 		idComboBox, idStaticPath int,
-		filetype UINT) int
+		filetype T.UINT) int
 
 	DlgDirSelectComboBoxEx func(
-		dlg HWND,
+		dlg T.HWND,
 		string_ VString,
 		out int,
-		comboBox int) BOOL
+		comboBox int) T.BOOL
 
 	DlgDirSelectEx func(
-		dlg HWND,
+		dlg T.HWND,
 		string_ VString,
 		count int,
-		listBox int) BOOL
+		listBox int) T.BOOL
 
-	DragDetect func(w HWND, pt POINT) BOOL
+	DragDetect func(w T.HWND, pt T.POINT) T.BOOL
 
 	DragObject func(
-		parent HWND,
-		from HWND,
-		fmt UINT,
-		data ULONG_PTR,
-		cur HCURSOR) DWORD
+		parent T.HWND,
+		from T.HWND,
+		fmt T.UINT,
+		data T.ULONG_PTR,
+		cur T.HCURSOR) T.DWORD
 
 	DrawAnimatedRects func(
-		hw HWND, ani int, from *RECT, to *RECT) BOOL
+		hw T.HWND, ani int, from *T.RECT, to *T.RECT) T.BOOL
 
 	DrawCaption func(
-		w HWND, dc HDC, rect *RECT, flags UINT) BOOL
+		w T.HWND, dc T.HDC, rect *T.RECT, flags T.UINT) T.BOOL
 
 	DrawEdge func(
-		hdc HDC, qrc *RECT, edge UINT, grfFlags UINT) BOOL
+		hdc T.HDC, qrc *T.RECT, edge T.UINT, grfFlags T.UINT) T.BOOL
 
-	DrawFocusRect func(dc HDC, rc *RECT) BOOL
+	DrawFocusRect func(dc T.HDC, rc *T.RECT) T.BOOL
 
-	DrawFrameControl func(HDC, *RECT, UINT, UINT) BOOL
+	DrawFrameControl func(T.HDC, *T.RECT, T.UINT, T.UINT) T.BOOL
 
-	DrawIcon func(dc HDC, x, y int, icon HICON) BOOL
+	DrawIcon func(dc T.HDC, x, y int, icon T.HICON) T.BOOL
 
 	DrawIconEx func(
-		dc HDC,
+		dc T.HDC,
 		xLeft, yTop int,
-		icon HICON,
+		icon T.HICON,
 		xWidth, yWidth int,
-		stepIfAniCur UINT,
-		brFlickerFreeDraw HBRUSH,
-		flags UINT) BOOL
+		stepIfAniCur T.UINT,
+		brFlickerFreeDraw T.HBRUSH,
+		flags T.UINT) T.BOOL
 
-	DrawMenuBar func(w HWND) BOOL
+	DrawMenuBar func(w T.HWND) T.BOOL
 
 	DrawState func(
-		dc HDC,
-		brFore HBRUSH,
-		fnCallBack DRAWSTATEPROC,
-		lData LPARAM,
-		wData WPARAM,
+		dc T.HDC,
+		brFore T.HBRUSH,
+		fnCallBack T.DRAWSTATEPROC,
+		lData T.LPARAM,
+		wData T.WPARAM,
 		x, y, cx, cy int,
-		uFlags UINT) BOOL
+		uFlags T.UINT) T.BOOL
 
 	DrawText func(
-		dc HDC,
+		dc T.HDC,
 		text VString,
 		nText int,
-		rc *RECT,
-		format UINT) int
+		rc *T.RECT,
+		format T.UINT) int
 
 	DrawTextEx func(
-		dc HDC,
+		dc T.HDC,
 		text VString,
 		nText int,
-		rc *RECT,
-		format UINT,
-		dtp *DRAWTEXTPARAMS) int
+		rc *T.RECT,
+		format T.UINT,
+		dtp *T.DRAWTEXTPARAMS) int
 
-	EmptyClipboard func() BOOL
+	EmptyClipboard func() T.BOOL
 
 	EnableMenuItem func(
-		m HMENU, idDEnableItem UINT, enable UINT) BOOL
+		m T.HMENU, idDEnableItem T.UINT, enable T.UINT) T.BOOL
 
-	EnableScrollBar func(w HWND, sbflags UINT, arrows UINT) BOOL
+	EnableScrollBar func(w T.HWND, sbflags T.UINT, arrows T.UINT) T.BOOL
 
-	EnableWindow func(w HWND, enable BOOL) BOOL
+	EnableWindow func(w T.HWND, enable T.BOOL) T.BOOL
 
-	EndDeferWindowPos func(winPosInfo HDWP) BOOL
+	EndDeferWindowPos func(winPosInfo T.HDWP) T.BOOL
 
-	EndDialog func(dlg HWND, result INT_PTR) BOOL
+	EndDialog func(dlg T.HWND, result T.INT_PTR) T.BOOL
 
-	EndMenu func() BOOL
+	EndMenu func() T.BOOL
 
-	EndPaint func(w HWND, paint *PAINTSTRUCT) BOOL
+	EndPaint func(w T.HWND, paint *T.PAINTSTRUCT) T.BOOL
 
-	EndTask func(w HWND, shutDown BOOL, force BOOL) BOOL
+	EndTask func(w T.HWND, shutDown T.BOOL, force T.BOOL) T.BOOL
 
 	EnumChildWindows func(
-		parent HWND, fn WNDENUMPROC, l LPARAM) BOOL
+		parent T.HWND, fn T.WNDENUMPROC, l T.LPARAM) T.BOOL
 
-	EnumClipboardFormats func(format UINT) UINT
+	EnumClipboardFormats func(format T.UINT) T.UINT
 
 	EnumDesktops func(
-		wsta HWINSTA, fn DESKTOPENUMPROC, l LPARAM) BOOL
+		wsta T.HWINSTA, fn T.DESKTOPENUMPROC, l T.LPARAM) T.BOOL
 
 	EnumDesktopWindows func(
-		desktop HDESK, fn WNDENUMPROC, param LPARAM) BOOL
+		desktop T.HDESK, fn T.WNDENUMPROC, param T.LPARAM) T.BOOL
 
 	EnumDisplayDevicesA func(
 		device VString,
-		devNum DWORD,
-		displayDevice *DISPLAY_DEVICEA,
-		flags DWORD) BOOL
+		devNum T.DWORD,
+		displayDevice *T.DISPLAY_DEVICEA,
+		flags T.DWORD) T.BOOL
 
 	EnumDisplayDevicesW func(
 		device VString,
-		devNum DWORD,
-		displayDevice *DISPLAY_DEVICEW,
-		flags DWORD) BOOL
+		devNum T.DWORD,
+		displayDevice *T.DISPLAY_DEVICEW,
+		flags T.DWORD) T.BOOL
 
 	EnumDisplayMonitors func(
-		dc HDC,
-		clip *RECT,
-		fn MONITORENUMPROC,
-		data LPARAM) BOOL
+		dc T.HDC,
+		clip *T.RECT,
+		fn T.MONITORENUMPROC,
+		data T.LPARAM) T.BOOL
 
 	EnumDisplaySettingsA func(
 		deviceName VString,
-		modeNum DWORD,
-		dm *DEVMODEA) BOOL
+		modeNum T.DWORD,
+		dm *T.DEVMODEA) T.BOOL
 
 	EnumDisplaySettingsW func(
 		deviceName VString,
-		modeNum DWORD,
-		dm *DEVMODEW) BOOL
+		modeNum T.DWORD,
+		dm *T.DEVMODEW) T.BOOL
 
 	EnumDisplaySettingsExA func(
 		deviceName VString,
-		modeNum DWORD,
-		dm *DEVMODEA,
-		flags DWORD) BOOL
+		modeNum T.DWORD,
+		dm *T.DEVMODEA,
+		flags T.DWORD) T.BOOL
 
 	EnumDisplaySettingsExW func(
 		deviceName VString,
-		modeNum DWORD,
-		dm *DEVMODEW,
-		flags DWORD) BOOL
+		modeNum T.DWORD,
+		dm *T.DEVMODEW,
+		flags T.DWORD) T.BOOL
 
-	EnumPropsA func(w HWND, enumFunc PROPENUMPROCA) int
+	EnumPropsA func(w T.HWND, enumFunc T.PROPENUMPROCA) int
 
-	EnumPropsW func(w HWND, enumFunc PROPENUMPROCW) int
+	EnumPropsW func(w T.HWND, enumFunc T.PROPENUMPROCW) int
 
 	EnumPropsExA func(
-		w HWND, enumFunc PROPENUMPROCEXA, l LPARAM) int
+		w T.HWND, enumFunc T.PROPENUMPROCEXA, l T.LPARAM) int
 
 	EnumPropsExW func(
-		w HWND, enumFunc PROPENUMPROCEXW, l LPARAM) int
+		w T.HWND, enumFunc T.PROPENUMPROCEXW, l T.LPARAM) int
 
 	EnumThreadWindows func(
-		threadId DWORD, fn WNDENUMPROC, l LPARAM) BOOL
+		threadId T.DWORD, fn T.WNDENUMPROC, l T.LPARAM) T.BOOL
 
-	EnumWindows func(enumFunc WNDENUMPROC, l LPARAM) BOOL
+	EnumWindows func(enumFunc T.WNDENUMPROC, l T.LPARAM) T.BOOL
 
 	EnumWindowStations func(
-		enumFunc WINSTAENUMPROC, l LPARAM) BOOL
+		enumFunc T.WINSTAENUMPROC, l T.LPARAM) T.BOOL
 
-	EqualRect func(rc1 *RECT, rc2 *RECT) BOOL
+	EqualRect func(rc1 *T.RECT, rc2 *T.RECT) T.BOOL
 
-	ExcludeUpdateRgn func(dc HDC, w HWND) int
+	ExcludeUpdateRgn func(dc T.HDC, w T.HWND) int
 
-	ExitWindowsEx func(flags UINT, reason DWORD) BOOL
+	ExitWindowsEx func(flags T.UINT, reason T.DWORD) T.BOOL
 
-	FillRect func(dc HDC, rc *RECT, br HBRUSH) int
+	FillRect func(dc T.HDC, rc *T.RECT, br T.HBRUSH) int
 
-	FindWindow func(className VString, windowName VString) HWND
+	FindWindow func(className VString, windowName VString) T.HWND
 
 	FindWindowEx func(
-		wndParent, wndChildAfter HWND,
-		class, window VString) HWND
+		wndParent, wndChildAfter T.HWND,
+		class, window VString) T.HWND
 
-	FlashWindow func(w HWND, invert BOOL) BOOL
+	FlashWindow func(w T.HWND, invert T.BOOL) T.BOOL
 
-	FlashWindowEx func(fwi *FLASHWINFO) BOOL
+	FlashWindowEx func(fwi *T.FLASHWINFO) T.BOOL
 
-	FrameRect func(dc HDC, rc *RECT, br HBRUSH) int
+	FrameRect func(dc T.HDC, rc *T.RECT, br T.HBRUSH) int
 
-	GetActiveWindow func() HWND
+	GetActiveWindow func() T.HWND
 
 	GetAltTabInfo func(
-		w HWND,
+		w T.HWND,
 		item int,
-		ati *ALTTABINFO,
+		ati *T.ALTTABINFO,
 		itemText OVString,
-		size UINT) BOOL
+		size T.UINT) T.BOOL
 
-	GetAncestor func(w HWND, flags UINT) HWND
+	GetAncestor func(w T.HWND, flags T.UINT) T.HWND
 
-	GetAsyncKeyState func(key int) SHORT
+	GetAsyncKeyState func(key int) T.SHORT
 
-	GetCapture func() HWND
+	GetCapture func() T.HWND
 
-	GetCaretBlinkTime func() UINT
+	GetCaretBlinkTime func() T.UINT
 
-	GetCaretPos func(point *POINT) BOOL
+	GetCaretPos func(point *T.POINT) T.BOOL
 
 	GetClassInfo func(
-		instance HINSTANCE, className VString, wc *WNDCLASS) BOOL
+		instance T.HINSTANCE, className VString, wc *T.WNDCLASS) T.BOOL
 
 	GetClassInfoEx func(
-		instance HINSTANCE, class VString, wcx *WNDCLASSEX) BOOL
+		instance T.HINSTANCE, class VString, wcx *T.WNDCLASSEX) T.BOOL
 
-	GetClassLong func(w HWND, index int) DWORD
+	GetClassLong func(w T.HWND, index int) T.DWORD
 
-	GetClassLongPtr func(w HWND, index int) ULONG_PTR
+	GetClassLongPtr func(w T.HWND, index int) T.ULONG_PTR
 
 	//GetClassName func(
-	//	w HWND, className OVString, maxCount int) int
-	GetClassName func(w HWND, className *WChar, maxCount int) int
+	//	w T.HWND, className OVString, maxCount int) int
+	GetClassName func(
+		w T.HWND, className *T.WChar, maxCount int) int
 
 	//GetClassWord is obsolete; instead use:
 	//	GetClassLong
-	GetClassWord func(w HWND, index int) WORD
+	GetClassWord func(w T.HWND, index int) T.WORD
 
-	GetClientRect func(w HWND, rect *RECT) BOOL
+	GetClientRect func(w T.HWND, rect *T.RECT) T.BOOL
 
-	GetClipboardData func(format UINT) HANDLE
+	GetClipboardData func(format T.UINT) T.HANDLE
 
 	GetClipboardFormatName func(
-		format UINT, formatName VString, maxCount int) int
+		format T.UINT, formatName VString, maxCount int) int
 
-	GetClipboardOwner func() HWND
+	GetClipboardOwner func() T.HWND
 
-	GetClipboardSequenceNumber func() DWORD
+	GetClipboardSequenceNumber func() T.DWORD
 
-	GetClipboardViewer func() HWND
+	GetClipboardViewer func() T.HWND
 
-	GetClipCursor func(rect *RECT) BOOL
+	GetClipCursor func(rect *T.RECT) T.BOOL
 
-	GetComboBoxInfo func(w HWND, cbi *COMBOBOXINFO) BOOL
+	GetComboBoxInfo func(w T.HWND, cbi *T.COMBOBOXINFO) T.BOOL
 
-	GetCursor func() HCURSOR
+	GetCursor func() T.HCURSOR
 
-	GetCursorInfo func(ci *CURSORINFO) BOOL
+	GetCursorInfo func(ci *T.CURSORINFO) T.BOOL
 
-	GetCursorPos func(point *POINT) BOOL
+	GetCursorPos func(point *T.POINT) T.BOOL
 
-	GetDC func(w HWND) HDC
+	GetDC func(w T.HWND) T.HDC
 
-	GetDCEx func(w HWND, rgnClip HRGN, flags DWORD) HDC
+	GetDCEx func(w T.HWND, rgnClip T.HRGN, flags T.DWORD) T.HDC
 
-	GetDesktopWindow func() HWND
+	GetDesktopWindow func() T.HWND
 
-	GetDialogBaseUnits func() LONG
+	GetDialogBaseUnits func() T.LONG
 
-	GetDlgCtrlID func(w HWND) int
+	GetDlgCtrlID func(w T.HWND) int
 
-	GetDlgItem func(dlg HWND, idDlgItem int) HWND
+	GetDlgItem func(dlg T.HWND, idDlgItem int) T.HWND
 
 	GetDlgItemInt func(
-		dlg HWND,
+		dlg T.HWND,
 		idDlgItem int,
-		translated *BOOL,
-		signed BOOL) UINT
+		translated *T.BOOL,
+		signed T.BOOL) T.UINT
 
 	GetDlgItemText func(
-		dlg HWND,
+		dlg T.HWND,
 		idDlgItem int,
 		string_ OVString,
-		max int) UINT
+		max int) T.UINT
 
-	GetDoubleClickTime func() UINT
+	GetDoubleClickTime func() T.UINT
 
-	GetFocus func() HWND
+	GetFocus func() T.HWND
 
-	GetForegroundWindow func() HWND
+	GetForegroundWindow func() T.HWND
 
-	GetGuiResources func(process HANDLE, flags DWORD) DWORD
+	GetGuiResources func(process T.HANDLE, flags T.DWORD) T.DWORD
 
-	GetGUIThreadInfo func(thread DWORD, ui *GUITHREADINFO) BOOL
+	GetGUIThreadInfo func(thread T.DWORD, ui *T.GUITHREADINFO) T.BOOL
 
-	GetIconInfo func(icon HICON, iconinfo *ICONINFO) BOOL
+	GetIconInfo func(icon T.HICON, iconinfo *T.ICONINFO) T.BOOL
 
-	GetInputState func() BOOL
+	GetInputState func() T.BOOL
 
-	GetKBCodePage func() UINT
+	GetKBCodePage func() T.UINT
 
-	GetKeyboardLayout func(thread DWORD) HKL
+	GetKeyboardLayout func(thread T.DWORD) T.HKL
 
-	GetKeyboardLayoutList func(buff int, list *HKL) int
+	GetKeyboardLayoutList func(buff int, list *T.HKL) int
 
-	GetKeyboardLayoutName func(klid VString) BOOL
+	GetKeyboardLayoutName func(klid VString) T.BOOL
 
-	GetKeyboardState func(keyState *BYTE) BOOL
+	GetKeyboardState func(keyState *T.BYTE) T.BOOL
 
 	GetKeyboardType func(typeFlag int) int
 
 	GetKeyNameText func(
-		param LONG, string_ OVString, size int) int
+		param T.LONG, string_ OVString, size int) int
 
-	GetKeyState func(virtKey int) SHORT
+	GetKeyState func(virtKey int) T.SHORT
 
-	GetLastActivePopup func(w HWND) HWND
+	GetLastActivePopup func(w T.HWND) T.HWND
 
-	GetLastInputInfo func(lii *LASTINPUTINFO) BOOL
+	GetLastInputInfo func(lii *T.LASTINPUTINFO) T.BOOL
 
 	GetLayeredWindowAttributes func(
-		w HWND, crKey *COLORREF, alpha *BYTE, flags *DWORD) BOOL
+		w T.HWND, crKey *T.COLORREF, alpha *T.BYTE, flags *T.DWORD) T.BOOL
 
-	GetListBoxInfo func(w HWND) DWORD
+	GetListBoxInfo func(w T.HWND) T.DWORD
 
-	GetMenu func(w HWND) HMENU
+	GetMenu func(w T.HWND) T.HMENU
 
 	GetMenuBarInfo func(
-		w HWND, object, item LONG, mbi *MENUBARINFO) BOOL
+		w T.HWND, object, item T.LONG, mbi *T.MENUBARINFO) T.BOOL
 
-	GetMenuCheckMarkDimensions func() LONG
+	GetMenuCheckMarkDimensions func() T.LONG
 
-	GetMenuContextHelpId func(HMENU) DWORD
+	GetMenuContextHelpId func(T.HMENU) T.DWORD
 
 	GetMenuDefaultItem func(
-		m HMENU, byPos UINT, gmdiFlags UINT) UINT
+		m T.HMENU, byPos T.UINT, gmdiFlags T.UINT) T.UINT
 
-	GetMenuInfo func(HMENU, *MENUINFO) BOOL
+	GetMenuInfo func(T.HMENU, *T.MENUINFO) T.BOOL
 
-	GetMenuItemCount func(m HMENU) int
+	GetMenuItemCount func(m T.HMENU) int
 
-	GetMenuItemID func(m HMENU, pos int) UINT
+	GetMenuItemID func(m T.HMENU, pos int) T.UINT
 
 	GetMenuItemInfo func(
-		m HMENU,
-		item UINT,
-		byPosition BOOL,
-		mii *MENUITEMINFO) BOOL
+		m T.HMENU,
+		item T.UINT,
+		byPosition T.BOOL,
+		mii *T.MENUITEMINFO) T.BOOL
 
 	GetMenuItemRect func(
-		w HWND, m HMENU, item UINT, rcItem *RECT) BOOL
+		w T.HWND, m T.HMENU, item T.UINT, rcItem *T.RECT) T.BOOL
 
-	GetMenuState func(m HMENU, id UINT, flags UINT) UINT
+	GetMenuState func(m T.HMENU, id T.UINT, flags T.UINT) T.UINT
 
 	GetMenuString func(
-		m HMENU,
-		idItem UINT,
+		m T.HMENU,
+		idItem T.UINT,
 		string_ OVString,
 		max int,
-		flags UINT) int
+		flags T.UINT) int
 
 	GetMessage func(
-		m *MSG, w HWND, filterMin, filterMax UINT) BOOL
+		m *T.MSG, w T.HWND, filterMin, filterMax T.UINT) T.BOOL
 
-	GetMessageExtraInfo func() LPARAM
+	GetMessageExtraInfo func() T.LPARAM
 
-	GetMessagePos func() DWORD
+	GetMessagePos func() T.DWORD
 
-	GetMessageTime func() LONG
+	GetMessageTime func() T.LONG
 
-	GetMonitorInfo func(monitor HMONITOR, mi *MONITORINFO) BOOL
+	GetMonitorInfo func(monitor T.HMONITOR, mi *T.MONITORINFO) T.BOOL
 
 	GetMouseMovePointsEx func(
-		size UINT,
-		pt, ptBuf *MOUSEMOVEPOINT,
+		size T.UINT,
+		pt, ptBuf *T.MOUSEMOVEPOINT,
 		bufPoints int,
-		resolution DWORD) int
+		resolution T.DWORD) int
 
 	GetNextDlgGroupItem func(
-		dlg, ctl HWND, previous BOOL) HWND
+		dlg, ctl T.HWND, previous T.BOOL) T.HWND
 
 	GetNextDlgTabItem func(
-		dlg, ctl HWND, previous BOOL) HWND
+		dlg, ctl T.HWND, previous T.BOOL) T.HWND
 
-	GetOpenClipboardWindow func() HWND
+	GetOpenClipboardWindow func() T.HWND
 
-	GetParent func(w HWND) HWND
+	GetParent func(w T.HWND) T.HWND
 
 	GetPriorityClipboardFormat func(
-		formatPriorityList *UINT, formats int) int
+		formatPriorityList *T.UINT, formats int) int
 
-	GetProcessDefaultLayout func(defaultLayout *DWORD) BOOL
+	GetProcessDefaultLayout func(defaultLayout *T.DWORD) T.BOOL
 
-	GetProcessWindowStation func() HWINSTA
+	GetProcessWindowStation func() T.HWINSTA
 
-	GetProp func(w HWND, string_ VString) HANDLE
+	GetProp func(w T.HWND, string_ VString) T.HANDLE
 
-	GetQueueStatus func(flags UINT) DWORD
+	GetQueueStatus func(flags T.UINT) T.DWORD
 
 	GetRawInputBuffer func(
-		data *RAWINPUT, size *UINT, sizeHeader UINT) UINT
+		data *T.RAWINPUT, size *T.UINT, sizeHeader T.UINT) T.UINT
 
 	GetRawInputData func(
-		rawInput HRAWINPUT,
-		command UINT,
-		data *VOID,
-		size *UINT,
-		sizeHeader UINT) UINT
+		rawInput T.HRAWINPUT,
+		command T.UINT,
+		data *T.VOID,
+		size *T.UINT,
+		sizeHeader T.UINT) T.UINT
 
 	GetRawInputDeviceInfo func(
-		device HANDLE,
-		command UINT,
-		data *VOID,
-		size *UINT) UINT
+		device T.HANDLE,
+		command T.UINT,
+		data *T.VOID,
+		size *T.UINT) T.UINT
 
 	GetRawInputDeviceList func(
-		ridl *RAWINPUTDEVICELIST,
-		numDevices *UINT,
-		size UINT) UINT
+		ridl *T.RAWINPUTDEVICELIST,
+		numDevices *T.UINT,
+		size T.UINT) T.UINT
 
 	GetRegisteredRawInputDevices func(
-		rid *RAWINPUTDEVICE, numDevices *UINT, size UINT) UINT
+		rid *T.RAWINPUTDEVICE, numDevices *T.UINT, size T.UINT) T.UINT
 
 	GetScrollBarInfo func(
-		w HWND, object LONG, sbi *SCROLLBARINFO) BOOL
+		w T.HWND, object T.LONG, sbi *T.SCROLLBARINFO) T.BOOL
 
-	GetScrollInfo func(w HWND, bar int, si *SCROLLINFO) BOOL
+	GetScrollInfo func(w T.HWND, bar int, si *T.SCROLLINFO) T.BOOL
 
-	GetScrollPos func(w HWND, bar int) int
+	GetScrollPos func(w T.HWND, bar int) int
 
 	GetScrollRange func(
-		w HWND, bar int, minPos *INT, maxPos *INT) BOOL
+		w T.HWND, bar int, minPos *T.INT, maxPos *T.INT) T.BOOL
 
-	GetShellWindow func() HWND
+	GetShellWindow func() T.HWND
 
-	GetSubMenu func(m HMENU, pos int) HMENU
+	GetSubMenu func(m T.HMENU, pos int) T.HMENU
 
-	GetSysColor func(index int) DWORD
+	GetSysColor func(index int) T.DWORD
 
-	GetSysColorBrush func(index int) HBRUSH
+	GetSysColorBrush func(index int) T.HBRUSH
 
-	GetSystemMenu func(w HWND, revert BOOL) HMENU
+	GetSystemMenu func(w T.HWND, revert T.BOOL) T.HMENU
 
 	GetSystemMetrics func(index int) int
 
 	GetTabbedTextExtent func(
-		dc HDC,
+		dc T.HDC,
 		s VString,
 		count, tabPositions int,
-		tabStopPositions *INT) DWORD
+		tabStopPositions *T.INT) T.DWORD
 
-	GetThreadDesktop func(threadId DWORD) HDESK
+	GetThreadDesktop func(threadId T.DWORD) T.HDESK
 
-	GetTitleBarInfo func(w HWND, ti *TITLEBARINFO) BOOL
+	GetTitleBarInfo func(w T.HWND, ti *T.TITLEBARINFO) T.BOOL
 
-	GetTopWindow func(w HWND) HWND
+	GetTopWindow func(w T.HWND) T.HWND
 
-	GetUpdateRect func(w HWND, rect *RECT, erase BOOL) BOOL
+	GetUpdateRect func(w T.HWND, rect *T.RECT, erase T.BOOL) T.BOOL
 
-	GetUpdateRgn func(w HWND, rgn HRGN, erase BOOL) int
+	GetUpdateRgn func(w T.HWND, rgn T.HRGN, erase T.BOOL) int
 
 	GetUserObjectInformation func(
-		obj HANDLE,
+		obj T.HANDLE,
 		index int,
-		info *VOID,
-		length DWORD,
-		lengthNeeded *DWORD) BOOL
+		info *T.VOID,
+		length T.DWORD,
+		lengthNeeded *T.DWORD) T.BOOL
 
 	GetUserObjectSecurity func(
-		obj HANDLE,
-		siRequested *SECURITY_INFORMATION,
-		sd *SECURITY_DESCRIPTOR,
-		length DWORD,
-		lengthNeeded *DWORD) BOOL
+		obj T.HANDLE,
+		siRequested *T.SECURITY_INFORMATION,
+		sd *T.SECURITY_DESCRIPTOR,
+		length T.DWORD,
+		lengthNeeded *T.DWORD) T.BOOL
 
-	GetWindow func(w HWND, cmd UINT) HWND
+	GetWindow func(w T.HWND, cmd T.UINT) T.HWND
 
-	GetWindowContextHelpId func(HWND) DWORD
+	GetWindowContextHelpId func(T.HWND) T.DWORD
 
-	GetWindowDC func(w HWND) HDC
+	GetWindowDC func(w T.HWND) T.HDC
 
-	GetWindowInfo func(w HWND, wi *WINDOWINFO) BOOL
+	GetWindowInfo func(w T.HWND, wi *T.WINDOWINFO) T.BOOL
 
-	GetWindowLong func(w HWND, index int) LONG
+	GetWindowLong func(w T.HWND, index int) T.LONG
 
-	GetWindowLongPtr func(w HWND, index int) LONG_PTR
+	GetWindowLongPtr func(w T.HWND, index int) T.LONG_PTR
 
 	GetWindowModuleFileName func(
-		w HWND, fileName OVString, fileNameMax UINT) UINT
+		w T.HWND, fileName OVString, fileNameMax T.UINT) T.UINT
 
-	GetWindowPlacement func(w HWND, wndpl *WINDOWPLACEMENT) BOOL
+	GetWindowPlacement func(w T.HWND, wndpl *T.WINDOWPLACEMENT) T.BOOL
 
-	GetWindowRect func(w HWND, rect *RECT) BOOL
+	GetWindowRect func(w T.HWND, rect *T.RECT) T.BOOL
 
-	GetWindowRgn func(w HWND, rgn HRGN) int
+	GetWindowRgn func(w T.HWND, rgn T.HRGN) int
 
-	GetWindowRgnBox func(w HWND, rc *RECT) int
+	GetWindowRgnBox func(w T.HWND, rc *T.RECT) int
 
-	// GetWindowText func(w HWND, s OVString, maxCount int) int
-	GetWindowText func(w HWND, s *WChar, maxCount int) int
+	// GetWindowText func(w T.HWND, s OVString, maxCount int) int
+	GetWindowText func(w T.HWND, s *T.WChar, maxCount int) int
 
-	GetWindowTextLength func(w HWND) int
+	GetWindowTextLength func(w T.HWND) int
 
 	GetWindowThreadProcessId func(
-		w HWND, processId *DWORD) DWORD
+		w T.HWND, processId *T.DWORD) T.DWORD
 
-	GetWindowWord func(w HWND, index int) WORD
+	GetWindowWord func(w T.HWND, index int) T.WORD
 
 	GrayString func(
-		dc HDC,
-		brush HBRUSH,
-		outputFunc GRAYSTRINGPROC,
-		data LPARAM,
-		count, x, y, width, height int) BOOL
+		dc T.HDC,
+		brush T.HBRUSH,
+		outputFunc T.GRAYSTRINGPROC,
+		data T.LPARAM,
+		count, x, y, width, height int) T.BOOL
 
-	HideCaret func(w HWND) BOOL
+	HideCaret func(w T.HWND) T.BOOL
 
 	HiliteMenuItem func(
-		w HWND, m HMENU, idHiliteItem UINT, hilite UINT) BOOL
+		w T.HWND, m T.HMENU, idHiliteItem T.UINT, hilite T.UINT) T.BOOL
 
-	InflateRect func(rc *RECT, x, y int) BOOL
+	InflateRect func(rc *T.RECT, x, y int) T.BOOL
 
-	InSendMessage func() BOOL
+	InSendMessage func() T.BOOL
 
-	InSendMessageEx func(reserved *VOID) DWORD
+	InSendMessageEx func(reserved *T.VOID) T.DWORD
 
 	InsertMenu func(
-		m HMENU,
-		position UINT,
-		flags UINT,
-		idNewItem UINT_PTR,
-		NewItem AString) BOOL
+		m T.HMENU,
+		position T.UINT,
+		flags T.UINT,
+		idNewItem T.UINT_PTR,
+		NewItem T.AString) T.BOOL
 
 	InsertMenuItem func(
-		m HMENU,
-		item UINT,
-		byPosition BOOL,
-		mii MENUITEMINFO) BOOL
+		m T.HMENU,
+		item T.UINT,
+		byPosition T.BOOL,
+		mii T.MENUITEMINFO) T.BOOL
 
-	InternalGetWindowText func(w HWND, s OWString, size int) int
+	InternalGetWindowText func(w T.HWND, s T.OWString, size int) int
 
-	IntersectRect func(dst, src1, src2 *RECT) BOOL
+	IntersectRect func(dst, src1, src2 *T.RECT) T.BOOL
 
-	InvalidateRect func(w HWND, rect *RECT, erase BOOL) BOOL
+	InvalidateRect func(w T.HWND, rect *T.RECT, erase T.BOOL) T.BOOL
 
-	InvalidateRgn func(w HWND, rgn HRGN, erase BOOL) BOOL
+	InvalidateRgn func(w T.HWND, rgn T.HRGN, erase T.BOOL) T.BOOL
 
-	InvertRect func(dc HDC, rc *RECT) BOOL
+	InvertRect func(dc T.HDC, rc *T.RECT) T.BOOL
 
-	IsCharAlpha func(ch VChar) BOOL
+	IsCharAlpha func(ch T.VChar) T.BOOL
 
-	IsCharAlphaNumeric func(ch VChar) BOOL
+	IsCharAlphaNumeric func(ch T.VChar) T.BOOL
 
-	IsCharLower func(ch VChar) BOOL
+	IsCharLower func(ch T.VChar) T.BOOL
 
-	IsCharUpper func(ch VChar) BOOL
+	IsCharUpper func(ch T.VChar) T.BOOL
 
-	IsChild func(wndParent HWND, w HWND) BOOL
+	IsChild func(wndParent T.HWND, w T.HWND) T.BOOL
 
-	IsClipboardFormatAvailable func(format UINT) BOOL
+	IsClipboardFormatAvailable func(format T.UINT) T.BOOL
 
-	IsDialogMessage func(dlg HWND, msg *MSG) BOOL
+	IsDialogMessage func(dlg T.HWND, msg *T.MSG) T.BOOL
 
-	IsDlgButtonChecked func(dlg HWND, idButton int) UINT
+	IsDlgButtonChecked func(dlg T.HWND, idButton int) T.UINT
 
-	IsGUIThread func(convert BOOL) BOOL
+	IsGUIThread func(convert T.BOOL) T.BOOL
 
-	IsHungAppWindow func(w HWND) BOOL
+	IsHungAppWindow func(w T.HWND) T.BOOL
 
-	IsIconic func(w HWND) BOOL
+	IsIconic func(w T.HWND) T.BOOL
 
-	IsMenu func(m HMENU) BOOL
+	IsMenu func(m T.HMENU) T.BOOL
 
-	IsRectEmpty func(rc *RECT) BOOL
+	IsRectEmpty func(rc *T.RECT) T.BOOL
 
-	IsWindow func(w HWND) BOOL
+	IsWindow func(w T.HWND) T.BOOL
 
-	IsWindowEnabled func(w HWND) BOOL
+	IsWindowEnabled func(w T.HWND) T.BOOL
 
-	IsWindowUnicode func(w HWND) BOOL
+	IsWindowUnicode func(w T.HWND) T.BOOL
 
-	IsWindowVisible func(w HWND) BOOL
+	IsWindowVisible func(w T.HWND) T.BOOL
 
-	IsWinEventHookInstalled func(event DWORD) BOOL
+	IsWinEventHookInstalled func(event T.DWORD) T.BOOL
 
-	IsWow64Message func() BOOL
+	IsWow64Message func() T.BOOL
 
-	IsZoomed func(w HWND) BOOL
+	IsZoomed func(w T.HWND) T.BOOL
 
 	Keybd_event func(
-		vk BYTE, scan BYTE, flags DWORD, extraInfo ULONG_PTR)
+		vk T.BYTE, scan T.BYTE, flags T.DWORD, extraInfo T.ULONG_PTR)
 
-	KillTimer func(w HWND, idEvent UINT_PTR) BOOL
+	KillTimer func(w T.HWND, idEvent T.UINT_PTR) T.BOOL
 
-	LoadAccelerators func(i HINSTANCE, tableName VString) HACCEL
+	LoadAccelerators func(i T.HINSTANCE, tableName VString) T.HACCEL
 
-	LoadBitmap func(i HINSTANCE, bitmapName VString) HBITMAP
+	LoadBitmap func(i T.HINSTANCE, bitmapName VString) T.HBITMAP
 
-	LoadCursor func(i HINSTANCE, cursorName PVString) HCURSOR
+	LoadCursor func(i T.HINSTANCE, cursorName PVString) T.HCURSOR
 
-	LoadCursorFromFile func(fileName VString) HCURSOR
+	LoadCursorFromFile func(fileName VString) T.HCURSOR
 
-	LoadIcon func(i HINSTANCE, iconName VString) HICON
+	LoadIcon func(i T.HINSTANCE, iconName VString) T.HICON
 
 	LoadImage func(
-		i HINSTANCE,
+		i T.HINSTANCE,
 		name VString,
-		type_ UINT,
+		type_ T.UINT,
 		x, y int,
-		load UINT) HANDLE
+		load T.UINT) T.HANDLE
 
-	LoadKeyboardLayout func(klid VString, flags UINT) HKL
+	LoadKeyboardLayout func(klid VString, flags T.UINT) T.HKL
 
-	LoadMenu func(instance HINSTANCE, menuName VString) HMENU
+	LoadMenu func(instance T.HINSTANCE, menuName VString) T.HMENU
 
-	//TODO(t):How does yhis work (*VOID underneath)
-	LoadMenuIndirect func(mt *MENUTEMPLATE) HMENU
+	//TODO(t):How does this work (*T.VOID underneath)
+	LoadMenuIndirect func(mt *T.MENUTEMPLATE) T.HMENU
 
 	LoadString func(
-		i HINSTANCE, id UINT, s VString, size int) int
+		i T.HINSTANCE, id T.UINT, s VString, size int) int
 
-	LockSetForegroundWindow func(lockCode UINT) BOOL
+	LockSetForegroundWindow func(lockCode T.UINT) T.BOOL
 
-	LockWindowUpdate func(wndLock HWND) BOOL
+	LockWindowUpdate func(wndLock T.HWND) T.BOOL
 
-	LockWorkStation func() BOOL
+	LockWorkStation func() T.BOOL
 
 	LookupIconIdFromDirectory func(
-		resbits *BYTE, icon BOOL) int
+		resbits *T.BYTE, icon T.BOOL) int
 
 	LookupIconIdFromDirectoryEx func(
-		resbits *BYTE,
-		icon BOOL,
+		resbits *T.BYTE,
+		icon T.BOOL,
 		xDesired, yDesired int,
-		flags UINT) int
+		flags T.UINT) int
 
-	MapDialogRect func(dlg HWND, rect *RECT) BOOL
+	MapDialogRect func(dlg T.HWND, rect *T.RECT) T.BOOL
 
-	MapVirtualKey func(code UINT, mapType UINT) UINT
+	MapVirtualKey func(code T.UINT, mapType T.UINT) T.UINT
 
-	MapVirtualKeyEx func(code UINT, mapType UINT, hkl HKL) UINT
+	MapVirtualKeyEx func(code T.UINT, mapType T.UINT, hkl T.HKL) T.UINT
 
 	MapWindowPoints func(
-		from HWND, to HWND, p *POINT, nPoints UINT) int
+		from T.HWND, to T.HWND, p *T.POINT, nPoints T.UINT) int
 
-	MenuItemFromPoint func(w HWND, m HMENU, ptScreen POINT) int
+	MenuItemFromPoint func(w T.HWND, m T.HMENU, ptScreen T.POINT) int
 
-	MessageBeep func(type_ UINT) BOOL
-)
+	MessageBeep func(type_ T.UINT) T.BOOL
 
-var MessageBox func(
-	w HWND, text, caption VString, t MSGBOX_TYPE) int
+	MessageBox func(
+		w T.HWND, text, caption VString, t T.MSGBOX_TYPE) int
 
-var (
 	MessageBoxEx func(
-		w HWND,
+		w T.HWND,
 		text, caption VString,
-		t MSGBOX_TYPE,
-		languageId WORD) int
+		t T.MSGBOX_TYPE,
+		languageId T.WORD) int
 
-	MessageBoxIndirect func(mbp *MSGBOXPARAMS) int
+	MessageBoxIndirect func(mbp *T.MSGBOXPARAMS) int
 
 	ModifyMenu func(
-		mnu HMENU,
-		position, flags UINT,
-		idNewItem UINT_PTR,
-		NewItem VString) BOOL
+		mnu T.HMENU,
+		position, flags T.UINT,
+		idNewItem T.UINT_PTR,
+		NewItem VString) T.BOOL
 
-	MonitorFromPoint func(pt POINT, flags DWORD) HMONITOR
+	MonitorFromPoint func(pt T.POINT, flags T.DWORD) T.HMONITOR
 
-	MonitorFromRect func(rc *RECT, flags DWORD) HMONITOR
+	MonitorFromRect func(rc *T.RECT, flags T.DWORD) T.HMONITOR
 
-	MonitorFromWindow func(w HWND, flags DWORD) HMONITOR
+	MonitorFromWindow func(w T.HWND, flags T.DWORD) T.HMONITOR
 
 	Mouse_event func(
-		flags, x, y, data DWORD, extraInfo ULONG_PTR)
+		flags, x, y, data T.DWORD, extraInfo T.ULONG_PTR)
 
 	MoveWindow func(
-		w HWND, x, y, width, height int, repaint BOOL) BOOL
+		w T.HWND, x, y, width, height int, repaint T.BOOL) T.BOOL
 
 	MsgWaitForMultipleObjects func(
-		count DWORD,
-		h *HANDLE,
-		waitAll BOOL,
-		milliseconds DWORD,
-		wakeMask DWORD) DWORD
+		count T.DWORD,
+		h *T.HANDLE,
+		waitAll T.BOOL,
+		milliseconds T.DWORD,
+		wakeMask T.DWORD) T.DWORD
 
 	MsgWaitForMultipleObjectsEx func(
-		count DWORD,
-		h *HANDLE,
-		milliseconds, wakeMask, flags DWORD) DWORD
+		count T.DWORD,
+		h *T.HANDLE,
+		milliseconds, wakeMask, flags T.DWORD) T.DWORD
 
 	NotifyWinEvent func(
-		event DWORD, w HWND, object, child LONG)
+		event T.DWORD, w T.HWND, object, child T.LONG)
 
-	OemKeyScan func(oemChar WORD) DWORD
+	OemKeyScan func(oemChar T.WORD) T.DWORD
 
-	OemToChar func(src VString, dst OVString) BOOL
+	OemToChar func(src VString, dst OVString) T.BOOL
 
 	OemToCharBuff func(
-		src VString, dst OVString, dstLength DWORD) BOOL
+		src VString, dst OVString, dstLength T.DWORD) T.BOOL
 
-	OffsetRect func(rc *RECT, x, y int) BOOL
+	OffsetRect func(rc *T.RECT, x, y int) T.BOOL
 
-	OpenClipboard func(wndNewOwner HWND) BOOL
+	OpenClipboard func(wndNewOwner T.HWND) T.BOOL
 
 	OpenDesktop func(
 		desktop VString,
-		flags DWORD,
-		inherit BOOL,
-		desiredAccess ACCESS_MASK) HDESK
+		flags T.DWORD,
+		inherit T.BOOL,
+		desiredAccess T.ACCESS_MASK) T.HDESK
 
-	OpenIcon func(w HWND) BOOL
+	OpenIcon func(w T.HWND) T.BOOL
 
 	OpenInputDesktop func(
-		flags DWORD,
-		inherit BOOL,
-		desiredAccess ACCESS_MASK) HDESK
+		flags T.DWORD,
+		inherit T.BOOL,
+		desiredAccess T.ACCESS_MASK) T.HDESK
 
 	OpenWindowStation func(
 		winSta VString,
-		inherit BOOL,
-		desiredAccess ACCESS_MASK) HWINSTA
+		inherit T.BOOL,
+		desiredAccess T.ACCESS_MASK) T.HWINSTA
 
-	PaintDesktop func(dc HDC) BOOL
+	PaintDesktop func(dc T.HDC) T.BOOL
 
 	PeekMessage func(
-		msg *MSG,
-		w HWND,
-		msgFilterMin UINT,
-		msgFilterMax UINT,
-		removeMsg UINT) BOOL
+		msg *T.MSG,
+		w T.HWND,
+		msgFilterMin T.UINT,
+		msgFilterMax T.UINT,
+		removeMsg T.UINT) T.BOOL
 
 	PostMessage func(
-		win HWND, msg UINT, w WPARAM, l LPARAM) BOOL
+		win T.HWND, msg T.UINT, w T.WPARAM, l T.LPARAM) T.BOOL
 
 	PostQuitMessage func(exitCode int)
 
 	PostThreadMessage func(
-		thread DWORD, msg UINT, w WPARAM, l LPARAM) BOOL
+		thread T.DWORD, msg T.UINT, w T.WPARAM, l T.LPARAM) T.BOOL
 
-	PrintWindow func(w HWND, blt HDC, flags UINT) BOOL
+	PrintWindow func(w T.HWND, blt T.HDC, flags T.UINT) T.BOOL
 
 	PrivateExtractIcons func(
 		fileName VString,
 		iconIndex, xIcon, yIcon int,
-		icon *HICON,
-		iconid *UINT,
-		icons, flags UINT) UINT
+		icon *T.HICON,
+		iconid *T.UINT,
+		icons, flags T.UINT) T.UINT
 
-	PtInRect func(rc *RECT, pt POINT) BOOL
+	PtInRect func(rc *T.RECT, pt T.POINT) T.BOOL
 
 	RealChildWindowFromPoint func(
-		parent HWND, parentClientCoords POINT) HWND
+		parent T.HWND, parentClientCoords T.POINT) T.HWND
 
 	RealGetWindowClass func(
-		w HWND, className OVString, classNameMax UINT) UINT
+		w T.HWND, className OVString, classNameMax T.UINT) T.UINT
 
 	RedrawWindow func(
-		w HWND, rcUpdate *RECT, rgnUpdate HRGN, flags UINT) BOOL
+		w T.HWND, rcUpdate *T.RECT, rgnUpdate T.HRGN, flags T.UINT) T.BOOL
 
-	RegisterClass func(*WNDCLASS) ATOM
+	RegisterClass func(*T.WNDCLASS) T.ATOM
 
-	RegisterClassEx func(*WNDCLASSEX) ATOM
+	RegisterClassEx func(*T.WNDCLASSEX) T.ATOM
 
-	RegisterClipboardFormat func(format VString) UINT
+	RegisterClipboardFormat func(format VString) T.UINT
 
 	RegisterDeviceNotification func(
-		recipient HANDLE,
-		notificationFilter *VOID, flags DWORD) HDEVNOTIFY
+		recipient T.HANDLE,
+		notificationFilter *T.VOID, flags T.DWORD) T.HDEVNOTIFY
 
 	RegisterHotKey func(
-		w HWND, id int, modifiers UINT, vk UINT) BOOL
+		w T.HWND, id int, modifiers T.UINT, vk T.UINT) T.BOOL
 
 	RegisterRawInputDevices func(
-		rids *RAWINPUTDEVICE, numDevices UINT, size UINT) BOOL
+		rids *T.RAWINPUTDEVICE, numDevices T.UINT, size T.UINT) T.BOOL
 
-	RegisterShellHookWindow func(HWND) BOOL
+	RegisterShellHookWindow func(T.HWND) T.BOOL
 
-	RegisterWindowMessage func(VString) UINT
+	RegisterWindowMessage func(VString) T.UINT
 
-	ReleaseCapture func() BOOL
+	ReleaseCapture func() T.BOOL
 
-	ReleaseDC func(HWND, HDC) int
+	ReleaseDC func(T.HWND, T.HDC) int
 
-	RemoveMenu func(m HMENU, position UINT, flags UINT) BOOL
+	RemoveMenu func(m T.HMENU, position T.UINT, flags T.UINT) T.BOOL
 
-	RemoveProp func(HWND, VString) HANDLE
+	RemoveProp func(T.HWND, VString) T.HANDLE
 
-	ReplyMessage func(LRESULT) BOOL
+	ReplyMessage func(T.LRESULT) T.BOOL
 
-	ScreenToClient func(HWND, *POINT) BOOL
+	ScreenToClient func(T.HWND, *T.POINT) T.BOOL
 
 	ScrollDC func(
-		dc HDC,
+		dc T.HDC,
 		x, y int,
-		rcScroll, rcClip *RECT,
-		rgnUpdate HRGN,
-		rcUpdate *RECT) BOOL
+		rcScroll, rcClip *T.RECT,
+		rgnUpdate T.HRGN,
+		rcUpdate *T.RECT) T.BOOL
 
 	ScrollWindow func(
-		w HWND, xAmount, yAmount int,
-		rect, clipRect *RECT) BOOL
+		w T.HWND, xAmount, yAmount int,
+		rect, clipRect *T.RECT) T.BOOL
 
 	ScrollWindowEx func(
-		w HWND,
+		w T.HWND,
 		x, y int,
-		scroll, clip *RECT,
-		rgnUpdate HRGN,
-		rcUpdate *RECT,
-		flags UINT) int
+		scroll, clip *T.RECT,
+		rgnUpdate T.HRGN,
+		rcUpdate *T.RECT,
+		flags T.UINT) int
 
 	SendDlgItemMessage func(
-		dlg HWND,
+		dlg T.HWND,
 		idDlgItem int,
-		msg UINT,
-		w WPARAM,
-		l LPARAM) LRESULT
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM) T.LRESULT
 
-	SendInput func(nInputs UINT, i *INPUT, size int) UINT
+	SendInput func(nInputs T.UINT, i *T.INPUT, size int) T.UINT
 
 	SendMessage func(
-		win HWND, msg UINT, w WPARAM, l LPARAM) LRESULT
+		win T.HWND, msg T.UINT, w T.WPARAM, l T.LPARAM) T.LRESULT
 
 	SendMessageCallback func(
-		win HWND,
-		msg UINT,
-		w WPARAM,
-		l LPARAM,
-		resultCallBack SENDASYNCPROC,
-		data ULONG_PTR) BOOL
+		win T.HWND,
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM,
+		resultCallBack T.SENDASYNCPROC,
+		data T.ULONG_PTR) T.BOOL
 
 	SendMessageTimeout func(
-		win HWND,
-		msg UINT,
-		w WPARAM,
-		l LPARAM,
-		flags, timeout UINT,
-		result *DWORD_PTR) LRESULT
+		win T.HWND,
+		msg T.UINT,
+		w T.WPARAM,
+		l T.LPARAM,
+		flags, timeout T.UINT,
+		result *T.DWORD_PTR) T.LRESULT
 
 	SendNotifyMessage func(
-		win HWND, msg UINT, w WPARAM, l LPARAM) BOOL
+		win T.HWND, msg T.UINT, w T.WPARAM, l T.LPARAM) T.BOOL
 
-	SetActiveWindow func(w HWND) HWND
+	SetActiveWindow func(w T.HWND) T.HWND
 
-	SetCapture func(w HWND) HWND
+	SetCapture func(w T.HWND) T.HWND
 
-	SetCaretBlinkTime func(mSeconds UINT) BOOL
+	SetCaretBlinkTime func(mSeconds T.UINT) T.BOOL
 
-	SetCaretPos func(x, y int) BOOL
+	SetCaretPos func(x, y int) T.BOOL
 
 	//SetClassWord is obsolete; instead use:
 	//	SetClassLong
-	SetClassLong func(w HWND, index int, newLong LONG) DWORD
+	SetClassLong func(w T.HWND, index int, newLong T.LONG) T.DWORD
 
 	SetClassLongPtr func(
-		w HWND, index int, newLong LONG_PTR) ULONG_PTR
+		w T.HWND, index int, newLong T.LONG_PTR) T.ULONG_PTR
 
-	SetClassWord func(w HWND, index int, newWord WORD) WORD
+	SetClassWord func(w T.HWND, index int, newWord T.WORD) T.WORD
 
-	SetClipboardData func(format UINT, mem HANDLE) HANDLE
+	SetClipboardData func(format T.UINT, mem T.HANDLE) T.HANDLE
 
-	SetClipboardViewer func(wndNewViewer HWND) HWND
+	SetClipboardViewer func(wndNewViewer T.HWND) T.HWND
 
-	SetCursor func(cursor HCURSOR) HCURSOR
+	SetCursor func(cursor T.HCURSOR) T.HCURSOR
 
-	SetCursorPos func(x, y int) BOOL
+	SetCursorPos func(x, y int) T.BOOL
 
-	SetDebugErrorLevel func(level DWORD)
+	SetDebugErrorLevel func(level T.DWORD)
 
 	SetDlgItemInt func(
-		dlg HWND, idDlgItem int, value UINT, signed BOOL) BOOL
+		dlg T.HWND, idDlgItem int, value T.UINT, signed T.BOOL) T.BOOL
 
 	SetDlgItemText func(
-		dlg HWND, idDlgItem int, s VString) BOOL
+		dlg T.HWND, idDlgItem int, s VString) T.BOOL
 
-	SetDoubleClickTime func(UINT) BOOL
+	SetDoubleClickTime func(T.UINT) T.BOOL
 
-	SetFocus func(HWND) HWND
+	SetFocus func(T.HWND) T.HWND
 
-	SetForegroundWindow func(HWND) BOOL
+	SetForegroundWindow func(T.HWND) T.BOOL
 
-	SetKeyboardState func(keyState *BYTE) BOOL
+	SetKeyboardState func(keyState *T.BYTE) T.BOOL
 
-	SetLastErrorEx func(errCode DWORD, type_ DWORD)
+	SetLastErrorEx func(errCode T.DWORD, type_ T.DWORD)
 
 	SetLayeredWindowAttributes func(
-		w HWND, crKey COLORREF, alpha BYTE, flags DWORD) BOOL
+		w T.HWND, crKey T.COLORREF, alpha T.BYTE, flags T.DWORD) T.BOOL
 
-	SetMenu func(HWND, HMENU) BOOL
+	SetMenu func(T.HWND, T.HMENU) T.BOOL
 
-	SetMenuContextHelpId func(HMENU, DWORD) BOOL
+	SetMenuContextHelpId func(T.HMENU, T.DWORD) T.BOOL
 
-	SetMenuDefaultItem func(m HMENU, item UINT, byPos UINT) BOOL
+	SetMenuDefaultItem func(m T.HMENU, item T.UINT, byPos T.UINT) T.BOOL
 
-	SetMenuInfo func(HMENU, MENUINFO) BOOL
+	SetMenuInfo func(T.HMENU, T.MENUINFO) T.BOOL
 
 	SetMenuItemBitmaps func(
-		m HMENU,
-		position, flags UINT,
-		bitmapUnchecked, bitmapChecked HBITMAP) BOOL
+		m T.HMENU,
+		position, flags T.UINT,
+		bitmapUnchecked, bitmapChecked T.HBITMAP) T.BOOL
 
 	SetMenuItemInfo func(
-		m HMENU,
-		item UINT,
-		byPositon BOOL,
-		mii MENUITEMINFO) BOOL
+		m T.HMENU,
+		item T.UINT,
+		byPositon T.BOOL,
+		mii T.MENUITEMINFO) T.BOOL
 
-	SetMessageExtraInfo func(LPARAM) LPARAM
+	SetMessageExtraInfo func(T.LPARAM) T.LPARAM
 
-	SetMessageQueue func(messagesMax int) BOOL
+	SetMessageQueue func(messagesMax int) T.BOOL
 
-	SetParent func(child HWND, newParent HWND) HWND
+	SetParent func(child T.HWND, newParent T.HWND) T.HWND
 
-	SetProcessDefaultLayout func(defaultLayout DWORD) BOOL
+	SetProcessDefaultLayout func(defaultLayout T.DWORD) T.BOOL
 
-	SetProcessWindowStation func(HWINSTA) BOOL
+	SetProcessWindowStation func(T.HWINSTA) T.BOOL
 
-	SetProp func(w HWND, s VString, data HANDLE) BOOL
+	SetProp func(w T.HWND, s VString, data T.HANDLE) T.BOOL
 
-	SetRect func(rc *RECT, xLeft, yTop, xRight, yBottom int) BOOL
+	SetRect func(rc *T.RECT, xLeft, yTop, xRight, yBottom int) T.BOOL
 
-	SetRectEmpty func(*RECT) BOOL
+	SetRectEmpty func(*T.RECT) T.BOOL
 
 	SetScrollInfo func(
-		w HWND, bar int, si *SCROLLINFO, redraw BOOL) int
+		w T.HWND, bar int, si *T.SCROLLINFO, redraw T.BOOL) int
 
-	SetScrollPos func(w HWND, bar, pos, redraw BOOL) int
+	SetScrollPos func(w T.HWND, bar, pos, redraw T.BOOL) int
 
 	SetScrollRange func(
-		w HWND, bar, minPos, maxPos int, redraw BOOL) BOOL
+		w T.HWND, bar, minPos, maxPos int, redraw T.BOOL) T.BOOL
 
 	SetSysColors func(
-		nElements int, elements *INT, rgbValues *COLORREF) BOOL
+		nElements int, elements *T.INT, rgbValues *T.COLORREF) T.BOOL
 
-	SetSystemCursor func(cur HCURSOR, id DWORD) BOOL
+	SetSystemCursor func(cur T.HCURSOR, id T.DWORD) T.BOOL
 
-	SetThreadDesktop func(desktop HDESK) BOOL
+	SetThreadDesktop func(desktop T.HDESK) T.BOOL
 
 	SetTimer func(
-		w HWND,
-		idEvent UINT_PTR,
-		elapse UINT,
-		fn TIMERPROC) UINT_PTR
+		w T.HWND,
+		idEvent T.UINT_PTR,
+		elapse T.UINT,
+		fn T.TIMERPROC) T.UINT_PTR
 
 	SetUserObjectInformation func(
-		obj HANDLE, index int, info *VOID, length DWORD) BOOL
+		obj T.HANDLE, index int, info *T.VOID, length T.DWORD) T.BOOL
 
 	SetUserObjectSecurity func(
-		obj HANDLE,
-		requested *SECURITY_INFORMATION,
-		sid *SECURITY_DESCRIPTOR) BOOL
+		obj T.HANDLE,
+		requested *T.SECURITY_INFORMATION,
+		sid *T.SECURITY_DESCRIPTOR) T.BOOL
 
-	SetWindowContextHelpId func(HWND, DWORD) BOOL
+	SetWindowContextHelpId func(T.HWND, T.DWORD) T.BOOL
 
-	SetWindowLong func(w HWND, index int, newLong LONG) LONG
+	SetWindowLong func(w T.HWND, index int, newLong T.LONG) T.LONG
 
 	SetWindowLongPtr func(
-		w HWND, index int, newLong LONG_PTR) LONG_PTR
+		w T.HWND, index int, newLong T.LONG_PTR) T.LONG_PTR
 
-	SetWindowPlacement func(w HWND, wndpl *WINDOWPLACEMENT) BOOL
+	SetWindowPlacement func(w T.HWND, wndpl *T.WINDOWPLACEMENT) T.BOOL
 
 	SetWindowPos func(
-		w HWND,
-		insertAfter HWND,
+		w T.HWND,
+		insertAfter T.HWND,
 		x, y, cx, cy int,
-		flags UINT) BOOL
+		flags T.UINT) T.BOOL
 
-	SetWindowRgn func(w HWND, rgn HRGN, redraw BOOL) int
+	SetWindowRgn func(w T.HWND, rgn T.HRGN, redraw T.BOOL) int
 
-	SetWindowsHook func(filterType int, fn HOOKPROC) HHOOK
+	SetWindowsHook func(filterType int, fn T.HOOKPROC) T.HHOOK
 
 	SetWindowsHookEx func(
 		hook int,
-		fn HOOKPROC,
-		mod HINSTANCE,
-		threadId DWORD) HHOOK
+		fn T.HOOKPROC,
+		mod T.HINSTANCE,
+		threadId T.DWORD) T.HHOOK
 
-	SetWindowText func(w HWND, s VString) BOOL
+	SetWindowText func(w T.HWND, s VString) T.BOOL
 
-	SetWindowWord func(w HWND, index int, newWord WORD) WORD
+	SetWindowWord func(w T.HWND, index int, newWord T.WORD) T.WORD
 
 	SetWinEventHook func(
-		min, max DWORD,
-		modWinEventProc HMODULE,
-		fn WINEVENTPROC,
-		process, thread DWORD,
-		f WINEVENT_FLAGS) HWINEVENTHOOK
+		min, max T.DWORD,
+		modWinEventProc T.HMODULE,
+		fn T.WINEVENTPROC,
+		process, thread T.DWORD,
+		f T.WINEVENT_FLAGS) T.HWINEVENTHOOK
 
-	ShowCaret func(w HWND) BOOL
+	ShowCaret func(w T.HWND) T.BOOL
 
-	ShowCursor func(show BOOL) int
+	ShowCursor func(show T.BOOL) int
 
-	ShowOwnedPopups func(w HWND, show BOOL) BOOL
+	ShowOwnedPopups func(w T.HWND, show T.BOOL) T.BOOL
 
-	ShowScrollBar func(w HWND, bar int, show BOOL) BOOL
+	ShowScrollBar func(w T.HWND, bar int, show T.BOOL) T.BOOL
 
-	ShowWindow func(w HWND, cmdShow int) BOOL
+	ShowWindow func(w T.HWND, cmdShow int) T.BOOL
 
-	ShowWindowAsync func(w HWND, cmdShow int) BOOL
+	ShowWindowAsync func(w T.HWND, cmdShow int) T.BOOL
 
-	SubtractRect func(dst, src1, src2 *RECT) BOOL
+	SubtractRect func(dst, src1, src2 *T.RECT) T.BOOL
 
-	SwapMouseButton func(swap BOOL) BOOL
+	SwapMouseButton func(swap T.BOOL) T.BOOL
 
-	SwitchDesktop func(desktop HDESK) BOOL
+	SwitchDesktop func(desktop T.HDESK) T.BOOL
 
-	SwitchToThisWindow func(w HWND, unknown BOOL)
+	SwitchToThisWindow func(w T.HWND, unknown T.BOOL)
 
 	SystemParametersInfo func(
-		action, nParam UINT, param *VOID, winIni UINT) BOOL
+		action, nParam T.UINT, param *T.VOID, winIni T.UINT) T.BOOL
 
 	TabbedTextOut func(
-		h HDC,
+		h T.HDC,
 		x, y int,
 		s VString,
 		count, tabPositions int,
-		tabStopPositions *INT,
-		tabOrigin int) LONG
+		tabStopPositions *T.INT,
+		tabOrigin int) T.LONG
 
 	TileWindows func(
-		parent HWND,
-		how UINT,
-		rect *RECT,
-		nKids UINT,
-		kids *HWND) WORD
+		parent T.HWND,
+		how T.UINT,
+		rect *T.RECT,
+		nKids T.UINT,
+		kids *T.HWND) T.WORD
 
 	ToAscii func(
-		virtKey, scanCode UINT,
-		keyState *BYTE,
-		char *WORD,
-		flags UINT) int
+		virtKey, scanCode T.UINT,
+		keyState *T.BYTE,
+		char *T.WORD,
+		flags T.UINT) int
 
 	ToAsciiEx func(
-		virtKey, scanCode UINT,
-		keyState *BYTE,
-		char *WORD,
-		flags UINT,
-		hkl HKL) int
+		virtKey, scanCode T.UINT,
+		keyState *T.BYTE,
+		char *T.WORD,
+		flags T.UINT,
+		hkl T.HKL) int
 
 	ToUnicode func(
-		virtKey, scanCode UINT,
-		keyState *BYTE,
-		buff OWString,
+		virtKey, scanCode T.UINT,
+		keyState *T.BYTE,
+		buff T.OWString,
 		size int,
-		flags UINT) int
+		flags T.UINT) int
 
 	ToUnicodeEx func(
-		virtKey, scanCode UINT,
-		keyState *BYTE,
-		buff WString,
+		virtKey, scanCode T.UINT,
+		keyState *T.BYTE,
+		buff T.WString,
 		size int,
-		flags UINT,
-		h HKL) int
+		flags T.UINT,
+		h T.HKL) int
 
-	TrackMouseEvent func(eventTrack *TRACKMOUSEEVENT) BOOL
+	TrackMouseEvent func(eventTrack *T.TRACKMOUSEEVENT) T.BOOL
 
 	TrackPopupMenu func(
-		m HMENU,
-		flags UINT,
+		m T.HMENU,
+		flags T.UINT,
 		x, y, reserved int,
-		w HWND,
-		rect *RECT) BOOL
+		w T.HWND,
+		rect *T.RECT) T.BOOL
 
 	TrackPopupMenuEx func(
-		HMENU, UINT, int, int, HWND, *TPMPARAMS) BOOL
+		T.HMENU, T.UINT, int, int, T.HWND, *T.TPMPARAMS) T.BOOL
 
 	TranslateAccelerator func(
-		w HWND, accTable HACCEL, msg *MSG) int
+		w T.HWND, accTable T.HACCEL, msg *T.MSG) int
 
-	TranslateMDISysAccel func(wndClient HWND, msg *MSG) BOOL
+	TranslateMDISysAccel func(wndClient T.HWND, msg *T.MSG) T.BOOL
 
-	TranslateMessage func(msg *MSG) BOOL
+	TranslateMessage func(msg *T.MSG) T.BOOL
 
-	UnhookWindowsHook func(code int, filterProc HOOKPROC) BOOL
+	UnhookWindowsHook func(code int, filterProc T.HOOKPROC) T.BOOL
 
-	UnhookWindowsHookEx func(hk HHOOK) BOOL
+	UnhookWindowsHookEx func(hk T.HHOOK) T.BOOL
 
-	UnhookWinEvent func(winEventHook HWINEVENTHOOK) BOOL
+	UnhookWinEvent func(winEventHook T.HWINEVENTHOOK) T.BOOL
 
-	UnionRect func(dst, src1, src2 *RECT) BOOL
+	UnionRect func(dst, src1, src2 *T.RECT) T.BOOL
 
-	UnloadKeyboardLayout func(hkl HKL) BOOL
+	UnloadKeyboardLayout func(hkl T.HKL) T.BOOL
 
 	UnregisterClass func(
-		className VString, instance HINSTANCE) BOOL
+		className VString, instance T.HINSTANCE) T.BOOL
 
-	UnregisterDeviceNotification func(handle HDEVNOTIFY) BOOL
+	UnregisterDeviceNotification func(handle T.HDEVNOTIFY) T.BOOL
 
-	UnregisterHotKey func(w HWND, id int) BOOL
+	UnregisterHotKey func(w T.HWND, id int) T.BOOL
 
 	UpdateLayeredWindow func(
-		w HWND,
-		dst HDC,
-		ptDst *POINT,
-		s *SIZE,
-		src HDC,
-		ptSrc *POINT,
-		crKey COLORREF,
-		blend *BLENDFUNCTION,
-		flags DWORD) BOOL
+		w T.HWND,
+		dst T.HDC,
+		ptDst *T.POINT,
+		s *T.SIZE,
+		src T.HDC,
+		ptSrc *T.POINT,
+		crKey T.COLORREF,
+		blend *T.BLENDFUNCTION,
+		flags T.DWORD) T.BOOL
 
 	UpdateLayeredWindowIndirect func(
-		w HWND, ulwi *UPDATELAYEREDWINDOWINFO) BOOL
+		w T.HWND, ulwi *T.UPDATELAYEREDWINDOWINFO) T.BOOL
 
-	UpdateWindow func(w HWND) BOOL
+	UpdateWindow func(w T.HWND) T.BOOL
 
 	UserHandleGrantAccess func(
-		user HANDLE, job HANDLE, grant BOOL) BOOL
+		user T.HANDLE, job T.HANDLE, grant T.BOOL) T.BOOL
 
-	ValidateRect func(w HWND, rect *RECT) BOOL
+	ValidateRect func(w T.HWND, rect *T.RECT) T.BOOL
 
-	ValidateRgn func(w HWND, rgn HRGN) BOOL
+	ValidateRgn func(w T.HWND, rgn T.HRGN) T.BOOL
 
-	VkKeyScan func(ch Char) SHORT
+	VkKeyScan func(ch T.Char) T.SHORT
 
-	VkKeyScanEx func(ch Char, dwhkl HKL) SHORT
+	VkKeyScanEx func(ch T.Char, dwhkl T.HKL) T.SHORT
 
 	WaitForInputIdle func(
-		process HANDLE, milliseconds DWORD) DWORD
+		process T.HANDLE, milliseconds T.DWORD) T.DWORD
 
-	WaitMessage func() BOOL
+	WaitMessage func() T.BOOL
 
-	WindowFromDC func(dc HDC) HWND
+	WindowFromDC func(dc T.HDC) T.HWND
 
-	WindowFromPoint func(point POINT) HWND
+	WindowFromPoint func(point T.POINT) T.HWND
 
 	WinHelp func(
-		main HWND,
+		main T.HWND,
 		help VString,
-		command UINT,
-		data ULONG_PTR) BOOL
+		command T.UINT,
+		data T.ULONG_PTR) T.BOOL
 
 	Wsprintf func(VString, VString, ...variadic) int
 
@@ -1818,7 +1817,7 @@ var WinUserApis = Apis{
 }
 
 //TODO(t): funcs ending with A and W
-var WinUserUnicodeApis = Apis{
+var WinUserUnicodeApis =Apis{
 	{"AppendMenuW", &AppendMenu},
 	{"BroadcastSystemMessageExW", &BroadcastSystemMessageEx},
 	{"BroadcastSystemMessageW", &BroadcastSystemMessage},
@@ -1881,7 +1880,7 @@ var WinUserUnicodeApis = Apis{
 	{"GetTabbedTextExtentW", &GetTabbedTextExtent},
 	{"GetUserObjectInformationW", &GetUserObjectInformation},
 	{"GetWindowLongW", &GetWindowLong},
-	{"GetWindowLongW", &GetWindowLongPtr}, // NOTE(t): Not on xp32
+	{"GetWindowLongW", &GetWindowLongPtr}, //NOTE(t): Not on xp32
 	{"GetWindowTextLengthW", &GetWindowTextLength},
 	{"GetWindowTextW", &GetWindowText},
 	{"GrayStringW", &GrayString},
@@ -1934,7 +1933,7 @@ var WinUserUnicodeApis = Apis{
 	{"SetPropW", &SetProp},
 	{"SetUserObjectInformationW", &SetUserObjectInformation},
 	{"SetWindowLongW", &SetWindowLong},
-	{"SetWindowLongW", &SetWindowLongPtr}, // NOTE(t): Not on xp32
+	{"SetWindowLongW", &SetWindowLongPtr}, //NOTE(t): Not on xp32
 	{"SetWindowsHookExW", &SetWindowsHookEx},
 	{"SetWindowsHookW", &SetWindowsHook},
 	{"SetWindowTextW", &SetWindowText},
@@ -1998,7 +1997,7 @@ var WinUserANSIApis = Apis{
 	{"GetClassInfoA", &GetClassInfo},
 	{"GetClassInfoExA", &GetClassInfoEx},
 	{"GetClassLongA", &GetClassLong},
-	{"GetClassLongA", &GetClassLongPtr}, // NOTE(t): Not on xp32
+	{"GetClassLongA", &GetClassLongPtr}, //NOTE(t): Not on xp32
 	{"GetClassNameA", &GetClassName},
 	{"GetClipboardFormatNameA", &GetClipboardFormatName},
 	{"GetDlgItemTextA", &GetDlgItemText},
@@ -2013,7 +2012,7 @@ var WinUserANSIApis = Apis{
 	{"GetTabbedTextExtentA", &GetTabbedTextExtent},
 	{"GetUserObjectInformationA", &GetUserObjectInformation},
 	{"GetWindowLongA", &GetWindowLong},
-	{"GetWindowLongA", &GetWindowLongPtr}, // NOTE(t): Not on xp32
+	{"GetWindowLongA", &GetWindowLongPtr}, //NOTE(t): Not on xp32
 	{"GetWindowTextA", &GetWindowText},
 	{"GetWindowTextLengthA", &GetWindowTextLength},
 	{"GrayStringA", &GrayString},
@@ -2060,13 +2059,13 @@ var WinUserANSIApis = Apis{
 	{"SendMessageTimeoutA", &SendMessageTimeout},
 	{"SendNotifyMessageA", &SendNotifyMessage},
 	{"SetClassLongA", &SetClassLong},
-	{"SetClassLongA", &SetClassLongPtr}, // NOTE(t): Not on xp32
+	{"SetClassLongA", &SetClassLongPtr}, //NOTE(t): Not on xp32
 	{"SetDlgItemTextA", &SetDlgItemText},
 	{"SetMenuItemInfoA", &SetMenuItemInfo},
 	{"SetPropA", &SetProp},
 	{"SetUserObjectInformationA", &SetUserObjectInformation},
 	{"SetWindowLongA", &SetWindowLong},
-	{"SetWindowLongA", &SetWindowLongPtr}, // NOTE(t): Not on xp32
+	{"SetWindowLongA", &SetWindowLongPtr}, //NOTE(t): Not on xp32
 	{"SetWindowsHookA", &SetWindowsHook},
 	{"SetWindowsHookExA", &SetWindowsHookEx},
 	{"SetWindowTextA", &SetWindowText},

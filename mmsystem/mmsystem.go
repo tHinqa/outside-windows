@@ -7,443 +7,443 @@ package mmsystem
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/winmm"
 )
 
 var (
-	CloseDriver func(Driver HDRVR, Param1, Param2 LPARAM) LRESULT
+	CloseDriver func(driver T.HDRVR, param1, param2 T.LPARAM) T.LRESULT
 
 	OpenDriver func(
-		DriverName, SectionName WString, Param2 LPARAM) HDRVR
+		driverName, sectionName T.WString, param2 T.LPARAM) T.HDRVR
 
 	SendDriverMessage func(
-		Driver HDRVR, Message UINT, Param1, Param2 LPARAM) LRESULT
+		driver T.HDRVR, message T.UINT, param1, param2 T.LPARAM) T.LRESULT
 
-	DrvGetModuleHandle func(Driver HDRVR) HMODULE
+	DrvGetModuleHandle func(driver T.HDRVR) T.HMODULE
 
-	GetDriverModuleHandle func(Driver HDRVR) HMODULE
+	GetDriverModuleHandle func(driver T.HDRVR) T.HMODULE
 
 	DefDriverProc func(
-		DriverIdentifier DWORD_PTR,
-		Drvr HDRVR,
-		Msg UINT,
-		Param1, Param2 LPARAM) LRESULT
+		driverIdentifier T.DWORD_PTR,
+		drvr T.HDRVR,
+		msg T.UINT,
+		param1, param2 T.LPARAM) T.LRESULT
 
-	SndPlaySound func(Sound VString, fSound UINT) BOOL
+	SndPlaySound func(sound VString, fSound T.UINT) T.BOOL
 
-	PlaySound func(Sound VString, mod HMODULE, fSound DWORD) BOOL
+	PlaySound func(sound VString, mod T.HMODULE, fSound T.DWORD) T.BOOL
 
-	WaveOutGetNumDevs func() UINT
+	WaveOutGetNumDevs func() T.UINT
 
 	WaveOutGetDevCapsA func(
-		deviceID UINT_PTR, woc *WAVEOUTCAPSA, size UINT) MMRESULT
+		deviceID T.UINT_PTR, woc *T.WAVEOUTCAPSA, size T.UINT) T.MMRESULT
 
 	WaveOutGetDevCapsW func(
-		deviceID UINT_PTR, woc *WAVEOUTCAPSW, size UINT) MMRESULT
+		deviceID T.UINT_PTR, woc *T.WAVEOUTCAPSW, size T.UINT) T.MMRESULT
 
-	WaveOutGetVolume func(WO HWAVEOUT, Volume *DWORD) MMRESULT
+	WaveOutGetVolume func(wo T.HWAVEOUT, volume *T.DWORD) T.MMRESULT
 
-	WaveOutSetVolume func(WO HWAVEOUT, Volume DWORD) MMRESULT
+	WaveOutSetVolume func(wo T.HWAVEOUT, volume T.DWORD) T.MMRESULT
 
 	WaveOutGetErrorText func(
-		MmrError MMRESULT,
-		Text OVString,
-		sText UINT) MMRESULT
+		mmrError T.MMRESULT,
+		text OVString,
+		sText T.UINT) T.MMRESULT
 
 	WaveOutOpen func(
-		WO *HWAVEOUT,
-		DeviceID UINT,
-		WFX *WAVEFORMATEX,
-		Callback,
-		Instance DWORD_PTR,
-		fOpen DWORD) MMRESULT
+		wo *T.HWAVEOUT,
+		deviceID T.UINT,
+		wfx *T.WAVEFORMATEX,
+		callback,
+		instance T.DWORD_PTR,
+		fOpen T.DWORD) T.MMRESULT
 
-	WaveOutClose func(WO HWAVEOUT) MMRESULT
+	WaveOutClose func(wo T.HWAVEOUT) T.MMRESULT
 
 	WaveOutPrepareHeader func(
-		WO HWAVEOUT, WH *WAVEHDR, cWH UINT) MMRESULT
+		wo T.HWAVEOUT, wh *T.WAVEHDR, cWH T.UINT) T.MMRESULT
 
 	WaveOutUnprepareHeader func(
-		WO HWAVEOUT, WH *WAVEHDR, cWH UINT) MMRESULT
+		wo T.HWAVEOUT, wh *T.WAVEHDR, cWH T.UINT) T.MMRESULT
 
 	WaveOutWrite func(
-		WO HWAVEOUT,
-		WH *WAVEHDR,
-		sWH UINT) MMRESULT
+		wo T.HWAVEOUT,
+		wh *T.WAVEHDR,
+		sWH T.UINT) T.MMRESULT
 
-	WaveOutPause func(WO HWAVEOUT) MMRESULT
+	WaveOutPause func(wo T.HWAVEOUT) T.MMRESULT
 
-	WaveOutRestart func(WO HWAVEOUT) MMRESULT
+	WaveOutRestart func(wo T.HWAVEOUT) T.MMRESULT
 
-	WaveOutReset func(WO HWAVEOUT) MMRESULT
+	WaveOutReset func(wo T.HWAVEOUT) T.MMRESULT
 
-	WaveOutBreakLoop func(WO HWAVEOUT) MMRESULT
+	WaveOutBreakLoop func(wo T.HWAVEOUT) T.MMRESULT
 
 	WaveOutGetPosition func(
-		WO HWAVEOUT, mmt *MMTIME, cbmmt UINT) MMRESULT
+		wo T.HWAVEOUT, mmt *T.MMTIME, cbmmt T.UINT) T.MMRESULT
 
-	WaveOutGetPitch func(WO HWAVEOUT, Pitch *DWORD) MMRESULT
+	WaveOutGetPitch func(wo T.HWAVEOUT, pitch *T.DWORD) T.MMRESULT
 
-	WaveOutSetPitch func(WO HWAVEOUT, Pitch DWORD) MMRESULT
+	WaveOutSetPitch func(wo T.HWAVEOUT, pitch T.DWORD) T.MMRESULT
 
 	WaveOutGetPlaybackRate func(
-		WO HWAVEOUT, Rate *DWORD) MMRESULT
+		wo T.HWAVEOUT, rate  *T.DWORD) T.MMRESULT
 
-	WaveOutSetPlaybackRate func(WO HWAVEOUT, Rate DWORD) MMRESULT
+	WaveOutSetPlaybackRate func(wo T.HWAVEOUT, rate  T.DWORD) T.MMRESULT
 
-	WaveOutGetID func(WO HWAVEOUT, DeviceID *UINT) MMRESULT
+	WaveOutGetID func(wo T.HWAVEOUT, devideID *T.UINT) T.MMRESULT
 
 	WaveOutMessage func(
-		WO HWAVEOUT, Msg UINT, D1, D2 DWORD_PTR) MMRESULT
+		wo T.HWAVEOUT, msg T.UINT, d1, d2 T.DWORD_PTR) T.MMRESULT
 
-	WaveInGetNumDevs func() UINT
+	WaveInGetNumDevs func() T.UINT
 
 	WaveInGetDevCapsA func(
-		DeviceID UINT_PTR, WIC *WAVEINCAPSA, cWIC UINT) MMRESULT
+		deviceID T.UINT_PTR, wic *T.WAVEINCAPSA, cWIC T.UINT) T.MMRESULT
 
 	WaveInGetDevCapsW func(
-		DeviceID UINT_PTR, WIC *WAVEINCAPSW, cWIC UINT) MMRESULT
+		deviceID T.UINT_PTR, wic *T.WAVEINCAPSW, cWIC T.UINT) T.MMRESULT
 
 	WaveInGetErrorText func(
-		MmrError MMRESULT, Text OVString, cText UINT) MMRESULT
+		mmrError T.MMRESULT, text OVString, cText T.UINT) T.MMRESULT
 
 	WaveInOpen func(
-		WI *HWAVEIN,
-		DeviceID UINT,
-		Wfx *WAVEFORMATEX,
-		Callback, Instance DWORD_PTR,
-		fdwOpen DWORD) MMRESULT
+		wi *T.HWAVEIN,
+		deviceID T.UINT,
+		wfx *T.WAVEFORMATEX,
+		callback, instance T.DWORD_PTR,
+		fdwOpen T.DWORD) T.MMRESULT
 
-	WaveInClose func(WI HWAVEIN) MMRESULT
+	WaveInClose func(wi T.HWAVEIN) T.MMRESULT
 
 	WaveInPrepareHeader func(
-		WI HWAVEIN, Wh *WAVEHDR, cWH UINT) MMRESULT
+		wi T.HWAVEIN, wh *T.WAVEHDR, cWH T.UINT) T.MMRESULT
 
 	WaveInUnprepareHeader func(
-		WI HWAVEIN, WH *WAVEHDR, cbwh UINT) MMRESULT
+		wi T.HWAVEIN, wh *T.WAVEHDR, cbwh T.UINT) T.MMRESULT
 
 	WaveInAddBuffer func(
-		WI HWAVEIN, WH *WAVEHDR, cWH UINT) MMRESULT
+		wi T.HWAVEIN, wh *T.WAVEHDR, cWH T.UINT) T.MMRESULT
 
-	WaveInStart func(WI HWAVEIN) MMRESULT
+	WaveInStart func(wi T.HWAVEIN) T.MMRESULT
 
-	WaveInStop func(WI HWAVEIN) MMRESULT
+	WaveInStop func(wi T.HWAVEIN) T.MMRESULT
 
-	WaveInReset func(WI HWAVEIN) MMRESULT
+	WaveInReset func(wi T.HWAVEIN) T.MMRESULT
 
 	WaveInGetPosition func(
-		WI HWAVEIN, MMT *MMTIME, cMMT UINT) MMRESULT
+		wi T.HWAVEIN, mmt *T.MMTIME, cMMT T.UINT) T.MMRESULT
 
-	WaveInGetID func(WI HWAVEIN, DeviceID *UINT) MMRESULT
+	WaveInGetID func(wi T.HWAVEIN, devideID *T.UINT) T.MMRESULT
 
 	WaveInMessage func(
-		WI HWAVEIN, Msg UINT, D1, D2 DWORD_PTR) MMRESULT
+		wi T.HWAVEIN,  msg T.UINT, d1, d2 T.DWORD_PTR) T.MMRESULT
 
-	MidiOutGetNumDevs func() UINT
+	MidiOutGetNumDevs func() T.UINT
 
 	MidiStreamOpen func(
-		MS *HMIDISTRM,
-		DeviceID *UINT,
-		sMidi DWORD,
-		Callback,
-		Instance DWORD_PTR,
-		fOpen DWORD) MMRESULT
+		ms *T.HMIDISTRM,
+		deviceID *T.UINT,
+		sMidi T.DWORD,
+		callback,
+		instance T.DWORD_PTR,
+		fOpen T.DWORD) T.MMRESULT
 
-	MidiStreamClose func(MS HMIDISTRM) MMRESULT
+	MidiStreamClose func(ms T.HMIDISTRM) T.MMRESULT
 
 	MidiStreamProperty func(
-		MS HMIDISTRM, RopData *BYTE, Property DWORD) MMRESULT
+		ms T.HMIDISTRM, ropData *T.BYTE, property T.DWORD) T.MMRESULT
 
 	MidiStreamPosition func(
-		MS HMIDISTRM, MMT *MMTIME, cMMT UINT) MMRESULT
+		ms T.HMIDISTRM, mmt  *T.MMTIME, cMMT T.UINT) T.MMRESULT
 
 	MidiStreamOut func(
-		MS HMIDISTRM, MH *MIDIHDR, cMH UINT) MMRESULT
+		ms T.HMIDISTRM, mh *T.MIDIHDR, cMH T.UINT) T.MMRESULT
 
-	MidiStreamPause func(MS HMIDISTRM) MMRESULT
+	MidiStreamPause func(ms T.HMIDISTRM) T.MMRESULT
 
-	MidiStreamRestart func(MS HMIDISTRM) MMRESULT
+	MidiStreamRestart func(ms T.HMIDISTRM) T.MMRESULT
 
-	MidiStreamStop func(MS HMIDISTRM) MMRESULT
+	MidiStreamStop func(ms T.HMIDISTRM) T.MMRESULT
 
 	MidiConnect func(
-		MI HMIDI, MO HMIDIOUT, Reserved *VOID) MMRESULT
+		mi T.HMIDI, mo T.HMIDIOUT, _ *T.VOID) T.MMRESULT
 
 	MidiDisconnect func(
-		MI HMIDI, MO HMIDIOUT, Reserved *VOID) MMRESULT
+		mi T.HMIDI, mo T.HMIDIOUT, _ *T.VOID) T.MMRESULT
 
 	MidiOutGetDevCapsA func(
-		DeviceID UINT_PTR, MOC *MIDIOUTCAPSA, cMOC UINT) MMRESULT
+		deviceID T.UINT_PTR, moc *T.MIDIOUTCAPSA, cMOC T.UINT) T.MMRESULT
 
 	MidiOutGetDevCapsW func(
-		DeviceID UINT_PTR, MOC *MIDIOUTCAPSW, cMOC UINT) MMRESULT
+		deviceID T.UINT_PTR, moc *T.MIDIOUTCAPSW, cMOC T.UINT) T.MMRESULT
 
-	MidiOutGetVolume func(Mo HMIDIOUT, Volume *DWORD) MMRESULT
+	MidiOutGetVolume func(mo T.HMIDIOUT, volume *T.DWORD) T.MMRESULT
 
-	MidiOutSetVolume func(Mo HMIDIOUT, Volume DWORD) MMRESULT
+	MidiOutSetVolume func(mo T.HMIDIOUT, volume T.DWORD) T.MMRESULT
 
 	MidiOutGetErrorText func(
-		MmrError MMRESULT, Text OVString, cText UINT) MMRESULT
+		mmrError T.MMRESULT, text OVString, cText T.UINT) T.MMRESULT
 
 	MidiOutOpen func(
-		MO *HMIDIOUT,
-		DeviceID UINT,
-		Callback,
-		Instance DWORD_PTR,
-		fOpen DWORD) MMRESULT
+		mo *T.HMIDIOUT,
+		deviceID T.UINT,
+		callback ,
+		instance T.DWORD_PTR,
+		fOpen T.DWORD) T.MMRESULT
 
-	MidiOutClose func(MO HMIDIOUT) MMRESULT
+	MidiOutClose func(mo T.HMIDIOUT) T.MMRESULT
 
 	MidiOutPrepareHeader func(
-		MO HMIDIOUT, MH *MIDIHDR, sMH UINT) MMRESULT
+		mo T.HMIDIOUT, mh *T.MIDIHDR, sMH T.UINT) T.MMRESULT
 
 	MidiOutUnprepareHeader func(
-		MO HMIDIOUT, MH *MIDIHDR, sMH UINT) MMRESULT
+		mo T.HMIDIOUT, mh *T.MIDIHDR, sMH T.UINT) T.MMRESULT
 
-	MidiOutShortMsg func(MO HMIDIOUT, Msg DWORD) MMRESULT
+	MidiOutShortMsg func(mo T.HMIDIOUT,  msg T.DWORD) T.MMRESULT
 
 	MidiOutLongMsg func(
-		MO HMIDIOUT, MH *MIDIHDR, sMH UINT) MMRESULT
+		mo T.HMIDIOUT, mh *T.MIDIHDR, sMH T.UINT) T.MMRESULT
 
-	MidiOutReset func(MO HMIDIOUT) MMRESULT
+	MidiOutReset func(mo T.HMIDIOUT) T.MMRESULT
 
 	MidiOutCachePatches func(
-		MO HMIDIOUT, Bank UINT, P *WORD, fCache UINT) MMRESULT
+		mo T.HMIDIOUT, bank T.UINT, p *T.WORD, fCache T.UINT) T.MMRESULT
 
 	MidiOutCacheDrumPatches func(
-		MO HMIDIOUT,
-		Patch UINT,
-		sPatch *WORD,
-		fCache UINT) MMRESULT
+		mo T.HMIDIOUT,
+		patch T.UINT,
+		sPatch *T.WORD,
+		fCache T.UINT) T.MMRESULT
 
 	MidiOutGetID func(
-		MO HMIDIOUT,
-		DeviceID *UINT) MMRESULT
+		mo T.HMIDIOUT,
+		deviceID *T.UINT) T.MMRESULT
 
 	MidiOutMessage func(
-		MO HMIDIOUT, Msg UINT, D1, D2 DWORD_PTR) MMRESULT
+		mo T.HMIDIOUT,  msg T.UINT, d1, d2 T.DWORD_PTR) T.MMRESULT
 
-	MidiInGetNumDevs func() UINT
+	MidiInGetNumDevs func() T.UINT
 
 	MidiInGetDevCapsA func(
-		DeviceID UINT_PTR, MIC *MIDIINCAPSA, cMIC UINT) MMRESULT
+		deviceID T.UINT_PTR, mic *T.MIDIINCAPSA, cMIC T.UINT) T.MMRESULT
 
 	MidiInGetDevCapsW func(
-		DeviceID UINT_PTR, MIC *MIDIINCAPSW, cMIC UINT) MMRESULT
+		deviceID T.UINT_PTR, mic *T.MIDIINCAPSW, cMIC T.UINT) T.MMRESULT
 
 	MidiInGetErrorText func(
-		MmrError MMRESULT, Text OVString, cText UINT) MMRESULT
+		mmrError T.MMRESULT, Text OVString, cText T.UINT) T.MMRESULT
 
 	MidiInOpen func(
-		MI *HMIDIIN,
-		DeviceID UINT,
-		Callback,
-		Instance DWORD_PTR,
-		fOpen DWORD) MMRESULT
+		mi *T.HMIDIIN,
+		deviceID T.UINT,
+		callback ,
+		instance T.DWORD_PTR,
+		fOpen T.DWORD) T.MMRESULT
 
-	MidiInClose func(MI HMIDIIN) MMRESULT
+	MidiInClose func(mi T.HMIDIIN) T.MMRESULT
 
 	MidiInPrepareHeader func(
-		MI HMIDIIN, MH *MIDIHDR, cMH UINT) MMRESULT
+		mi T.HMIDIIN, mh *T.MIDIHDR, cMH T.UINT) T.MMRESULT
 
 	MidiInUnprepareHeader func(
-		MI HMIDIIN, MH *MIDIHDR, cMH UINT) MMRESULT
+		mi T.HMIDIIN, mh *T.MIDIHDR, cMH T.UINT) T.MMRESULT
 
 	MidiInAddBuffer func(
-		MI HMIDIIN, MH *MIDIHDR, cMH UINT) MMRESULT
+		mi T.HMIDIIN, mh *T.MIDIHDR, cMH T.UINT) T.MMRESULT
 
-	MidiInStart func(MI HMIDIIN) MMRESULT
+	MidiInStart func(mi T.HMIDIIN) T.MMRESULT
 
-	MidiInStop func(MI HMIDIIN) MMRESULT
+	MidiInStop func(mi T.HMIDIIN) T.MMRESULT
 
-	MidiInReset func(MI HMIDIIN) MMRESULT
+	MidiInReset func(mi T.HMIDIIN) T.MMRESULT
 
-	MidiInGetID func(MI HMIDIIN, DeviceID *UINT) MMRESULT
+	MidiInGetID func(mi T.HMIDIIN, devideID *T.UINT) T.MMRESULT
 
 	MidiInMessage func(
-		MI HMIDIIN, Msg UINT, D1, D2 DWORD_PTR) MMRESULT
+		mi T.HMIDIIN,  msg T.UINT, d1, d2 T.DWORD_PTR) T.MMRESULT
 
-	AuxGetNumDevs func() UINT
+	AuxGetNumDevs func() T.UINT
 
 	AuxGetDevCapsA func(
-		DeviceID UINT_PTR, AC *AUXCAPSA, cAC UINT) MMRESULT
+		deviceID T.UINT_PTR, ac *T.AUXCAPSA, cAC T.UINT) T.MMRESULT
 
 	AuxGetDevCapsW func(
-		DeviceID UINT_PTR, AC *AUXCAPSW, cAC UINT) MMRESULT
+		deviceID T.UINT_PTR, ac *T.AUXCAPSW, cAC T.UINT) T.MMRESULT
 
-	AuxSetVolume func(DeviceID UINT, Volume DWORD) MMRESULT
+	AuxSetVolume func(deviceID T.UINT, volume T.DWORD) T.MMRESULT
 
-	AuxGetVolume func(DeviceID UINT, Volume *DWORD) MMRESULT
+	AuxGetVolume func(deviceID T.UINT, volume *T.DWORD) T.MMRESULT
 
 	AuxOutMessage func(
-		DeviceID, Msg UINT, D1, D2 DWORD_PTR) MMRESULT
+		deviceID,  msg T.UINT, d1, d2 T.DWORD_PTR) T.MMRESULT
 
-	MixerGetNumDevs func() UINT
+	MixerGetNumDevs func() T.UINT
 
 	MixerGetDevCapsA func(
-		MxId UINT_PTR, mc *MIXERCAPSA, sMxCaps UINT) MMRESULT
+		mxId T.UINT_PTR, mc *T.MIXERCAPSA, sMxCaps T.UINT) T.MMRESULT
 
 	MixerGetDevCapsW func(
-		MxId UINT_PTR, mc *MIXERCAPSW, sMxCaps UINT) MMRESULT
+		mxId T.UINT_PTR, mc *T.MIXERCAPSW, sMxCaps T.UINT) T.MMRESULT
 
 	MixerOpen func(
-		Mx *HMIXER, MxId UINT,
-		Callback, Instance DWORD_PTR, fOpen DWORD) MMRESULT
+		mx *T.HMIXER, mxId T.UINT,
+		callback , instance T.DWORD_PTR, fOpen T.DWORD) T.MMRESULT
 
-	MixerClose func(Mx HMIXER) MMRESULT
+	MixerClose func(mx T.HMIXER) T.MMRESULT
 
 	MixerMessage func(
-		Mx HMIXER, Msg UINT, Param1, Param2 DWORD_PTR) DWORD
+		mx T.HMIXER,  msg T.UINT, param1, param2 T.DWORD_PTR) T.DWORD
 
 	MixerGetLineInfoA func(
-		Mxobj HMIXEROBJ, ml **MIXERLINEA, fInfo DWORD) MMRESULT
+		mxobj T.HMIXEROBJ, ml **T.MIXERLINEA, fInfo T.DWORD) T.MMRESULT
 
 	MixerGetLineInfoW func(
-		Mxobj HMIXEROBJ, ml **MIXERLINEW, fInfo DWORD) MMRESULT
+		mxobj T.HMIXEROBJ, ml **T.MIXERLINEW, fInfo T.DWORD) T.MMRESULT
 
 	MixerGetID func(
-		Mxobj HMIXEROBJ,
-		uMxId *UINT,
-		fdwId DWORD) MMRESULT
+		mxobj T.HMIXEROBJ,
+		uMxId *T.UINT,
+		fdwId T.DWORD) T.MMRESULT
 
 	MixerGetControlDetails func(
-		Mxobj HMIXEROBJ,
-		Mxcd *MIXERCONTROLDETAILS,
-		fDetails DWORD) MMRESULT
+		mxobj T.HMIXEROBJ,
+		mxcd *T.MIXERCONTROLDETAILS,
+		fDetails T.DWORD) T.MMRESULT
 
 	MixerSetControlDetails func(
-		Mxobj HMIXEROBJ,
-		Mxcd *MIXERCONTROLDETAILS,
-		fDetails DWORD) MMRESULT
+		mxobj T.HMIXEROBJ,
+		mxcd *T.MIXERCONTROLDETAILS,
+		fDetails T.DWORD) T.MMRESULT
 
-	TimeGetSystemTime func(Mmt *MMTIME, sMMT UINT) MMRESULT
+	TimeGetSystemTime func(mmt *T.MMTIME, sMMT T.UINT) T.MMRESULT
 
-	TimeGetTime func() DWORD
+	TimeGetTime func() T.DWORD
 
 	TimeSetEvent func(
-		Delay UINT,
-		Resolution UINT,
-		TC *TIMECALLBACK,
-		User DWORD_PTR,
-		fEvent UINT) MMRESULT
+		delay T.UINT,
+		resolution T.UINT,
+		tc *T.TIMECALLBACK,
+		user T.DWORD_PTR,
+		fEvent T.UINT) T.MMRESULT
 
 	TimeKillEvent func(
-		TimerID UINT) MMRESULT
+		timerID T.UINT) T.MMRESULT
 
 	TimeGetDevCaps func(
-		TC *TIMECAPS,
-		sTC UINT) MMRESULT
+		tc *T.TIMECAPS,
+		sTC T.UINT) T.MMRESULT
 
-	TimeBeginPeriod func(Period UINT) MMRESULT
+	TimeBeginPeriod func(period T.UINT) T.MMRESULT
 
-	TimeEndPeriod func(Period UINT) MMRESULT
+	TimeEndPeriod func(period T.UINT) T.MMRESULT
 
-	JoyGetNumDevs func() UINT
+	JoyGetNumDevs func() T.UINT
 
 	JoyGetDevCapsA func(
-		JoyID UINT_PTR, JC *JOYCAPSA, sJC UINT) MMRESULT
+		joyID T.UINT_PTR, jc *T.JOYCAPSA, sJC T.UINT) T.MMRESULT
 
 	JoyGetDevCapsW func(
-		JoyID UINT_PTR, JC *JOYCAPSW, sJC UINT) MMRESULT
+		joyID T.UINT_PTR, jc *T.JOYCAPSW, sJC T.UINT) T.MMRESULT
 
-	JoyGetPos func(JoyID UINT, JI *JOYINFO) MMRESULT
+	JoyGetPos func(joyID T.UINT, ji *T.JOYINFO) T.MMRESULT
 
-	JoyGetPosEx func(JoyID UINT, JI *JOYINFOEX) MMRESULT
+	JoyGetPosEx func(joyID T.UINT, ji *T.JOYINFOEX) T.MMRESULT
 
-	JoyGetThreshold func(JoyID UINT, Threshold *UINT) MMRESULT
+	JoyGetThreshold func(joyID T.UINT, threshold *T.UINT) T.MMRESULT
 
-	JoyReleaseCapture func(JoyID UINT) MMRESULT
+	JoyReleaseCapture func(joyID T.UINT) T.MMRESULT
 
 	JoySetCapture func(
-		Wnd HWND, JoyID, Period UINT, fChanged BOOL) MMRESULT
+		wnd T.HWND, T.JoyID, period T.UINT, fChanged T.BOOL) T.MMRESULT
 
-	JoySetThreshold func(JoyID UINT, Threshold UINT) MMRESULT
+	JoySetThreshold func(joyID T.UINT, threshold T.UINT) T.MMRESULT
 
-	MmioStringToFOURCC func(S VString, Flags UINT) FOURCC
+	MmioStringToFOURCC func(s VString, flags T.UINT) T.FOURCC
 
 	MmioInstallIOProc func(
-		FccIOProc FOURCC, IOProc *MMIOPROC,
-		Flags DWORD) *MMIOPROC
+		fccIOProc T.FOURCC, ioProc *T.MMIOPROC,
+		flags T.DWORD) *T.MMIOPROC
 
 	MmioOpen func(
-		FileName VString,
-		Mmioinfo *MMIOINFO,
-		fOpen DWORD) HMMIO
+		fileName VString,
+		mmioinfo *T.MMIOINFO,
+		fOpen T.DWORD) T.HMMIO
 
 	MmioRename func(
-		FileName, NewFileName VString,
-		Mmioinfo *MMIOINFO,
-		fRename DWORD) MMRESULT
+		fileName, newFileName VString,
+		mmioinfo *T.MMIOINFO,
+		fRename T.DWORD) T.MMRESULT
 
-	MmioClose func(Mmio HMMIO, fClose UINT) MMRESULT
+	MmioClose func(mmio T.HMMIO, fClose T.UINT) T.MMRESULT
 
-	MmioRead func(Mmio HMMIO, S *Char, sS LONG) LONG
+	MmioRead func(mmio T.HMMIO, s *T.Char, sS T.LONG) T.LONG
 
-	MmioWrite func(Mmio HMMIO, S *Char, sS LONG) LONG
+	MmioWrite func(mmio T.HMMIO, s *T.Char, sS T.LONG) T.LONG
 
-	MmioSeek func(Mmio HMMIO, Offset LONG, Origin int) LONG
+	MmioSeek func(mmio T.HMMIO, Offset T.LONG, Origin int) T.LONG
 
 	MmioGetInfo func(
-		Mmio HMMIO, MmioInfo *MMIOINFO, fInfo UINT) MMRESULT
+		mmio T.HMMIO, mmioInfo *T.MMIOINFO, fInfo T.UINT) T.MMRESULT
 
 	MmioSetInfo func(
-		Mmio HMMIO, Mmioinfo *MMIOINFO, fInfo UINT) MMRESULT
+		mmio T.HMMIO, mmioinfo *T.MMIOINFO, fInfo T.UINT) T.MMRESULT
 
 	MmioSetBuffer func(
-		Mmio HMMIO,
-		Buffer *Char,
-		sBuffer LONG,
-		fuBuffer UINT) MMRESULT
+		mmio T.HMMIO,
+		buffer *T.Char,
+		sBuffer T.LONG,
+		fuBuffer T.UINT) T.MMRESULT
 
-	MmioFlush func(Mmio HMMIO, fFlush UINT) MMRESULT
+	MmioFlush func(mmio T.HMMIO, fFlush T.UINT) T.MMRESULT
 
 	MmioAdvance func(
-		Mmio HMMIO, Mmioinfo *MMIOINFO, fAdvance UINT) MMRESULT
+		mmio T.HMMIO, mmioinfo *T.MMIOINFO, fAdvance T.UINT) T.MMRESULT
 
 	MmioSendMessage func(
-		Mmio HMMIO, Msg UINT, Param1, Param2 LPARAM) LRESULT
+		mmio T.HMMIO,  msg T.UINT, param1, param2 T.LPARAM) T.LRESULT
 
 	MmioDescend func(
-		Mmio HMMIO,
-		Mmcki *MMCKINFO,
-		MmckiParent *MMCKINFO,
-		fDescend UINT) MMRESULT
+		mmio T.HMMIO,
+		mmcki *T.MMCKINFO,
+		mmckiParent *T.MMCKINFO,
+		fDescend T.UINT) T.MMRESULT
 
 	MmioAscend func(
-		Mmio HMMIO, Mmcki *MMCKINFO, fAscend UINT) MMRESULT
+		mmio T.HMMIO, mmcki *T.MMCKINFO, fAscend T.UINT) T.MMRESULT
 
 	MmioCreateChunk func(
-		Mmio HMMIO, Mmcki *MMCKINFO, fCreate UINT) MMRESULT
+		mmio T.HMMIO, mmcki *T.MMCKINFO, fCreate T.UINT) T.MMRESULT
 
 	MciSendCommand func(
-		MciId MCIDEVICEID,
-		Msg UINT,
-		Param1, Param2 DWORD_PTR) MCIERROR
+		mciId T.MCIDEVICEID,
+		msg T.UINT,
+		param1, param2 T.DWORD_PTR) T.MCIERROR
 
 	MciSendString func(
-		Command VString,
-		ReturnString OVString,
-		ReturnLength UINT,
-		WndCallback HWND) MCIERROR
+		command VString,
+		returnString OVString,
+		returnLength T.UINT,
+		wndCallback T.HWND) T.MCIERROR
 
-	MciGetDeviceID func(Device VString) MCIDEVICEID
+	MciGetDeviceID func(device VString) T.MCIDEVICEID
 
 	MciGetDeviceIDFromElementID func(
-		ElementID DWORD, Type VString) MCIDEVICEID
+		elementID T.DWORD, Type VString) T.MCIDEVICEID
 
 	MciGetErrorString func(
-		err MCIERROR, text OAString, textSize UINT) BOOL
+		err T.MCIERROR, text T.OAString, textSize T.UINT) T.BOOL
 
 	MciSetYieldProc func(
-		MciId MCIDEVICEID,
-		YieldProc YIELDPROC,
-		YieldData DWORD) BOOL
+		mciId T.MCIDEVICEID,
+		yieldProc T.YIELDPROC,
+		yieldData T.DWORD) T.BOOL
 
-	MciGetCreatorTask func(MciId MCIDEVICEID) HTASK
+	MciGetCreatorTask func(mciId T.MCIDEVICEID) T.HTASK
 
 	MciGetYieldProc func(
-		MciId MCIDEVICEID, YieldData *DWORD) YIELDPROC
+		mciId T.MCIDEVICEID, yieldData *T.DWORD) T.YIELDPROC
 )
 
 //func OutputDebugStr(s VString) {  OutputDebugString(s) } // in winbase

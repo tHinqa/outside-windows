@@ -9,12 +9,12 @@ package nb30
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/netapi32"
 )
 
 var (
-	Netbios func(pncb *NCB) UCHAR
+	Netbios func(pncb *T.NCB) T.UCHAR
 )
 
 var Nb30Apis = Apis{{"Netbios", &Netbios}}

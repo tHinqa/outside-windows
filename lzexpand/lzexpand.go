@@ -7,30 +7,30 @@ package lzexpand
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/kernel32"
 )
 
 var (
-	LZStart func() INT
+	LZStart func() T.INT
 
-	LZDone func() VOID
+	LZDone func() T.VOID
 
-	CopyLZFile func(INT, INT) LONG
+	CopyLZFile func(T.INT, T.INT) T.LONG
 
-	LZCopy func(INT, INT) LONG
+	LZCopy func(T.INT, T.INT) T.LONG
 
-	LZInit func(INT) INT
+	LZInit func(T.INT) T.INT
 
-	GetExpandedName func(VString, OVString) INT
+	GetExpandedName func(VString, OVString) T.INT
 
-	LZOpenFile func(OVString, *OFSTRUCT, WORD) INT
+	LZOpenFile func(OVString, *T.OFSTRUCT, T.WORD) T.INT
 
-	LZSeek func(INT, LONG, INT) LONG
+	LZSeek func(T.INT, T.LONG, T.INT) T.LONG
 
-	LZRead func(INT, AString, INT) INT
+	LZRead func(T.INT, T.AString, T.INT) T.INT
 
-	LZClose func(INT) VOID
+	LZClose func(T.INT) T.VOID
 )
 
 var LZExpandANSIApis = Apis{

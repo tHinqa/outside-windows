@@ -7,41 +7,41 @@ package dde
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/user32"
 )
 
 var (
 	DdeSetQualityOfService func(
-		Client HWND,
-		QosNew *SECURITY_QUALITY_OF_SERVICE,
-		QosPrev *SECURITY_QUALITY_OF_SERVICE) BOOL
+		Client T.HWND,
+		QosNew *T.SECURITY_QUALITY_OF_SERVICE,
+		QosPrev *T.SECURITY_QUALITY_OF_SERVICE) T.BOOL
 
 	ImpersonateDdeClientWindow func(
-		Client HWND,
-		Server HWND) BOOL
+		Client T.HWND,
+		Server T.HWND) T.BOOL
 
 	PackDDElParam func(
-		Msg UINT,
-		Lo UINT_PTR,
-		Hi UINT_PTR) LPARAM
+		Msg T.UINT,
+		Lo T.UINT_PTR,
+		Hi T.UINT_PTR) T.LPARAM
 
 	UnpackDDElParam func(
-		Msg UINT,
-		LParam LPARAM,
-		Lo *UINT_PTR,
-		Hi *UINT_PTR) BOOL
+		Msg T.UINT,
+		LParam T.LPARAM,
+		Lo *T.UINT_PTR,
+		Hi *T.UINT_PTR) T.BOOL
 
 	FreeDDElParam func(
-		Msg UINT,
-		LParam LPARAM) BOOL
+		Msg T.UINT,
+		LParam T.LPARAM) T.BOOL
 
 	ReuseDDElParam func(
-		LParam LPARAM,
-		In UINT,
-		Out UINT,
-		Lo UINT_PTR,
-		Hi UINT_PTR) LPARAM
+		LParam T.LPARAM,
+		In T.UINT,
+		Out T.UINT,
+		Lo T.UINT_PTR,
+		Hi T.UINT_PTR) T.LPARAM
 )
 
 var DdeANSIApis = Apis{

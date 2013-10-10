@@ -2,375 +2,375 @@ package ole2
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/ole32"
 )
 
 var (
-	CreateDataAdviseHolder func(DAHolder **IDataAdviseHolder)
+	CreateDataAdviseHolder func(daHolder **T.IDataAdviseHolder)
 
-	OleBuildVersion func() DWORD
+	OleBuildVersion func() T.DWORD
 
-	ReadClassStg func(Stg *IStorage, ClsId *CLSID)
+	ReadClassStg func(stg *T.IStorage, clsId *T.CLSID)
 
-	WriteClassStg func(Stg *IStorage, ClsId REFCLSID)
+	WriteClassStg func(stg *T.IStorage, clsId T.REFCLSID)
 
-	ReadClassStm func(Stm *IStream, ClsId *CLSID)
+	ReadClassStm func(stm *T.IStream, clsId *T.CLSID)
 
-	WriteClassStm func(Stm *IStream, ClsId REFCLSID)
+	WriteClassStm func(stm *T.IStream, clsId T.REFCLSID)
 
 	WriteFmtUserTypeStg func(
-		Stg *IStorage,
-		CF CLIPFORMAT,
-		UserType *OLESTR)
+		stg *T.IStorage,
+		cf T.CLIPFORMAT,
+		userType *T.OLESTR)
 
 	ReadFmtUserTypeStg func(
-		Stg *IStorage,
-		CF *CLIPFORMAT,
-		UserType **OLESTR)
+		stg *T.IStorage,
+		cf *T.CLIPFORMAT,
+		userType **T.OLESTR)
 
-	OleInitialize func(pvReserved *VOID)
+	OleInitialize func(pvReserved *T.VOID)
 
 	OleUninitialize func()
 
-	OleQueryLinkFromData func(SrcDataObject *IDataObject)
+	OleQueryLinkFromData func(srcDataObject *T.IDataObject)
 
-	OleQueryCreateFromData func(SrcDataObject *IDataObject)
+	OleQueryCreateFromData func(srcDataObject *T.IDataObject)
 
 	OleCreate func(
-		RClsId REFCLSID,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		rClsId T.REFCLSID,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateEx func(
-		RClsId REFCLSID,
-		Riid REFIID,
-		Flags DWORD,
-		Renderopt DWORD,
-		Formats ULONG,
-		Advf *DWORD,
-		FormatEtc *FORMATETC,
-		AdviseSink *IAdviseSink,
-		Connection *DWORD,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		rClsId T.REFCLSID,
+		riid T.REFIID,
+		flags T.DWORD,
+		renderopt T.DWORD,
+		formats T.ULONG,
+		advf *T.DWORD,
+		formatEtc *T.FORMATETC,
+		adviseSink *T.IAdviseSink,
+		connection *T.DWORD,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateFromData func(
-		SrcDataObj *IDataObject,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		srcDataObj *T.IDataObject,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateFromDataEx func(
-		SrcDataObj *IDataObject,
-		Riid REFIID,
-		Flags DWORD,
-		Renderopt DWORD,
-		Formats ULONG,
-		Advf *DWORD,
-		FormatEtc *FORMATETC,
-		AdviseSink *IAdviseSink,
-		Connection *DWORD,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		srcDataObj *T.IDataObject,
+		riid T.REFIID,
+		flags T.DWORD,
+		renderopt T.DWORD,
+		formats T.ULONG,
+		advf *T.DWORD,
+		formatEtc *T.FORMATETC,
+		adviseSink *T.IAdviseSink,
+		connection *T.DWORD,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateLinkFromData func(
-		SrcDataObj *IDataObject,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		srcDataObj *T.IDataObject,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateLinkFromDataEx func(
-		SrcDataObj *IDataObject,
-		Riid REFIID,
-		Flags DWORD,
-		Renderopt DWORD,
-		Formats ULONG,
-		Advf *DWORD,
-		FormatEtc *FORMATETC,
-		AdviseSink *IAdviseSink,
-		Connection *DWORD,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		srcDataObj *T.IDataObject,
+		riid T.REFIID,
+		flags T.DWORD,
+		renderopt T.DWORD,
+		formats T.ULONG,
+		advf *T.DWORD,
+		formatEtc *T.FORMATETC,
+		adviseSink *T.IAdviseSink,
+		connection *T.DWORD,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateStaticFromData func(
-		SrcDataObj *IDataObject,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		srcDataObj *T.IDataObject,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateLink func(
-		pmkLinkSrc *IMoniker,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		pmkLinkSrc *T.IMoniker,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateLinkEx func(
-		pmkLinkSrc *IMoniker,
-		Riid REFIID,
-		Flags DWORD,
-		Renderopt DWORD,
-		Formats ULONG,
-		Advf *DWORD,
-		FormatEtc *FORMATETC,
-		AdviseSink *IAdviseSink,
-		Connection *DWORD,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		pmkLinkSrc *T.IMoniker,
+		riid T.REFIID,
+		flags T.DWORD,
+		renderopt T.DWORD,
+		formats T.ULONG,
+		advf *T.DWORD,
+		formatEtc *T.FORMATETC,
+		adviseSink *T.IAdviseSink,
+		connection *T.DWORD,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateLinkToFile func(
-		FileName *OLESTR,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		fileName *T.OLESTR,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateLinkToFileEx func(
-		lpszFileName *OLESTR,
-		Riid REFIID,
-		Flags DWORD,
-		Renderopt DWORD,
-		Formats ULONG,
-		Advf *DWORD,
-		FormatEtc *FORMATETC,
-		AdviseSink *IAdviseSink,
-		Connection *DWORD,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		lpszFileName *T.OLESTR,
+		riid T.REFIID,
+		flags T.DWORD,
+		renderopt T.DWORD,
+		formats T.ULONG,
+		advf *T.DWORD,
+		formatEtc *T.FORMATETC,
+		adviseSink *T.IAdviseSink,
+		connection *T.DWORD,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateFromFile func(
-		ClsId REFCLSID,
-		FileName *OLESTR,
-		Riid REFIID,
-		Renderopt DWORD,
-		FormatEtc *FORMATETC,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		clsId T.REFCLSID,
+		fileName *T.OLESTR,
+		riid T.REFIID,
+		renderopt T.DWORD,
+		formatEtc *T.FORMATETC,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleCreateFromFileEx func(
-		RClsId REFCLSID,
-		FileName *OLESTR,
-		Riid REFIID,
-		Flags DWORD,
-		Renderopt DWORD,
-		Formats ULONG,
-		Advf *DWORD,
-		FormatEtc *FORMATETC,
-		AdviseSink *IAdviseSink,
-		Connection *DWORD,
-		ClientSite *IOleClientSite,
-		Stg *IStorage,
-		Obj **VOID)
+		rClsId T.REFCLSID,
+		fileName *T.OLESTR,
+		riid T.REFIID,
+		flags T.DWORD,
+		renderopt T.DWORD,
+		formats T.ULONG,
+		advf *T.DWORD,
+		formatEtc *T.FORMATETC,
+		adviseSink *T.IAdviseSink,
+		connection *T.DWORD,
+		clientSite *T.IOleClientSite,
+		stg *T.IStorage,
+		obj **T.VOID)
 
 	OleLoad func(
-		Stg *IStorage,
-		Riid REFIID,
-		ClientSite *IOleClientSite,
-		Obj **VOID)
+		stg *T.IStorage,
+		riid T.REFIID,
+		clientSite *T.IOleClientSite,
+		obj **T.VOID)
 
 	OleSave func(
-		PS *IPersistStorage,
-		Stg *IStorage,
-		SameAsLoad BOOL)
+		ps *T.IPersistStorage,
+		stg *T.IStorage,
+		sameAsLoad T.BOOL)
 
 	OleLoadFromStream func(
-		Stm *STREAM,
-		RiidInterface REFIID,
-		Obj **VOID)
+		stm *T.STREAM,
+		riidInterface T.REFIID,
+		obj **T.VOID)
 
 	OleSaveToStream func(
-		PStm *IPersistStream, Stm *STREAM)
+		ps *T.IPersistStream, stm *T.STREAM)
 
 	OleSetContainedObject func(
-		Unknown *IUnknown, Contained BOOL)
+		unknown *T.IUnknown, contained T.BOOL)
 
 	OleNoteObjectVisible func(
-		Unknown *IUnknown, Visible BOOL)
+		unknown *T.IUnknown, Visible T.BOOL)
 
 	RegisterDragDrop func(
-		Wnd HWND, DropTarget *IDropTarget)
+		wnd T.HWND, dropTarget *T.IDropTarget)
 
-	RevokeDragDrop func(Wnd HWND)
+	RevokeDragDrop func(wnd T.HWND)
 
 	DoDragDrop func(
-		DataObj *IDataObject,
-		DropSource *IDropSource,
-		OKEffects DWORD,
-		Effect *DWORD)
+		dataObj *T.IDataObject,
+		dropSource *T.IDropSource,
+		okEffects T.DWORD,
+		effect *T.DWORD)
 
-	OleSetClipboard func(DataObj *IDataObject)
+	OleSetClipboard func(dataObj *T.IDataObject)
 
-	OleGetClipboard func(DataObj **IDataObject)
+	OleGetClipboard func(dataObj **T.IDataObject)
 
 	OleFlushClipboard func()
 
-	OleIsCurrentClipboard func(DataObj *IDataObject)
+	OleIsCurrentClipboard func(dataObj *T.IDataObject)
 
 	OleCreateMenuDescriptor func(
-		MenuCombined HMENU,
-		MenuWidths *OLEMENUGROUPWIDTHS) HOLEMENU
+		menuCombined T.HMENU,
+		menuWidths *T.OLEMENUGROUPWIDTHS) T.HOLEMENU
 
 	OleSetMenuDescriptor func(
-		Olemenu HOLEMENU,
-		WndFrame HWND,
-		WndActiveObject HWND,
-		Frame *IOleInPlaceFrame,
-		ActiveObj *IOleInPlaceActiveObject)
+		olemenu T.HOLEMENU,
+		wndFrame T.HWND,
+		wndActiveObject T.HWND,
+		frame *T.IOleInPlaceFrame,
+		activeObj *T.IOleInPlaceActiveObject)
 
-	OleDestroyMenuDescriptor func(Olemenu HOLEMENU)
+	OleDestroyMenuDescriptor func(olemenu T.HOLEMENU)
 
 	OleTranslateAccelerator func(
-		Frame *IOleInPlaceFrame,
-		FrameInfo *OLEINPLACEFRAMEINFO,
-		Msg *MSG)
+		frame *T.IOleInPlaceFrame,
+		frameInfo *T.OLEINPLACEFRAMEINFO,
+		msg *T.MSG)
 
 	OleDuplicateData func(
-		Src HANDLE, Format CLIPFORMAT, Flags UINT) HANDLE
+		src T.HANDLE, format T.CLIPFORMAT, flags T.UINT) T.HANDLE
 
 	OleDraw func(
-		Unknown *IUnknown,
-		Aspect DWORD,
-		DCDraw HDC,
-		RCBounds *RECT)
+		unknown *T.IUnknown,
+		aspect T.DWORD,
+		dcDraw T.HDC,
+		rcBounds *T.RECT)
 
-	OleRun func(Unknown *IUnknown)
+	OleRun func(unknown *T.IUnknown)
 
-	OleIsRunning func(Object *IOleObject) BOOL
+	OleIsRunning func(object *T.IOleObject) T.BOOL
 
 	OleLockRunning func(
-		Unknown *IUnknown,
-		Lock BOOL,
-		LastUnlockCloses BOOL)
+		unknown *T.IUnknown,
+		lock T.BOOL,
+		lastUnlockCloses T.BOOL)
 
-	ReleaseStgMedium func(*STGMEDIUM)
+	ReleaseStgMedium func(*T.STGMEDIUM)
 
-	CreateOleAdviseHolder func(OAHolder **IOleAdviseHolder)
+	CreateOleAdviseHolder func(oaHolder **T.IOleAdviseHolder)
 
 	OleCreateDefaultHandler func(
-		ClsId REFCLSID,
-		UnkOuter *IUnknown,
-		Riid REFIID,
-		Obj **VOID)
+		clsId T.REFCLSID,
+		unkOuter *T.IUnknown,
+		riid T.REFIID,
+		obj **T.VOID)
 
 	OleCreateEmbeddingHelper func(
-		ClsId REFCLSID,
-		UnkOuter *IUnknown,
-		Flags DWORD,
-		CF *IClassFactory,
-		Riid REFIID,
-		Obj **VOID)
+		clsId T.REFCLSID,
+		unkOuter *T.IUnknown,
+		flags T.DWORD,
+		cf *T.IClassFactory,
+		riid T.REFIID,
+		obj **T.VOID)
 
 	IsAccelerator func(
-		Accel HACCEL,
-		AccelEntries int,
-		Msg *MSG,
-		Cmd *WORD) BOOL
+		accel T.HACCEL,
+		accelEntries int,
+		msg *T.MSG,
+		cmd *T.WORD) T.BOOL
 
 	OleGetIconOfFile func(
-		Path *OLESTR, UseFileAsLabel BOOL) HGLOBAL
+		path *T.OLESTR, useFileAsLabel T.BOOL) T.HGLOBAL
 
 	OleGetIconOfClass func(
-		RClsId REFCLSID,
-		Label *OLESTR,
-		UseTypeAsLabel BOOL) HGLOBAL
+		rClsId T.REFCLSID,
+		label *T.OLESTR,
+		useTypeAsLabel T.BOOL) T.HGLOBAL
 
 	OleMetafilePictFromIconAndLabel func(
-		Icon HICON,
-		Label *OLESTR,
-		SourceFile *OLESTR,
-		IconIndex UINT) HGLOBAL
+		icon T.HICON,
+		label *T.OLESTR,
+		sourceFile *T.OLESTR,
+		iconIndex T.UINT) T.HGLOBAL
 
 	OleRegGetUserType func(
-		ClsId REFCLSID,
-		FormOfType DWORD,
-		UserType **OLESTR)
+		clsId T.REFCLSID,
+		formOfType T.DWORD,
+		userType **T.OLESTR)
 
 	OleRegGetMiscStatus func(
-		ClsId REFCLSID, Aspect DWORD, Status *DWORD)
+		clsId T.REFCLSID, aspect T.DWORD, status *T.DWORD)
 
 	OleRegEnumFormatEtc func(
-		ClsId REFCLSID,
-		Direction DWORD,
-		Enum **IEnumFORMATETC)
+		clsId T.REFCLSID,
+		direction T.DWORD,
+		enum **T.IEnumFORMATETC)
 
-	OleRegEnumVerbs func(ClsId REFCLSID, Enum **IEnumOLEVERB)
+	OleRegEnumVerbs func(clsId T.REFCLSID, enum **T.IEnumOLEVERB)
 
 	OleConvertOLESTREAMToIStorage func(
-		Olestream *OLESTREAM,
-		Stg *IStorage,
-		TD *DVTARGETDEVICE)
+		olestream *T.OLESTREAM,
+		stg *T.IStorage,
+		td *T.DVTARGETDEVICE)
 
 	OleConvertIStorageToOLESTREAM func(
-		Stg *IStorage, Olestream *OLESTREAM)
+		stg *T.IStorage, Olestream *T.OLESTREAM)
 
 	GetHGlobalFromILockBytes func(
-		KByt *ILockBytes, global *HGLOBAL)
+		kByt *T.ILockBytes, global *T.HGLOBAL)
 
 	CreateILockBytesOnHGlobal func(
-		Global HGLOBAL,
-		DeleteOnRelease BOOL,
-		KByt **ILockBytes)
+		global T.HGLOBAL,
+		deleteOnRelease T.BOOL,
+		kByt **T.ILockBytes)
 
-	GetHGlobalFromStream func(Stm *STREAM, Global *HGLOBAL)
+	GetHGlobalFromStream func(stm *T.STREAM, global *T.HGLOBAL)
 
 	CreateStreamOnHGlobal func(
-		Global HGLOBAL,
-		DeleteOnRelease BOOL,
-		Stm **STREAM)
+		global T.HGLOBAL,
+		deleteOnRelease T.BOOL,
+		stm **T.STREAM)
 
-	OleDoAutoConvert func(Stg *IStorage, ClsidNew *CLSID)
+	OleDoAutoConvert func(stg *T.IStorage, clsidNew *T.CLSID)
 
 	OleGetAutoConvert func(
-		ClsIdOld REFCLSID, ClsidNew *CLSID)
+		clsIdOld T.REFCLSID, clsidNew *T.CLSID)
 
 	OleSetAutoConvert func(
-		ClsIdOld REFCLSID, ClsIdNew REFCLSID)
+		clsIdOld T.REFCLSID, clsIdNew T.REFCLSID)
 
-	GetConvertStg func(Stg *IStorage)
+	GetConvertStg func(stg *T.IStorage)
 
-	SetConvertStg func(Stg *IStorage, Convert BOOL)
+	SetConvertStg func(stg *T.IStorage, convert T.BOOL)
 
 	OleConvertIStorageToOLESTREAMEx func(
-		Stg *IStorage,
-		Format CLIPFORMAT,
-		Width LONG,
-		Height LONG,
-		Size DWORD,
-		Medium *STGMEDIUM,
-		Olestm *OLESTREAM)
+		stg *T.IStorage,
+		format T.CLIPFORMAT,
+		width T.LONG,
+		height T.LONG,
+		size T.DWORD,
+		medium *T.STGMEDIUM,
+		olestm *T.OLESTREAM)
 
 	OleConvertOLESTREAMToIStorageEx func(
-		Olestm *OLESTREAM,
-		Stg *IStorage,
-		Format *CLIPFORMAT,
-		Width *LONG,
-		Height *LONG,
-		Size *DWORD,
-		Medium *STGMEDIUM)
+		olestm *T.OLESTREAM,
+		stg *T.IStorage,
+		format *T.CLIPFORMAT,
+		width *T.LONG,
+		height *T.LONG,
+		size *T.DWORD,
+		medium *T.STGMEDIUM)
 )
 
 var Ole2Apis = Apis{

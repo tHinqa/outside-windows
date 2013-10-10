@@ -7,1373 +7,870 @@ package ole2
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/oleaut32"
 )
 
 type ()
 
 var (
-	SysAllocString func(*OLECHAR) BSTR
+	SysAllocString func(*T.OLECHAR) T.BSTR
 
-	SysReAllocString func(*BSTR, *OLECHAR) INT
+	SysReAllocString func(*T.BSTR, *T.OLECHAR) T.INT
 
-	SysAllocStringLen func(*OLECHAR, UINT) BSTR
+	SysAllocStringLen func(*T.OLECHAR, T.UINT) T.BSTR
 
-	SysReAllocStringLen func(*BSTR, *OLECHAR, UINT) INT
+	SysReAllocStringLen func(*T.BSTR, *T.OLECHAR, T.UINT) T.INT
 
-	SysFreeString func(BSTR)
+	SysFreeString func(T.BSTR)
 
-	SysStringLen func(BSTR) UINT
+	SysStringLen func(T.BSTR) T.UINT
 
-	SysStringByteLen func(s BSTR) UINT
+	SysStringByteLen func(s T.BSTR) T.UINT
 
-	SysAllocStringByteLen func(s AString, leng UINT) BSTR
+	SysAllocStringByteLen func(s T.AString, leng T.UINT) T.BSTR
 
 	DosDateTimeToVariantTime func(
-		DosDate, DosTime USHORT, Time *DOUBLE) INT
+		dosDate, dosTime T.USHORT, time *T.DOUBLE) T.INT
 
 	VariantTimeToDosDateTime func(
-		Time DOUBLE, DosDate, DosTime *USHORT) INT
+		time T.DOUBLE, dosDate, dosTime *T.USHORT) T.INT
 
 	SystemTimeToVariantTime func(
-		SystemTime *SYSTEMTIME, Time *DOUBLE) INT
+		systemTime *T.SYSTEMTIME, time *T.DOUBLE) T.INT
 
 	VariantTimeToSystemTime func(
-		Time DOUBLE, SystemTime *SYSTEMTIME) INT
+		time T.DOUBLE, systemTime *T.SYSTEMTIME) T.INT
 
-	SafeArrayAllocDescriptor func(Dims UINT, Out **SAFEARRAY)
+	SafeArrayAllocDescriptor func(dims T.UINT, out **T.SAFEARRAY)
 
 	SafeArrayAllocDescriptorEx func(
-		VT VARTYPE, Dims UINT, Out **SAFEARRAY)
+		vt T.VARTYPE, dims T.UINT, out **T.SAFEARRAY)
 
-	SafeArrayAllocData func(SA *SAFEARRAY)
+	SafeArrayAllocData func(sa *T.SAFEARRAY)
 
 	SafeArrayCreate func(
-		VT VARTYPE, Dims UINT,
-		SABound *SAFEARRAYBOUND) *SAFEARRAY
+		vt T.VARTYPE, dims T.UINT,
+		saBound *T.SAFEARRAYBOUND) *T.SAFEARRAY
 
 	SafeArrayCreateEx func(
-		VT VARTYPE,
-		Dims UINT,
-		SABound *SAFEARRAYBOUND,
-		pvExtra *VOID) *SAFEARRAY
+		vt T.VARTYPE,
+		dims T.UINT,
+		saBound *T.SAFEARRAYBOUND,
+		pvExtra *T.VOID) *T.SAFEARRAY
 
-	SafeArrayCopyData func(
-		Source *SAFEARRAY,
-		Target *SAFEARRAY)
+	SafeArrayCopyData func(source, target *T.SAFEARRAY)
 
-	SafeArrayDestroyDescriptor func(
-		SA *SAFEARRAY)
+	SafeArrayDestroyDescriptor func(sa *T.SAFEARRAY)
 
-	SafeArrayDestroyData func(
-		SA *SAFEARRAY)
+	SafeArrayDestroyData func(sa *T.SAFEARRAY)
 
-	SafeArrayDestroy func(
-		SA *SAFEARRAY)
+	SafeArrayDestroy func(sa *T.SAFEARRAY)
 
 	SafeArrayRedim func(
-		SA *SAFEARRAY,
-		psaboundNew *SAFEARRAYBOUND)
+		sa *T.SAFEARRAY, psaboundNew *T.SAFEARRAYBOUND)
 
-	SafeArrayGetDim func(
-		SA *SAFEARRAY) UINT
+	SafeArrayGetDim func(sa *T.SAFEARRAY) T.UINT
 
-	SafeArrayGetElemsize func(
-		SA *SAFEARRAY) UINT
+	SafeArrayGetElemsize func(sa *T.SAFEARRAY) T.UINT
 
 	SafeArrayGetUBound func(
-		SA *SAFEARRAY,
-		nDim UINT,
-		plUbound *LONG)
+		sa *T.SAFEARRAY, nDim T.UINT, plUbound *T.LONG)
+
 	SafeArrayGetLBound func(
-		SA *SAFEARRAY,
-		nDim UINT,
-		plLbound *LONG)
-	SafeArrayLock func(
-		SA *SAFEARRAY)
-	SafeArrayUnlock func(
-		SA *SAFEARRAY)
-	SafeArrayAccessData func(
-		SA *SAFEARRAY,
-		ppvData **VOID)
-	SafeArrayUnaccessData func(
-		SA *SAFEARRAY)
+		sa *T.SAFEARRAY, nDim T.UINT, plLbound *T.LONG)
+
+	SafeArrayLock func(sa *T.SAFEARRAY)
+
+	SafeArrayUnlock func(sa *T.SAFEARRAY)
+
+	SafeArrayAccessData func(sa *T.SAFEARRAY, ppvData **T.VOID)
+
+	SafeArrayUnaccessData func(sa *T.SAFEARRAY)
+
 	SafeArrayGetElement func(
-		SA *SAFEARRAY,
-		rgIndices *LONG,
-		pv *VOID)
+		sa *T.SAFEARRAY, rgIndices *T.LONG, pv *T.VOID)
+
 	SafeArrayPutElement func(
-		SA *SAFEARRAY,
-		rgIndices *LONG,
-		pv *VOID)
-	SafeArrayCopy func(
-		SA *SAFEARRAY,
-		Out **SAFEARRAY)
+		sa *T.SAFEARRAY, rgIndices *T.LONG, pv *T.VOID)
+
+	SafeArrayCopy func(sa *T.SAFEARRAY, out **T.SAFEARRAY)
+
 	SafeArrayPtrOfIndex func(
-		SA *SAFEARRAY,
-		rgIndices *LONG,
-		ppvData **VOID)
+		sa *T.SAFEARRAY, rgIndices *T.LONG, ppvData **T.VOID)
+
 	SafeArraySetRecordInfo func(
-		SA *SAFEARRAY,
-		prinfo *IRecordInfo)
+		sa *T.SAFEARRAY, prinfo *T.IRecordInfo)
+
 	SafeArrayGetRecordInfo func(
-		SA *SAFEARRAY,
-		prinfo **IRecordInfo)
-	SafeArraySetIID func(
-		SA *SAFEARRAY,
-		guid REFGUID)
-	SafeArrayGetIID func(
-		SA *SAFEARRAY,
-		pguid *GUID)
-	SafeArrayGetVartype func(
-		SA *SAFEARRAY,
-		pvt *VARTYPE)
-	SafeArrayCreateVector func(
-		VT VARTYPE,
-		lLbound LONG,
-		Elements ULONG) *SAFEARRAY
-	SafeArrayCreateVectorEx func(
-		VT VARTYPE,
-		lLbound LONG,
-		Elements ULONG,
-		pvExtra *VOID) *SAFEARRAY
+		sa *T.SAFEARRAY, prinfo **T.IRecordInfo)
 
-	VariantInit func(
-		pvarg *VARIANTARG)
-	VariantClear func(
-		pvarg *VARIANTARG)
-	VariantCopy func(
-		Dest *VARIANTARG,
-		Src *VARIANTARG)
-	VariantCopyInd func(
-		pvarDest *VARIANT,
-		Src *VARIANTARG)
-	VariantChangeType func(
-		Dest *VARIANTARG,
-		pvarSrc *VARIANTARG,
-		wFlags USHORT,
-		VT VARTYPE)
-	VariantChangeTypeEx func(
-		Dest *VARIANTARG,
-		pvarSrc *VARIANTARG,
-		lcid LCID,
-		wFlags USHORT,
-		VT VARTYPE)
+	SafeArraySetIID func(sa *T.SAFEARRAY, guid T.REFGUID)
 
-	VectorFromBstr func(S BSTR, SA **SAFEARRAY)
+	SafeArrayGetIID func(sa *T.SAFEARRAY, pguid *T.GUID)
 
-	BstrFromVector func(SA *SAFEARRAY, S *BSTR)
+	SafeArrayGetVartype func(sa *T.SAFEARRAY, pvt *T.VARTYPE)
 
-	VarUI1FromI2 func(
-		sIn SHORT,
-		pbOut *BYTE)
-	VarUI1FromI4 func(
-		lIn LONG,
-		pbOut *BYTE)
-	VarUI1FromI8 func(
-		i64In LONG64,
-		pbOut *BYTE)
-	VarUI1FromR4 func(
-		fltIn FLOAT,
-		pbOut *BYTE)
-	VarUI1FromR8 func(
-		dblIn DOUBLE,
-		pbOut *BYTE)
-	VarUI1FromCy func(
-		In CY,
-		pbOut *BYTE)
-	VarUI1FromDate func(
-		dateIn DATE,
-		pbOut *BYTE)
-	VarUI1FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pbOut *BYTE)
+	SafeArrayCreateVector func(vt T.VARTYPE,
+		lLbound T.LONG, elements T.ULONG) *T.SAFEARRAY
+
+	SafeArrayCreateVectorEx func(vt T.VARTYPE, lLbound T.LONG,
+		elements T.ULONG, pvExtra *T.VOID) *T.SAFEARRAY
+
+	VariantInit func(pvarg *T.VARIANTARG)
+
+	VariantClear func(pvarg *T.VARIANTARG)
+
+	VariantCopy func(dest, src *T.VARIANTARG)
+
+	VariantCopyInd func(pvarDest *T.VARIANT, src *T.VARIANTARG)
+
+	VariantChangeType func(dest, pvarSrc *T.VARIANTARG,
+		wFlags T.USHORT, vt T.VARTYPE)
+
+	VariantChangeTypeEx func(dest, pvarSrc *T.VARIANTARG,
+		lcid T.LCID, wFlags T.USHORT, vt T.VARTYPE)
+
+	VectorFromBstr func(s T.BSTR, sa **T.SAFEARRAY)
+
+	BstrFromVector func(sa *T.SAFEARRAY, s *T.BSTR)
+
+	VarUI1FromI2 func(sIn T.SHORT, pbOut *T.BYTE)
+
+	VarUI1FromI4 func(lIn T.LONG, pbOut *T.BYTE)
+
+	VarUI1FromI8 func(i64In T.LONG64, pbOut *T.BYTE)
+
+	VarUI1FromR4 func(fltIn T.FLOAT, pbOut *T.BYTE)
+
+	VarUI1FromR8 func(dblIn T.DOUBLE, pbOut *T.BYTE)
+
+	VarUI1FromCy func(in T.CY, pbOut *T.BYTE)
+
+	VarUI1FromDate func(dateIn T.DATE, pbOut *T.BYTE)
+
+	VarUI1FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pbOut *T.BYTE)
+
 	VarUI1FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pbOut *BYTE)
-	VarUI1FromBool func(
-		boolIn VARIANT_BOOL,
-		pbOut *BYTE)
-	VarUI1FromI1 func(
-		In Char,
-		pbOut *BYTE)
-	VarUI1FromUI2 func(
-		uiIn USHORT,
-		pbOut *BYTE)
-	VarUI1FromUI4 func(
-		ulIn ULONG,
-		pbOut *BYTE)
-	VarUI1FromUI8 func(
-		ui64In ULONG64,
-		pbOut *BYTE)
-	VarUI1FromDec func(
-		pdecIn *DECIMAL,
-		pbOut *BYTE)
+		pdispIn *T.IDispatch, lcid T.LCID, pbOut *T.BYTE)
 
-	VarI2FromUI1 func(
-		bIn BYTE,
-		Out *SHORT)
-	VarI2FromI4 func(
-		lIn LONG,
-		Out *SHORT)
-	VarI2FromI8 func(
-		i64In LONG64,
-		Out *SHORT)
-	VarI2FromR4 func(
-		fltIn FLOAT,
-		Out *SHORT)
-	VarI2FromR8 func(
-		dblIn DOUBLE,
-		Out *SHORT)
-	VarI2FromCy func(
-		In CY,
-		Out *SHORT)
-	VarI2FromDate func(
-		dateIn DATE,
-		Out *SHORT)
-	VarI2FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		Out *SHORT)
+	VarUI1FromBool func(boolIn T.VARIANT_BOOL, pbOut *T.BYTE)
+
+	VarUI1FromI1 func(in T.Char, pbOut *T.BYTE)
+
+	VarUI1FromUI2 func(uiIn T.USHORT, pbOut *T.BYTE)
+
+	VarUI1FromUI4 func(ulIn T.ULONG, pbOut *T.BYTE)
+
+	VarUI1FromUI8 func(ui64In T.ULONG64, pbOut *T.BYTE)
+
+	VarUI1FromDec func(pdecIn *T.DECIMAL, pbOut *T.BYTE)
+
+	VarI2FromUI1 func(bIn T.BYTE, out *T.SHORT)
+
+	VarI2FromI4 func(lIn T.LONG, out *T.SHORT)
+
+	VarI2FromI8 func(i64In T.LONG64, out *T.SHORT)
+
+	VarI2FromR4 func(fltIn T.FLOAT, out *T.SHORT)
+
+	VarI2FromR8 func(dblIn T.DOUBLE, out *T.SHORT)
+
+	VarI2FromCy func(in T.CY, out *T.SHORT)
+
+	VarI2FromDate func(dateIn T.DATE, out *T.SHORT)
+
+	VarI2FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, out *T.SHORT)
+
 	VarI2FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		Out *SHORT)
-	VarI2FromBool func(
-		boolIn VARIANT_BOOL,
-		Out *SHORT)
-	VarI2FromI1 func(
-		In Char,
-		Out *SHORT)
-	VarI2FromUI2 func(
-		uiIn USHORT,
-		Out *SHORT)
-	VarI2FromUI4 func(
-		ulIn ULONG,
-		Out *SHORT)
-	VarI2FromUI8 func(
-		ui64In ULONG64,
-		Out *SHORT)
-	VarI2FromDec func(
-		pdecIn *DECIMAL,
-		Out *SHORT)
+		pdispIn *T.IDispatch, lcid T.LCID, out *T.SHORT)
 
-	VarI4FromUI1 func(
-		bIn BYTE,
-		plOut *LONG)
-	VarI4FromI2 func(
-		sIn SHORT,
-		plOut *LONG)
-	VarI4FromI8 func(
-		i64In LONG64,
-		plOut *LONG)
-	VarI4FromR4 func(
-		fltIn FLOAT,
-		plOut *LONG)
-	VarI4FromR8 func(
-		dblIn DOUBLE,
-		plOut *LONG)
-	VarI4FromCy func(
-		In CY,
-		plOut *LONG)
-	VarI4FromDate func(
-		dateIn DATE,
-		plOut *LONG)
-	VarI4FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		plOut *LONG)
+	VarI2FromBool func(boolIn T.VARIANT_BOOL, out *T.SHORT)
+
+	VarI2FromI1 func(in T.Char, out *T.SHORT)
+
+	VarI2FromUI2 func(uiIn T.USHORT, out *T.SHORT)
+
+	VarI2FromUI4 func(ulIn T.ULONG, out *T.SHORT)
+
+	VarI2FromUI8 func(ui64In T.ULONG64, out *T.SHORT)
+
+	VarI2FromDec func(pdecIn *T.DECIMAL, out *T.SHORT)
+
+	VarI4FromUI1 func(bIn T.BYTE, plOut *T.LONG)
+
+	VarI4FromI2 func(sIn T.SHORT, plOut *T.LONG)
+
+	VarI4FromI8 func(i64In T.LONG64, plOut *T.LONG)
+
+	VarI4FromR4 func(fltIn T.FLOAT, plOut *T.LONG)
+
+	VarI4FromR8 func(dblIn T.DOUBLE, plOut *T.LONG)
+
+	VarI4FromCy func(in T.CY, plOut *T.LONG)
+
+	VarI4FromDate func(dateIn T.DATE, plOut *T.LONG)
+
+	VarI4FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, plOut *T.LONG)
+
 	VarI4FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		plOut *LONG)
-	VarI4FromBool func(
-		boolIn VARIANT_BOOL,
-		plOut *LONG)
-	VarI4FromI1 func(
-		In Char,
-		plOut *LONG)
-	VarI4FromUI2 func(
-		uiIn USHORT,
-		plOut *LONG)
-	VarI4FromUI4 func(
-		ulIn ULONG,
-		plOut *LONG)
-	VarI4FromUI8 func(
-		ui64In ULONG64,
-		plOut *LONG)
-	VarI4FromDec func(
-		pdecIn *DECIMAL,
-		plOut *LONG)
+		pdispIn *T.IDispatch, lcid T.LCID, plOut *T.LONG)
 
-	VarI4FromInt func(in INT, out *LONG)
+	VarI4FromBool func(boolIn T.VARIANT_BOOL, plOut *T.LONG)
 
-	VarI8FromUI1 func(
-		bIn BYTE,
-		pi64Out *LONG64)
-	VarI8FromI2 func(
-		sIn SHORT,
-		pi64Out *LONG64)
+	VarI4FromI1 func(in T.Char, plOut *T.LONG)
 
-	VarI8FromI4 func(in LONG, out *LONG64)
+	VarI4FromUI2 func(uiIn T.USHORT, plOut *T.LONG)
 
-	VarI8FromR4 func(
-		fltIn FLOAT,
-		pi64Out *LONG64)
-	VarI8FromR8 func(
-		dblIn DOUBLE,
-		pi64Out *LONG64)
-	VarI8FromCy func(
-		In CY,
-		pi64Out *LONG64)
-	VarI8FromDate func(
-		dateIn DATE,
-		pi64Out *LONG64)
-	VarI8FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags Unsigned_long,
-		pi64Out *LONG64)
+	VarI4FromUI4 func(ulIn T.ULONG, plOut *T.LONG)
+
+	VarI4FromUI8 func(ui64In T.ULONG64, plOut *T.LONG)
+
+	VarI4FromDec func(pdecIn *T.DECIMAL, plOut *T.LONG)
+
+	VarI4FromInt func(in T.INT, out *T.LONG)
+
+	VarI8FromUI1 func(bIn T.BYTE, pi64Out *T.LONG64)
+
+	VarI8FromI2 func(sIn T.SHORT, pi64Out *T.LONG64)
+
+	VarI8FromI4 func(in T.LONG, out *T.LONG64)
+
+	VarI8FromR4 func(fltIn T.FLOAT, pi64Out *T.LONG64)
+
+	VarI8FromR8 func(dblIn T.DOUBLE, pi64Out *T.LONG64)
+
+	VarI8FromCy func(in T.CY, pi64Out *T.LONG64)
+
+	VarI8FromDate func(dateIn T.DATE, pi64Out *T.LONG64)
+
+	VarI8FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.Unsigned_long, pi64Out *T.LONG64)
+
 	VarI8FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pi64Out *LONG64)
-	VarI8FromBool func(
-		boolIn VARIANT_BOOL,
-		pi64Out *LONG64)
-	VarI8FromI1 func(
-		In Char,
-		pi64Out *LONG64)
-	VarI8FromUI2 func(
-		uiIn USHORT,
-		pi64Out *LONG64)
-	VarI8FromUI4 func(
-		ulIn ULONG,
-		pi64Out *LONG64)
-	VarI8FromUI8 func(
-		ui64In ULONG64,
-		pi64Out *LONG64)
-	VarI8FromDec func(
-		pdecIn *DECIMAL,
-		pi64Out *LONG64)
-	VarI8FromInt func(
-		intIn INT,
-		pi64Out *LONG64)
+		pdispIn *T.IDispatch, lcid T.LCID, pi64Out *T.LONG64)
 
-	VarR4FromUI1 func(
-		bIn BYTE,
-		pfltOut *FLOAT)
-	VarR4FromI2 func(
-		sIn SHORT,
-		pfltOut *FLOAT)
-	VarR4FromI4 func(
-		lIn LONG,
-		pfltOut *FLOAT)
-	VarR4FromI8 func(
-		i64In LONG64,
-		pfltOut *FLOAT)
-	VarR4FromR8 func(
-		dblIn DOUBLE,
-		pfltOut *FLOAT)
-	VarR4FromCy func(
-		In CY,
-		pfltOut *FLOAT)
-	VarR4FromDate func(
-		dateIn DATE,
-		pfltOut *FLOAT)
-	VarR4FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pfltOut *FLOAT)
+	VarI8FromBool func(boolIn T.VARIANT_BOOL, pi64Out *T.LONG64)
+
+	VarI8FromI1 func(in T.Char, pi64Out *T.LONG64)
+
+	VarI8FromUI2 func(uiIn T.USHORT, pi64Out *T.LONG64)
+
+	VarI8FromUI4 func(ulIn T.ULONG, pi64Out *T.LONG64)
+
+	VarI8FromUI8 func(ui64In T.ULONG64, pi64Out *T.LONG64)
+
+	VarI8FromDec func(pdecIn *T.DECIMAL, pi64Out *T.LONG64)
+
+	VarI8FromInt func(intIn T.INT, pi64Out *T.LONG64)
+
+	VarR4FromUI1 func(bIn T.BYTE, pfltOut *T.FLOAT)
+
+	VarR4FromI2 func(sIn T.SHORT, pfltOut *T.FLOAT)
+
+	VarR4FromI4 func(lIn T.LONG, pfltOut *T.FLOAT)
+
+	VarR4FromI8 func(i64In T.LONG64, pfltOut *T.FLOAT)
+
+	VarR4FromR8 func(dblIn T.DOUBLE, pfltOut *T.FLOAT)
+
+	VarR4FromCy func(in T.CY, pfltOut *T.FLOAT)
+
+	VarR4FromDate func(dateIn T.DATE, pfltOut *T.FLOAT)
+
+	VarR4FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pfltOut *T.FLOAT)
+
 	VarR4FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pfltOut *FLOAT)
-	VarR4FromBool func(
-		boolIn VARIANT_BOOL,
-		pfltOut *FLOAT)
-	VarR4FromI1 func(
-		In Char,
-		pfltOut *FLOAT)
-	VarR4FromUI2 func(
-		uiIn USHORT,
-		pfltOut *FLOAT)
-	VarR4FromUI4 func(
-		ulIn ULONG,
-		pfltOut *FLOAT)
-	VarR4FromUI8 func(
-		ui64In ULONG64,
-		pfltOut *FLOAT)
-	VarR4FromDec func(
-		pdecIn *DECIMAL,
-		pfltOut *FLOAT)
+		pdispIn *T.IDispatch, lcid T.LCID, pfltOut *T.FLOAT)
 
-	VarR8FromUI1 func(
-		bIn BYTE,
-		pdblOut *DOUBLE)
-	VarR8FromI2 func(
-		sIn SHORT,
-		pdblOut *DOUBLE)
-	VarR8FromI4 func(
-		lIn LONG,
-		pdblOut *DOUBLE)
-	VarR8FromI8 func(
-		i64In LONG64,
-		pdblOut *DOUBLE)
-	VarR8FromR4 func(
-		fltIn FLOAT,
-		pdblOut *DOUBLE)
-	VarR8FromCy func(
-		In CY,
-		pdblOut *DOUBLE)
-	VarR8FromDate func(
-		dateIn DATE,
-		pdblOut *DOUBLE)
-	VarR8FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pdblOut *DOUBLE)
+	VarR4FromBool func(boolIn T.VARIANT_BOOL, pfltOut *T.FLOAT)
+
+	VarR4FromI1 func(in T.Char, pfltOut *T.FLOAT)
+
+	VarR4FromUI2 func(uiIn T.USHORT, pfltOut *T.FLOAT)
+
+	VarR4FromUI4 func(ulIn T.ULONG, pfltOut *T.FLOAT)
+
+	VarR4FromUI8 func(ui64In T.ULONG64, pfltOut *T.FLOAT)
+
+	VarR4FromDec func(pdecIn *T.DECIMAL, pfltOut *T.FLOAT)
+
+	VarR8FromUI1 func(bIn T.BYTE, pdblOut *T.DOUBLE)
+
+	VarR8FromI2 func(sIn T.SHORT, pdblOut *T.DOUBLE)
+
+	VarR8FromI4 func(lIn T.LONG, pdblOut *T.DOUBLE)
+
+	VarR8FromI8 func(i64In T.LONG64, pdblOut *T.DOUBLE)
+
+	VarR8FromR4 func(fltIn T.FLOAT, pdblOut *T.DOUBLE)
+
+	VarR8FromCy func(in T.CY, pdblOut *T.DOUBLE)
+
+	VarR8FromDate func(dateIn T.DATE, pdblOut *T.DOUBLE)
+
+	VarR8FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pdblOut *T.DOUBLE)
+
 	VarR8FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pdblOut *DOUBLE)
-	VarR8FromBool func(
-		boolIn VARIANT_BOOL,
-		pdblOut *DOUBLE)
-	VarR8FromI1 func(
-		In Char,
-		pdblOut *DOUBLE)
-	VarR8FromUI2 func(
-		uiIn USHORT,
-		pdblOut *DOUBLE)
-	VarR8FromUI4 func(
-		ulIn ULONG,
-		pdblOut *DOUBLE)
-	VarR8FromUI8 func(
-		ui64In ULONG64,
-		pdblOut *DOUBLE)
-	VarR8FromDec func(
-		pdecIn *DECIMAL,
-		pdblOut *DOUBLE)
+		pdispIn *T.IDispatch, lcid T.LCID, pdblOut *T.DOUBLE)
 
-	VarDateFromUI1 func(
-		bIn BYTE,
-		pdateOut *DATE)
-	VarDateFromI2 func(
-		sIn SHORT,
-		pdateOut *DATE)
-	VarDateFromI4 func(
-		lIn LONG,
-		pdateOut *DATE)
-	VarDateFromI8 func(
-		i64In LONG64,
-		pdateOut *DATE)
-	VarDateFromR4 func(
-		fltIn FLOAT,
-		pdateOut *DATE)
-	VarDateFromR8 func(
-		dblIn DOUBLE,
-		pdateOut *DATE)
-	VarDateFromCy func(
-		In CY,
-		pdateOut *DATE)
-	VarDateFromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pdateOut *DATE)
+	VarR8FromBool func(boolIn T.VARIANT_BOOL, pdblOut *T.DOUBLE)
+
+	VarR8FromI1 func(in T.Char, pdblOut *T.DOUBLE)
+
+	VarR8FromUI2 func(uiIn T.USHORT, pdblOut *T.DOUBLE)
+
+	VarR8FromUI4 func(ulIn T.ULONG, pdblOut *T.DOUBLE)
+
+	VarR8FromUI8 func(ui64In T.ULONG64, pdblOut *T.DOUBLE)
+
+	VarR8FromDec func(pdecIn *T.DECIMAL, pdblOut *T.DOUBLE)
+
+	VarDateFromUI1 func(bIn T.BYTE, pdateOut *T.DATE)
+
+	VarDateFromI2 func(sIn T.SHORT, pdateOut *T.DATE)
+
+	VarDateFromI4 func(lIn T.LONG, pdateOut *T.DATE)
+
+	VarDateFromI8 func(i64In T.LONG64, pdateOut *T.DATE)
+
+	VarDateFromR4 func(fltIn T.FLOAT, pdateOut *T.DATE)
+
+	VarDateFromR8 func(dblIn T.DOUBLE, pdateOut *T.DATE)
+
+	VarDateFromCy func(in T.CY, pdateOut *T.DATE)
+
+	VarDateFromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pdateOut *T.DATE)
+
 	VarDateFromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pdateOut *DATE)
-	VarDateFromBool func(
-		boolIn VARIANT_BOOL,
-		pdateOut *DATE)
-	VarDateFromI1 func(
-		In Char,
-		pdateOut *DATE)
-	VarDateFromUI2 func(
-		uiIn USHORT,
-		pdateOut *DATE)
-	VarDateFromUI4 func(
-		ulIn ULONG,
-		pdateOut *DATE)
-	VarDateFromUI8 func(
-		ui64In ULONG64,
-		pdateOut *DATE)
-	VarDateFromDec func(
-		pdecIn *DECIMAL,
-		pdateOut *DATE)
+		pdispIn *T.IDispatch, lcid T.LCID, pdateOut *T.DATE)
 
-	VarCyFromUI1 func(
-		bIn BYTE,
-		pcyOut *CY)
-	VarCyFromI2 func(
-		sIn SHORT,
-		pcyOut *CY)
-	VarCyFromI4 func(
-		lIn LONG,
-		pcyOut *CY)
-	VarCyFromI8 func(
-		i64In LONG64,
-		pcyOut *CY)
-	VarCyFromR4 func(
-		fltIn FLOAT,
-		pcyOut *CY)
-	VarCyFromR8 func(
-		dblIn DOUBLE,
-		pcyOut *CY)
-	VarCyFromDate func(
-		dateIn DATE,
-		pcyOut *CY)
-	VarCyFromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pcyOut *CY)
+	VarDateFromBool func(boolIn T.VARIANT_BOOL, pdateOut *T.DATE)
+
+	VarDateFromI1 func(in T.Char, pdateOut *T.DATE)
+
+	VarDateFromUI2 func(uiIn T.USHORT, pdateOut *T.DATE)
+
+	VarDateFromUI4 func(ulIn T.ULONG, pdateOut *T.DATE)
+
+	VarDateFromUI8 func(ui64In T.ULONG64, pdateOut *T.DATE)
+
+	VarDateFromDec func(pdecIn *T.DECIMAL, pdateOut *T.DATE)
+
+	VarCyFromUI1 func(bIn T.BYTE, pcyOut *T.CY)
+
+	VarCyFromI2 func(sIn T.SHORT, pcyOut *T.CY)
+
+	VarCyFromI4 func(lIn T.LONG, pcyOut *T.CY)
+
+	VarCyFromI8 func(i64In T.LONG64, pcyOut *T.CY)
+
+	VarCyFromR4 func(fltIn T.FLOAT, pcyOut *T.CY)
+
+	VarCyFromR8 func(dblIn T.DOUBLE, pcyOut *T.CY)
+
+	VarCyFromDate func(dateIn T.DATE, pcyOut *T.CY)
+
+	VarCyFromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pcyOut *T.CY)
+
 	VarCyFromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pcyOut *CY)
-	VarCyFromBool func(
-		boolIn VARIANT_BOOL,
-		pcyOut *CY)
-	VarCyFromI1 func(
-		In Char,
-		pcyOut *CY)
-	VarCyFromUI2 func(
-		uiIn USHORT,
-		pcyOut *CY)
-	VarCyFromUI4 func(
-		ulIn ULONG,
-		pcyOut *CY)
-	VarCyFromUI8 func(
-		ui64In ULONG64,
-		pcyOut *CY)
-	VarCyFromDec func(
-		pdecIn *DECIMAL,
-		pcyOut *CY)
+		pdispIn *T.IDispatch, lcid T.LCID, pcyOut *T.CY)
 
-	VarBstrFromUI1 func(
-		bVal BYTE,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromI2 func(
-		iVal SHORT,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromI4 func(
-		lIn LONG,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromI8 func(
-		i64In LONG64,
-		lcid LCID,
-		Flags Unsigned_long,
-		pbstrOut *BSTR)
-	VarBstrFromR4 func(
-		fltIn FLOAT,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromR8 func(
-		dblIn DOUBLE,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromCy func(
-		In CY,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromDate func(
-		dateIn DATE,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromBool func(
-		boolIn VARIANT_BOOL,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromI1 func(
-		In Char,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromUI2 func(
-		uiIn USHORT,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromUI4 func(
-		ulIn ULONG,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarBstrFromUI8 func(
-		ui64In ULONG64,
-		lcid LCID,
-		Flags Unsigned_long,
-		pbstrOut *BSTR)
-	VarBstrFromDec func(
-		pdecIn *DECIMAL,
-		lcid LCID,
-		Flags ULONG,
-		pbstrOut *BSTR)
+	VarCyFromBool func(boolIn T.VARIANT_BOOL, pcyOut *T.CY)
 
-	VarBoolFromUI1 func(
-		bIn BYTE,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromI2 func(
-		sIn SHORT,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromI4 func(
-		lIn LONG,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromI8 func(
-		i64In LONG64,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromR4 func(
-		fltIn FLOAT,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromR8 func(
-		dblIn DOUBLE,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromDate func(
-		dateIn DATE,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromCy func(
-		In CY,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromI1 func(
-		In Char,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromUI2 func(
-		uiIn USHORT,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromUI4 func(
-		ulIn ULONG,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromUI8 func(
-		i64In ULONG64,
-		pboolOut *VARIANT_BOOL)
-	VarBoolFromDec func(
-		pdecIn *DECIMAL,
-		pboolOut *VARIANT_BOOL)
+	VarCyFromI1 func(in T.Char, pcyOut *T.CY)
 
-	VarI1FromUI1 func(
-		bIn BYTE,
-		pcOut *Char)
+	VarCyFromUI2 func(uiIn T.USHORT, pcyOut *T.CY)
 
-	VarI1FromI2 func(
-		uiIn SHORT,
-		pcOut *Char)
+	VarCyFromUI4 func(ulIn T.ULONG, pcyOut *T.CY)
 
-	VarI1FromI4 func(
-		lIn LONG,
-		pcOut *Char)
+	VarCyFromUI8 func(ui64In T.ULONG64, pcyOut *T.CY)
 
-	VarI1FromI8 func(
-		i64In LONG64,
-		pcOut *Char)
+	VarCyFromDec func(pdecIn *T.DECIMAL, pcyOut *T.CY)
 
-	VarI1FromR4 func(
-		fltIn FLOAT,
-		pcOut *Char)
+	VarBstrFromUI1 func(bVal T.BYTE,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
 
-	VarI1FromR8 func(
-		dblIn DOUBLE,
-		pcOut *Char)
+	VarBstrFromI2 func(iVal T.SHORT,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
 
-	VarI1FromDate func(
-		dateIn DATE,
-		pcOut *Char)
+	VarBstrFromI4 func(lIn T.LONG,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
 
-	VarI1FromCy func(
-		In CY,
-		pcOut *Char)
+	VarBstrFromI8 func(i64In T.LONG64,
+		lcid T.LCID, flags T.Unsigned_long, pbstrOut *T.BSTR)
 
-	VarI1FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pcOut *Char)
+	VarBstrFromR4 func(fltIn T.FLOAT,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromR8 func(dblIn T.DOUBLE,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromCy func(in T.CY,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromDate func(dateIn T.DATE,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromDisp func(pdispIn *T.IDispatch,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromBool func(boolIn T.VARIANT_BOOL,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromI1 func(in T.Char,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromUI2 func(uiIn T.USHORT,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromUI4 func(ulIn T.ULONG,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBstrFromUI8 func(ui64In T.ULONG64,
+		lcid T.LCID, flags T.Unsigned_long, pbstrOut *T.BSTR)
+
+	VarBstrFromDec func(pdecIn *T.DECIMAL,
+		lcid T.LCID, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarBoolFromUI1 func(bIn T.BYTE, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromI2 func(sIn T.SHORT, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromI4 func(lIn T.LONG, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromI8 func(i64In T.LONG64, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromR4 func(fltIn T.FLOAT, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromR8 func(dblIn T.DOUBLE, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromDate func(dateIn T.DATE, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromCy func(in T.CY, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromDisp func(pdispIn *T.IDispatch,
+		lcid T.LCID, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromI1 func(in T.Char, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromUI2 func(uiIn T.USHORT, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromUI4 func(ulIn T.ULONG, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromUI8 func(i64In T.ULONG64, pboolOut *T.VARIANT_BOOL)
+
+	VarBoolFromDec func(pdecIn *T.DECIMAL, pboolOut *T.VARIANT_BOOL)
+
+	VarI1FromUI1 func(bIn T.BYTE, pcOut *T.Char)
+
+	VarI1FromI2 func(uiIn T.SHORT, pcOut *T.Char)
+
+	VarI1FromI4 func(lIn T.LONG, pcOut *T.Char)
+
+	VarI1FromI8 func(i64In T.LONG64, pcOut *T.Char)
+
+	VarI1FromR4 func(fltIn T.FLOAT, pcOut *T.Char)
+
+	VarI1FromR8 func(dblIn T.DOUBLE, pcOut *T.Char)
+
+	VarI1FromDate func(dateIn T.DATE, pcOut *T.Char)
+
+	VarI1FromCy func(in T.CY, pcOut *T.Char)
+
+	VarI1FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pcOut *T.Char)
 
 	VarI1FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pcOut *Char)
+		pdispIn *T.IDispatch, lcid T.LCID, pcOut *T.Char)
 
-	VarI1FromBool func(
-		boolIn VARIANT_BOOL,
-		pcOut *Char)
+	VarI1FromBool func(boolIn T.VARIANT_BOOL, pcOut *T.Char)
 
-	VarI1FromUI2 func(
-		uiIn USHORT,
-		pcOut *Char)
+	VarI1FromUI2 func(uiIn T.USHORT, pcOut *T.Char)
 
-	VarI1FromUI4 func(
-		ulIn ULONG,
-		pcOut *Char)
+	VarI1FromUI4 func(ulIn T.ULONG, pcOut *T.Char)
 
-	VarI1FromUI8 func(
-		i64In ULONG64,
-		pcOut *Char)
+	VarI1FromUI8 func(i64In T.ULONG64, pcOut *T.Char)
 
-	VarI1FromDec func(
-		pdecIn *DECIMAL,
-		pcOut *Char)
+	VarI1FromDec func(pdecIn *T.DECIMAL, pcOut *T.Char)
 
-	VarUI2FromUI1 func(
-		bIn BYTE,
-		puiOut *USHORT)
-	VarUI2FromI2 func(
-		uiIn SHORT,
-		puiOut *USHORT)
-	VarUI2FromI4 func(
-		lIn LONG,
-		puiOut *USHORT)
-	VarUI2FromI8 func(
-		i64In LONG64,
-		puiOut *USHORT)
-	VarUI2FromR4 func(
-		fltIn FLOAT,
-		puiOut *USHORT)
-	VarUI2FromR8 func(
-		dblIn DOUBLE,
-		puiOut *USHORT)
-	VarUI2FromDate func(
-		dateIn DATE,
-		puiOut *USHORT)
-	VarUI2FromCy func(
-		In CY,
-		puiOut *USHORT)
-	VarUI2FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		puiOut *USHORT)
+	VarUI2FromUI1 func(bIn T.BYTE, puiOut *T.USHORT)
+
+	VarUI2FromI2 func(uiIn T.SHORT, puiOut *T.USHORT)
+
+	VarUI2FromI4 func(lIn T.LONG, puiOut *T.USHORT)
+
+	VarUI2FromI8 func(i64In T.LONG64, puiOut *T.USHORT)
+
+	VarUI2FromR4 func(fltIn T.FLOAT, puiOut *T.USHORT)
+
+	VarUI2FromR8 func(dblIn T.DOUBLE, puiOut *T.USHORT)
+
+	VarUI2FromDate func(dateIn T.DATE, puiOut *T.USHORT)
+
+	VarUI2FromCy func(in T.CY, puiOut *T.USHORT)
+
+	VarUI2FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, puiOut *T.USHORT)
+
 	VarUI2FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		puiOut *USHORT)
-	VarUI2FromBool func(
-		boolIn VARIANT_BOOL,
-		puiOut *USHORT)
-	VarUI2FromI1 func(
-		In Char,
-		puiOut *USHORT)
-	VarUI2FromUI4 func(
-		ulIn ULONG,
-		puiOut *USHORT)
-	VarUI2FromUI8 func(
-		i64In ULONG64,
-		puiOut *USHORT)
-	VarUI2FromDec func(
-		pdecIn *DECIMAL,
-		puiOut *USHORT)
+		pdispIn *T.IDispatch, lcid T.LCID, puiOut *T.USHORT)
 
-	VarUI4FromUI1 func(
-		bIn BYTE,
-		pulOut *ULONG)
-	VarUI4FromI2 func(
-		uiIn SHORT,
-		pulOut *ULONG)
-	VarUI4FromI4 func(
-		lIn LONG,
-		pulOut *ULONG)
-	VarUI4FromI8 func(
-		i64In LONG64,
-		plOut *ULONG)
-	VarUI4FromR4 func(
-		fltIn FLOAT,
-		pulOut *ULONG)
-	VarUI4FromR8 func(
-		dblIn DOUBLE,
-		pulOut *ULONG)
-	VarUI4FromDate func(
-		dateIn DATE,
-		pulOut *ULONG)
-	VarUI4FromCy func(
-		In CY,
-		pulOut *ULONG)
-	VarUI4FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pulOut *ULONG)
+	VarUI2FromBool func(boolIn T.VARIANT_BOOL, puiOut *T.USHORT)
+
+	VarUI2FromI1 func(in T.Char, puiOut *T.USHORT)
+
+	VarUI2FromUI4 func(ulIn T.ULONG, puiOut *T.USHORT)
+
+	VarUI2FromUI8 func(i64In T.ULONG64, puiOut *T.USHORT)
+
+	VarUI2FromDec func(pdecIn *T.DECIMAL, puiOut *T.USHORT)
+
+	VarUI4FromUI1 func(bIn T.BYTE, pulOut *T.ULONG)
+
+	VarUI4FromI2 func(uiIn T.SHORT, pulOut *T.ULONG)
+
+	VarUI4FromI4 func(lIn T.LONG, pulOut *T.ULONG)
+
+	VarUI4FromI8 func(i64In T.LONG64, plOut *T.ULONG)
+
+	VarUI4FromR4 func(fltIn T.FLOAT, pulOut *T.ULONG)
+
+	VarUI4FromR8 func(dblIn T.DOUBLE, pulOut *T.ULONG)
+
+	VarUI4FromDate func(dateIn T.DATE, pulOut *T.ULONG)
+
+	VarUI4FromCy func(in T.CY, pulOut *T.ULONG)
+
+	VarUI4FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pulOut *T.ULONG)
+
 	VarUI4FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pulOut *ULONG)
-	VarUI4FromBool func(
-		boolIn VARIANT_BOOL,
-		pulOut *ULONG)
-	VarUI4FromI1 func(
-		In Char,
-		pulOut *ULONG)
-	VarUI4FromUI2 func(
-		uiIn USHORT,
-		pulOut *ULONG)
-	VarUI4FromUI8 func(
-		ui64In ULONG64,
-		plOut *ULONG)
-	VarUI4FromDec func(
-		pdecIn *DECIMAL,
-		pulOut *ULONG)
+		pdispIn *T.IDispatch, lcid T.LCID, pulOut *T.ULONG)
 
-	VarUI8FromUI1 func(
-		bIn BYTE,
-		pi64Out *ULONG64)
-	VarUI8FromI2 func(
-		sIn SHORT,
-		pi64Out *ULONG64)
-	VarUI8FromI4 func(
-		lIn LONG,
-		pi64Out *ULONG64)
-	VarUI8FromI8 func(
-		ui64In LONG64,
-		pi64Out *ULONG64)
-	VarUI8FromR4 func(
-		fltIn FLOAT,
-		pi64Out *ULONG64)
-	VarUI8FromR8 func(
-		dblIn DOUBLE,
-		pi64Out *ULONG64)
-	VarUI8FromCy func(
-		In CY,
-		pi64Out *ULONG64)
-	VarUI8FromDate func(
-		dateIn DATE,
-		pi64Out *ULONG64)
-	VarUI8FromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags Unsigned_long,
-		pi64Out *ULONG64)
+	VarUI4FromBool func(boolIn T.VARIANT_BOOL, pulOut *T.ULONG)
+
+	VarUI4FromI1 func(in T.Char, pulOut *T.ULONG)
+
+	VarUI4FromUI2 func(uiIn T.USHORT, pulOut *T.ULONG)
+
+	VarUI4FromUI8 func(ui64In T.ULONG64, plOut *T.ULONG)
+
+	VarUI4FromDec func(pdecIn *T.DECIMAL, pulOut *T.ULONG)
+
+	VarUI8FromUI1 func(bIn T.BYTE, pi64Out *T.ULONG64)
+
+	VarUI8FromI2 func(sIn T.SHORT, pi64Out *T.ULONG64)
+
+	VarUI8FromI4 func(lIn T.LONG, pi64Out *T.ULONG64)
+
+	VarUI8FromI8 func(ui64In T.LONG64, pi64Out *T.ULONG64)
+
+	VarUI8FromR4 func(fltIn T.FLOAT, pi64Out *T.ULONG64)
+
+	VarUI8FromR8 func(dblIn T.DOUBLE, pi64Out *T.ULONG64)
+
+	VarUI8FromCy func(in T.CY, pi64Out *T.ULONG64)
+
+	VarUI8FromDate func(dateIn T.DATE, pi64Out *T.ULONG64)
+
+	VarUI8FromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.Unsigned_long, pi64Out *T.ULONG64)
+
 	VarUI8FromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pi64Out *ULONG64)
+		pdispIn *T.IDispatch, lcid T.LCID, pi64Out *T.ULONG64)
+
 	VarUI8FromBool func(
-		boolIn VARIANT_BOOL,
-		pi64Out *ULONG64)
-	VarUI8FromI1 func(
-		In Char,
-		pi64Out *ULONG64)
-	VarUI8FromUI2 func(
-		uiIn USHORT,
-		pi64Out *ULONG64)
-	VarUI8FromUI4 func(
-		ulIn ULONG,
-		pi64Out *ULONG64)
-	VarUI8FromDec func(
-		pdecIn *DECIMAL,
-		pi64Out *ULONG64)
-	VarUI8FromInt func(
-		intIn INT,
-		pi64Out *ULONG64)
+		boolIn T.VARIANT_BOOL, pi64Out *T.ULONG64)
 
-	VarDecFromUI1 func(
-		bIn BYTE,
-		pdecOut *DECIMAL)
-	VarDecFromI2 func(
-		uiIn SHORT,
-		pdecOut *DECIMAL)
-	VarDecFromI4 func(
-		lIn LONG,
-		pdecOut *DECIMAL)
-	VarDecFromI8 func(
-		i64In LONG64,
-		pdecOut *DECIMAL)
-	VarDecFromR4 func(
-		fltIn FLOAT,
-		pdecOut *DECIMAL)
-	VarDecFromR8 func(
-		dblIn DOUBLE,
-		pdecOut *DECIMAL)
-	VarDecFromDate func(
-		dateIn DATE,
-		pdecOut *DECIMAL)
-	VarDecFromCy func(
-		In CY,
-		pdecOut *DECIMAL)
-	VarDecFromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pdecOut *DECIMAL)
+	VarUI8FromI1 func(in T.Char, pi64Out *T.ULONG64)
+
+	VarUI8FromUI2 func(uiIn T.USHORT, pi64Out *T.ULONG64)
+
+	VarUI8FromUI4 func(ulIn T.ULONG, pi64Out *T.ULONG64)
+
+	VarUI8FromDec func(pdecIn *T.DECIMAL, pi64Out *T.ULONG64)
+
+	VarUI8FromInt func(intIn T.INT, pi64Out *T.ULONG64)
+
+	VarDecFromUI1 func(bIn T.BYTE, pdecOut *T.DECIMAL)
+
+	VarDecFromI2 func(uiIn T.SHORT, pdecOut *T.DECIMAL)
+
+	VarDecFromI4 func(lIn T.LONG, pdecOut *T.DECIMAL)
+
+	VarDecFromI8 func(i64In T.LONG64, pdecOut *T.DECIMAL)
+
+	VarDecFromR4 func(fltIn T.FLOAT, pdecOut *T.DECIMAL)
+
+	VarDecFromR8 func(dblIn T.DOUBLE, pdecOut *T.DECIMAL)
+
+	VarDecFromDate func(dateIn T.DATE, pdecOut *T.DECIMAL)
+
+	VarDecFromCy func(in T.CY, pdecOut *T.DECIMAL)
+
+	VarDecFromStr func(strIn *T.OLECHAR,
+		lcid T.LCID, flags T.ULONG, pdecOut *T.DECIMAL)
+
 	VarDecFromDisp func(
-		pdispIn *IDispatch,
-		lcid LCID,
-		pdecOut *DECIMAL)
-	VarDecFromBool func(
-		boolIn VARIANT_BOOL,
-		pdecOut *DECIMAL)
-	VarDecFromI1 func(
-		In Char,
-		pdecOut *DECIMAL)
-	VarDecFromUI2 func(
-		uiIn USHORT,
-		pdecOut *DECIMAL)
-	VarDecFromUI4 func(
-		ulIn ULONG,
-		pdecOut *DECIMAL)
-	VarDecFromUI8 func(
-		ui64In ULONG64, pdecOut *DECIMAL)
+		pdispIn *T.IDispatch, lcid T.LCID, pdecOut *T.DECIMAL)
 
-	VarParseNumFromStr func(
-		strIn *OLECHAR,
-		lcid LCID,
-		Flags ULONG,
-		pnumprs *NUMPARSE,
-		rgbDig *BYTE)
+	VarDecFromBool func(boolIn T.VARIANT_BOOL, pdecOut *T.DECIMAL)
 
-	VarNumFromParseNum func(
-		pnumprs *NUMPARSE,
-		rgbDig *BYTE,
-		VtBits ULONG,
-		pvar *VARIANT)
+	VarDecFromI1 func(in T.Char, pdecOut *T.DECIMAL)
 
-	VarAdd func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarAnd func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarCat func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarDiv func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarEqv func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarIdiv func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarImp func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarMod func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarMul func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarOr func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarPow func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarSub func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
-	VarXor func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		pvarResult *VARIANT)
+	VarDecFromUI2 func(uiIn T.USHORT, pdecOut *T.DECIMAL)
 
-	VarAbs func(
-		pvarIn *VARIANT,
-		pvarResult *VARIANT)
-	VarFix func(
-		pvarIn *VARIANT,
-		pvarResult *VARIANT)
-	VarInt func(
-		pvarIn *VARIANT,
-		pvarResult *VARIANT)
-	VarNeg func(
-		pvarIn *VARIANT,
-		pvarResult *VARIANT)
-	VarNot func(
-		pvarIn *VARIANT,
-		pvarResult *VARIANT)
+	VarDecFromUI4 func(ulIn T.ULONG, pdecOut *T.DECIMAL)
+
+	VarDecFromUI8 func(ui64In T.ULONG64, pdecOut *T.DECIMAL)
+
+	VarParseNumFromStr func(strIn *T.OLECHAR, lcid T.LCID,
+		flags T.ULONG, pnumprs *T.NUMPARSE, rgbDig *T.BYTE)
+
+	VarNumFromParseNum func(pnumprs *T.NUMPARSE,
+		rgbDig *T.BYTE, vtBits T.ULONG, pvar *T.VARIANT)
+
+	VarAdd func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarAnd func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarCat func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarDiv func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarEqv func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarIdiv func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarImp func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarMod func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarMul func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarOr func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarPow func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarSub func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarXor func(pvarLeft, pvarRight, pvarResult *T.VARIANT)
+
+	VarAbs func(pvarIn, pvarResult *T.VARIANT)
+
+	VarFix func(pvarIn, pvarResult *T.VARIANT)
+
+	VarInt func(pvarIn, pvarResult *T.VARIANT)
+
+	VarNeg func(pvarIn, pvarResult *T.VARIANT)
+
+	VarNot func(pvarIn, pvarResult *T.VARIANT)
 
 	VarRound func(
-		pvarIn *VARIANT,
-		Decimals int,
-		pvarResult *VARIANT)
+		pvarIn *T.VARIANT, decimals int, pvarResult *T.VARIANT)
 
-	VarCmp func(
-		pvarLeft *VARIANT,
-		pvarRight *VARIANT,
-		lcid LCID,
-		Flags ULONG)
+	VarCmp func(pvarLeft, pvarRight *T.VARIANT,
+		lcid T.LCID, flags T.ULONG)
 
-	VarDecAdd func(
-		pdecLeft *DECIMAL,
-		pdecRight *DECIMAL,
-		pdecResult *DECIMAL)
-	VarDecDiv func(
-		pdecLeft *DECIMAL,
-		pdecRight *DECIMAL,
-		pdecResult *DECIMAL)
-	VarDecMul func(
-		pdecLeft *DECIMAL,
-		pdecRight *DECIMAL,
-		pdecResult *DECIMAL)
-	VarDecSub func(
-		pdecLeft *DECIMAL,
-		pdecRight *DECIMAL,
-		pdecResult *DECIMAL)
+	VarDecAdd func(pdecLeft, pdecRight, pdecResult *T.DECIMAL)
 
-	VarDecAbs func(
-		pdecIn *DECIMAL,
-		pdecResult *DECIMAL)
-	VarDecFix func(
-		pdecIn *DECIMAL,
-		pdecResult *DECIMAL)
-	VarDecInt func(
-		pdecIn *DECIMAL,
-		pdecResult *DECIMAL)
-	VarDecNeg func(
-		pdecIn *DECIMAL,
-		pdecResult *DECIMAL)
+	VarDecDiv func(pdecLeft, pdecRight, pdecResult *T.DECIMAL)
+
+	VarDecMul func(pdecLeft, pdecRight, pdecResult *T.DECIMAL)
+
+	VarDecSub func(pdecLeft, pdecRight, pdecResult *T.DECIMAL)
+
+	VarDecAbs func(pdecIn, pdecResult *T.DECIMAL)
+
+	VarDecFix func(pdecIn, pdecResult *T.DECIMAL)
+
+	VarDecInt func(pdecIn, pdecResult *T.DECIMAL)
+
+	VarDecNeg func(pdecIn, pdecResult *T.DECIMAL)
 
 	VarDecRound func(
-		pdecIn *DECIMAL,
-		Decimals int,
-		pdecResult *DECIMAL)
+		pdecIn *T.DECIMAL, decimals int, pdecResult *T.DECIMAL)
 
-	VarDecCmp func(
-		pdecLeft *DECIMAL,
-		pdecRight *DECIMAL)
-	VarDecCmpR8 func(
-		pdecLeft *DECIMAL,
-		dblRight DOUBLE)
+	VarDecCmp func(pdecLeft, pdecRight *T.DECIMAL)
 
-	VarCyAdd func(
-		Left CY,
-		Right CY,
-		pcyResult *CY)
-	VarCyMul func(
-		Left CY,
-		Right CY,
-		pcyResult *CY)
-	VarCyMulI4 func(
-		Left CY,
-		lRight LONG,
-		pcyResult *CY)
-	VarCyMulI8 func(
-		Left CY,
-		lRight LONG64,
-		pcyResult *CY)
-	VarCySub func(
-		Left CY,
-		Right CY,
-		pcyResult *CY)
+	VarDecCmpR8 func(pdecLeft *T.DECIMAL, dblRight T.DOUBLE)
 
-	VarCyAbs func(
-		In CY,
-		pcyResult *CY)
-	VarCyFix func(
-		In CY,
-		pcyResult *CY)
-	VarCyInt func(
-		In CY,
-		pcyResult *CY)
-	VarCyNeg func(
-		In CY,
-		pcyResult *CY)
+	VarCyAdd func(left, right T.CY, pcyResult *T.CY)
 
-	VarCyRound func(
-		In CY,
-		Decimals int,
-		pcyResult *CY)
+	VarCyMul func(left, right T.CY, pcyResult *T.CY)
 
-	VarCyCmp func(
-		Left CY,
-		Right CY)
-	VarCyCmpR8 func(
-		Left CY,
-		dblRight DOUBLE)
+	VarCyMulI4 func(left T.CY, lRight T.LONG, pcyResult *T.CY)
 
-	VarBstrCat func(
-		bstrLeft BSTR,
-		bstrRight BSTR,
-		pbstrResult *BSTR)
+	VarCyMulI8 func(left T.CY, lRight T.LONG64, pcyResult *T.CY)
+
+	VarCySub func(left, right T.CY, pcyResult *T.CY)
+
+	VarCyAbs func(in T.CY, pcyResult *T.CY)
+
+	VarCyFix func(in T.CY, pcyResult *T.CY)
+
+	VarCyInt func(in T.CY, pcyResult *T.CY)
+
+	VarCyNeg func(in T.CY, pcyResult *T.CY)
+
+	VarCyRound func(in T.CY, decimals int, pcyResult *T.CY)
+
+	VarCyCmp func(left, right T.CY)
+
+	VarCyCmpR8 func(left T.CY, dblRight T.DOUBLE)
+
+	VarBstrCat func(bstrLeft, bstrRight T.BSTR,
+		pbstrResult *T.BSTR)
+
 	VarBstrCmp func(
-		bstrLeft BSTR,
-		bstrRight BSTR,
-		lcid LCID,
-		Flags ULONG)
+		bstrLeft, bstrRight T.BSTR, lcid T.LCID, flags T.ULONG)
+
 	VarR8Pow func(
-		dblLeft DOUBLE,
-		dblRight DOUBLE,
-		pdblResult *DOUBLE)
-	VarR4CmpR8 func(
-		fltLeft FLOAT,
-		dblRight DOUBLE)
+		dblLeft, dblRight T.DOUBLE, pdblResult *T.DOUBLE)
+
+	VarR4CmpR8 func(fltLeft T.FLOAT, dblRight T.DOUBLE)
+
 	VarR8Round func(
-		dblIn DOUBLE,
-		Decimals int,
-		pdblResult *DOUBLE)
+		dblIn T.DOUBLE, decimals int, pdblResult *T.DOUBLE)
 
 	VarDateFromUdate func(
-		pudateIn *UDATE,
-		Flags ULONG,
-		pdateOut *DATE)
-	VarDateFromUdateEx func(
-		pudateIn *UDATE,
-		lcid LCID,
-		Flags ULONG,
-		pdateOut *DATE)
+		pudateIn *T.UDATE, flags T.ULONG, pdateOut *T.DATE)
+
+	VarDateFromUdateEx func(pudateIn *T.UDATE,
+		lcid T.LCID, flags T.ULONG, pdateOut *T.DATE)
+
 	VarUdateFromDate func(
-		dateIn DATE,
-		Flags ULONG,
-		pudateOut *UDATE)
+		dateIn T.DATE, flags T.ULONG, pudateOut *T.UDATE)
 
-	GetAltMonthNames func(
-		lcid LCID,
-		prgp ***OLESTR)
+	GetAltMonthNames func(lcid T.LCID, prgp ***T.OLESTR)
 
-	VarFormat func(
-		pvarIn *VARIANT,
-		pstrFormat *OLESTR,
-		iFirstDay int,
-		iFirstWeek int,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarFormatDateTime func(
-		pvarIn *VARIANT,
-		iNamedFormat int,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarFormatNumber func(
-		pvarIn *VARIANT,
-		iNumDig int,
-		iIncLead int,
-		iUseParens int,
-		iGroup int,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarFormatPercent func(
-		pvarIn *VARIANT,
-		iNumDig int,
-		iIncLead int,
-		iUseParens int,
-		iGroup int,
-		Flags ULONG,
-		pbstrOut *BSTR)
-	VarFormatCurrency func(
-		pvarIn *VARIANT,
-		iNumDig int,
-		iIncLead int,
-		iUseParens int,
-		iGroup int,
-		Flags ULONG,
-		pbstrOut *BSTR)
+	VarFormat func(pvarIn *T.VARIANT,
+		pstrFormat *T.OLESTR, iFirstDay, iFirstWeek int,
+		flags T.ULONG, pbstrOut *T.BSTR)
 
-	VarWeekdayName func(
-		iWeekday int,
-		fAbbrev int,
-		iFirstDay int,
-		Flags ULONG,
-		pbstrOut *BSTR)
+	VarFormatDateTime func(pvarIn *T.VARIANT,
+		iNamedFormat int, flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarFormatNumber func(pvarIn *T.VARIANT,
+		iNumDig, iIncLead, iUseParens, iGroup int,
+		flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarFormatPercent func(pvarIn *T.VARIANT,
+		iNumDig, iIncLead, iUseParens, iGroup int,
+		flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarFormatCurrency func(pvarIn *T.VARIANT,
+		iNumDig, iIncLead, iUseParens, iGroup int,
+		flags T.ULONG, pbstrOut *T.BSTR)
+
+	VarWeekdayName func(iWeekday, fAbbrev, iFirstDay int,
+		flags T.ULONG, pbstrOut *T.BSTR)
+
 	VarMonthName func(
-		iMonth int,
-		fAbbrev int,
-		Flags ULONG,
-		pbstrOut *BSTR)
+		iMonth, fAbbrev int, flags T.ULONG, pbstrOut *T.BSTR)
 
-	VarFormatFromTokens func(
-		pvarIn *VARIANT,
-		pstrFormat *OLESTR,
-		pbTokCur *BYTE,
-		Flags ULONG,
-		pbstrOut *BSTR,
-		lcid LCID)
-	VarTokenizeFormatString func(
-		pstrFormat *OLESTR,
-		rgbTok *BYTE,
-		cbTok int,
-		iFirstDay int,
-		iFirstWeek int,
-		lcid LCID,
-		pcbActual *int)
+	VarFormatFromTokens func(pvarIn *T.VARIANT,
+		pstrFormat *T.OLESTR, pbTokCur *T.BYTE,
+		flags T.ULONG, pbstrOut *T.BSTR, lcid T.LCID)
+
+	VarTokenizeFormatString func(pstrFormat *T.OLESTR,
+		rgbTok *T.BYTE, cbTok, iFirstDay, iFirstWeek int,
+		lcid T.LCID, pcbActual *int)
 
 	LHashValOfNameSysA func(
-		syskind SYSKIND,
-		lcid LCID,
-		szName AString) ULONG
+		syskind T.SYSKIND, lcid T.LCID, szName T.AString) T.ULONG
 
-	LHashValOfNameSys func(
-		syskind SYSKIND,
-		lcid LCID,
-		szName *OLECHAR) ULONG
+	LHashValOfNameSys func(syskind T.SYSKIND,
+		lcid T.LCID, szName *T.OLECHAR) T.ULONG
 
-	LoadTypeLib func(
-		szFile *OLECHAR,
-		pptlib **ITypeLib)
+	LoadTypeLib func(szFile *T.OLECHAR, pptlib **T.ITypeLib)
 
 	LoadTypeLibEx func(
-		szFile *OLESTR,
-		regkind REGKIND,
-		pptlib **ITypeLib)
+		szFile *T.OLESTR, regkind T.REGKIND, pptlib **T.ITypeLib)
 
 	LoadRegTypeLib func(
-		rguid REFGUID,
-		VerMajor WORD,
-		VerMinor WORD,
-		lcid LCID,
-		pptlib **ITypeLib)
+		rguid T.REFGUID, verMajor, verMinor T.WORD,
+		lcid T.LCID, pptlib **T.ITypeLib)
 
-	QueryPathOfRegTypeLib func(
-		guid REFGUID,
-		Maj USHORT,
-		Min USHORT,
-		lcid LCID,
-		PathName *BSTR)
+	QueryPathOfRegTypeLib func(guid T.REFGUID,
+		maj, min T.USHORT, lcid T.LCID, pathName *T.BSTR)
 
 	RegisterTypeLib func(
-		ptlib *ITypeLib,
-		szFullPath *OLECHAR,
-		szHelpDir *OLECHAR)
+		ptlib *T.ITypeLib, szFullPath, szHelpDir *T.OLECHAR)
 
 	UnRegisterTypeLib func(
-		libID REFGUID,
-		wVerMajor WORD,
-		wVerMinor WORD,
-		lcid LCID,
-		syskind SYSKIND)
+		libID T.REFGUID, wVerMajor, wVerMinor T.WORD,
+		lcid T.LCID, syskind T.SYSKIND)
 
-	CreateTypeLib func(
-		syskind SYSKIND,
-		szFile *OLECHAR,
-		ppctlib **ICreateTypeLib)
+	CreateTypeLib func(syskind T.SYSKIND,
+		szFile *T.OLECHAR, ppctlib **T.ICreateTypeLib)
 
-	CreateTypeLib2 func(
-		syskind SYSKIND,
-		szFile *OLESTR,
-		ppctlib **ICreateTypeLib2)
+	CreateTypeLib2 func(syskind T.SYSKIND,
+		szFile *T.OLESTR, ppctlib **T.ICreateTypeLib2)
 
-	DispGetParam func(
-		pdispparams *DISPPARAMS,
-		position UINT,
-		vtTarg VARTYPE,
-		pvarResult *VARIANT,
-		puArgErr *UINT)
+	DispGetParam func(pdispparams *T.DISPPARAMS,
+		position T.UINT, vtTarg T.VARTYPE,
+		pvarResult *T.VARIANT, puArgErr *T.UINT)
 
-	DispGetIDsOfNames func(
-		ptinfo *ITypeInfo,
-		rgszNames **OLECHAR,
-		Names UINT,
-		rgdispid *DISPID)
+	DispGetIDsOfNames func(ptinfo *T.ITypeInfo,
+		rgszNames **T.OLECHAR, names T.UINT, rgdispid *T.DISPID)
 
-	DispInvoke func(
-		_this *VOID,
-		ptinfo *ITypeInfo,
-		dispidMember DISPID,
-		wFlags WORD,
-		pparams *DISPPARAMS,
-		pvarResult *VARIANT,
-		pexcepinfo *EXCEPINFO,
-		puArgErr *UINT)
+	DispInvoke func(_this *T.VOID, ptinfo *T.ITypeInfo,
+		dispidMember T.DISPID, wFlags T.WORD,
+		pparams *T.DISPPARAMS, pvarResult *T.VARIANT,
+		pexcepinfo *T.EXCEPINFO, puArgErr *T.UINT)
 
-	CreateDispTypeInfo func(
-		pidata *INTERFACEDATA,
-		lcid LCID,
-		pptinfo **ITypeInfo)
+	CreateDispTypeInfo func(pidata *T.INTERFACEDATA,
+		lcid T.LCID, pptinfo **T.ITypeInfo)
 
-	CreateStdDispatch func(
-		Outer *IUnknown,
-		pvThis *VOID,
-		ptinfo *ITypeInfo,
-		ppunkStdDisp **IUnknown)
+	CreateStdDispatch func(outer *T.IUnknown, pvThis *T.VOID,
+		ptinfo *T.ITypeInfo, ppunkStdDisp **T.IUnknown)
 
-	DispCallFunc func(
-		pvInstance *VOID,
-		oVft ULONG_PTR,
-		cc CALLCONV,
-		vtReturn VARTYPE,
-		Actuals UINT,
-		prgvt *VARTYPE,
-		prgpvarg **VARIANTARG,
-		Result *VARIANT)
+	DispCallFunc func(pvInstance *T.VOID, oVft T.ULONG_PTR,
+		cc T.CALLCONV, vtReturn T.VARTYPE, actuals T.UINT,
+		prgvt *T.VARTYPE, prgpvarg **T.VARIANTARG,
+		result *T.VARIANT)
 
-	RegisterActiveObject func(
-		Unk *IUnknown,
-		rclsid REFCLSID,
-		Flags DWORD,
-		pdwRegister *DWORD)
+	RegisterActiveObject func(unk *T.IUnknown,
+		rclsid T.REFCLSID, flags T.DWORD, pdwRegister *T.DWORD)
 
-	RevokeActiveObject func(
-		Register DWORD,
-		pvReserved *VOID)
+	RevokeActiveObject func(register T.DWORD, pvReserved *T.VOID)
 
-	GetActiveObject func(
-		rclsid REFCLSID,
-		pvReserved *VOID,
-		ppunk **IUnknown)
+	GetActiveObject func(rclsid T.REFCLSID,
+		pvReserved *T.VOID, ppunk **T.IUnknown)
 
 	SetErrorInfo func(
-		Reserved ULONG,
-		perrinfo *IErrorInfo)
+		reserved T.ULONG, perrinfo *T.IErrorInfo)
+
 	GetErrorInfo func(
-		Reserved ULONG,
-		pperrinfo **IErrorInfo)
-	CreateErrorInfo func(
-		pperrinfo **ICreateErrorInfo)
+		reserved T.ULONG, pperrinfo **T.IErrorInfo)
+
+	CreateErrorInfo func(pperrinfo **T.ICreateErrorInfo)
 
 	GetRecordInfoFromTypeInfo func(
-		TypeInfo *ITypeInfo,
-		RecInfo **IRecordInfo)
+		typeInfo *T.ITypeInfo, recInfo **T.IRecordInfo)
 
-	GetRecordInfoFromGuids func(
-		rGuidTypeLib REFGUID,
-		uVerMajor ULONG,
-		uVerMinor ULONG,
-		lcid LCID,
-		rGuidTypeInfo REFGUID,
-		RecInfo **IRecordInfo)
+	GetRecordInfoFromGuids func(rGuidTypeLib T.REFGUID,
+		uVerMajor, uVerMinor T.ULONG, lcid T.LCID,
+		rGuidTypeInfo T.REFGUID, recInfo **T.IRecordInfo)
 
-	OaBuildVersion func() ULONG
+	OaBuildVersion func() T.ULONG
 
-	ClearCustData func(custData *CUSTDATA)
+	ClearCustData func(custData *T.CUSTDATA)
 )
 
-func VarI4FromI4(in int, out *LONG) { *out = LONG(in) }
+func VarI4FromI4(in int, out *T.LONG) { *out = T.LONG(in) }
 
 //VarI4FromI8 func(LONG64 i64In, LONG *plOut) DUP
 //VarI4FromUI8 func(ULONG64 ui64In, LONG *plOut) DUP
@@ -1454,14 +951,14 @@ func VarI4FromI4(in int, out *LONG) { *out = LONG(in) }
    #define WHashValOfLHashVal(lhashval) \
                ((USHORT) (0x0000ffff & (lhashval)))
 
-   #define IsHashValCompatible(lhashval1, lhashval2) \
+   #define T.IsHashValCompatible(lhashval1, lhashval2) \
                ((BOOL) ((0x00ff0000 & (lhashval1)) == (0x00ff0000 & (lhashval2))))
 */
 
-//TODO(t): Normal funcs
+//TODO(t): T.Normal funcs
 //{"VarI4FromInt", VarI4FromI4},
 
-//TODO(t): Only in header No implementation
+//TODO(t): Only in header T.No implementation
 //{"VarI8FromI4", &VarI8FromI4},
 //{"VarI8FromInt", &VarI8FromI4},
 //{"VarUI8FromI4", &VarUI8FromI4},

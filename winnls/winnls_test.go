@@ -1,7 +1,7 @@
 package winnls
 
 import . "github.com/tHinqa/outside"
-import . "github.com/tHinqa/outside/windows/types"
+import . "github.com/tHinqa/outside-windows/types"
 import "testing"
 
 func init() {
