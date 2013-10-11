@@ -7,63 +7,63 @@ package winsock
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/wsock32"
 )
 
 type (
-	timeval       Fake_type_Fix_me
-	servent       Fake_type_Fix_me
-	protoent      Fake_type_Fix_me
-	u_int         Fake_type_Fix_me
-	u_long        Fake_type_Fix_me
-	u_short       Fake_type_Fix_me
-	hostent       Fake_type_Fix_me
-	fd_set        Fake_type_Fix_me
-	sockaddr      Fake_type_Fix_me
-	long          Fake_type_Fix_me
-	in_addr       Fake_type_Fix_me
-	unsigned_long Fake_type_Fix_me
+	timeval       T.Fake_type_Fix_me
+	servent       T.Fake_type_Fix_me
+	protoent      T.Fake_type_Fix_me
+	u_int         T.Fake_type_Fix_me
+	u_long        T.Fake_type_Fix_me
+	u_short       T.Fake_type_Fix_me
+	hostent       T.Fake_type_Fix_me
+	fd_set        T.Fake_type_Fix_me
+	sockaddr      T.Fake_type_Fix_me
+	long          T.Fake_type_Fix_me
+	in_addr       T.Fake_type_Fix_me
+	unsigned_long T.Fake_type_Fix_me
 	char          byte
 )
 
 var (
-	WSAFDIsSet func(SOCKET, *fd_set) int
+	WSAFDIsSet func(T.SOCKET, *fd_set) int
 
 	Accept func(
-		s SOCKET,
+		s T.SOCKET,
 		addr *sockaddr,
-		addrlen *int) SOCKET
+		addrlen *int) T.SOCKET
 
 	Bind func(
-		s SOCKET,
+		s T.SOCKET,
 		addr *sockaddr,
 		namelen int) int
 
-	Closesocket func(s SOCKET) int
+	Closesocket func(s T.SOCKET) int
 
 	Connect func(
-		s SOCKET,
+		s T.SOCKET,
 		name *sockaddr,
 		namelen int) int
 
 	Ioctlsocket func(
-		s SOCKET,
+		s T.SOCKET,
 		cmd long,
 		argp *u_long) int
 
 	Getpeername func(
-		s SOCKET,
+		s T.SOCKET,
 		name *sockaddr,
 		namelen *int) int
 
 	Getsockname func(
-		s SOCKET,
+		s T.SOCKET,
 		name *sockaddr,
 		namelen *int) int
 
 	Getsockopt func(
-		s SOCKET,
+		s T.SOCKET,
 		level int,
 		optname int,
 		optval *char,
@@ -77,20 +77,20 @@ var (
 
 	Inet_ntoa func(in in_addr) *char
 
-	Listen func(s SOCKET, backlog int) int
+	Listen func(s T.SOCKET, backlog int) int
 
 	Ntohl func(netlong u_long) u_long
 
 	Ntohs func(netshort u_short) u_short
 
 	Recv func(
-		s SOCKET,
+		s T.SOCKET,
 		buf *char,
 		len int,
 		flags int) int
 
 	Recvfrom func(
-		s SOCKET,
+		s T.SOCKET,
 		buf *char,
 		len int,
 		flags int,
@@ -105,13 +105,13 @@ var (
 		timeout *timeval) int
 
 	Send func(
-		s SOCKET,
+		s T.SOCKET,
 		buf *char,
 		len int,
 		flags int) int
 
 	Sendto func(
-		s SOCKET,
+		s T.SOCKET,
 		buf *char,
 		len int,
 		flags int,
@@ -119,20 +119,20 @@ var (
 		tolen int) int
 
 	Setsockopt func(
-		s SOCKET,
+		s T.SOCKET,
 		level int,
 		optname int,
 		optval *char,
 		optlen int) int
 
 	Shutdown func(
-		s SOCKET,
+		s T.SOCKET,
 		how int) int
 
 	Socket func(
 		af int,
 		typ int,
-		protocol int) SOCKET
+		protocol int) T.SOCKET
 
 	Gethostbyaddr func(
 		addr *char,
@@ -161,8 +161,8 @@ var (
 		name *char) *protoent
 
 	WSAStartup func(
-		VersionRequired WORD,
-		WSAData *WSADATA) int
+		VersionRequired T.WORD,
+		WSAData *T.WSADATA) int
 
 	WSACleanup func() int
 
@@ -171,103 +171,103 @@ var (
 
 	WSAGetLastError func() int
 
-	WSAIsBlocking func() BOOL
+	WSAIsBlocking func() T.BOOL
 
 	WSAUnhookBlockingHook func() int
 
 	WSASetBlockingHook func(
-		BlockFunc FARPROC) FARPROC
+		BlockFunc T.FARPROC) T.FARPROC
 
 	WSACancelBlockingCall func() int
 
 	WSAAsyncGetServByName func(
-		Wnd HWND,
+		Wnd T.HWND,
 		Msg u_int,
 		name *char,
 		proto *char,
 		buf *char,
-		buflen int) HANDLE
+		buflen int) T.HANDLE
 
 	WSAAsyncGetServByPort func(
-		Wnd HWND,
+		Wnd T.HWND,
 		Msg u_int,
 		port int,
 		proto *char,
 		buf *char,
-		buflen int) HANDLE
+		buflen int) T.HANDLE
 
 	WSAAsyncGetProtoByName func(
-		Wnd HWND,
+		Wnd T.HWND,
 		Msg u_int,
 		name *char,
 		buf *char,
-		buflen int) HANDLE
+		buflen int) T.HANDLE
 
 	WSAAsyncGetProtoByNumber func(
-		Wnd HWND,
+		Wnd T.HWND,
 		Msg u_int,
 		number int,
 		buf *char,
-		buflen int) HANDLE
+		buflen int) T.HANDLE
 
 	WSAAsyncGetHostByName func(
-		Wnd HWND,
+		Wnd T.HWND,
 		Msg u_int,
 		name *char,
 		buf *char,
-		buflen int) HANDLE
+		buflen int) T.HANDLE
 
 	WSAAsyncGetHostByAddr func(
-		Wnd HWND,
+		Wnd T.HWND,
 		Msg u_int,
 		addr *char,
 		len int,
 		typ int,
 		buf *char,
-		buflen int) HANDLE
+		buflen int) T.HANDLE
 
-	WSACancelAsyncRequest func(hAsyncTaskHandle HANDLE) int
+	WSACancelAsyncRequest func(hAsyncTaskHandle T.HANDLE) int
 
 	WSAAsyncSelect func(
-		s SOCKET,
-		Wnd HWND,
+		s T.SOCKET,
+		Wnd T.HWND,
 		Msg u_int,
 		lEvent long) int
 
 	WSARecvEx func(
-		s SOCKET,
+		s T.SOCKET,
 		buf *char,
 		len int,
 		flags *int) int
 
 	TransmitFile func(
-		Socket SOCKET,
-		File HANDLE,
-		NumberOfBytesToWrite DWORD,
-		NumberOfBytesPerSend DWORD,
-		Overlapped *OVERLAPPED,
-		TransmitBuffers *TRANSMIT_FILE_BUFFERS,
-		Reserved DWORD) BOOL
+		Socket T.SOCKET,
+		File T.HANDLE,
+		NumberOfBytesToWrite T.DWORD,
+		NumberOfBytesPerSend T.DWORD,
+		Overlapped *T.OVERLAPPED,
+		TransmitBuffers *T.TRANSMIT_FILE_BUFFERS,
+		Reserved T.DWORD) T.BOOL
 
 	AcceptEx func(
-		ListenSocket SOCKET,
-		AcceptSocket SOCKET,
-		OutputBuffer *VOID,
-		ReceiveDataLength DWORD,
-		LocalAddressLength DWORD,
-		RemoteAddressLength DWORD,
-		BytesReceived *DWORD,
-		Overlapped *OVERLAPPED) BOOL
+		ListenSocket T.SOCKET,
+		AcceptSocket T.SOCKET,
+		OutputBuffer *T.VOID,
+		ReceiveDataLength T.DWORD,
+		LocalAddressLength T.DWORD,
+		RemoteAddressLength T.DWORD,
+		BytesReceived *T.DWORD,
+		Overlapped *T.OVERLAPPED) T.BOOL
 
 	GetAcceptExSockaddrs func(
-		OutputBuffer *VOID,
-		ReceiveDataLength DWORD,
-		LocalAddressLength DWORD,
-		RemoteAddressLength DWORD,
+		OutputBuffer *T.VOID,
+		ReceiveDataLength T.DWORD,
+		LocalAddressLength T.DWORD,
+		RemoteAddressLength T.DWORD,
 		LocalSockaddr **sockaddr,
-		LocalSockaddrLength *INT,
+		LocalSockaddrLength *T.INT,
 		RemoteSockaddr **sockaddr,
-		RemoteSockaddrLength *INT)
+		RemoteSockaddrLength *T.INT)
 )
 
 var WinSockApis = Apis{

@@ -7,173 +7,173 @@ package winsvc
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/advapi32"
 )
 
 var (
 	ChangeServiceConfig func(
-		Service SC_HANDLE,
+		Service T.SC_HANDLE,
 		ServiceType,
 		StartType,
-		ErrorControl DWORD,
+		ErrorControl T.DWORD,
 		BinaryPathName,
 		LoadOrderGroup VString,
-		TagId *DWORD,
+		TagId *T.DWORD,
 		Dependencies,
 		ServiceStartName,
 		Password,
-		DisplayName VString) BOOL
+		DisplayName VString) T.BOOL
 
 	ChangeServiceConfig2 func(
-		Service SC_HANDLE,
-		InfoLevel DWORD,
-		Info *VOID) BOOL
+		Service T.SC_HANDLE,
+		InfoLevel T.DWORD,
+		Info *T.VOID) T.BOOL
 
-	CloseServiceHandle func(SCObject SC_HANDLE) BOOL
+	CloseServiceHandle func(SCObject T.SC_HANDLE) T.BOOL
 
 	ControlService func(
-		Service SC_HANDLE,
-		Control DWORD,
-		ServiceStatus *SERVICE_STATUS) BOOL
+		Service T.SC_HANDLE,
+		Control T.DWORD,
+		ServiceStatus *T.SERVICE_STATUS) T.BOOL
 
 	CreateService func(
-		SCManager SC_HANDLE,
+		SCManager T.SC_HANDLE,
 		ServiceName,
 		DisplayName VString,
 		DesiredAccess,
 		ServiceType,
 		StartType,
-		ErrorControl DWORD,
+		ErrorControl T.DWORD,
 		BinaryPathName,
 		LoadOrderGroup VString,
-		TagId *DWORD,
+		TagId *T.DWORD,
 		Dependencies,
 		ServiceStartName,
-		Password VString) SC_HANDLE
+		Password VString) T.SC_HANDLE
 
-	DeleteService func(Service SC_HANDLE) BOOL
+	DeleteService func(Service T.SC_HANDLE) T.BOOL
 
 	EnumDependentServices func(
-		Service SC_HANDLE,
-		ServiceState DWORD,
-		Services *ENUM_SERVICE_STATUS,
-		BufSize DWORD,
+		Service T.SC_HANDLE,
+		ServiceState T.DWORD,
+		Services *T.ENUM_SERVICE_STATUS,
+		BufSize T.DWORD,
 		BytesNeeded,
-		ServicesReturned *DWORD) BOOL
+		ServicesReturned *T.DWORD) T.BOOL
 
 	EnumServicesStatus func(
-		SCManager SC_HANDLE,
+		SCManager T.SC_HANDLE,
 		ServiceType,
-		ServiceState DWORD,
-		Services *ENUM_SERVICE_STATUS,
-		BufSize DWORD,
+		ServiceState T.DWORD,
+		Services *T.ENUM_SERVICE_STATUS,
+		BufSize T.DWORD,
 		BytesNeeded,
 		ServicesReturned,
-		ResumeHandle *DWORD) BOOL
+		ResumeHandle *T.DWORD) T.BOOL
 
 	EnumServicesStatusEx func(
-		SCManager SC_HANDLE,
-		InfoLevel SC_ENUM_TYPE,
+		SCManager T.SC_HANDLE,
+		InfoLevel T.SC_ENUM_TYPE,
 		ServiceType,
-		ServiceState DWORD,
-		Services *BYTE,
-		BufSize DWORD,
+		ServiceState T.DWORD,
+		Services *T.BYTE,
+		BufSize T.DWORD,
 		BytesNeeded,
 		ServicesReturned,
-		ResumeHandle *DWORD,
-		pszGroupName VString) BOOL
+		ResumeHandle *T.DWORD,
+		pszGroupName VString) T.BOOL
 
 	GetServiceKeyName func(
-		SCManager SC_HANDLE,
+		SCManager T.SC_HANDLE,
 		DisplayName VString,
 		ServiceName OVString,
-		cBuffer *DWORD) BOOL
+		cBuffer *T.DWORD) T.BOOL
 
 	GetServiceDisplayName func(
-		SCManager SC_HANDLE,
+		SCManager T.SC_HANDLE,
 		ServiceName VString,
 		DisplayName OVString,
-		cBuffer *DWORD) BOOL
+		cBuffer *T.DWORD) T.BOOL
 
-	LockServiceDatabase func(SCManager SC_HANDLE) SC_LOCK
+	LockServiceDatabase func(SCManager T.SC_HANDLE) T.SC_LOCK
 
-	NotifyBootConfigStatus func(BootAcceptable BOOL) BOOL
+	NotifyBootConfigStatus func(BootAcceptable T.BOOL) T.BOOL
 
 	OpenSCManager func(
 		MachineName,
 		DatabaseName VString,
-		DesiredAccess DWORD) SC_HANDLE
+		DesiredAccess T.DWORD) T.SC_HANDLE
 
 	OpenService func(
-		SCManager SC_HANDLE,
+		SCManager T.SC_HANDLE,
 		ServiceName VString,
-		DesiredAccess DWORD) SC_HANDLE
+		DesiredAccess T.DWORD) T.SC_HANDLE
 
 	QueryServiceConfig func(
-		Service SC_HANDLE,
-		ServiceConfig *QUERY_SERVICE_CONFIG,
-		BufSize DWORD,
-		BytesNeeded *DWORD) BOOL
+		Service T.SC_HANDLE,
+		ServiceConfig *T.QUERY_SERVICE_CONFIG,
+		BufSize T.DWORD,
+		BytesNeeded *T.DWORD) T.BOOL
 
 	QueryServiceConfig2 func(
-		Service SC_HANDLE,
-		InfoLevel DWORD,
-		Buffer *BYTE,
-		BufSize DWORD,
-		BytesNeeded *DWORD) BOOL
+		Service T.SC_HANDLE,
+		InfoLevel T.DWORD,
+		Buffer *T.BYTE,
+		BufSize T.DWORD,
+		BytesNeeded *T.DWORD) T.BOOL
 
 	QueryServiceLockStatus func(
-		SCManager SC_HANDLE,
-		LockStatus *QUERY_SERVICE_LOCK_STATUS,
-		BufSize DWORD,
-		BytesNeeded *DWORD) BOOL
+		SCManager T.SC_HANDLE,
+		LockStatus *T.QUERY_SERVICE_LOCK_STATUS,
+		BufSize T.DWORD,
+		BytesNeeded *T.DWORD) T.BOOL
 
 	QueryServiceObjectSecurity func(
-		Service SC_HANDLE,
-		SecurityInformation SECURITY_INFORMATION,
-		SecurityDescriptor *SECURITY_DESCRIPTOR,
-		BufSize DWORD,
-		BytesNeeded *DWORD) BOOL
+		Service T.SC_HANDLE,
+		SecurityInformation T.SECURITY_INFORMATION,
+		SecurityDescriptor *T.SECURITY_DESCRIPTOR,
+		BufSize T.DWORD,
+		BytesNeeded *T.DWORD) T.BOOL
 
 	QueryServiceStatus func(
-		Service SC_HANDLE,
-		ServiceStatus *SERVICE_STATUS) BOOL
+		Service T.SC_HANDLE,
+		ServiceStatus *T.SERVICE_STATUS) T.BOOL
 
 	QueryServiceStatusEx func(
-		Service SC_HANDLE,
-		InfoLevel SC_STATUS_TYPE,
-		Buffer *BYTE,
-		BufSize DWORD,
-		BytesNeeded *DWORD) BOOL
+		Service T.SC_HANDLE,
+		InfoLevel T.SC_STATUS_TYPE,
+		Buffer *T.BYTE,
+		BufSize T.DWORD,
+		BytesNeeded *T.DWORD) T.BOOL
 
 	RegisterServiceCtrlHandler func(
 		ServiceName VString,
-		HandlerProc *HANDLER_FUNCTION) SERVICE_STATUS_HANDLE
+		HandlerProc *T.HANDLER_FUNCTION) T.SERVICE_STATUS_HANDLE
 
 	RegisterServiceCtrlHandlerEx func(
 		ServiceName VString,
-		HandlerProc *HANDLER_FUNCTION_EX,
-		Context *VOID) SERVICE_STATUS_HANDLE
+		HandlerProc *T.HANDLER_FUNCTION_EX,
+		Context *T.VOID) T.SERVICE_STATUS_HANDLE
 
 	SetServiceObjectSecurity func(
-		Service SC_HANDLE,
-		SecurityInformation SECURITY_INFORMATION,
-		SecurityDescriptor *SECURITY_DESCRIPTOR) BOOL
+		Service T.SC_HANDLE,
+		SecurityInformation T.SECURITY_INFORMATION,
+		SecurityDescriptor *T.SECURITY_DESCRIPTOR) T.BOOL
 
 	SetServiceStatus func(
-		ServiceStatusH SERVICE_STATUS_HANDLE,
-		ServiceStatus *SERVICE_STATUS) BOOL
+		ServiceStatusH T.SERVICE_STATUS_HANDLE,
+		ServiceStatus *T.SERVICE_STATUS) T.BOOL
 
 	StartServiceCtrlDispatcher func(
-		ServiceStartTable *SERVICE_TABLE_ENTRY) BOOL
+		ServiceStartTable *T.SERVICE_TABLE_ENTRY) T.BOOL
 
 	StartService func(
-		Service SC_HANDLE,
-		NumServiceArgs DWORD,
-		ServiceArgVectors *VString) BOOL
+		Service T.SC_HANDLE,
+		NumServiceArgs T.DWORD,
+		ServiceArgVectors *VString) T.BOOL
 
-	UnlockServiceDatabase func(ScLock SC_LOCK) BOOL
+	UnlockServiceDatabase func(ScLock T.SC_LOCK) T.BOOL
 )
 
 var WinSvcANSIApis = Apis{

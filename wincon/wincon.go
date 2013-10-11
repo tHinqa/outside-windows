@@ -7,231 +7,231 @@ package wincon
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/kernel32"
 )
 
 var (
 	PeekConsoleInput func(
-		ConsoleInput HANDLE,
-		Buffer *INPUT_RECORD,
-		Length DWORD,
-		NumberOfEventsRead *DWORD) BOOL
+		consoleInput T.HANDLE,
+		buffer *T.INPUT_RECORD,
+		length T.DWORD,
+		numberOfEventsRead *T.DWORD) T.BOOL
 
 	ReadConsoleInput func(
-		ConsoleInput HANDLE,
-		Buffer *INPUT_RECORD,
-		Length DWORD,
-		NumberOfEventsRead *DWORD) BOOL
+		consoleInput T.HANDLE,
+		buffer *T.INPUT_RECORD,
+		length T.DWORD,
+		numberOfEventsRead *T.DWORD) T.BOOL
 
 	WriteConsoleInput func(
-		ConsoleInput HANDLE,
-		Buffer *INPUT_RECORD,
-		Length DWORD,
-		NumberOfEventsWritten *DWORD) BOOL
+		consoleInput T.HANDLE,
+		buffer *T.INPUT_RECORD,
+		length T.DWORD,
+		numberOfEventsWritten *T.DWORD) T.BOOL
 
 	ReadConsoleOutput func(
-		ConsoleOutput HANDLE,
-		Buffer *CHAR_INFO,
-		BufferSize COORD,
-		BufferCoord COORD,
-		ReadRegion *SMALL_RECT) BOOL
+		consoleOutput T.HANDLE,
+		buffer *T.CHAR_INFO,
+		bufferSize T.COORD,
+		bufferCoord T.COORD,
+		readRegion *T.SMALL_RECT) T.BOOL
 
 	WriteConsoleOutput func(
-		ConsoleOutput HANDLE,
-		Buffer *CHAR_INFO,
-		BufferSize COORD,
-		BufferCoord COORD,
-		WriteRegion *SMALL_RECT) BOOL
+		consoleOutput T.HANDLE,
+		buffer *T.CHAR_INFO,
+		bufferSize T.COORD,
+		bufferCoord T.COORD,
+		writeRegion *T.SMALL_RECT) T.BOOL
 
 	ReadConsoleOutputCharacter func(
-		hConsoleOutput HANDLE,
-		Character OVString,
-		Length DWORD,
-		ReadCoord COORD,
-		NumberOfCharsRead *DWORD) BOOL
+		hConsoleOutput T.HANDLE,
+		character OVString,
+		length T.DWORD,
+		readCoord T.COORD,
+		numberOfCharsRead *T.DWORD) T.BOOL
 
 	ReadConsoleOutputAttribute func(
-		ConsoleOutput HANDLE,
-		Attribute *WORD,
-		Length DWORD,
-		ReadCoord COORD,
-		NumberOfAttrsRead *DWORD) BOOL
+		consoleOutput T.HANDLE,
+		attribute *T.WORD,
+		length T.DWORD,
+		readCoord T.COORD,
+		numberOfAttrsRead *T.DWORD) T.BOOL
 
 	WriteConsoleOutputCharacter func(
-		ConsoleOutput HANDLE,
-		Character VString,
-		Length DWORD,
-		WriteCoord COORD,
-		NumberOfCharsWritten *DWORD) BOOL
+		consoleOutput T.HANDLE,
+		character VString,
+		length T.DWORD,
+		writeCoord T.COORD,
+		numberOfCharsWritten *T.DWORD) T.BOOL
 
 	WriteConsoleOutputAttribute func(
-		ConsoleOutput HANDLE,
-		Attribute *WORD,
-		Length DWORD,
-		WriteCoord COORD,
-		NumberOfAttrsWritten *DWORD) BOOL
+		consoleOutput T.HANDLE,
+		attribute *T.WORD,
+		length T.DWORD,
+		writeCoord T.COORD,
+		numberOfAttrsWritten *T.DWORD) T.BOOL
 
 	FillConsoleOutputCharacter func(
-		ConsoleOutput HANDLE,
-		Character VChar,
-		Length DWORD,
-		WriteCoord COORD,
-		NumberOfCharsWritten *DWORD) BOOL
+		consoleOutput T.HANDLE,
+		character T.VChar,
+		length T.DWORD,
+		writeCoord T.COORD,
+		numberOfCharsWritten *T.DWORD) T.BOOL
 
 	FillConsoleOutputAttribute func(
-		ConsoleOutput HANDLE,
-		Attribute WORD,
-		Length DWORD,
-		WriteCoord COORD,
-		NumberOfAttrsWritten *DWORD) BOOL
+		consoleOutput T.HANDLE,
+		attribute T.WORD,
+		length T.DWORD,
+		writeCoord T.COORD,
+		numberOfAttrsWritten *T.DWORD) T.BOOL
 
 	GetConsoleMode func(
-		ConsoleHandle HANDLE,
-		Mode *DWORD) BOOL
+		consoleHandle T.HANDLE,
+		mode *T.DWORD) T.BOOL
 
 	GetNumberOfConsoleInputEvents func(
-		ConsoleInput HANDLE,
-		NumberOfEvents *DWORD) BOOL
+		consoleInput T.HANDLE,
+		numberOfEvents *T.DWORD) T.BOOL
 
 	GetConsoleScreenBufferInfo func(
-		ConsoleOutput HANDLE,
-		ConsoleScreenBufferInfo *CONSOLE_SCREEN_BUFFER_INFO) BOOL
+		consoleOutput T.HANDLE,
+		consoleScreenBufferInfo *T.CONSOLE_SCREEN_BUFFER_INFO) T.BOOL
 
 	GetLargestConsoleWindowSize func(
-		ConsoleOutput HANDLE) COORD
+		consoleOutput T.HANDLE) T.COORD
 
 	GetConsoleCursorInfo func(
-		ConsoleOutput HANDLE,
-		ConsoleCursorInfo *CONSOLE_CURSOR_INFO) BOOL
+		consoleOutput T.HANDLE,
+		consoleCursorInfo *T.CONSOLE_CURSOR_INFO) T.BOOL
 
 	GetCurrentConsoleFont func(
-		ConsoleOutput HANDLE,
-		MaximumWindow BOOL,
-		ConsoleCurrentFont *CONSOLE_FONT_INFO) BOOL
+		consoleOutput T.HANDLE,
+		maximumWindow T.BOOL,
+		consoleCurrentFont *T.CONSOLE_FONT_INFO) T.BOOL
 
 	GetConsoleFontSize func(
-		ConsoleOutput HANDLE,
-		Font DWORD) COORD
+		consoleOutput T.HANDLE,
+		font T.DWORD) T.COORD
 
 	GetConsoleSelectionInfo func(
-		ConsoleSelectionInfo *CONSOLE_SELECTION_INFO) BOOL
+		consoleSelectionInfo *T.CONSOLE_SELECTION_INFO) T.BOOL
 
 	GetNumberOfConsoleMouseButtons func(
-		NumberOfMouseButtons *DWORD) BOOL
+		numberOfMouseButtons *T.DWORD) T.BOOL
 
 	SetConsoleMode func(
-		ConsoleHandle HANDLE,
-		Mode DWORD) BOOL
+		consoleHandle T.HANDLE,
+		mode T.DWORD) T.BOOL
 
 	SetConsoleActiveScreenBuffer func(
-		ConsoleOutput HANDLE) BOOL
+		consoleOutput T.HANDLE) T.BOOL
 
 	FlushConsoleInputBuffer func(
-		ConsoleInput HANDLE) BOOL
+		consoleInput T.HANDLE) T.BOOL
 
 	SetConsoleScreenBufferSize func(
-		ConsoleOutput HANDLE,
-		Size COORD) BOOL
+		consoleOutput T.HANDLE,
+		size T.COORD) T.BOOL
 
 	SetConsoleCursorPosition func(
-		ConsoleOutput HANDLE,
-		CursorPosition COORD) BOOL
+		consoleOutput T.HANDLE,
+		cursorPosition T.COORD) T.BOOL
 
 	SetConsoleCursorInfo func(
-		ConsoleOutput HANDLE,
-		ConsoleCursorInfo *CONSOLE_CURSOR_INFO) BOOL
+		consoleOutput T.HANDLE,
+		consoleCursorInfo *T.CONSOLE_CURSOR_INFO) T.BOOL
 
 	ScrollConsoleScreenBuffer func(
-		ConsoleOutput HANDLE,
-		ScrollRectangle *SMALL_RECT,
-		ClipRectangle *SMALL_RECT,
-		DestinationOrigin COORD,
-		Fill *CHAR_INFO) BOOL
+		consoleOutput T.HANDLE,
+		scrollRectangle *T.SMALL_RECT,
+		clipRectangle *T.SMALL_RECT,
+		destinationOrigin T.COORD,
+		fill *T.CHAR_INFO) T.BOOL
 
 	SetConsoleWindowInfo func(
-		ConsoleOutput HANDLE,
-		Absolute BOOL,
-		ConsoleWindow *SMALL_RECT) BOOL
+		consoleOutput T.HANDLE,
+		absolute T.BOOL,
+		consoleWindow *T.SMALL_RECT) T.BOOL
 
 	SetConsoleTextAttribute func(
-		ConsoleOutput HANDLE, Attributes WORD) BOOL
+		consoleOutput T.HANDLE, attributes T.WORD) T.BOOL
 
 	SetConsoleCtrlHandler func(
-		HandlerRoutine *HANDLER_ROUTINE, Add BOOL) BOOL
+		handlerRoutine *T.HANDLER_ROUTINE, add T.BOOL) T.BOOL
 
 	GenerateConsoleCtrlEvent func(
-		CtrlEvent DWORD, ProcessGroupId DWORD) BOOL
+		ctrlEvent T.DWORD, processGroupId T.DWORD) T.BOOL
 
-	AllocConsole func() BOOL
+	AllocConsole func() T.BOOL
 
-	FreeConsole func() BOOL
+	FreeConsole func() T.BOOL
 
-	AttachConsole func(ProcessId DWORD) BOOL
+	AttachConsole func(processId T.DWORD) T.BOOL
 
 	GetConsoleTitle func(
-		ConsoleTitle OVString, Size DWORD) DWORD
+		consoleTitle OVString, size T.DWORD) T.DWORD
 
 	SetConsoleTitle func(
-		ConsoleTitle VString) BOOL
+		consoleTitle VString) T.BOOL
 
 	ReadConsole func(
-		ConsoleInput HANDLE,
-		Buffer *VOID,
-		NumberOfCharsToRead DWORD,
-		NumberOfCharsRead *DWORD,
-		Reserved *VOID) BOOL
+		consoleInputh T.HANDLE,
+		buffer *T.VOID,
+		numberOfCharsToRead T.DWORD,
+		numberOfCharsRead *T.DWORD,
+		reserved *T.VOID) T.BOOL
 
 	WriteConsole func(
-		ConsoleOutput HANDLE,
-		Buffer *VOID,
-		NumberOfCharsToWrite DWORD,
-		NumberOfCharsWritten *DWORD,
-		Reserved *VOID) BOOL
+		consoleOutput T.HANDLE,
+		buffer *T.VOID,
+		numberOfCharsToWrite T.DWORD,
+		numberOfCharsWritten *T.DWORD,
+		reserved *T.VOID) T.BOOL
 
 	CreateConsoleScreenBuffer func(
-		DesiredAccess DWORD,
-		ShareMode DWORD,
-		SecurityAttributes *SECURITY_ATTRIBUTES,
-		Flags DWORD,
-		ScreenBufferData *VOID) HANDLE
+		desiredAccess T.DWORD,
+		shareMode T.DWORD,
+		securityAttributes *T.SECURITY_ATTRIBUTES,
+		flags T.DWORD,
+		screenBufferData *T.VOID) T.HANDLE
 
-	GetConsoleCP func() UINT
+	GetConsoleCP func() T.UINT
 
-	SetConsoleCP func(CodePageID UINT) BOOL
+	SetConsoleCP func(codePageID T.UINT) T.BOOL
 
-	GetConsoleOutputCP func() UINT
+	GetConsoleOutputCP func() T.UINT
 
-	SetConsoleOutputCP func(wCodePageID UINT) BOOL
+	SetConsoleOutputCP func(wCodePageID T.UINT) T.BOOL
 
-	GetConsoleDisplayMode func(lpModeFlags *DWORD) BOOL
+	GetConsoleDisplayMode func(lpModeFlags *T.DWORD) T.BOOL
 
-	GetConsoleWindow func() HWND
+	GetConsoleWindow func() T.HWND
 
 	GetConsoleProcessList func(
-		ProcessList *DWORD, ProcessCount DWORD) DWORD
+		processList *T.DWORD, processCount T.DWORD) T.DWORD
 
 	AddConsoleAlias func(
-		Source, Target, ExeName VString) BOOL
+		source, Target, exeName VString) T.BOOL
 
 	GetConsoleAlias func(
-		Source VString,
-		TargetBuffer OVString,
-		TargetBufferLength DWORD,
-		ExeName VString) DWORD
+		source VString,
+		targetBuffer OVString,
+		targetBufferLength T.DWORD,
+		exeName VString) T.DWORD
 
-	GetConsoleAliasesLength func(ExeName VString) DWORD
+	GetConsoleAliasesLength func(exeName VString) T.DWORD
 
-	GetConsoleAliasExesLength func() DWORD
+	GetConsoleAliasExesLength func() T.DWORD
 
 	GetConsoleAliases func(
-		AliasBuffer OVString,
-		AliasBufferLength DWORD,
-		ExeName VString) DWORD
+		aliasBuffer OVString,
+		aliasBufferLength T.DWORD,
+		exeName VString) T.DWORD
 
 	GetConsoleAliasExes func(
-		ExeNameBuffer OVString,
-		ExeNameBufferLength DWORD) DWORD
+		exeNameBuffer OVString,
+		exeNameBufferLength T.DWORD) T.DWORD
 )
 
 var WinConANSIApis = Apis{

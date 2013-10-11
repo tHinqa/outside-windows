@@ -7,99 +7,99 @@ package winnetwk
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/mpr"
 )
 
 var (
 	WNetAddConnection func(
-		RemoteName, Password, LocalName VString) DWORD
+		RemoteName, Password, LocalName VString) T.DWORD
 
 	WNetAddConnection2 func(
-		NetResource *NETRESOURCE,
+		NetResource *T.NETRESOURCE,
 		Password, UserName VString,
-		Flags DWORD) DWORD
+		Flags T.DWORD) T.DWORD
 
 	WNetAddConnection3 func(
-		hwndOwner HWND,
-		NetResource *NETRESOURCE,
+		hwndOwner T.HWND,
+		NetResource *T.NETRESOURCE,
 		Password, UserName VString,
-		Flags DWORD) DWORD
+		Flags T.DWORD) T.DWORD
 
-	WNetCancelConnection func(Name VString, fForce BOOL) DWORD
+	WNetCancelConnection func(Name VString, fForce T.BOOL) T.DWORD
 
 	WNetCancelConnection2 func(
-		Name VString, Flags DWORD, Force BOOL) DWORD
+		Name VString, Flags T.DWORD, Force T.BOOL) T.DWORD
 
 	WNetGetConnection func(
 		LocalName VString,
 		RemoteName OVString,
-		Length *DWORD) DWORD
+		Length *T.DWORD) T.DWORD
 
 	WNetRestoreConnection func(
-		Parent HWND,
-		Device VString) DWORD
+		Parent T.HWND,
+		Device VString) T.DWORD
 
 	WNetUseConnection func(
-		hwndOwner HWND,
-		NetResource *NETRESOURCE,
+		hwndOwner T.HWND,
+		NetResource *T.NETRESOURCE,
 		Password, UserID VString,
-		Flags DWORD,
+		Flags T.DWORD,
 		AccessName OVString, BufferSize,
-		Result *DWORD) DWORD
+		Result *T.DWORD) T.DWORD
 
-	WNetConnectionDialog func(Wnd HWND, Type DWORD) DWORD
+	WNetConnectionDialog func(Wnd T.HWND, Type T.DWORD) T.DWORD
 
-	WNetDisconnectDialog func(Wnd HWND, Type DWORD) DWORD
+	WNetDisconnectDialog func(Wnd T.HWND, Type T.DWORD) T.DWORD
 
 	WNetOpenEnum func(
-		Scope, Type, Usage DWORD,
-		NetResource *NETRESOURCE,
-		Enum *HANDLE) DWORD
+		Scope, Type, Usage T.DWORD,
+		NetResource *T.NETRESOURCE,
+		Enum *T.HANDLE) T.DWORD
 
 	WNetEnumResource func(
-		Enum HANDLE,
-		Count *DWORD,
-		Buffer *VOID,
-		BufferSize *DWORD) DWORD
+		Enum T.HANDLE,
+		Count *T.DWORD,
+		Buffer *T.VOID,
+		BufferSize *T.DWORD) T.DWORD
 
 	WNetCloseEnum func(
-		hEnum HANDLE) DWORD
+		hEnum T.HANDLE) T.DWORD
 
 	WNetGetResourceParent func(
-		NetResource *NETRESOURCE,
-		Buffer *VOID,
-		BufferSize *DWORD) DWORD
+		NetResource *T.NETRESOURCE,
+		Buffer *T.VOID,
+		BufferSize *T.DWORD) T.DWORD
 
 	WNetGetResourceInformation func(
-		NetResource *NETRESOURCE,
-		Buffer *VOID,
-		BufferSize *DWORD,
-		System *OVString) DWORD
+		NetResource *T.NETRESOURCE,
+		Buffer *T.VOID,
+		BufferSize *T.DWORD,
+		System *OVString) T.DWORD
 
 	WNetGetUser func(
 		Name VString,
 		UserName OVString,
-		Length *DWORD) DWORD
+		Length *T.DWORD) T.DWORD
 
 	WNetGetProviderName func(
-		NetType DWORD,
+		NetType T.DWORD,
 		ProviderName OVString,
-		BufferSize *DWORD) DWORD
+		BufferSize *T.DWORD) T.DWORD
 
 	WNetGetNetworkInformation func(
 		Provider VString,
-		NetInfoStruct *NETINFOSTRUCT) DWORD
+		NetInfoStruct *T.NETINFOSTRUCT) T.DWORD
 
 	WNetGetLastError func(
-		Error *DWORD,
+		Error *T.DWORD,
 		ErrorBuf OVString,
-		ErrorBufSize DWORD,
+		ErrorBufSize T.DWORD,
 		NameBuf OVString,
-		NameBufSize DWORD) DWORD
+		NameBufSize T.DWORD) T.DWORD
 
 	MultinetGetConnectionPerformance func(
-		*NETRESOURCE, *NETCONNECTINFOSTRUCT) DWORD
+		*T.NETRESOURCE, *T.NETCONNECTINFOSTRUCT) T.DWORD
 )
 
 var WinNetwkANSIApis = Apis{

@@ -7,124 +7,124 @@ package winreg
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/advapi32"
 )
 
 var (
-	RegCloseKey func(Key HKEY) LONG
+	RegCloseKey func(Key T.HKEY) T.LONG
 
-	RegOverridePredefKey func(Key HKEY, NewHKey HKEY) LONG
+	RegOverridePredefKey func(Key T.HKEY, NewHKey T.HKEY) T.LONG
 
 	RegOpenUserClassesRoot func(
-		Token HANDLE,
-		Options DWORD,
-		SamDesired REGSAM,
-		Result *HKEY) LONG
+		Token T.HANDLE,
+		Options T.DWORD,
+		SamDesired T.REGSAM,
+		Result *T.HKEY) T.LONG
 
 	RegOpenCurrentUser func(
-		SamDesired REGSAM, Result *HKEY) LONG
+		SamDesired T.REGSAM, Result *T.HKEY) T.LONG
 
-	RegDisablePredefinedCache func() LONG
+	RegDisablePredefinedCache func() T.LONG
 
 	RegConnectRegistry func(
 		MachineName VString,
-		Key HKEY,
-		Result *HKEY) LONG
+		Key T.HKEY,
+		Result *T.HKEY) T.LONG
 
 	RegConnectRegistryEx func(
 		MachineName VString,
-		Key HKEY,
-		Flags ULONG,
-		Result *HKEY) LONG
+		Key T.HKEY,
+		Flags T.ULONG,
+		Result *T.HKEY) T.LONG
 
 	RegCreateKey func(
-		Key HKEY, SubKey VString, Result *HKEY) LONG
+		Key T.HKEY, SubKey VString, Result *T.HKEY) T.LONG
 
 	RegCreateKeyEx func(
-		Key HKEY,
+		Key T.HKEY,
 		SubKey VString,
-		Reserved DWORD,
+		Reserved T.DWORD,
 		Class VString,
-		Options DWORD,
-		SamDesired REGSAM,
-		SecurityAttributes *SECURITY_ATTRIBUTES,
-		Result *HKEY,
-		Disposition *DWORD) LONG
+		Options T.DWORD,
+		SamDesired T.REGSAM,
+		SecurityAttributes *T.SECURITY_ATTRIBUTES,
+		Result *T.HKEY,
+		Disposition *T.DWORD) T.LONG
 
-	RegDeleteKey func(Key HKEY, SubKey VString) LONG
+	RegDeleteKey func(Key T.HKEY, SubKey VString) T.LONG
 
 	RegDeleteKeyEx func(
-		Key HKEY,
+		Key T.HKEY,
 		SubKey VString,
-		SamDesired REGSAM,
-		Reserved DWORD) LONG
+		SamDesired T.REGSAM,
+		Reserved T.DWORD) T.LONG
 
-	RegDisableReflectionKey func(Base HKEY) LONG
+	RegDisableReflectionKey func(Base T.HKEY) T.LONG
 
-	RegEnableReflectionKey func(Base HKEY) LONG
+	RegEnableReflectionKey func(Base T.HKEY) T.LONG
 
 	RegQueryReflectionKey func(
-		Base HKEY, IsReflectionDisabled *BOOL) LONG
+		Base T.HKEY, IsReflectionDisabled *T.BOOL) T.LONG
 
-	RegDeleteValue func(Key HKEY, ValueName VString) LONG
+	RegDeleteValue func(Key T.HKEY, ValueName VString) T.LONG
 
 	RegEnumKey func(
-		Key HKEY,
-		Index DWORD,
+		Key T.HKEY,
+		Index T.DWORD,
 		Name OVString,
-		cName DWORD) LONG
+		cName T.DWORD) T.LONG
 
 	RegEnumKeyEx func(
-		Key HKEY,
-		Index DWORD,
+		Key T.HKEY,
+		Index T.DWORD,
 		Name OVString,
-		cName *DWORD,
-		Reserved *DWORD,
+		cName *T.DWORD,
+		Reserved *T.DWORD,
 		Class OVString,
-		cClass *DWORD,
-		LastWriteTime *FILETIME) LONG
+		cClass *T.DWORD,
+		LastWriteTime *T.FILETIME) T.LONG
 
 	RegEnumValue func(
-		Key HKEY,
-		Index DWORD,
+		Key T.HKEY,
+		Index T.DWORD,
 		ValueName OVString,
-		cValueName *DWORD,
-		Reserved *DWORD,
-		Type *DWORD,
-		Data *BYTE,
-		cData *DWORD) LONG
+		cValueName *T.DWORD,
+		Reserved *T.DWORD,
+		Type *T.DWORD,
+		Data *T.BYTE,
+		cData *T.DWORD) T.LONG
 
-	RegFlushKey func(Key HKEY) LONG
+	RegFlushKey func(Key T.HKEY) T.LONG
 
 	RegGetKeySecurity func(
-		Key HKEY,
-		SecurityInformation SECURITY_INFORMATION,
-		SecurityDescriptor *SECURITY_DESCRIPTOR,
-		cSecurityDescriptor *DWORD) LONG
+		Key T.HKEY,
+		SecurityInformation T.SECURITY_INFORMATION,
+		SecurityDescriptor *T.SECURITY_DESCRIPTOR,
+		cSecurityDescriptor *T.DWORD) T.LONG
 
 	RegLoadKey func(
-		Key HKEY, SubKey, File VString) LONG
+		Key T.HKEY, SubKey, File VString) T.LONG
 
 	RegNotifyChangeKeyValue func(
-		Key HKEY,
-		WatchSubtree BOOL,
-		NotifyFilter DWORD,
-		Event HANDLE,
-		Asynchronous BOOL) LONG
+		Key T.HKEY,
+		WatchSubtree T.BOOL,
+		NotifyFilter T.DWORD,
+		Event T.HANDLE,
+		Asynchronous T.BOOL) T.LONG
 
 	RegOpenKey func(
-		Key HKEY, SubKey VString, Result *HKEY) LONG
+		Key T.HKEY, SubKey VString, Result *T.HKEY) T.LONG
 
 	RegOpenKeyEx func(
-		Key HKEY,
+		Key T.HKEY,
 		SubKey VString,
-		Options DWORD,
-		SamDesired REGSAM,
-		Result *HKEY) LONG
+		Options T.DWORD,
+		SamDesired T.REGSAM,
+		Result *T.HKEY) T.LONG
 
 	RegQueryInfoKey func(
-		Key HKEY,
+		Key T.HKEY,
 		Class OVString,
 		cClass,
 		Reserved,
@@ -134,93 +134,93 @@ var (
 		Values,
 		MaxValueNameLen,
 		MaxValueLen,
-		SecurityDescriptor *DWORD,
-		LastWriteTime *FILETIME) LONG
+		SecurityDescriptor *T.DWORD,
+		LastWriteTime *T.FILETIME) T.LONG
 
 	RegQueryValue func(
-		Key HKEY,
+		Key T.HKEY,
 		SubKey VString,
 		Data OVString,
-		cData *LONG) LONG
+		cData *T.LONG) T.LONG
 
 	RegQueryMultipleValues func(
-		Key HKEY,
-		ValList *VALENT,
-		NumVals DWORD,
+		Key T.HKEY,
+		ValList *T.VALENT,
+		NumVals T.DWORD,
 		ValueBuf VString,
-		TotSize *DWORD) LONG
+		TotSize *T.DWORD) T.LONG
 
 	RegQueryValueEx func(
-		Key HKEY,
+		Key T.HKEY,
 		ValueName VString,
 		Reserved,
-		Type *DWORD,
-		Data *BYTE,
-		cData *DWORD) LONG
+		Type *T.DWORD,
+		Data *T.BYTE,
+		cData *T.DWORD) T.LONG
 
 	RegReplaceKey func(
-		Key HKEY, SubKey, NewFile, OldFile VString) LONG
+		Key T.HKEY, SubKey, NewFile, OldFile VString) T.LONG
 
 	RegRestoreKey func(
-		Key HKEY, File VString, Flags DWORD) LONG
+		Key T.HKEY, File VString, Flags T.DWORD) T.LONG
 
 	RegSaveKey func(
-		Key HKEY,
+		Key T.HKEY,
 		File VString,
-		SecurityAttributes *SECURITY_ATTRIBUTES) LONG
+		SecurityAttributes *T.SECURITY_ATTRIBUTES) T.LONG
 
 	RegSetKeySecurity func(
-		Key HKEY,
-		SecurityInformation SECURITY_INFORMATION,
-		pSecurityDescriptor *SECURITY_DESCRIPTOR) LONG
+		Key T.HKEY,
+		SecurityInformation T.SECURITY_INFORMATION,
+		pSecurityDescriptor *T.SECURITY_DESCRIPTOR) T.LONG
 
 	RegSetValue func(
-		Key HKEY,
+		Key T.HKEY,
 		SubKey VString,
-		Type DWORD,
+		Type T.DWORD,
 		Data VString,
-		cbData DWORD) LONG
+		cbData T.DWORD) T.LONG
 
 	RegSetValueEx func(
-		Key HKEY,
+		Key T.HKEY,
 		ValueName VString,
 		Reserved,
-		Type DWORD,
-		Data *BYTE,
-		cData DWORD) LONG
+		Type T.DWORD,
+		Data *T.BYTE,
+		cData T.DWORD) T.LONG
 
-	RegUnLoadKey func(Key HKEY, SubKey VString) LONG
+	RegUnLoadKey func(Key T.HKEY, SubKey VString) T.LONG
 
 	RegGetValue func(
-		Key HKEY,
+		Key T.HKEY,
 		SubKey, Value VString,
-		Flags DWORD,
-		Type *DWORD,
-		Data *VOID,
-		cData *DWORD) LONG
+		Flags T.DWORD,
+		Type *T.DWORD,
+		Data *T.VOID,
+		cData *T.DWORD) T.LONG
 
 	InitiateSystemShutdown func(
 		MachineName, Message VString,
-		Timeout DWORD,
-		ForceAppsClosed, RebootAfterShutdown BOOL) BOOL
+		Timeout T.DWORD,
+		ForceAppsClosed, RebootAfterShutdown T.BOOL) T.BOOL
 
 	AbortSystemShutdown func(
-		MachineName VString) BOOL
+		MachineName VString) T.BOOL
 
 	InitiateSystemShutdownEx func(
 		MachineName, Message VString,
-		Timeout DWORD,
-		ForceAppsClosed, RebootAfterShutdown BOOL,
-		Reason DWORD) BOOL
+		Timeout T.DWORD,
+		ForceAppsClosed, RebootAfterShutdown T.BOOL,
+		Reason T.DWORD) T.BOOL
 
 	RegSaveKeyEx func(
-		Key HKEY,
+		Key T.HKEY,
 		File VString,
-		SecurityAttributes *SECURITY_ATTRIBUTES,
-		Flags DWORD) LONG
+		SecurityAttributes *T.SECURITY_ATTRIBUTES,
+		Flags T.DWORD) T.LONG
 
 	Wow64Win32ApiEntry func(
-		FuncNumber DWORD, Flag DWORD, Res DWORD) LONG
+		FuncNumber T.DWORD, Flag T.DWORD, Res T.DWORD) T.LONG
 )
 
 var WinRegANSIApis = Apis{

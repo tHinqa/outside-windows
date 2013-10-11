@@ -7,243 +7,243 @@ package winnls
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/kernel32"
 )
 
 var (
-	IsValidCodePage func(CodePage UINT) BOOL
+	IsValidCodePage func(CodePage T.UINT) T.BOOL
 
-	GetACP func() UINT
+	GetACP func() T.UINT
 
-	GetOEMCP func() UINT
+	GetOEMCP func() T.UINT
 
-	GetCPInfo func(CodePage UINT, CPInfo *CPINFO) BOOL
+	GetCPInfo func(CodePage T.UINT, cpInfo *T.CPINFO) T.BOOL
 
 	GetCPInfoExA func(
-		CodePage UINT, Flags DWORD, CPInfoEx *CPINFOEXA) BOOL
+		CodePage T.UINT, Flags T.DWORD, cpInfoEx *T.CPINFOEXA) T.BOOL
 
 	GetCPInfoExW func(
-		CodePage UINT, Flags DWORD, CPInfoEx *CPINFOEXW) BOOL
+		CodePage T.UINT, Flags T.DWORD, cpInfoEx *T.CPINFOEXW) T.BOOL
 
-	IsDBCSLeadByte func(TestChar BYTE) BOOL
+	IsDBCSLeadByte func(TestChar T.BYTE) T.BOOL
 
-	IsDBCSLeadByteEx func(CodePage UINT, TestChar BYTE) BOOL
+	IsDBCSLeadByteEx func(CodePage T.UINT, TestChar T.BYTE) T.BOOL
 
 	MultiByteToWideChar func(
-		CodePage UINT,
-		Flags DWORD,
-		MultiByteStr AString,
+		CodePage T.UINT,
+		Flags T.DWORD,
+		MultiByteStr T.AString,
 		cbMultiByte int,
-		WideCharStr OWString,
+		WideCharStr T.OWString,
 		WideChar int) int
 
 	WideCharToMultiByte func(
-		CodePage UINT,
-		Flags DWORD,
-		WideCharStr WString,
+		CodePage T.UINT,
+		Flags T.DWORD,
+		WideCharStr T.WString,
 		WideChar int,
-		MultiByteStr OAString,
+		MultiByteStr T.OAString,
 		cbMultiByte int,
-		DefaultChar AString,
-		UsedDefaultChar *BOOL) int
+		DefaultChar T.AString,
+		UsedDefaultChar *T.BOOL) int
 
 	CompareString func(
-		Locale LCID,
-		CmpFlags DWORD,
+		Locale T.LCID,
+		CmpFlags T.DWORD,
 		String1 VString,
 		Count1 int,
 		String2 VString,
 		Count2 int) int
 
 	LCMapString func(
-		Locale LCID,
-		MapFlags DWORD,
+		Locale T.LCID,
+		MapFlags T.DWORD,
 		SrcStr VString,
 		Src int,
 		DestStr OVString,
 		Dest int) int
 
 	GetLocaleInfo func(
-		Locale LCID,
-		LCType LCTYPE,
+		Locale T.LCID,
+		LCType T.LCTYPE,
 		LCData OVString,
 		Data int) int
 
 	SetLocaleInfo func(
-		Locale LCID,
-		LCType LCTYPE,
-		LCData VString) BOOL
+		Locale T.LCID,
+		LCType T.LCTYPE,
+		LCData VString) T.BOOL
 
 	GetCalendarInfo func(
-		Locale LCID,
-		Calendar CALID,
-		CalType CALTYPE,
+		Locale T.LCID,
+		Calendar T.CALID,
+		CalType T.CALTYPE,
 		CalData OVString,
 		Data int,
-		Value *DWORD) int
+		Value *T.DWORD) int
 
 	SetCalendarInfo func(
-		Locale LCID,
-		Calendar CALID,
-		CalType CALTYPE,
-		CalData VString) BOOL
+		Locale T.LCID,
+		Calendar T.CALID,
+		CalType T.CALTYPE,
+		CalData VString) T.BOOL
 
 	GetTimeFormat func(
-		Locale LCID,
-		Flags DWORD,
-		Time *SYSTEMTIME,
+		Locale T.LCID,
+		Flags T.DWORD,
+		Time *T.SYSTEMTIME,
 		Format VString,
 		TimeStr OVString,
 		cTime int) int
 
 	GetDateFormat func(
-		Locale LCID,
-		Flags DWORD,
-		Date *SYSTEMTIME,
+		Locale T.LCID,
+		Flags T.DWORD,
+		Date *T.SYSTEMTIME,
 		Format VString,
 		DateStr OVString,
 		cDate int) int
 
 	GetNumberFormat func(
-		Locale LCID,
-		Flags DWORD,
+		Locale T.LCID,
+		Flags T.DWORD,
 		Value VString,
-		Format *NUMBERFMT,
+		Format *T.NUMBERFMT,
 		NumberStr OVString,
 		Number int) int
 
 	GetCurrencyFormat func(
-		Locale LCID,
-		Flags DWORD,
+		Locale T.LCID,
+		Flags T.DWORD,
 		Value VString,
-		Format *CURRENCYFMT,
+		Format *T.CURRENCYFMT,
 		CurrencyStr OVString,
 		Currency int) int
 
 	EnumCalendarInfo func(
-		CalInfoEnumProc CALINFO_ENUMPROC,
-		Locale LCID,
-		Calendar CALID,
-		CalType CALTYPE) BOOL
+		CalInfoEnumProc T.CALINFO_ENUMPROC,
+		Locale T.LCID,
+		Calendar T.CALID,
+		CalType T.CALTYPE) T.BOOL
 
 	EnumCalendarInfoEx func(
-		CalInfoEnumProcEx CALINFO_ENUMPROCEX,
-		Locale LCID,
-		Calendar CALID,
-		CalType CALTYPE) BOOL
+		CalInfoEnumProcEx T.CALINFO_ENUMPROCEX,
+		Locale T.LCID,
+		Calendar T.CALID,
+		CalType T.CALTYPE) T.BOOL
 
 	EnumTimeFormats func(
-		TimeFmtEnumProc TIMEFMT_ENUMPROC,
-		Locale LCID,
-		Flags DWORD) BOOL
+		TimeFmtEnumProc T.TIMEFMT_ENUMPROC,
+		Locale T.LCID,
+		Flags T.DWORD) T.BOOL
 
 	EnumDateFormats func(
-		DateFmtEnumProc DATEFMT_ENUMPROC,
-		Locale LCID,
-		Flags DWORD) BOOL
+		DateFmtEnumProc T.DATEFMT_ENUMPROC,
+		Locale T.LCID,
+		Flags T.DWORD) T.BOOL
 
 	EnumDateFormatsEx func(
-		DateFmtEnumProcEx DATEFMT_ENUMPROCEX,
-		Locale LCID,
-		Flags DWORD) BOOL
+		DateFmtEnumProcEx T.DATEFMT_ENUMPROCEX,
+		Locale T.LCID,
+		Flags T.DWORD) T.BOOL
 
 	IsValidLanguageGroup func(
-		LanguageGroup LGRPID,
-		Flags DWORD) BOOL
+		LanguageGroup T.LGRPID,
+		Flags T.DWORD) T.BOOL
 
 	GetNLSVersion func(
-		NLS_FUNCTION, LCID, *NLSVERSIONINFO) BOOL
+		T.NLS_FUNCTION, T.LCID, *T.NLSVERSIONINFO) T.BOOL
 
 	IsNLSDefinedString func(
-		Function NLS_FUNCTION,
-		Flags DWORD,
-		VersionInformation *NLSVERSIONINFO,
-		String WString,
-		Str INT) BOOL
+		Function T.NLS_FUNCTION,
+		Flags T.DWORD,
+		VersionInformation *T.NLSVERSIONINFO,
+		String T.WString,
+		Str T.INT) T.BOOL
 
 	IsValidLocale func(
-		Locale LCID,
-		Flags DWORD) BOOL
+		Locale T.LCID,
+		Flags T.DWORD) T.BOOL
 
 	GetGeoInfo func(
-		Location GEOID,
-		GeoType GEOTYPE,
+		Location T.GEOID,
+		GeoType T.GEOTYPE,
 		GeoData OVString,
 		Data int,
-		LangId LANGID) int
+		LangId T.LANGID) int
 
 	EnumSystemGeoID func(
-		GeoClass GEOCLASS,
-		ParentGeoId GEOID,
-		GeoEnumProc GEO_ENUMPROC) BOOL
+		GeoClass T.GEOCLASS,
+		ParentGeoId T.GEOID,
+		GeoEnumProc T.GEO_ENUMPROC) T.BOOL
 
-	GetUserGeoID func(GeoClass GEOCLASS) GEOID
+	GetUserGeoID func(GeoClass T.GEOCLASS) T.GEOID
 
-	SetUserGeoID func(GeoId GEOID) BOOL
+	SetUserGeoID func(GeoId T.GEOID) T.BOOL
 
-	ConvertDefaultLocale func(Locale LCID) LCID
+	ConvertDefaultLocale func(Locale T.LCID) T.LCID
 
-	GetThreadLocale func() LCID
+	GetThreadLocale func() T.LCID
 
-	SetThreadLocale func(Locale LCID) BOOL
+	SetThreadLocale func(Locale T.LCID) T.BOOL
 
-	GetSystemDefaultUILanguage func() LANGID
+	GetSystemDefaultUILanguage func() T.LANGID
 
-	GetUserDefaultUILanguage func() LANGID
+	GetUserDefaultUILanguage func() T.LANGID
 
-	GetSystemDefaultLangID func() LANGID
+	GetSystemDefaultLangID func() T.LANGID
 
-	GetUserDefaultLangID func() LANGID
+	GetUserDefaultLangID func() T.LANGID
 
-	GetSystemDefaultLCID func() LCID
+	GetSystemDefaultLCID func() T.LCID
 
-	GetUserDefaultLCID func() LCID
+	GetUserDefaultLCID func() T.LCID
 
 	GetStringTypeEx func(
-		Locale LCID,
-		InfoType DWORD,
+		Locale T.LCID,
+		InfoType T.DWORD,
 		SrcStr VString,
 		Src int,
-		CharType *WORD) BOOL
+		CharType *T.WORD) T.BOOL
 
 	GetStringType func(
-		Locale LCID,
-		InfoType DWORD,
+		Locale T.LCID,
+		InfoType T.DWORD,
 		SrcStr VString,
 		Src int,
-		CharType *WORD) BOOL
+		CharType *T.WORD) T.BOOL
 
 	FoldString func(
-		MapFlags DWORD,
+		MapFlags T.DWORD,
 		SrcStr VString,
 		Src int,
 		DestStr OVString,
 		Dest int) int
 
 	EnumSystemLanguageGroups func(
-		LanguageGroupEnumProc LANGUAGEGROUP_ENUMPROC,
-		Flags DWORD,
-		lParam LONG_PTR) BOOL
+		LanguageGroupEnumProc T.LANGUAGEGROUP_ENUMPROC,
+		Flags T.DWORD,
+		lParam T.LONG_PTR) T.BOOL
 
 	EnumLanguageGroupLocales func(
-		LangGroupLocaleEnumProc LANGGROUPLOCALE_ENUMPROC,
-		LanguageGroup LGRPID,
-		Flags DWORD,
-		lParam LONG_PTR) BOOL
+		LangGroupLocaleEnumProc T.LANGGROUPLOCALE_ENUMPROC,
+		LanguageGroup T.LGRPID,
+		Flags T.DWORD,
+		lParam T.LONG_PTR) T.BOOL
 
 	EnumUILanguages func(
-		UILanguageEnumProc UILANGUAGE_ENUMPROC,
-		Flags DWORD,
-		lParam LONG_PTR) BOOL
+		UILanguageEnumProc T.UILANGUAGE_ENUMPROC,
+		Flags T.DWORD,
+		lParam T.LONG_PTR) T.BOOL
 
 	EnumSystemLocales func(
-		LocaleEnumProc LOCALE_ENUMPROC,
-		Flags DWORD) BOOL
+		LocaleEnumProc T.LOCALE_ENUMPROC,
+		Flags T.DWORD) T.BOOL
 
 	EnumSystemCodePages func(
-		CodePageEnumProc CODEPAGE_ENUMPROC,
-		Flags DWORD) BOOL
+		CodePageEnumProc T.CODEPAGE_ENUMPROC,
+		Flags T.DWORD) T.BOOL
 )
 
 //TODO(t): not on XP

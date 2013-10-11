@@ -7,129 +7,124 @@ package shellapi
 
 import (
 	. "github.com/tHinqa/outside"
-	. "github.com/tHinqa/outside-windows/types"
+	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/shell32"
 )
 
 var (
-	DragQueryFile func(HDROP, UINT, VString, UINT) UINT
+	DragQueryFile func(T.HDROP, T.UINT, VString, T.UINT) T.UINT
 
-	DragQueryPoint func(HDROP, *POINT) BOOL
+	DragQueryPoint func(T.HDROP, *T.POINT) T.BOOL
 
-	DragFinish func(HDROP)
+	DragFinish func(T.HDROP)
 
-	DragAcceptFiles func(HWND, BOOL)
+	DragAcceptFiles func(T.HWND, T.BOOL)
 
-	ShellExecute func(
-		Wnd HWND,
-		Operation,
-		File, Parameters,
-		Directory VString,
-		ShowCmd INT) HINSTANCE
+	ShellExecute func(wnd T.HWND,
+		operation, file, parameters, directory VString,
+		showCmd T.INT) T.HINSTANCE
 
 	FindExecutable func(
-		File, Directory VString,
-		Result OVString) HINSTANCE
+		file, directory VString, result OVString) T.HINSTANCE
 
 	CommandLineToArgvW func(
-		CmdLine WString, NumArgs *int) *WString
+		cmdLine T.WString, numArgs *int) *T.WString
 	//TODO(t):*WString was *LPWSTR
 
 	ShellAbout func(
-		Wnd HWND,
-		App, OtherStuff VString,
-		Icon HICON) INT
+		wnd T.HWND,
+		app, otherStuff VString,
+		icon T.HICON) T.INT
 
-	DuplicateIcon func(Inst HINSTANCE, Icon HICON) HICON
+	DuplicateIcon func(Inst T.HINSTANCE, icon T.HICON) T.HICON
 
 	ExtractAssociatedIcon func(
-		Inst HINSTANCE, IconPath VString, Icon *WORD) HICON
+		inst T.HINSTANCE, iconPath VString, icon *T.WORD) T.HICON
 
 	ExtractAssociatedIconEx func(
-		Inst HINSTANCE,
-		IconPath VString,
-		IconIndex *WORD,
-		IconId *WORD) HICON
+		inst T.HINSTANCE,
+		iconPath VString,
+		iconIndex *T.WORD,
+		iconId *T.WORD) T.HICON
 
 	ExtractIcon func(
-		Inst HINSTANCE,
-		ExeFileName VString,
-		IconIndex UINT) HICON
+		inst T.HINSTANCE,
+		exeFileName VString,
+		iconIndex T.UINT) T.HICON
 
 	ExtractIconEx func(
-		File VString,
-		IconIndex int,
-		Large, Small *HICON,
-		Icons UINT) UINT
+		file VString,
+		iconIndex int,
+		large, small *T.HICON,
+		icons T.UINT) T.UINT
 
-	SHFreeNameMappings func(hNameMappings HANDLE)
+	SHFreeNameMappings func(hNameMappings T.HANDLE)
 
 	WinExecError func(
-		Wnd HWND,
-		Error int,
-		FileName,
-		Title VString)
+		wnd T.HWND,
+		err int,
+		fileName,
+		title VString)
 
 	SHCreateProcessAsUserW func(
-		Scpi *SHCREATEPROCESSINFOW) BOOL
+		scpi *T.SHCREATEPROCESSINFOW) T.BOOL
 
 	SHGetFileInfoA func(
-		Path AString,
-		FileAttributes DWORD,
-		Sfi *SHFILEINFOA,
-		FileInfo, Flags UINT) DWORD_PTR
+		path T.AString,
+		fileAttributes T.DWORD,
+		sfi *T.SHFILEINFOA,
+		fileInfo, flags T.UINT) T.DWORD_PTR
 
 	SHGetFileInfoW func(
-		Path WString,
-		FileAttributes DWORD,
-		Sfi *SHFILEINFOW,
-		FileInfo, Flags UINT) DWORD_PTR
+		path T.WString,
+		fileAttributes T.DWORD,
+		sfi *T.SHFILEINFOW,
+		fileInfo, flags T.UINT) T.DWORD_PTR
 
 	SHGetDiskFreeSpaceEx func(
-		DirectoryName VString,
-		FreeBytesAvailableToCaller,
-		TotalNumberOfBytes,
-		TotalNumberOfFreeBytes *ULARGE_INTEGER) BOOL
+		directoryName VString,
+		freeBytesAvailableToCaller,
+		totalNumberOfBytes,
+		totalNumberOfFreeBytes *T.ULARGE_INTEGER) T.BOOL
 
 	SHGetNewLinkInfo func(
-		LinkTo,
-		Dir VString,
-		Name OVString,
-		MustCopy *BOOL,
-		Flags UINT) BOOL
+		linkTo, dir VString,
+		name OVString,
+		mustCopy *T.BOOL,
+		flags T.UINT) T.BOOL
 
 	SHInvokePrinterCommand func(
-		Wnd HWND,
-		Action UINT,
-		Buf1, Buf2 VString,
-		Modal BOOL) BOOL
+		wnd T.HWND,
+		action T.UINT,
+		buf1, buf2 VString,
+		modal T.BOOL) T.BOOL
 
-	IsLFNDrive func(Path VString) BOOL
+	IsLFNDrive func(Path VString) T.BOOL
 
 	SHEnumerateUnreadMailAccounts func(
-		KeyUser HKEY,
-		Index DWORD,
-		MailAddress OVString,
+		keyUser T.HKEY,
+		index T.DWORD,
+		mailAddress OVString,
 		cMailAddress int)
 
 	SHGetUnreadMailCount func(
-		KeyUser HKEY,
-		MailAddress VString,
-		Count *DWORD,
-		FileTime *FILETIME,
-		ShellExecuteCommand OVString,
+		keyUser T.HKEY,
+		mailAddress VString,
+		count *T.DWORD,
+		fileTime *T.FILETIME,
+		shellExecuteCommand OVString,
 		cShellExecuteCommand int)
 
 	SHSetUnreadMailCount func(
-		MailAddress VString,
-		Count DWORD,
-		ShellExecuteCommand AString)
+		mailAddress VString,
+		count T.DWORD,
+		shellExecuteCommand T.AString)
 
 	SHTestTokenMembership func(
-		Token HANDLE, RID ULONG) BOOL
+		token T.HANDLE, rid T.ULONG) T.BOOL
 
 	SHGetImageList func(
-		ImageList int, Riid REFIID, Obj **VOID)
+		imageList int, riid T.REFIID, Obj **T.VOID)
 )
 
 var ShellApiANSIApis = Apis{
