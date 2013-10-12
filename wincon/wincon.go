@@ -1,5 +1,5 @@
 // Copyright (c) 2013 Tony Wilson. All rights reserved.
-// See LICENSE file for permissions and restrictions.
+// See LICENCE file for permissions and restrictions.
 
 //Package wincon provides API definitions for accessing the console
 //functions in kernel32.dll.

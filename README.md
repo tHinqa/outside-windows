@@ -2,7 +2,7 @@
 
 #### Fire off quick questions to [@tHinqa](http://twitter.com/tHinqa) on Twitter
 
-#### Covered by the same license conditions as Go is
+#### Covered by the same licence conditions as Go is
 
 ### For use with [*outside*](https://github.com/tHinqa/outside)
 
