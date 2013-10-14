@@ -6,7 +6,8 @@
 package mmsystem
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside/types"
 	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/winmm"
 )
@@ -448,7 +449,7 @@ var (
 
 //func OutputDebugStr(s VString) {  OutputDebugString(s) } // in winbase
 
-var MMSystemANSIApis = Apis{
+var MMSystemANSIApis = outside.Apis{
 	{"auxGetDevCapsW", &AuxGetDevCapsW},
 	{"joyGetDevCapsW", &JoyGetDevCapsW},
 	{"mciGetDeviceIDW", &MciGetDeviceID},
@@ -474,7 +475,7 @@ var MMSystemANSIApis = Apis{
 	{"waveOutGetErrorTextW", &WaveOutGetErrorText},
 }
 
-var MMSystemUnicodeApis = Apis{
+var MMSystemUnicodeApis = outside.Apis{
 	{"auxGetDevCapsA", &AuxGetDevCapsA},
 	{"joyGetDevCapsA", &JoyGetDevCapsA},
 	{"mciGetDeviceIDA", &MciGetDeviceID},
@@ -501,7 +502,7 @@ var MMSystemUnicodeApis = Apis{
 	{"waveOutGetErrorTextA", &WaveOutGetErrorText},
 }
 
-var MMSystemApis = Apis{
+var MMSystemApis = outside.Apis{
 	{"auxGetNumDevs", &AuxGetNumDevs},
 	{"auxGetVolume", &AuxGetVolume},
 	{"auxOutMessage", &AuxOutMessage},

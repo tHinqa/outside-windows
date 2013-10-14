@@ -4,8 +4,8 @@
 package dde
 
 import (
-	. "github.com/tHinqa/outside"
 	. "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/user32"
 )
 

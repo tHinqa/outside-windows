@@ -6,8 +6,9 @@
 package winnls
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/kernel32"
 )
 
@@ -250,7 +251,7 @@ var (
 //{"GetNLSVersion", &GetNLSVersion},
 //{"IsNLSDefinedString", &IsNLSDefinedString},
 
-var WinNlsANSIApis = Apis{
+var WinNlsANSIApis = outside.Apis{
 	{"GetCPInfoExA", &GetCPInfoExA},
 	{"LCMapStringA", &LCMapString},
 	{"GetLocaleInfoA", &GetLocaleInfo},
@@ -278,7 +279,7 @@ var WinNlsANSIApis = Apis{
 	{"EnumSystemCodePagesA", &EnumSystemCodePages},
 }
 
-var WinNlsUnicodeApis = Apis{
+var WinNlsUnicodeApis = outside.Apis{
 	{"GetCPInfoExW", &GetCPInfoExW},
 	{"LCMapStringW", &LCMapString},
 	{"GetLocaleInfoW", &GetLocaleInfo},
@@ -306,7 +307,7 @@ var WinNlsUnicodeApis = Apis{
 	{"EnumSystemCodePagesW", &EnumSystemCodePages},
 }
 
-var WinNlsApis = Apis{
+var WinNlsApis = outside.Apis{
 	{"IsValidCodePage", &IsValidCodePage},
 	{"GetACP", &GetACP},
 	{"GetOEMCP", &GetOEMCP},

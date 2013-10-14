@@ -1,16 +1,19 @@
 package winuser
 
-import . "github.com/tHinqa/outside"
-import . "github.com/tHinqa/outside-windows/types"
-import "testing"
-import . "fmt"
+import (
+	. "fmt"
+	"github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
+	"testing"
+)
 
 // import "unsafe"
 
 func init() {
-	AddApis(WinUserApis)
-	// AddApis(WinUserANSIApis)
-	AddApis(WinUserUnicodeApis)
+	outside.AddApis(WinUserApis)
+	// outside.AddApis(WinUserANSIApis)
+	outside.AddApis(WinUserUnicodeApis)
 }
 
 //TODO(t): Handle output string buffers

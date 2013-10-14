@@ -6,7 +6,8 @@
 package winuser
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside/types"
 	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/user32"
 )
@@ -1489,7 +1490,7 @@ var (
 //{"IsWow64Message",&IsWow64Message},
 //{"UpdateLayeredWindowIndirect",&UpdateLayeredWindowIndirect},
 
-var WinUserApis = Apis{
+var WinUserApis = outside.Apis{
 	{"ActivateKeyboardLayout", &ActivateKeyboardLayout},
 	{"AdjustWindowRect", &AdjustWindowRect},
 	{"AdjustWindowRectEx", &AdjustWindowRectEx},
@@ -1817,7 +1818,7 @@ var WinUserApis = Apis{
 }
 
 //TODO(t): funcs ending with A and W
-var WinUserUnicodeApis =Apis{
+var WinUserUnicodeApis = outside.Apis{
 	{"AppendMenuW", &AppendMenu},
 	{"BroadcastSystemMessageExW", &BroadcastSystemMessageEx},
 	{"BroadcastSystemMessageW", &BroadcastSystemMessage},
@@ -1947,7 +1948,7 @@ var WinUserUnicodeApis =Apis{
 	{"wvsprintfW", &Wvsprintf},
 }
 
-var WinUserANSIApis = Apis{
+var WinUserANSIApis = outside.Apis{
 	{"AppendMenuA", &AppendMenu},
 	{"BroadcastSystemMessageA", &BroadcastSystemMessage},
 	{"BroadcastSystemMessageExA", &BroadcastSystemMessageEx},

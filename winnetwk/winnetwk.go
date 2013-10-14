@@ -6,8 +6,9 @@
 package winnetwk
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/mpr"
 )
 
@@ -102,7 +103,7 @@ var (
 		*T.NETRESOURCE, *T.NETCONNECTINFOSTRUCT) T.DWORD
 )
 
-var WinNetwkANSIApis = Apis{
+var WinNetwkANSIApis = outside.Apis{
 	{"MultinetGetConnectionPerformanceA", &MultinetGetConnectionPerformance},
 	{"WNetAddConnectionA", &WNetAddConnection},
 	{"WNetAddConnection2A", &WNetAddConnection2},
@@ -121,7 +122,7 @@ var WinNetwkANSIApis = Apis{
 	{"WNetUseConnectionA", &WNetUseConnection},
 }
 
-var WinNetwkUnicodeApis = Apis{
+var WinNetwkUnicodeApis = outside.Apis{
 	{"MultinetGetConnectionPerformanceW", &MultinetGetConnectionPerformance},
 	{"WNetAddConnectionW", &WNetAddConnection},
 	{"WNetAddConnection2W", &WNetAddConnection2},
@@ -140,7 +141,7 @@ var WinNetwkUnicodeApis = Apis{
 	{"WNetUseConnectionW", &WNetUseConnection},
 }
 
-var WinNetwkApis = Apis{
+var WinNetwkApis = outside.Apis{
 	{"WNetCloseEnum", &WNetCloseEnum},
 	{"WNetConnectionDialog", &WNetConnectionDialog},
 	{"WNetDisconnectDialog", &WNetDisconnectDialog},

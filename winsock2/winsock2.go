@@ -6,8 +6,9 @@
 package winsock2
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/ws2_32"
 )
 
@@ -361,7 +362,7 @@ var (
 		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) T.INT
 )
 
-var WinSock2ANSIApis = Apis{
+var WinSock2ANSIApis = outside.Apis{
 	{"WSAAddressToStringA", &WSAAddressToStringA},
 	{"WSADuplicateSocketA", &WSADuplicateSocketA},
 	{"WSAEnumNameSpaceProvidersA", &WSAEnumNameSpaceProviders},
@@ -376,7 +377,7 @@ var WinSock2ANSIApis = Apis{
 	{"WSAStringToAddressA", &WSAStringToAddressA},
 }
 
-var WinSock2UnicodeApis = Apis{
+var WinSock2UnicodeApis = outside.Apis{
 	{"WSAAddressToStringW", &WSAAddressToStringW},
 	{"WSADuplicateSocketW", &WSADuplicateSocketW},
 	{"WSAEnumNameSpaceProvidersW", &WSAEnumNameSpaceProviders},
@@ -391,7 +392,7 @@ var WinSock2UnicodeApis = Apis{
 	{"WSAStringToAddressW", &WSAStringToAddressW},
 }
 
-var WinSock2Apis = Apis{
+var WinSock2Apis = outside.Apis{
 	{"accept", &Accept},
 	{"bind", &Bind},
 	{"closesocket", &Closesocket},

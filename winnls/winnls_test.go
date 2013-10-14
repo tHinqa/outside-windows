@@ -1,13 +1,16 @@
 package winnls
 
-import . "github.com/tHinqa/outside"
-import . "github.com/tHinqa/outside-windows/types"
-import "testing"
+import (
+	"github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
+	"testing"
+)
 
 func init() {
-	AddApis(WinNlsApis)
-	AddApis(WinNlsANSIApis)
-	//AddApis(WinNlsUnicodeApis)
+	outside.AddApis(WinNlsApis)
+	outside.AddApis(WinNlsANSIApis)
+	//outside.AddApis(WinNlsUnicodeApis)
 }
 
 func callback2(s PVString, l LONG_PTR) BOOL {

@@ -6,8 +6,9 @@
 package winsvc
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/advapi32"
 )
 
@@ -176,7 +177,7 @@ var (
 	UnlockServiceDatabase func(ScLock T.SC_LOCK) T.BOOL
 )
 
-var WinSvcANSIApis = Apis{
+var WinSvcANSIApis = outside.Apis{
 	{"ChangeServiceConfigA", &ChangeServiceConfig},
 	{"ChangeServiceConfig2A", &ChangeServiceConfig2},
 	{"CreateServiceA", &CreateService},
@@ -196,7 +197,7 @@ var WinSvcANSIApis = Apis{
 	{"StartServiceA", &StartService},
 }
 
-var WinSvcUnicodeApis = Apis{
+var WinSvcUnicodeApis = outside.Apis{
 	{"ChangeServiceConfigW", &ChangeServiceConfig},
 	{"ChangeServiceConfig2W", &ChangeServiceConfig2},
 	{"CreateServiceW", &CreateService},
@@ -216,7 +217,7 @@ var WinSvcUnicodeApis = Apis{
 	{"StartServiceW", &StartService},
 }
 
-var WinSvcApis = Apis{
+var WinSvcApis = outside.Apis{
 	{"CloseServiceHandle", &CloseServiceHandle},
 	{"ControlService", &ControlService},
 	{"DeleteService", &DeleteService},

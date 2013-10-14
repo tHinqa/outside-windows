@@ -6,8 +6,9 @@
 package wincon
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/kernel32"
 )
 
@@ -234,7 +235,7 @@ var (
 		exeNameBufferLength T.DWORD) T.DWORD
 )
 
-var WinConANSIApis = Apis{
+var WinConANSIApis = outside.Apis{
 	{"AddConsoleAliasA", &AddConsoleAlias},
 	{"FillConsoleOutputCharacterA", &FillConsoleOutputCharacter},
 	{"GetConsoleAliasA", &GetConsoleAlias},
@@ -256,7 +257,7 @@ var WinConANSIApis = Apis{
 	{"WriteConsoleOutputCharacterA", &WriteConsoleOutputCharacter},
 }
 
-var WinConUnicodeApis = Apis{
+var WinConUnicodeApis = outside.Apis{
 	{"AddConsoleAliasW", &AddConsoleAlias},
 	{"FillConsoleOutputCharacterW", &FillConsoleOutputCharacter},
 	{"GetConsoleAliasW", &GetConsoleAlias},
@@ -278,7 +279,7 @@ var WinConUnicodeApis = Apis{
 	{"WriteConsoleOutputCharacterW", &WriteConsoleOutputCharacter},
 }
 
-var WinConApis = Apis{
+var WinConApis = outside.Apis{
 	{"AllocConsole", &AllocConsole},
 	{"AttachConsole", &AttachConsole},
 	{"CreateConsoleScreenBuffer", &CreateConsoleScreenBuffer},

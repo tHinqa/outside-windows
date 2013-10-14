@@ -9,7 +9,7 @@ package types
 //TODO(t): Check all callback use for indirections (structs and funcs)
 
 import (
-	. "github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside/types"
 	"unsafe"
 )
 

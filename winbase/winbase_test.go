@@ -46,12 +46,6 @@ func BenchmarkSyscall(b *testing.B) {
 	}
 }
 
-func BenchmarkApi(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Api(EP("GetStartupInfoA"), (uintptr)(Pointer(&SI)))
-	}
-}
-
 func BenchmarkReflectStartupInfo(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		GetStartupInfo(&SI)

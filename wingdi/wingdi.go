@@ -6,8 +6,9 @@
 package wingdi
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/gdi32"
 	_ "github.com/tHinqa/outside/win32/opengl32"
 )
@@ -1078,7 +1079,7 @@ TODO(t): winspool
 {"DeviceCapabilities", &DeviceCapabilities},
 */
 
-var WinGdiApis = Apis{
+var WinGdiApis = outside.Apis{
 	{"AbortDoc", &AbortDoc},
 	{"AbortPath", &AbortPath},
 	{"AddFontMemResourceEx", &AddFontMemResourceEx},
@@ -1341,7 +1342,7 @@ var WinGdiApis = Apis{
 	{"WidenPath", &WidenPath},
 }
 
-var WinGdiANSIApis = Apis{
+var WinGdiANSIApis = outside.Apis{
 	{"AddFontResourceA", &AddFontResource},
 	{"AddFontResourceExA", &AddFontResourceEx},
 	{"CopyEnhMetaFileA", &CopyEnhMetaFile},
@@ -1391,7 +1392,7 @@ var WinGdiANSIApis = Apis{
 	{"wglUseFontOutlinesA", &WglUseFontOutlines},
 }
 
-var WinGdiUnicodeApis = Apis{
+var WinGdiUnicodeApis = outside.Apis{
 	{"AddFontResourceW", &AddFontResource},
 	{"AddFontResourceExW", &AddFontResourceEx},
 	{"CopyEnhMetaFileW", &CopyEnhMetaFile},

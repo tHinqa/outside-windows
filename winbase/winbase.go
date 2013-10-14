@@ -6,7 +6,8 @@
 package winbase
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside/types"
 	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/advapi32"
 	_ "github.com/tHinqa/outside/win32/kernel32"
@@ -2717,7 +2718,7 @@ InterlockedCompareExchangePointerRelease = InterlockedCompareExchangePointer
 //{"Wow64EnableWow64FsRedirection", &Wow64EnableWow64FsRedirection},
 //{"Wow64RevertWow64FsRedirection", &Wow64RevertWow64FsRedirection},
 
-var WinBaseApis = Apis{
+var WinBaseApis = outside.Apis{
 	{"_hread", &Hread},
 	{"_hwrite", &Hwrite},
 	{"_lclose", &Lclose},
@@ -3193,7 +3194,7 @@ var WinBaseApis = Apis{
 //{"ReOpenFileW", &ReOpenFile},
 //{"SetEnvironmentStringsW", &SetEnvironmentStrings},
 
-var WinBaseUnicodeApis = Apis{
+var WinBaseUnicodeApis = outside.Apis{
 	{"AccessCheckAndAuditAlarmW", &AccessCheckAndAuditAlarm},
 	{"AccessCheckByTypeAndAuditAlarmW", &AccessCheckByTypeAndAuditAlarm},
 	{"AccessCheckByTypeResultListAndAuditAlarmByHandleW", &AccessCheckByTypeResultListAndAuditAlarmByHandle},
@@ -3365,7 +3366,7 @@ var WinBaseUnicodeApis = Apis{
 //{"ReOpenFileA", &ReOpenFile},
 //{"SetEnvironmentStringsA", &SetEnvironmentStrings},
 
-var WinBaseANSIApis = Apis{
+var WinBaseANSIApis = outside.Apis{
 	{"AccessCheckAndAuditAlarmA", &AccessCheckAndAuditAlarm},
 	{"AccessCheckByTypeAndAuditAlarmA", &AccessCheckByTypeAndAuditAlarm},
 	{"AccessCheckByTypeResultListAndAuditAlarmA", &AccessCheckByTypeResultListAndAuditAlarm},

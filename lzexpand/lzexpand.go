@@ -6,8 +6,9 @@
 package lzexpand
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/kernel32"
 )
 
@@ -33,17 +34,17 @@ var (
 	LZClose func(T.INT) T.VOID
 )
 
-var LZExpandANSIApis = Apis{
+var LZExpandANSIApis = outside.Apis{
 	{"GetExpandedNameA", &GetExpandedName},
 	{"LZOpenFileA", &LZOpenFile},
 }
 
-var LZExpandUnicodeApis = Apis{
+var LZExpandUnicodeApis = outside.Apis{
 	{"GetExpandedNameW", &GetExpandedName},
 	{"LZOpenFileW", &LZOpenFile},
 }
 
-var LZExpandApis = Apis{
+var LZExpandApis = outside.Apis{
 	{"CopyLZFile", &CopyLZFile},
 	{"LZClose", &LZClose},
 	{"LZCopy", &LZCopy},

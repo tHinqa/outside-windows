@@ -6,8 +6,9 @@
 package shellapi
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/shell32"
 )
 
@@ -127,7 +128,7 @@ var (
 		imageList int, riid T.REFIID, Obj **T.VOID)
 )
 
-var ShellApiANSIApis = Apis{
+var ShellApiANSIApis = outside.Apis{
 	{"ExtractAssociatedIconA", &ExtractAssociatedIcon},
 	{"ExtractAssociatedIconExA", &ExtractAssociatedIconEx},
 	{"ExtractIconA", &ExtractIcon},
@@ -140,7 +141,7 @@ var ShellApiANSIApis = Apis{
 	{"SHInvokePrinterCommandA", &SHInvokePrinterCommand},
 }
 
-var ShellApiUnicodeApis = Apis{
+var ShellApiUnicodeApis = outside.Apis{
 	{"ExtractAssociatedIconW", &ExtractAssociatedIcon},
 	{"ExtractAssociatedIconExW", &ExtractAssociatedIconEx},
 	{"ExtractIconW", &ExtractIcon},
@@ -162,7 +163,7 @@ var ShellApiUnicodeApis = Apis{
 //{"SHGetUnreadMailCount", &SHGetUnreadMailCount},
 //{"SHSetUnreadMailCount", &SHSetUnreadMailCount},
 
-var ShellApiApis = Apis{
+var ShellApiApis = outside.Apis{
 	{"CommandLineToArgvW", &CommandLineToArgvW},
 	{"DragAcceptFiles", &DragAcceptFiles},
 	{"DragFinish", &DragFinish},

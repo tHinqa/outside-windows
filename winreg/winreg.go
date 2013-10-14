@@ -6,8 +6,9 @@
 package winreg
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
 	T "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	_ "github.com/tHinqa/outside/win32/advapi32"
 )
 
@@ -223,7 +224,7 @@ var (
 		FuncNumber T.DWORD, Flag T.DWORD, Res T.DWORD) T.LONG
 )
 
-var WinRegANSIApis = Apis{
+var WinRegANSIApis = outside.Apis{
 	{"AbortSystemShutdownA", &AbortSystemShutdown},
 	{"InitiateSystemShutdownA", &InitiateSystemShutdown},
 	{"InitiateSystemShutdownExA", &InitiateSystemShutdownEx},
@@ -251,7 +252,7 @@ var WinRegANSIApis = Apis{
 	{"RegUnLoadKeyA", &RegUnLoadKey},
 }
 
-var WinRegUnicodeApis = Apis{
+var WinRegUnicodeApis = outside.Apis{
 	{"AbortSystemShutdownW", &AbortSystemShutdown},
 	{"InitiateSystemShutdownW", &InitiateSystemShutdown},
 	{"InitiateSystemShutdownExW", &InitiateSystemShutdownEx},
@@ -290,7 +291,7 @@ var WinRegUnicodeApis = Apis{
 //{"RegGetValueW", &RegGetValue},
 //{"RegQueryReflectionKey", &RegQueryReflectionKey},
 
-var WinRegApis = Apis{
+var WinRegApis = outside.Apis{
 	{"RegCloseKey", &RegCloseKey},
 	{"RegDisablePredefinedCache", &RegDisablePredefinedCache},
 	{"RegFlushKey", &RegFlushKey},

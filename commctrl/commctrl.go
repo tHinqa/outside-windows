@@ -6,7 +6,8 @@
 package commctrl
 
 import (
-	. "github.com/tHinqa/outside"
+	"github.com/tHinqa/outside"
+	. "github.com/tHinqa/outside/types"
 	T "github.com/tHinqa/outside-windows/types"
 	_ "github.com/tHinqa/outside/win32/comctl32"
 )
@@ -323,17 +324,17 @@ func ImageList_LoadBitmap(i T.HINSTANCE, bmp VString, cx, T.Grow int, T.Mask T.C
 //{"DrawShadowText", &DrawShadowText},
 //{"ImageList_WriteEx", &ImageList_WriteEx},
 
-var CommCtrlANSIApis = Apis{
+var CommCtrlANSIApis = outside.Apis{
 	{"CreateStatusWindowA", &CreateStatusWindow},
 	{"DrawStatusTextA", &DrawStatusText},
 }
 
-var CommCtrlUnicodeApis = Apis{
+var CommCtrlUnicodeApis = outside.Apis{
 	{"CreateStatusWindowW", &CreateStatusWindow},
 	{"DrawStatusTextW", &DrawStatusText},
 }
 
-var CommCtrlApis = Apis{
+var CommCtrlApis = outside.Apis{
 	{"CreateMappedBitmap", &CreateMappedBitmap},
 	{"CreateToolbarEx", &CreateToolbarEx},
 	{"CreateUpDownControl", &CreateUpDownControl},
