@@ -6,6 +6,7 @@ import (
 	. "github.com/tHinqa/outside-windows/types"
 	. "github.com/tHinqa/outside/types"
 	"testing"
+	"unsafe"
 )
 
 // import "unsafe"
@@ -50,20 +51,26 @@ func wscallback(c PVString, l LPARAM) BOOL {
 	return 1
 }
 
-func Test1(t *testing.T) {
+func TestEnumWindows(t *testing.T) {
 	if EnumWindows(callback, 0) == 0 {
 		t.Fail()
 	}
 	Println(W, "Windows")
 }
-func Test2(t *testing.T) {
+func TestEnumDesktops(t *testing.T) {
 	h := GetProcessWindowStation()
 	if EnumDesktops(h, wscallback, 123) == 0 {
 		t.Fail()
 	}
 }
-func Test3(t *testing.T) {
+func TestEnumWindowStations(t *testing.T) {
 	if EnumWindowStations(wscallback, 123) == 0 {
 		t.Fail()
 	}
+}
+
+func TestWsprintf(t *testing.T) {
+	var o [1000]WChar
+	Wsprintf(&o[0], "%d %d %d", 123, 456, 789)
+	t.Log(outside.UniStrToString((uintptr)(unsafe.Pointer(&o[0]))))
 }

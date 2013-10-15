@@ -54,7 +54,6 @@ func SetSysModalWindow(Wnd T.HWND) {}
 
 type (
 	va_list  T.Fake_type_Fix_me
-	variadic T.Fake_type_Fix_me
 )
 
 var (
@@ -1481,7 +1480,8 @@ var (
 		command T.UINT,
 		data T.ULONG_PTR) T.BOOL
 
-	Wsprintf func(VString, VString, ...variadic) int
+	//Wsprintf func(POVString, VString, ...VArg) int
+	Wsprintf func(*T.WChar, VString, ...VArg) int
 
 	Wvsprintf func(VString, VString, va_list) int
 )
