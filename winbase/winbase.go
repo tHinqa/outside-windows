@@ -950,7 +950,7 @@ var ( //TODO(t): Verify all
 
 	FreeEnvironmentStrings func(VString) T.BOOL
 
-	FreeLibrary func(libModule T.HMODULE) T.BOOL
+	FreeLibrary func(libModule T.HMODULE) (T.BOOL, error)
 
 	FreeLibraryAndExitThread func(
 		libModule T.HMODULE, exitCode T.DWORD)
@@ -1671,16 +1671,16 @@ var ( //TODO(t): Verify all
 
 	Llseek func(file T.HFILE, offset T.LONG, origin int) T.LONG
 
-	LoadLibrary func(libFileName VString) T.HMODULE
+	LoadLibrary func(libFileName VString) (T.HMODULE, error)
 
 	LoadLibraryEx func(
-		libFileName VString, file T.HANDLE, flags T.DWORD) T.HMODULE
+		libFileName VString, file T.HANDLE, flags T.DWORD) (T.HMODULE, error)
 
 	LoadModule func(
-		moduleName T.AString, parameterBlock *T.VOID) T.DWORD
+		moduleName T.AString, parameterBlock *T.VOID) (T.DWORD, error)
 
 	LoadResource func(
-		module T.HMODULE, resInfo T.HRSRC) T.HGLOBAL
+		module T.HMODULE, resInfo T.HRSRC) (T.HGLOBAL, error)
 
 	LocalAlloc func(
 		flags T.UINT, bytes T.SIZE_T) T.HLOCAL
