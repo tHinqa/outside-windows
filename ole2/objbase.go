@@ -41,7 +41,7 @@ var (
 		sdType T.COMSD, sd **T.SECURITY_DESCRIPTOR)
 
 	//NOTE(t):Not implemented in non-debug dll
-	//DebugCoGetRpcFault func(void) T.ULONG
+	//DebugCoGetRpcFault func() T.ULONG
 
 	//NOTE(t):Not implemented in non-debug dll
 	//DebugCoSetRpcFault func(T.ULONG) void
@@ -324,7 +324,7 @@ var (
 
 	CoTaskMemFree func(pv *T.VOID)
 
-	//CreateDataAdviseHolder func(T.LPDATAADVISEHOLDER *ppDAHolder) T.DUP T.IN T.OLE2
+	//CreateDataAdviseHolder func(T.LPDATAADVISEHOLDER *ppDAHolder) //DUP IN OLE2
 
 	CreateDataCache func(
 		unkOuter *T.IUnknown,
