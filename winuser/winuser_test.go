@@ -43,27 +43,32 @@ func callback(h HWND, l LPARAM) BOOL {
 
 var W uint32
 
+var tT *testing.T
+
 func wscallback(c PVString, l LPARAM) BOOL {
 	if l != 123 {
 		return 0
 	}
-	Println(*c)
+	tT.Log(*c)
 	return 1
 }
 
 func TestEnumWindows(t *testing.T) {
+	tT = t
 	if EnumWindows(callback, 0) == 0 {
 		t.Fail()
 	}
 	Println(W, "Windows")
 }
 func TestEnumDesktops(t *testing.T) {
+	tT = t
 	h := GetProcessWindowStation()
 	if EnumDesktops(h, wscallback, 123) == 0 {
 		t.Fail()
 	}
 }
 func TestEnumWindowStations(t *testing.T) {
+	tT = t
 	if EnumWindowStations(wscallback, 123) == 0 {
 		t.Fail()
 	}

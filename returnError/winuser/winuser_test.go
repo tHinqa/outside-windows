@@ -1,7 +1,6 @@
 package winuser
 
 import (
-	. "fmt"
 	"github.com/tHinqa/outside"
 	. "github.com/tHinqa/outside-windows/types"
 	. "github.com/tHinqa/outside/types"
@@ -43,11 +42,13 @@ func callback(h HWND, l LPARAM) BOOL {
 
 var W uint32
 
+var tT *testing.T
+
 func wscallback(c PVString, l LPARAM) BOOL {
 	if l != 123 {
 		return 0
 	}
-	Println(*c)
+	tT.Log(*c)
 	return 1
 }
 
@@ -56,9 +57,10 @@ func TestEnumWindows(t *testing.T) {
 	if ew == 0 {
 		t.Fatal(e)
 	}
-	Println(W, "Windows")
+	t.Log(W, "Windows")
 }
 func TestEnumDesktops(t *testing.T) {
+	tT = t
 	h, _ := GetProcessWindowStation()
 	ed, e := EnumDesktops(h, wscallback, 123)
 	if ed == 0 {
@@ -66,6 +68,7 @@ func TestEnumDesktops(t *testing.T) {
 	}
 }
 func TestEnumWindowStations(t *testing.T) {
+	tT = t
 	ew, e := EnumWindowStations(wscallback, 123)
 	if ew == 0 {
 		t.Fatal(e)
@@ -73,6 +76,7 @@ func TestEnumWindowStations(t *testing.T) {
 }
 
 func TestWsprintf(t *testing.T) {
+	tT = t
 	var o [1000]WChar
 	Wsprintf(&o[0], "%d %d %d", 123, 456, 789)
 	t.Log(outside.UniStrToString((uintptr)(unsafe.Pointer(&o[0]))))

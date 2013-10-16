@@ -23,6 +23,13 @@ and
 		import windows "github.com/tHinqa/outside-windows"
 ```
 
+or
+
+```go
+
+		import windows "github.com/tHinqa/outside-windows/returnError"
+```
+
 or any combination of
 
 ```go
@@ -44,4 +51,21 @@ or any combination of
 		import "github.com/tHinqa/outside-windows/winsock2"
 		import "github.com/tHinqa/outside-windows/winsvc"
 		import "github.com/tHinqa/outside-windows/types"
+		import "github.com/tHinqa/outside-windows/returnError/winbase"
+		import "github.com/tHinqa/outside-windows/returnError/winuser"
+		import "github.com/tHinqa/outside-windows/returnError/commctrl"
+		import "github.com/tHinqa/outside-windows/returnError/dde"
+		import "github.com/tHinqa/outside-windows/returnError/mmsystem"
+		import "github.com/tHinqa/outside-windows/returnError/nb30"
+		import "github.com/tHinqa/outside-windows/returnError/ole2"
+		import "github.com/tHinqa/outside-windows/returnError/shellapi"
+		import "github.com/tHinqa/outside-windows/returnError/wincon"
+		import "github.com/tHinqa/outside-windows/returnError/wingdi"
+		import "github.com/tHinqa/outside-windows/returnError/winnetwk"
+		import "github.com/tHinqa/outside-windows/returnError/winnls"
+		import "github.com/tHinqa/outside-windows/returnError/winreg"
+		import "github.com/tHinqa/outside-windows/returnError/winsock"
+		import "github.com/tHinqa/outside-windows/returnError/winsock2"
+		import "github.com/tHinqa/outside-windows/returnError/winsvc"
+		import "github.com/tHinqa/outside-windows/returnError/types"
 ```
