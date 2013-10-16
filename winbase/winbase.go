@@ -126,7 +126,7 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		privilegeSet *T.PRIVILEGE_SET,
 		privilegeSetLength, grantedAccess *T.DWORD,
-		accessStatus *T.BOOL) T.BOOL
+		accessStatus *T.BOOL) (T.BOOL, error)
 
 	AccessCheckAndAuditAlarm func(
 		subsystemName VString,
@@ -137,7 +137,7 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		objectCreation T.BOOL,
 		grantedAccess *T.DWORD,
-		accessStatus, generateOnClose *T.BOOL) T.BOOL
+		accessStatus, generateOnClose *T.BOOL) (T.BOOL, error)
 
 	AccessCheckByType func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
@@ -149,7 +149,7 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		privilegeSet *T.PRIVILEGE_SET,
 		privilegeSetLength, grantedAccess *T.DWORD,
-		accessStatus *T.BOOL) T.BOOL
+		accessStatus *T.BOOL) (T.BOOL, error)
 
 	AccessCheckByTypeAndAuditAlarm func(
 		subsystemName VString,
@@ -166,7 +166,7 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		objectCreation T.BOOL,
 		grantedAccess *T.DWORD,
-		accessStatus, generateOnClose *T.BOOL) T.BOOL
+		accessStatus, generateOnClose *T.BOOL) (T.BOOL, error)
 
 	AccessCheckByTypeResultList func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
@@ -178,7 +178,7 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		privilegeSet *T.PRIVILEGE_SET,
 		privilegeSetLength, grantedAccessList,
-		accessStatusList *T.DWORD) T.BOOL
+		accessStatusList *T.DWORD) (T.BOOL, error)
 
 	AccessCheckByTypeResultListAndAuditAlarm func(
 		subsystemName VString,
@@ -194,7 +194,7 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		objectCreation T.BOOL,
 		grantedAccess, accessStatusList *T.DWORD,
-		generateOnClose *T.BOOL) T.BOOL
+		generateOnClose *T.BOOL) (T.BOOL, error)
 
 	AccessCheckByTypeResultListAndAuditAlarmByHandle func(
 		subsystemName VString,
@@ -211,80 +211,80 @@ var ( //TODO(t): Verify all
 		genericMapping *T.GENERIC_MAPPING,
 		objectCreation T.BOOL,
 		grantedAccess, accessStatusList *T.DWORD,
-		generateOnClose *T.BOOL) T.BOOL
+		generateOnClose *T.BOOL) (T.BOOL, error)
 
 	ActivateActCtx func(
-		actCtx T.HANDLE, cookie *T.ULONG_PTR) T.BOOL
+		actCtx T.HANDLE, cookie *T.ULONG_PTR) (T.BOOL, error)
 
 	AddAccessAllowedAce func(
 		acl *T.ACL,
 		aceRevision, accessMask T.DWORD,
-		sid *T.SID) T.BOOL
+		sid *T.SID) (T.BOOL, error)
 
 	AddAccessAllowedAceEx func(
 		acl *T.ACL,
 		aceRevision, aceFlags, accessMask T.DWORD,
-		sid *T.SID) T.BOOL
+		sid *T.SID) (T.BOOL, error)
 
 	AddAccessAllowedObjectAce func(
 		acl *T.ACL,
 		aceRevision, aceFlags, accessMask T.DWORD,
 		objectTypeGuid, inheritedObjectTypeGuid *T.GUID,
-		sid *T.SID) T.BOOL
+		sid *T.SID) (T.BOOL, error)
 
 	AddAccessDeniedAce func(
 		acl *T.ACL,
 		aceRevision, accessMask T.DWORD,
-		sid *T.SID) T.BOOL
+		sid *T.SID) (T.BOOL, error)
 
 	AddAccessDeniedAceEx func(
 		acl *T.ACL,
 		aceRevision, aceFlags, accessMask T.DWORD,
-		sid *T.SID) T.BOOL
+		sid *T.SID) (T.BOOL, error)
 
 	AddAccessDeniedObjectAce func(
 		acl *T.ACL,
 		aceRevision, aceFlags, accessMask T.DWORD,
 		objectTypeGuid, inheritedObjectTypeGuid *T.GUID,
-		sid *T.SID) T.BOOL
+		sid *T.SID) (T.BOOL, error)
 
 	AddAce func(
 		acl *T.ACL,
 		aceRevision, startingAceIndex T.DWORD,
 		aceList *T.VOID,
-		aceListLength T.DWORD) T.BOOL
+		aceListLength T.DWORD) (T.BOOL, error)
 
-	AddAtom func(string_ VString) T.ATOM
+	AddAtom func(string_ VString) (T.ATOM, error)
 
 	AddAuditAccessAce func(
 		acl *T.ACL,
 		aceRevision, accessMask T.DWORD,
 		sid *T.SID,
-		auditSuccess, auditFailure T.BOOL) T.BOOL
+		auditSuccess, auditFailure T.BOOL) (T.BOOL, error)
 
 	AddAuditAccessAceEx func(
 		acl *T.ACL,
 		aceRevision, aceFlags,
 		accessMask T.DWORD,
 		sid *T.SID,
-		auditSuccess, auditFailure T.BOOL) T.BOOL
+		auditSuccess, auditFailure T.BOOL) (T.BOOL, error)
 
 	AddAuditAccessObjectAce func(
 		acl *T.ACL,
 		aceRevision, aceFlags, accessMask,
 		objectTypeGuid, inheritedObjectTypeGuid *T.GUID,
 		sid *T.SID,
-		auditSuccess, auditFailure T.BOOL) T.BOOL
+		auditSuccess, auditFailure T.BOOL) (T.BOOL, error)
 
 	AddRefActCtx func(actCtx T.HANDLE)
 
 	AddVectoredContinueHandler func(
 		first T.ULONG,
-		handler T.VECTORED_EXCEPTION_HANDLER) *T.VOID
+		handler T.VECTORED_EXCEPTION_HANDLER) (*T.VOID, error)
 
 	AddVectoredExceptionHandler func(
 		first T.ULONG,
-		handler T.VECTORED_EXCEPTION_HANDLER) *T.VOID
+		handler T.VECTORED_EXCEPTION_HANDLER) (*T.VOID, error)
 
 	AdjustTokenGroups func(
 		tokenHandle T.HANDLE,
@@ -292,7 +292,7 @@ var ( //TODO(t): Verify all
 		newState *T.TOKEN_GROUPS,
 		bufferLength T.DWORD,
 		previousState *T.TOKEN_GROUPS,
-		returnLength *T.DWORD) T.BOOL
+		returnLength *T.DWORD) (T.BOOL, error)
 
 	AdjustTokenPrivileges func(
 		tokenHandle T.HANDLE,
@@ -300,7 +300,7 @@ var ( //TODO(t): Verify all
 		newState *T.TOKEN_PRIVILEGES,
 		bufferLength T.DWORD,
 		previousState *T.TOKEN_PRIVILEGES,
-		returnLength *T.DWORD) T.BOOL
+		returnLength *T.DWORD) (T.BOOL, error)
 
 	AllocateAndInitializeSid func(
 		identifierAuthority *T.SID_IDENTIFIER_AUTHORITY,
@@ -309,26 +309,26 @@ var ( //TODO(t): Verify all
 		subAuthority2, subAuthority3,
 		subAuthority4, subAuthority5,
 		subAuthority6, subAuthority7 T.DWORD,
-		sid **T.SID) T.BOOL
+		sid **T.SID) (T.BOOL, error)
 
-	AllocateLocallyUniqueId func(luid *T.LUID) T.BOOL
+	AllocateLocallyUniqueId func(luid *T.LUID) (T.BOOL, error)
 
 	AllocateUserPhysicalPages func(
 		process T.HANDLE,
-		numberOfPages, pageArray *T.ULONG_PTR) T.BOOL
+		numberOfPages, pageArray *T.ULONG_PTR) (T.BOOL, error)
 
 	AreAllAccessesGranted func(
-		grantedAccess, desiredAccess T.DWORD) T.BOOL
+		grantedAccess, desiredAccess T.DWORD) (T.BOOL, error)
 
 	AreAnyAccessesGranted func(
-		grantedAccess, desiredAccess T.DWORD) T.BOOL
+		grantedAccess, desiredAccess T.DWORD) (T.BOOL, error)
 
 	AreFileApisANSI func()
 
-	AssignProcessToJobObject func(job, process T.HANDLE) T.BOOL
+	AssignProcessToJobObject func(job, process T.HANDLE) (T.BOOL, error)
 
 	BackupEventLog func(
-		eventLog T.HANDLE, backupFileName VString) T.BOOL
+		eventLog T.HANDLE, backupFileName VString) (T.BOOL, error)
 
 	BackupRead func(
 		file T.HANDLE,
@@ -336,13 +336,13 @@ var ( //TODO(t): Verify all
 		numberOfBytesToRead T.DWORD,
 		numberOfBytesRead *T.DWORD,
 		abort, processSecurity T.BOOL,
-		context **T.VOID) T.BOOL
+		context **T.VOID) (T.BOOL, error)
 
 	BackupSeek func(
 		file T.HANDLE,
 		lowBytesToSeek, highBytesToSeek T.DWORD,
 		lowByteSeeked, highByteSeeked *T.DWORD,
-		context **T.VOID) T.BOOL
+		context **T.VOID) (T.BOOL, error)
 
 	BackupWrite func(
 		file T.HANDLE,
@@ -350,25 +350,25 @@ var ( //TODO(t): Verify all
 		numberOfBytesToWrite T.DWORD,
 		numberOfBytesWritten *T.DWORD,
 		abort, processSecurity T.BOOL,
-		context **T.VOID) T.BOOL
+		context **T.VOID) (T.BOOL, error)
 
-	Beep func(freq, duration T.DWORD) T.BOOL
+	Beep func(freq, duration T.DWORD) (T.BOOL, error)
 
 	BeginUpdateResource func(
 		fileName VString,
-		deleteExistingResources T.BOOL) T.HANDLE
+		deleteExistingResources T.BOOL) (T.HANDLE, error)
 
 	BindIoCompletionCallback func(
 		fileHandle T.HANDLE,
 		function T.OVERLAPPED_COMPLETION_ROUTINE,
-		flags T.ULONG) T.BOOL
+		flags T.ULONG) (T.BOOL, error)
 
-	BuildCommDCB func(def VString, dcb *T.DCB) T.BOOL
+	BuildCommDCB func(def VString, dcb *T.DCB) (T.BOOL, error)
 
 	BuildCommDCBAndTimeouts func(
 		def VString,
 		dcb *T.DCB,
-		commTimeouts *T.COMMTIMEOUTS) T.BOOL
+		commTimeouts *T.COMMTIMEOUTS) (T.BOOL, error)
 
 	CallNamedPipe func(
 		namedPipeName VString,
@@ -377,67 +377,67 @@ var ( //TODO(t): Verify all
 		outBuffer *T.VOID,
 		outBufferSize T.DWORD,
 		bytesRead *T.DWORD,
-		timeOut T.DWORD) T.BOOL
+		timeOut T.DWORD) (T.BOOL, error)
 
-	CancelDeviceWakeupRequest func(device T.HANDLE) T.BOOL
+	CancelDeviceWakeupRequest func(device T.HANDLE) (T.BOOL, error)
 
-	CancelIo func(file T.HANDLE) T.BOOL
+	CancelIo func(file T.HANDLE) (T.BOOL, error)
 
 	CancelTimerQueueTimer func(
-		timerQueue, timer T.HANDLE) T.BOOL
+		timerQueue, timer T.HANDLE) (T.BOOL, error)
 
-	CancelWaitableTimer func(timer T.HANDLE) T.BOOL
+	CancelWaitableTimer func(timer T.HANDLE) (T.BOOL, error)
 
 	ChangeTimerQueueTimer func(
 		timerQueue, timer T.HANDLE,
-		dueTime, period T.ULONG) T.BOOL
+		dueTime, period T.ULONG) (T.BOOL, error)
 
 	CheckNameLegalDOS8Dot3 func(
 		name VString,
 		oemName T.OAString,
 		oemNameSize T.DWORD,
-		nameContainsSpaces, nameLegal *T.BOOL) T.BOOL
+		nameContainsSpaces, nameLegal *T.BOOL) (T.BOOL, error)
 
 	CheckRemoteDebuggerPresent func(
-		process T.HANDLE, debuggerPresent *T.BOOL) T.BOOL
+		process T.HANDLE, debuggerPresent *T.BOOL) (T.BOOL, error)
 
 	CheckTokenMembership func(
 		tokenHandleHANDLE,
 		sidToCheck *T.SID,
-		isMember *T.BOOL) T.BOOL
+		isMember *T.BOOL) (T.BOOL, error)
 
-	ClearCommBreak func(file T.HANDLE) T.BOOL
+	ClearCommBreak func(file T.HANDLE) (T.BOOL, error)
 
 	ClearCommError func(
-		file T.HANDLE, errors *T.DWORD, stat *T.COMSTAT) T.BOOL
+		file T.HANDLE, errors *T.DWORD, stat *T.COMSTAT) (T.BOOL, error)
 
 	ClearEventLog func(
-		eventLog T.HANDLE, backupFileName VString) T.BOOL
+		eventLog T.HANDLE, backupFileName VString) (T.BOOL, error)
 
 	CloseEncryptedFileRaw func(context *T.VOID)
 
-	CloseEventLog func(eventLog T.HANDLE) T.BOOL
+	CloseEventLog func(eventLog T.HANDLE) (T.BOOL, error)
 
-	CloseHandle func(object T.HANDLE) T.BOOL
+	CloseHandle func(object T.HANDLE) (T.BOOL, error)
 
 	CommConfigDialog func(
-		name VString, wnd T.HWND, cc *T.COMMCONFIG) T.BOOL
+		name VString, wnd T.HWND, cc *T.COMMCONFIG) (T.BOOL, error)
 
 	CompareFileTime func(
-		fileTime1, fileTime2 *T.FILETIME) T.LONG
+		fileTime1, fileTime2 *T.FILETIME) (T.LONG, error)
 
 	ConnectNamedPipe func(
-		namedPipe T.HANDLE, overlapped *T.OVERLAPPED) T.BOOL
+		namedPipe T.HANDLE, overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	ContinueDebugEvent func(
-		processId, threadId, continueStatus T.DWORD) T.BOOL
+		processId, threadId, continueStatus T.DWORD) (T.BOOL, error)
 
-	ConvertFiberToThread func() T.BOOL
+	ConvertFiberToThread func() (T.BOOL, error)
 
-	ConvertThreadToFiber func(parameter *T.VOID) *T.VOID
+	ConvertThreadToFiber func(parameter *T.VOID) (*T.VOID, error)
 
 	ConvertThreadToFiberEx func(
-		parameter *T.VOID, flags T.DWORD) *T.VOID
+		parameter *T.VOID, flags T.DWORD) (*T.VOID, error)
 
 	ConvertToAutoInheritPrivateObjectSecurity func(
 		parentDescriptor,
@@ -445,103 +445,103 @@ var ( //TODO(t): Verify all
 		newSecurityDescriptor **T.SECURITY_DESCRIPTOR,
 		objectType *T.GUID,
 		isDirectoryObject T.BOOLEAN,
-		genericMapping *T.GENERIC_MAPPING) T.BOOL
+		genericMapping *T.GENERIC_MAPPING) (T.BOOL, error)
 
 	CopyFile func(
 		existingFileName, newFileName VString,
-		failIfExists T.BOOL) T.BOOL
+		failIfExists T.BOOL) (T.BOOL, error)
 
 	CopyFileEx func(
 		existingFileName, newFileName VString,
 		progressRoutine T.PROGRESS_ROUTINE,
 		data *T.VOID,
 		cancel *T.BOOL,
-		copyFlags T.DWORD) T.BOOL
+		copyFlags T.DWORD) (T.BOOL, error)
 
 	CopySid func(
 		destinationLength T.DWORD,
-		destination, source *T.SID) T.BOOL
+		destination, source *T.SID) (T.BOOL, error)
 
-	CreateActCtx func(actCtx T.ACTCTX) T.HANDLE
+	CreateActCtx func(actCtx T.ACTCTX) (T.HANDLE, error)
 
 	CreateDirectory func(
 		pathName VString,
-		securityAttributes *T.SECURITY_ATTRIBUTES) T.BOOL
+		securityAttributes *T.SECURITY_ATTRIBUTES) (T.BOOL, error)
 
 	CreateDirectoryEx func(
 		templateDirectory, newDirectory VString,
-		securityAttributes *T.SECURITY_ATTRIBUTES) T.BOOL
+		securityAttributes *T.SECURITY_ATTRIBUTES) (T.BOOL, error)
 
 	CreateEvent func(
 		eventAttributes *T.SECURITY_ATTRIBUTES,
 		manualReset, initialState T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	CreateFiber func(
 		stackSize T.SIZE_T,
 		startAddress T.FIBER_START_ROUTINE,
-		parameter *T.VOID) *T.VOID
+		parameter *T.VOID) (*T.VOID, error)
 
 	CreateFiberEx func(
 		stackCommitSize, stackReserveSize T.SIZE_T,
 		flags T.DWORD,
 		startAddress T.FIBER_START_ROUTINE,
-		parameter *T.VOID) *T.VOID
+		parameter *T.VOID) (*T.VOID, error)
 
 	CreateFile func(
 		fileName VString,
 		desiredAccess, shareMode T.DWORD,
 		securityAttributes *T.SECURITY_ATTRIBUTES,
 		creationDisposition, flagsAndAttributes T.DWORD,
-		templateFile T.HANDLE) T.HANDLE
+		templateFile T.HANDLE) (T.HANDLE, error)
 
 	CreateFileMapping func(
 		file T.HANDLE,
 		fileMappingAttributes *T.SECURITY_ATTRIBUTES,
 		protect, maximumSizeHigh, maximumSizeLow T.DWORD,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	CreateHardLink func(
 		fileName, existingFileName VString,
-		securityAttributes *T.SECURITY_ATTRIBUTES) T.BOOL
+		securityAttributes *T.SECURITY_ATTRIBUTES) (T.BOOL, error)
 
 	CreateIoCompletionPort func(
 		fileHandle, existingCompletionPort T.HANDLE,
 		completionKey T.ULONG_PTR,
-		numberOfConcurrentThreads T.DWORD) T.HANDLE
+		numberOfConcurrentThreads T.DWORD) (T.HANDLE, error)
 
 	CreateJobObject func(
 		jobAttributes *T.SECURITY_ATTRIBUTES,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	CreateJobSet func(
 		numJob T.ULONG,
 		userJobSet *T.JOB_SET_ARRAY,
-		flags T.ULONG) T.BOOL
+		flags T.ULONG) (T.BOOL, error)
 
 	CreateMailslot func(
 		name VString,
 		maxMessageSize, readTimeout T.DWORD,
-		securityAttributes *T.SECURITY_ATTRIBUTES) T.HANDLE
+		securityAttributes *T.SECURITY_ATTRIBUTES) (T.HANDLE, error)
 
 	CreateMemoryResourceNotification func(
-		T.MEMORY_RESOURCE_NOTIFICATION_TYPE) T.HANDLE
+		T.MEMORY_RESOURCE_NOTIFICATION_TYPE) (T.HANDLE, error)
 
 	CreateMutex func(
 		mutexAttributes *T.SECURITY_ATTRIBUTES,
 		initialOwner T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	CreateNamedPipe func(
 		name VString,
 		openMode, pipeMode, maxInstances,
 		outBufferSize, inBufferSize, defaultTimeOut T.DWORD,
-		securityAttributes *T.SECURITY_ATTRIBUTES) T.HANDLE
+		securityAttributes *T.SECURITY_ATTRIBUTES) (T.HANDLE, error)
 
 	CreatePipe func(
 		readPipe, writePipe *T.HANDLE,
 		pipeAttributes *T.SECURITY_ATTRIBUTES,
-		size T.DWORD) T.BOOL
+		size T.DWORD) (T.BOOL, error)
 
 	CreatePrivateObjectSecurity func(
 		parentDescriptor,
@@ -549,7 +549,7 @@ var ( //TODO(t): Verify all
 		newDescriptor **T.SECURITY_DESCRIPTOR,
 		isDirectoryObject T.BOOL,
 		token T.HANDLE,
-		genericMapping *T.GENERIC_MAPPING) T.BOOL
+		genericMapping *T.GENERIC_MAPPING) (T.BOOL, error)
 
 	CreatePrivateObjectSecurityEx func(
 		parentDescriptor,
@@ -559,7 +559,7 @@ var ( //TODO(t): Verify all
 		isContainerObject T.BOOL,
 		autoInheritFlags T.ULONG,
 		token T.HANDLE,
-		genericMapping *T.GENERIC_MAPPING) T.BOOL
+		genericMapping *T.GENERIC_MAPPING) (T.BOOL, error)
 
 	CreatePrivateObjectSecurityWithMultipleInheritance func(
 		parentDescriptor, creatorDescriptor,
@@ -569,7 +569,7 @@ var ( //TODO(t): Verify all
 		isContainerObject T.BOOL,
 		autoInheritFlags T.ULONG,
 		token T.HANDLE,
-		genericMapping *T.GENERIC_MAPPING) T.BOOL
+		genericMapping *T.GENERIC_MAPPING) (T.BOOL, error)
 
 	CreateProcess func(
 		applicationName, commandLine VString,
@@ -580,7 +580,7 @@ var ( //TODO(t): Verify all
 		environment *T.VOID,
 		currentDirectory VString,
 		startupInfo *T.STARTUPINFO,
-		processInformation *T.PROCESS_INFORMATION) T.BOOL
+		processInformation *T.PROCESS_INFORMATION) (T.BOOL, error)
 
 	CreateProcessAsUser func(
 		token T.HANDLE,
@@ -592,7 +592,7 @@ var ( //TODO(t): Verify all
 		environment *T.VOID,
 		currentDirectory VString,
 		startupInfo *T.STARTUPINFO,
-		processInformation *T.PROCESS_INFORMATION) T.BOOL
+		processInformation *T.PROCESS_INFORMATION) (T.BOOL, error)
 
 	CreateProcessWithLogonW func(
 		username, domain, password T.WString,
@@ -603,7 +603,7 @@ var ( //TODO(t): Verify all
 		environment *T.VOID,
 		currentDirectory T.WString,
 		startupInfo *T.STARTUPINFO,
-		processInformation *T.PROCESS_INFORMATION) T.BOOL
+		processInformation *T.PROCESS_INFORMATION) (T.BOOL, error)
 
 	CreateProcessWithTokenW func(
 		token T.HANDLE,
@@ -614,7 +614,7 @@ var ( //TODO(t): Verify all
 		environment *T.VOID,
 		currentDirectory T.OWString,
 		startupInfo *T.STARTUPINFO,
-		processInformation *T.PROCESS_INFORMATION) T.BOOL
+		processInformation *T.PROCESS_INFORMATION) (T.BOOL, error)
 
 	CreateRemoteThread func(
 		process T.HANDLE,
@@ -623,22 +623,22 @@ var ( //TODO(t): Verify all
 		startAddress T.THREAD_START_ROUTINE,
 		parameter *T.VOID,
 		creationFlags T.DWORD,
-		threadId *T.DWORD) T.HANDLE
+		threadId *T.DWORD) (T.HANDLE, error)
 
 	CreateRestrictedToken func(
 		existingTokenHandle T.HANDLE,
 		flags, disableSidCount, deletePrivilegeCount,
 		restrictedSidCount T.DWORD,
-		newTokenHandle *T.HANDLE) T.BOOL
+		newTokenHandle *T.HANDLE) (T.BOOL, error)
 
 	CreateSemaphore func(
 		semaphoreAttributes *T.SECURITY_ATTRIBUTES,
 		initialCount, maximumCount T.LONG,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	CreateTapePartition func(
 		device T.HANDLE,
-		partitionMethod, count, size T.DWORD) T.DWORD
+		partitionMethod, count, size T.DWORD) (T.DWORD, error)
 
 	CreateThread func(
 		threadAttributes *T.SECURITY_ATTRIBUTES,
@@ -646,9 +646,9 @@ var ( //TODO(t): Verify all
 		startAddress T.THREAD_START_ROUTINE,
 		parameter *T.VOID,
 		creationFlags T.DWORD,
-		threadId *T.DWORD) T.HANDLE
+		threadId *T.DWORD) (T.HANDLE, error)
 
-	CreateTimerQueue func() T.HANDLE
+	CreateTimerQueue func() (T.HANDLE, error)
 
 	CreateTimerQueueTimer func(
 		newTimer *T.HANDLE,
@@ -656,66 +656,66 @@ var ( //TODO(t): Verify all
 		callback T.WAITORTIMERCALLBACK,
 		parameter *T.VOID,
 		dueTime, period T.DWORD,
-		flags T.ULONG) T.BOOL
+		flags T.ULONG) (T.BOOL, error)
 
 	CreateWaitableTimer func(
 		timerAttributes *T.SECURITY_ATTRIBUTES,
 		manualReset T.BOOL,
-		timerName VString) T.HANDLE
+		timerName VString) (T.HANDLE, error)
 
 	CreateWellKnownSid func(
 		wellKnownSidType T.WELL_KNOWN_SID_TYPE,
 		domainSid, sid *T.SID,
-		sidl *T.DWORD) T.BOOL
+		sidl *T.DWORD) (T.BOOL, error)
 
 	DeactivateActCtx func(
-		flags T.DWORD, cookie T.ULONG_PTR) T.BOOL
+		flags T.DWORD, cookie T.ULONG_PTR) (T.BOOL, error)
 
-	DebugActiveProcess func(processId T.DWORD) T.BOOL
+	DebugActiveProcess func(processId T.DWORD) (T.BOOL, error)
 
-	DebugActiveProcessStop func(processId T.DWORD) T.BOOL
+	DebugActiveProcessStop func(processId T.DWORD) (T.BOOL, error)
 
 	DebugBreak func()
 
-	DebugBreakProcess func(process T.HANDLE) T.BOOL
+	DebugBreakProcess func(process T.HANDLE) (T.BOOL, error)
 
-	DebugSetProcessKillOnExit func(killOnExit T.BOOL) T.BOOL
+	DebugSetProcessKillOnExit func(killOnExit T.BOOL) (T.BOOL, error)
 
-	DecodePointer func(ptr *T.VOID) *T.VOID
+	DecodePointer func(ptr *T.VOID) (*T.VOID, error)
 
-	DecodeSystemPointer func(ptr *T.VOID) *T.VOID
+	DecodeSystemPointer func(ptr *T.VOID) (*T.VOID, error)
 
-	DecryptFile func(fileName VString, reserved T.DWORD) T.BOOL
+	DecryptFile func(fileName VString, reserved T.DWORD) (T.BOOL, error)
 
 	DefineDosDevice func(
 		flags T.DWORD,
-		deviceName, targetPath VString) T.BOOL
+		deviceName, targetPath VString) (T.BOOL, error)
 
-	DeleteAce func(acl *T.ACL, aceIndex T.DWORD) T.BOOL
+	DeleteAce func(acl *T.ACL, aceIndex T.DWORD) (T.BOOL, error)
 
-	DeleteAtom func(atom T.ATOM) T.ATOM
+	DeleteAtom func(atom T.ATOM) (T.ATOM, error)
 
 	DeleteCriticalSection func(*T.CRITICAL_SECTION)
 
 	DeleteFiber func(fiber *T.VOID)
 
-	DeleteFile func(fileName VString) T.BOOL
+	DeleteFile func(fileName VString) (T.BOOL, error)
 
-	DeleteTimerQueue func(timerQueue T.HANDLE) T.BOOL
+	DeleteTimerQueue func(timerQueue T.HANDLE) (T.BOOL, error)
 
 	DeleteTimerQueueEx func(
-		timerQueue, completionEvent T.HANDLE) T.BOOL
+		timerQueue, completionEvent T.HANDLE) (T.BOOL, error)
 
 	DeleteTimerQueueTimer func(
-		timerQueue, timer, completionEvent T.HANDLE) T.BOOL
+		timerQueue, timer, completionEvent T.HANDLE) (T.BOOL, error)
 
 	DeleteVolumeMountPoint func(
-		volumeMountPoint VString) T.BOOL
+		volumeMountPoint VString) (T.BOOL, error)
 
-	DeregisterEventSource func(eventLog T.HANDLE) T.BOOL
+	DeregisterEventSource func(eventLog T.HANDLE) (T.BOOL, error)
 
 	DestroyPrivateObjectSecurity func(
-		objectDescriptor **T.SECURITY_DESCRIPTOR) T.BOOL
+		objectDescriptor **T.SECURITY_DESCRIPTOR) (T.BOOL, error)
 
 	DeviceIoControl func(
 		device T.HANDLE,
@@ -724,19 +724,19 @@ var ( //TODO(t): Verify all
 		inBufferSize T.DWORD,
 		outBuffer *T.VOID,
 		outBufferSize, bytesReturned *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
-	DisableThreadLibraryCalls func(libModule T.HMODULE) T.BOOL
+	DisableThreadLibraryCalls func(libModule T.HMODULE) (T.BOOL, error)
 
-	DisconnectNamedPipe func(namedPipe T.HANDLE) T.BOOL
+	DisconnectNamedPipe func(namedPipe T.HANDLE) (T.BOOL, error)
 
 	DnsHostnameToComputerName func(
 		hostname VString,
 		computerName OVString,
-		size *T.DWORD) T.BOOL
+		size *T.DWORD) (T.BOOL, error)
 
 	DosDateTimeToFileTime func(
-		fatDate, fatTime T.WORD, fileTime *T.FILETIME) T.BOOL
+		fatDate, fatTime T.WORD, fileTime *T.FILETIME) (T.BOOL, error)
 
 	DuplicateHandle func(
 		sourceProcessHandle, sourceHandle,
@@ -744,12 +744,12 @@ var ( //TODO(t): Verify all
 		targetHandle *T.HANDLE,
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		options T.DWORD) T.BOOL
+		options T.DWORD) (T.BOOL, error)
 
 	DuplicateToken func(
 		existingTokenHandle T.HANDLE,
 		impersonationLevel T.SECURITY_IMPERSONATION_LEVEL,
-		duplicateTokenHandle *T.HANDLE) T.BOOL
+		duplicateTokenHandle *T.HANDLE) (T.BOOL, error)
 
 	DuplicateTokenEx func(
 		existingToken T.HANDLE,
@@ -757,16 +757,16 @@ var ( //TODO(t): Verify all
 		tokenAttributes *T.SECURITY_ATTRIBUTES,
 		impersonationLevel T.SECURITY_IMPERSONATION_LEVEL,
 		tokenType T.TOKEN_TYPE,
-		newToken *T.HANDLE) T.BOOL
+		newToken *T.HANDLE) (T.BOOL, error)
 
-	EncodePointer func(ptr *T.VOID) *T.VOID
+	EncodePointer func(ptr *T.VOID) (*T.VOID, error)
 
-	EncodeSystemPointer func(ptr *T.VOID) *T.VOID
+	EncodeSystemPointer func(ptr *T.VOID) (*T.VOID, error)
 
-	EncryptFile func(fileName VString) T.BOOL
+	EncryptFile func(fileName VString) (T.BOOL, error)
 
 	EndUpdateResource func(
-		update T.HANDLE, discard T.BOOL) T.BOOL
+		update T.HANDLE, discard T.BOOL) (T.BOOL, error)
 
 	EnterCriticalSection func(*T.CRITICAL_SECTION)
 
@@ -774,95 +774,95 @@ var ( //TODO(t): Verify all
 		module T.HMODULE,
 		type_, name VString,
 		enumFunc T.ENUMRESLANGPROC,
-		param T.LONG_PTR) T.BOOL
+		param T.LONG_PTR) (T.BOOL, error)
 
 	EnumResourceNames func(
 		module T.HMODULE,
 		type_ VString,
 		enumFunc T.ENUMRESNAMEPROC,
-		param T.LONG_PTR) T.BOOL
+		param T.LONG_PTR) (T.BOOL, error)
 
 	EnumResourceTypes func(
 		module T.HMODULE,
 		enumFunc T.ENUMRESTYPEPROC,
-		param T.LONG_PTR) T.BOOL
+		param T.LONG_PTR) (T.BOOL, error)
 
 	EnumSystemFirmwareTables func(
 		firmwareTableProviderSignature T.DWORD,
 		firmwareTableEnumBuffer *T.VOID,
-		bufferSize T.DWORD) T.UINT
+		bufferSize T.DWORD) (T.UINT, error)
 
 	EqualDomainSid func(
-		sid1, sid2 *T.SID, equal *T.BOOL) T.BOOL
+		sid1, sid2 *T.SID, equal *T.BOOL) (T.BOOL, error)
 
 	EqualPrefixSid func(
-		sid1, sid2 *T.SID) T.BOOL
+		sid1, sid2 *T.SID) (T.BOOL, error)
 
-	EqualSid func(sid1, sid2 *T.SID) T.BOOL
+	EqualSid func(sid1, sid2 *T.SID) (T.BOOL, error)
 
 	EraseTape func(
 		device T.HANDLE,
 		eraseType T.DWORD,
-		immediate T.BOOL) T.DWORD
+		immediate T.BOOL) (T.DWORD, error)
 
-	EscapeCommFunction func(file T.HANDLE, function T.DWORD) T.BOOL
+	EscapeCommFunction func(file T.HANDLE, function T.DWORD) (T.BOOL, error)
 
 	ExitProcess func(exitCode T.UINT)
 
 	ExitThread func(exitCode T.DWORD)
 
 	ExpandEnvironmentStrings func(
-		src, dst VString, size T.DWORD) T.DWORD
+		src, dst VString, size T.DWORD) (T.DWORD, error)
 
 	FatalAppExit func(action T.UINT, messageText VString)
 
 	FatalExit func(exitCode int)
 
 	FileEncryptionStatus func(
-		fileName VString, status *T.DWORD) T.BOOL
+		fileName VString, status *T.DWORD) (T.BOOL, error)
 
 	FileTimeToDosDateTime func(
-		fileTime *T.FILETIME, fatDate, fatTime *T.WORD) T.BOOL
+		fileTime *T.FILETIME, fatDate, fatTime *T.WORD) (T.BOOL, error)
 
 	FileTimeToLocalFileTime func(
-		fileTime, localFileTime *T.FILETIME) T.BOOL
+		fileTime, localFileTime *T.FILETIME) (T.BOOL, error)
 
 	FileTimeToSystemTime func(
-		fileTime, systemTime *T.SYSTEMTIME) T.BOOL
+		fileTime, systemTime *T.SYSTEMTIME) (T.BOOL, error)
 
 	FindActCtxSectionGuid func(
 		flags T.DWORD,
 		extensionGuid *T.GUID,
 		sectionId T.ULONG,
 		guidToFind *T.GUID,
-		returnedData *T.ACTCTX_SECTION_KEYED_DATA) T.BOOL
+		returnedData *T.ACTCTX_SECTION_KEYED_DATA) (T.BOOL, error)
 
 	FindActCtxSectionString func(
 		flags T.DWORD,
 		extensionGuid *T.GUID,
 		sectionId T.ULONG,
 		string_ToFind VString,
-		returnedData *T.ACTCTX_SECTION_KEYED_DATA) T.BOOL
+		returnedData *T.ACTCTX_SECTION_KEYED_DATA) (T.BOOL, error)
 
-	FindAtom func(string_ VString) T.ATOM
+	FindAtom func(string_ VString) (T.ATOM, error)
 
-	FindClose func(findFile T.HANDLE) T.BOOL
+	FindClose func(findFile T.HANDLE) (T.BOOL, error)
 
 	FindCloseChangeNotification func(
-		changeHandle T.HANDLE) T.BOOL
+		changeHandle T.HANDLE) (T.BOOL, error)
 
 	FindFirstChangeNotification func(
 		pathName VString,
 		watchSubtree T.BOOL,
-		notifyFilter T.DWORD) T.HANDLE
+		notifyFilter T.DWORD) (T.HANDLE, error)
 
 	FindFirstFileA func(
 		fileName T.AString,
-		findFileData *T.WIN32_FIND_DATAA) T.HANDLE
+		findFileData *T.WIN32_FIND_DATAA) (T.HANDLE, error)
 
 	FindFirstFileW func(
 		fileName T.WString,
-		findFileData *T.WIN32_FIND_DATAW) T.HANDLE
+		findFileData *T.WIN32_FIND_DATAW) (T.HANDLE, error)
 
 	FindFirstFileEx func(
 		fileName VString,
@@ -870,75 +870,75 @@ var ( //TODO(t): Verify all
 		findFileData *T.VOID,
 		searchOp T.FINDEX_SEARCH_OPS,
 		searchFilter *T.VOID,
-		additionalFlags T.DWORD) T.HANDLE
+		additionalFlags T.DWORD) (T.HANDLE, error)
 
-	FindFirstFreeAce func(acl *T.ACL, ace **T.VOID) T.BOOL
+	FindFirstFreeAce func(acl *T.ACL, ace **T.VOID) (T.BOOL, error)
 
 	FindFirstVolume func(
-		volumeName OVString, bufferLength T.DWORD) T.HANDLE
+		volumeName OVString, bufferLength T.DWORD) (T.HANDLE, error)
 
 	FindFirstVolumeMountPoint func(
 		rootPathName VString,
 		volumeMountPoint OVString,
-		bufferLength T.DWORD) T.HANDLE
+		bufferLength T.DWORD) (T.HANDLE, error)
 
 	FindFirstStreamW func(
 		fileName T.WString,
 		infoLevel T.STREAM_INFO_LEVELS,
 		findStreamData *T.VOID,
-		flags T.DWORD) T.HANDLE
+		flags T.DWORD) (T.HANDLE, error)
 
 	FindNextStreamW func(
-		findStream T.HANDLE, data *T.VOID) T.BOOL
+		findStream T.HANDLE, data *T.VOID) (T.BOOL, error)
 
 	FindNextChangeNotification func(
-		changeHandle T.HANDLE) T.BOOL
+		changeHandle T.HANDLE) (T.BOOL, error)
 
 	FindNextFileA func(
-		findFile T.HANDLE, data *T.WIN32_FIND_DATAA) T.BOOL
+		findFile T.HANDLE, data *T.WIN32_FIND_DATAA) (T.BOOL, error)
 
 	FindNextFileW func(
-		findFile T.HANDLE, data *T.WIN32_FIND_DATAW) T.BOOL
+		findFile T.HANDLE, data *T.WIN32_FIND_DATAW) (T.BOOL, error)
 
 	FindNextVolume func(
 		findVolume T.HANDLE,
 		volumeName OVString,
-		bufferLength T.DWORD) T.BOOL
+		bufferLength T.DWORD) (T.BOOL, error)
 
 	FindNextVolumeMountPoint func(
 		findVolumeMountPoint T.HANDLE,
 		volumeMountPoint OVString,
-		bufferLength T.DWORD) T.BOOL
+		bufferLength T.DWORD) (T.BOOL, error)
 
 	FindResource func(
 		module T.HMODULE,
-		name, typ VString) T.HRSRC
+		name, typ VString) (T.HRSRC, error)
 
 	FindResourceEx func(
 		module T.HMODULE,
 		typ, name VString,
-		language T.WORD) T.HRSRC
+		language T.WORD) (T.HRSRC, error)
 
-	FindVolumeClose func(findVolume T.HANDLE) T.BOOL
+	FindVolumeClose func(findVolume T.HANDLE) (T.BOOL, error)
 
 	FindVolumeMountPointClose func(
-		findVolumeMountPoint T.HANDLE) T.BOOL
+		findVolumeMountPoint T.HANDLE) (T.BOOL, error)
 
-	FlsAlloc func(callback T.FLS_CALLBACK_FUNCTION) T.DWORD
+	FlsAlloc func(callback T.FLS_CALLBACK_FUNCTION) (T.DWORD, error)
 
-	FlsFree func(flsIndex T.DWORD) T.BOOL
+	FlsFree func(flsIndex T.DWORD) (T.BOOL, error)
 
-	FlsGetValue func(flsIndex T.DWORD) *T.VOID
+	FlsGetValue func(flsIndex T.DWORD) (*T.VOID, error)
 
-	FlsSetValue func(flsIndex T.DWORD, flsData *T.VOID) T.BOOL
+	FlsSetValue func(flsIndex T.DWORD, flsData *T.VOID) (T.BOOL, error)
 
-	FlushFileBuffers func(file T.HANDLE) T.BOOL
+	FlushFileBuffers func(file T.HANDLE) (T.BOOL, error)
 
 	FlushInstructionCache func(
-		process T.HANDLE, baseAddress *T.VOID, size T.SIZE_T) T.BOOL
+		process T.HANDLE, baseAddress *T.VOID, size T.SIZE_T) (T.BOOL, error)
 
 	FlushViewOfFile func(
-		baseAddress *T.VOID, numberOfBytesToFlush T.SIZE_T) T.BOOL
+		baseAddress *T.VOID, numberOfBytesToFlush T.SIZE_T) (T.BOOL, error)
 
 	FormatMessage func(
 		flags T.DWORD,
@@ -946,513 +946,513 @@ var ( //TODO(t): Verify all
 		messageId, languageId T.DWORD,
 		buffer VString,
 		size T.DWORD,
-		arguments *va_list) T.DWORD
+		arguments *va_list) (T.DWORD, error)
 
-	FreeEnvironmentStrings func(VString) T.BOOL
+	FreeEnvironmentStrings func(VString) (T.BOOL, error)
 
 	FreeLibrary func(libModule T.HMODULE) (T.BOOL, error)
 
 	FreeLibraryAndExitThread func(
 		libModule T.HMODULE, exitCode T.DWORD)
 
-	FreeResource func(resData T.HGLOBAL) T.BOOL
+	FreeResource func(resData T.HGLOBAL) (T.BOOL, error)
 
-	FreeSid func(sid *T.SID) *T.VOID
+	FreeSid func(sid *T.SID) (*T.VOID, error)
 
 	FreeUserPhysicalPages func(
 		process T.HANDLE,
-		numberOfPages, pageArray *T.ULONG_PTR) T.BOOL
+		numberOfPages, pageArray *T.ULONG_PTR) (T.BOOL, error)
 
 	GetAce func(
-		acl *T.ACL, aceIndex T.DWORD, ace **T.VOID) T.BOOL
+		acl *T.ACL, aceIndex T.DWORD, ace **T.VOID) (T.BOOL, error)
 
 	GetAclInformation func(
 		acl *T.ACL,
 		info *T.VOID,
 		length T.DWORD,
-		class T.ACL_INFORMATION_CLASS) T.BOOL
+		class T.ACL_INFORMATION_CLASS) (T.BOOL, error)
 
 	GetAtomName func(
-		atom T.ATOM, buffer VString, size int) T.UINT
+		atom T.ATOM, buffer VString, size int) (T.UINT, error)
 
 	GetBinaryType func(
-		applicationName VString, binaryType *T.DWORD) T.BOOL
+		applicationName VString, binaryType *T.DWORD) (T.BOOL, error)
 
-	GetCommandLine func() VString
+	GetCommandLine func() (VString, error)
 
 	GetCommConfig func(
-		commDev T.HANDLE, cc *T.COMMCONFIG, size *T.DWORD) T.BOOL
+		commDev T.HANDLE, cc *T.COMMCONFIG, size *T.DWORD) (T.BOOL, error)
 
-	GetCommMask func(file T.HANDLE, evtMask *T.DWORD) T.BOOL
+	GetCommMask func(file T.HANDLE, evtMask *T.DWORD) (T.BOOL, error)
 
 	GetCommModemStatus func(
-		file T.HANDLE, modemStat *T.DWORD) T.BOOL
+		file T.HANDLE, modemStat *T.DWORD) (T.BOOL, error)
 
 	GetCommProperties func(
-		file T.HANDLE, cp *T.COMMPROP) T.BOOL
+		file T.HANDLE, cp *T.COMMPROP) (T.BOOL, error)
 
-	GetCommState func(file T.HANDLE, dcn *T.DCB) T.BOOL
+	GetCommState func(file T.HANDLE, dcn *T.DCB) (T.BOOL, error)
 
 	GetCommTimeouts func(
-		file T.HANDLE, commTimeouts *T.COMMTIMEOUTS) T.BOOL
+		file T.HANDLE, commTimeouts *T.COMMTIMEOUTS) (T.BOOL, error)
 
 	GetCompressedFileSize func(
-		fileName VString, fileSizeHigh *T.DWORD) T.DWORD
+		fileName VString, fileSizeHigh *T.DWORD) (T.DWORD, error)
 
 	GetComputerName func(
-		buffer OVString, size *T.DWORD) T.BOOL
+		buffer OVString, size *T.DWORD) (T.BOOL, error)
 
 	GetComputerNameEx func(
 		nameType T.COMPUTER_NAME_FORMAT,
 		buffer OVString,
-		size *T.DWORD) T.BOOL
+		size *T.DWORD) (T.BOOL, error)
 
-	GetCurrentActCtx func(actCtx *T.HANDLE) T.BOOL
+	GetCurrentActCtx func(actCtx *T.HANDLE) (T.BOOL, error)
 
 	GetCurrentDirectory func(
-		bufferLength T.DWORD, buffer VString) T.DWORD
+		bufferLength T.DWORD, buffer VString) (T.DWORD, error)
 
 	GetCurrentHwProfileA func(
-		hwProfileInfo *T.HW_PROFILE_INFOA) T.BOOL
+		hwProfileInfo *T.HW_PROFILE_INFOA) (T.BOOL, error)
 
 	GetCurrentHwProfileW func(
-		hwProfileInfo *T.HW_PROFILE_INFOW) T.BOOL
+		hwProfileInfo *T.HW_PROFILE_INFOW) (T.BOOL, error)
 
-	GetCurrentProcess func() T.HANDLE
+	GetCurrentProcess func() (T.HANDLE, error)
 
-	GetCurrentProcessId func() T.DWORD
+	GetCurrentProcessId func() (T.DWORD, error)
 
-	GetCurrentProcessorNumber func() T.DWORD
+	GetCurrentProcessorNumber func() (T.DWORD, error)
 
-	GetCurrentThread func() T.HANDLE
+	GetCurrentThread func() (T.HANDLE, error)
 
-	GetCurrentThreadId func() T.DWORD
+	GetCurrentThreadId func() (T.DWORD, error)
 
 	GetDefaultCommConfig func(
-		name VString, cc *T.COMMCONFIG, size *T.DWORD) T.BOOL
+		name VString, cc *T.COMMCONFIG, size *T.DWORD) (T.BOOL, error)
 
 	GetDevicePowerState func(
-		device T.HANDLE, on *T.BOOL) T.BOOL
+		device T.HANDLE, on *T.BOOL) (T.BOOL, error)
 
 	GetDiskFreeSpace func(
 		rootPathName VString,
 		sectorsPerCluster,
 		bytesPerSector,
 		numberOfFreeClusters,
-		totalNumberOfClusters *T.DWORD) T.BOOL
+		totalNumberOfClusters *T.DWORD) (T.BOOL, error)
 
 	GetDiskFreeSpaceEx func(
 		directoryName VString,
 		freeBytesAvailableToCaller,
 		totalNumberOfBytes,
-		totalNumberOfFreeBytes *T.ULARGE_INTEGER) T.BOOL
+		totalNumberOfFreeBytes *T.ULARGE_INTEGER) (T.BOOL, error)
 
 	GetDllDirectory func(
-		bufferLength T.DWORD, buffer VString) T.DWORD
+		bufferLength T.DWORD, buffer VString) (T.DWORD, error)
 
-	GetDriveType func(rootPathName VString) T.UINT
+	GetDriveType func(rootPathName VString) (T.UINT, error)
 
-	GetEnvironmentStrings func() T.OMVString
+	GetEnvironmentStrings func() (T.OMVString, error)
 
 	GetEnvironmentVariable func(
-		name, buffer VString, size T.DWORD) T.DWORD
+		name, buffer VString, size T.DWORD) (T.DWORD, error)
 
 	GetEventLogInformation func(
 		eventLog T.HANDLE,
 		infoLevel T.DWORD,
 		buffer *T.VOID,
 		bufSize T.DWORD,
-		bytesNeeded *T.DWORD) T.BOOL
+		bytesNeeded *T.DWORD) (T.BOOL, error)
 
-	GetExitCodeProcess func(process T.HANDLE, exitCode *T.DWORD) T.BOOL
+	GetExitCodeProcess func(process T.HANDLE, exitCode *T.DWORD) (T.BOOL, error)
 
-	GetExitCodeThread func(thread T.HANDLE, exitCode *T.DWORD) T.BOOL
+	GetExitCodeThread func(thread T.HANDLE, exitCode *T.DWORD) (T.BOOL, error)
 
-	GetFileAttributes func(fileName VString) T.DWORD
+	GetFileAttributes func(fileName VString) (T.DWORD, error)
 
 	GetFileAttributesEx func(
 		fileName VString,
 		infoLevelId T.GET_FILEEX_INFO_LEVELS,
-		fileInformation *T.VOID) T.BOOL
+		fileInformation *T.VOID) (T.BOOL, error)
 
 	GetFileInformationByHandle func(
 		file T.HANDLE,
-		fileInformation *T.BY_HANDLE_FILE_INFORMATION) T.BOOL
+		fileInformation *T.BY_HANDLE_FILE_INFORMATION) (T.BOOL, error)
 
 	GetFileSecurity func(
 		fileName VString,
 		requestedInformation T.SECURITY_INFORMATION,
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		length T.DWORD,
-		lengthNeeded *T.DWORD) T.BOOL
+		lengthNeeded *T.DWORD) (T.BOOL, error)
 
 	GetFileSize func(
-		file T.HANDLE, fileSizeHigh *T.DWORD) T.DWORD
+		file T.HANDLE, fileSizeHigh *T.DWORD) (T.DWORD, error)
 
 	GetFileSizeEx func(
-		file T.HANDLE, fileSize *T.LARGE_INTEGER) T.BOOL
+		file T.HANDLE, fileSize *T.LARGE_INTEGER) (T.BOOL, error)
 
 	GetFileTime func(
 		file T.HANDLE,
 		creationTime, lastAccessTime,
-		lastWriteTime *T.FILETIME) T.BOOL
+		lastWriteTime *T.FILETIME) (T.BOOL, error)
 
-	GetFileType func(file T.HANDLE) T.DWORD
+	GetFileType func(file T.HANDLE) (T.DWORD, error)
 
 	GetFirmwareEnvironmentVariable func(
-		name, guid VString, buffer *T.VOID, size T.DWORD) T.DWORD
+		name, guid VString, buffer *T.VOID, size T.DWORD) (T.DWORD, error)
 
 	GetFullPathName func(
 		fileName VString,
 		bufferLength T.DWORD,
 		buffer VString,
-		filePart OVString) T.DWORD
+		filePart OVString) (T.DWORD, error)
 
 	GetHandleInformation func(
-		object T.HANDLE, flags *T.DWORD) T.BOOL
+		object T.HANDLE, flags *T.DWORD) (T.BOOL, error)
 
 	GetKernelObjectSecurity func(
 		handle T.HANDLE,
 		requestedInformation T.SECURITY_INFORMATION,
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		length T.DWORD,
-		lengthNeeded *T.DWORD) T.BOOL
+		lengthNeeded *T.DWORD) (T.BOOL, error)
 
-	GetLargePageMinimum func() T.SIZE_T
+	GetLargePageMinimum func() (T.SIZE_T, error)
 
-	GetLastError func() T.DWORD
+	GetLastError func() (T.DWORD, error)
 
-	GetLengthSid func(sid *T.SID) T.DWORD
+	GetLengthSid func(sid *T.SID) (T.DWORD, error)
 
 	GetLocalTime func(systemTime *T.SYSTEMTIME)
 
-	GetLogicalDrives func() T.DWORD
+	GetLogicalDrives func() (T.DWORD, error)
 
 	GetLogicalDriveStrings func(
 		bufferLength T.DWORD,
-		buffer T.OMVString) T.DWORD
+		buffer T.OMVString) (T.DWORD, error)
 
 	GetLogicalProcessorInformation func(
 		buffer *T.SYSTEM_LOGICAL_PROCESSOR_INFORMATION,
-		returnedLength *T.DWORD) T.BOOL
+		returnedLength *T.DWORD) (T.BOOL, error)
 
 	GetLongPathName func(
 		shortPath VString,
 		longPath OVString,
-		buffer T.DWORD) T.DWORD
+		buffer T.DWORD) (T.DWORD, error)
 
 	GetMailslotInfo func(
 		mailslot T.HANDLE,
 		maxMessageSize, nextSize, messageCount,
-		readTimeout *T.DWORD) T.BOOL
+		readTimeout *T.DWORD) (T.BOOL, error)
 
 	GetModuleFileName func(
-		module T.HMODULE, filename VString, size T.DWORD) T.DWORD
+		module T.HMODULE, filename VString, size T.DWORD) (T.DWORD, error)
 
-	GetModuleHandle func(moduleName VString) T.HMODULE
+	GetModuleHandle func(moduleName VString) (T.HMODULE, error)
 
 	GetModuleHandleEx func(
 		flags T.DWORD,
 		moduleName VString,
-		module *T.HMODULE) T.BOOL
+		module *T.HMODULE) (T.BOOL, error)
 
 	GetNamedPipeHandleState func(
 		namedPipe T.HANDLE,
 		state, curInstances, maxCollectionCount,
 		collectDataTimeout *T.DWORD,
 		userName VString,
-		maxUserNameSize T.DWORD) T.BOOL
+		maxUserNameSize T.DWORD) (T.BOOL, error)
 
 	GetNamedPipeInfo func(
 		namedPipe T.HANDLE,
 		flags, outBufferSize, inBufferSize,
-		maxInstances *T.DWORD) T.BOOL
+		maxInstances *T.DWORD) (T.BOOL, error)
 
 	GetNativeSystemInfo func(systemInfo *T.SYSTEM_INFO)
 
 	GetNumaAvailableMemoryNode func(
 		node T.WChar,
-		availableBytes *T.ULONGLONG) T.BOOL
+		availableBytes *T.ULONGLONG) (T.BOOL, error)
 
 	GetNumaHighestNodeNumber func(
-		highestNodeNumber *T.ULONG) T.BOOL
+		highestNodeNumber *T.ULONG) (T.BOOL, error)
 
 	GetNumaNodeProcessorMask func(
 		node T.WChar,
-		processorMask *T.ULONGLONG) T.BOOL
+		processorMask *T.ULONGLONG) (T.BOOL, error)
 
 	GetNumaProcessorNode func(
 		processor T.WChar,
-		nodeNumber *T.WChar) T.BOOL
+		nodeNumber *T.WChar) (T.BOOL, error)
 
 	GetNumberOfEventLogRecords func(
 		eventLog T.HANDLE,
-		numberOfRecords *T.DWORD) T.BOOL
+		numberOfRecords *T.DWORD) (T.BOOL, error)
 
 	GetOldestEventLogRecord func(
 		eventLog T.HANDLE,
-		oldestRecord *T.DWORD) T.BOOL
+		oldestRecord *T.DWORD) (T.BOOL, error)
 
 	GetOverlappedResult func(
 		file T.HANDLE,
 		overlapped *T.OVERLAPPED,
 		numberOfBytesTransferred *T.DWORD,
-		wait T.BOOL) T.BOOL
+		wait T.BOOL) (T.BOOL, error)
 
-	GetPriorityClass func(process T.HANDLE) T.DWORD
+	GetPriorityClass func(process T.HANDLE) (T.DWORD, error)
 
 	GetPrivateObjectSecurity func(
 		objectDescriptor *T.SECURITY_DESCRIPTOR,
 		securityInformation T.SECURITY_INFORMATION,
 		resultantDescriptor *T.SECURITY_DESCRIPTOR,
 		descriptorLength T.DWORD,
-		returnLength *T.DWORD) T.BOOL
+		returnLength *T.DWORD) (T.BOOL, error)
 
 	GetPrivateProfileInt func(
 		appName, keyName VString,
 		default_ T.INT,
-		fileName VString) T.UINT
+		fileName VString) (T.UINT, error)
 
 	GetPrivateProfileSection func(
 		appName, returnedString VString,
 		size T.DWORD,
-		fileName VString) T.DWORD
+		fileName VString) (T.DWORD, error)
 
 	GetPrivateProfileSectionNames func(
 		returnBuffer VString,
 		size T.DWORD,
-		fileName VString) T.DWORD
+		fileName VString) (T.DWORD, error)
 
 	GetPrivateProfileString func(
 		appName, keyName, default_, returned VString,
 		size T.DWORD,
-		fileName VString) T.DWORD
+		fileName VString) (T.DWORD, error)
 
 	GetPrivateProfileStruct func(
 		section, key VString,
 		struct_ *T.VOID,
 		sizeStruct T.UINT,
-		file VString) T.BOOL
+		file VString) (T.BOOL, error)
 
 	GetProcAddress func(
-		module T.HMODULE, procName T.AString) T.FARPROC
+		module T.HMODULE, procName T.AString) (T.FARPROC, error)
 
 	GetProcessAffinityMask func(
 		process T.HANDLE,
 		processAffinityMask,
-		systemAffinityMask *T.DWORD_PTR) T.BOOL
+		systemAffinityMask *T.DWORD_PTR) (T.BOOL, error)
 
 	GetProcessHandleCount func(
-		process T.HANDLE, handleCount *T.DWORD) T.BOOL
+		process T.HANDLE, handleCount *T.DWORD) (T.BOOL, error)
 
-	GetProcessHeap func() T.HANDLE
+	GetProcessHeap func() (T.HANDLE, error)
 
 	GetProcessHeaps func(
 		numberOfHeaps T.DWORD,
-		processHeaps *T.HANDLE) T.DWORD
+		processHeaps *T.HANDLE) (T.DWORD, error)
 
-	GetProcessId func(process T.HANDLE) T.DWORD
+	GetProcessId func(process T.HANDLE) (T.DWORD, error)
 
-	GetProcessIdOfThread func(thread T.HANDLE) T.DWORD
+	GetProcessIdOfThread func(thread T.HANDLE) (T.DWORD, error)
 
 	GetProcessIoCounters func(
-		process T.HANDLE, ioCounters *T.IO_COUNTERS) T.BOOL
+		process T.HANDLE, ioCounters *T.IO_COUNTERS) (T.BOOL, error)
 
 	GetProcessPriorityBoost func(
-		process T.HANDLE, disablePriorityBoost *T.BOOL) T.BOOL
+		process T.HANDLE, disablePriorityBoost *T.BOOL) (T.BOOL, error)
 
 	GetProcessShutdownParameters func(
-		level, flags *T.DWORD) T.BOOL
+		level, flags *T.DWORD) (T.BOOL, error)
 
 	GetProcessTimes func(
 		process T.HANDLE,
 		creationTime, exitTime, kernelTime,
-		userTime *T.FILETIME) T.BOOL
+		userTime *T.FILETIME) (T.BOOL, error)
 
 	GetProcessVersion func(
-		processId T.DWORD) T.DWORD
+		processId T.DWORD) (T.DWORD, error)
 
 	GetProcessWorkingSetSize func(
 		process T.HANDLE,
-		minWorkingSetSize, maxWorkingSetSize *T.SIZE_T) T.BOOL
+		minWorkingSetSize, maxWorkingSetSize *T.SIZE_T) (T.BOOL, error)
 
 	GetProcessWorkingSetSizeEx func(
 		process T.HANDLE,
 		minWorkingSetSize, maxWorkingSetSize *T.SIZE_T,
-		flags *T.DWORD) T.BOOL
+		flags *T.DWORD) (T.BOOL, error)
 
 	GetProfileInt func(
 		appName, keyName VString,
-		default_ T.INT) T.UINT
+		default_ T.INT) (T.UINT, error)
 
 	GetProfileSection func(
 		appName, returnedString VString,
-		size T.DWORD) T.DWORD
+		size T.DWORD) (T.DWORD, error)
 
 	GetProfileString func(
 		appName, keyName, default_, returned VString,
-		size T.DWORD) T.DWORD
+		size T.DWORD) (T.DWORD, error)
 
 	GetQueuedCompletionStatus func(
 		completionPort T.HANDLE,
 		numberOfBytesTransferred *T.DWORD,
 		completionKey *T.ULONG_PTR,
 		overlapped **T.OVERLAPPED,
-		milliseconds T.DWORD) T.BOOL
+		milliseconds T.DWORD) (T.BOOL, error)
 
 	GetSecurityDescriptorControl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		control *T.SECURITY_DESCRIPTOR_CONTROL,
-		revision *T.DWORD) T.BOOL
+		revision *T.DWORD) (T.BOOL, error)
 
 	GetSecurityDescriptorDacl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		daclPresent *T.BOOL,
 		dacl **T.ACL,
-		daclDefaulted *T.BOOL) T.BOOL
+		daclDefaulted *T.BOOL) (T.BOOL, error)
 
 	GetSecurityDescriptorGroup func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		group **T.SID,
-		groupDefaulted *T.BOOL) T.BOOL
+		groupDefaulted *T.BOOL) (T.BOOL, error)
 
 	GetSecurityDescriptorLength func(
-		securityDescriptor *T.SECURITY_DESCRIPTOR) T.DWORD
+		securityDescriptor *T.SECURITY_DESCRIPTOR) (T.DWORD, error)
 
 	GetSecurityDescriptorOwner func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		owner **T.SID,
-		ownerDefaulted *T.BOOL) T.BOOL
+		ownerDefaulted *T.BOOL) (T.BOOL, error)
 
 	GetSecurityDescriptorRMControl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
-		rmControl *T.WChar) T.DWORD
+		rmControl *T.WChar) (T.DWORD, error)
 
 	GetSecurityDescriptorSacl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		saclPresent *T.BOOL,
 		sacl **T.ACL,
-		saclDefaulted *T.BOOL) T.BOOL
+		saclDefaulted *T.BOOL) (T.BOOL, error)
 
 	GetShortPathName func(
 		longPath VString,
 		shortPath OVString,
-		buffer T.DWORD) T.DWORD
+		buffer T.DWORD) (T.DWORD, error)
 
 	GetSidIdentifierAuthority func(
-		sid *T.SID) *T.SID_IDENTIFIER_AUTHORITY
+		sid *T.SID) (*T.SID_IDENTIFIER_AUTHORITY, error)
 
-	GetSidLengthRequired func(subAuthorityCount T.WChar) T.DWORD
+	GetSidLengthRequired func(subAuthorityCount T.WChar) (T.DWORD, error)
 
 	GetSidSubAuthority func(
-		sid *T.SID, subAuthority T.DWORD) *T.DWORD
+		sid *T.SID, subAuthority T.DWORD) (*T.DWORD, error)
 
-	GetSidSubAuthorityCount func(sid *T.SID) *T.WChar
+	GetSidSubAuthorityCount func(sid *T.SID) (*T.WChar, error)
 
 	GetStartupInfo func(startupInfo *T.STARTUPINFO)
 
-	GetStdHandle func(stdHandle T.DWORD) T.HANDLE
+	GetStdHandle func(stdHandle T.DWORD) (T.HANDLE, error)
 
-	GetSystemDirectory func(buffer VString, size T.UINT) T.UINT
+	GetSystemDirectory func(buffer VString, size T.UINT) (T.UINT, error)
 
 	GetSystemFileCacheSize func(
 		minFileCacheSize, maxFileCacheSize *T.SIZE_T,
-		flags *T.DWORD) T.BOOL
+		flags *T.DWORD) (T.BOOL, error)
 
 	GetSystemFirmwareTable func(
 		firmwareTableProviderSignature,
 		firmwareTableID T.DWORD,
 		firmwareTableBuffer *T.VOID,
-		bufferSize T.DWORD) T.UINT
+		bufferSize T.DWORD) (T.UINT, error)
 
 	GetSystemInfo func(systemInfo *T.SYSTEM_INFO)
 
 	GetSystemPowerStatus func(
-		systemPowerStatus *T.SYSTEM_POWER_STATUS) T.BOOL
+		systemPowerStatus *T.SYSTEM_POWER_STATUS) (T.BOOL, error)
 
 	GetSystemRegistryQuota func(
-		quotaAllowed, quotaUsed *T.DWORD) T.BOOL
+		quotaAllowed, quotaUsed *T.DWORD) (T.BOOL, error)
 
 	GetSystemTime func(
 		systemTime *T.SYSTEMTIME)
 
 	GetSystemTimeAdjustment func(
 		timeAdjustment, timeIncrement *T.DWORD,
-		timeAdjustmentDisabled *T.BOOL) T.BOOL
+		timeAdjustmentDisabled *T.BOOL) (T.BOOL, error)
 
 	GetSystemTimeAsFileTime func(
 		systemTimeAsFileTime *T.FILETIME)
 
 	GetSystemTimes func(
-		idleTime, kernelTime, userTime *T.FILETIME) T.BOOL
+		idleTime, kernelTime, userTime *T.FILETIME) (T.BOOL, error)
 
 	GetSystemWindowsDirectory func(
-		buffer VString, size T.UINT) T.UINT
+		buffer VString, size T.UINT) (T.UINT, error)
 
 	GetSystemWow64Directory func(
-		buffer VString, size T.UINT) T.UINT
+		buffer VString, size T.UINT) (T.UINT, error)
 
 	GetTapeParameters func(
 		device T.HANDLE,
 		operation T.DWORD,
 		size *T.DWORD,
-		tapeInformation *T.VOID) T.DWORD
+		tapeInformation *T.VOID) (T.DWORD, error)
 
 	GetTapePosition func(
 		device T.HANDLE,
 		positionType T.DWORD,
-		partition, offsetLow, offsetHigh *T.DWORD) T.DWORD
+		partition, offsetLow, offsetHigh *T.DWORD) (T.DWORD, error)
 
-	GetTapeStatus func(device T.HANDLE) T.DWORD
+	GetTapeStatus func(device T.HANDLE) (T.DWORD, error)
 
 	GetTempFileName func(
 		pathName, prefixString VString,
 		unique T.UINT,
-		tempFileName VString) T.UINT
+		tempFileName VString) (T.UINT, error)
 
-	GetTempPath func(bufferLength T.DWORD, buffer VString) T.DWORD
+	GetTempPath func(bufferLength T.DWORD, buffer VString) (T.DWORD, error)
 
-	GetThreadContext func(thread T.HANDLE, context *T.CONTEXT) T.BOOL
+	GetThreadContext func(thread T.HANDLE, context *T.CONTEXT) (T.BOOL, error)
 
-	GetThreadId func(thread T.HANDLE) T.DWORD
+	GetThreadId func(thread T.HANDLE) (T.DWORD, error)
 
 	GetThreadIOPendingFlag func(
-		thread T.HANDLE, ioIsPending *T.BOOL) T.BOOL
+		thread T.HANDLE, ioIsPending *T.BOOL) (T.BOOL, error)
 
-	GetThreadPriority func(thread T.HANDLE) int
+	GetThreadPriority func(thread T.HANDLE) (int, error)
 
 	GetThreadPriorityBoost func(
-		thread T.HANDLE, disablePriorityBoost *T.BOOL) T.BOOL
+		thread T.HANDLE, disablePriorityBoost *T.BOOL) (T.BOOL, error)
 
 	GetThreadSelectorEntry func(
 		thread T.HANDLE,
 		selector T.DWORD,
-		selectorEntry *T.LDT_ENTRY) T.BOOL
+		selectorEntry *T.LDT_ENTRY) (T.BOOL, error)
 
 	GetThreadTimes func(
 		thread T.HANDLE,
 		creationTime, exitTime, kernelTime,
-		userTime *T.FILETIME) T.BOOL
+		userTime *T.FILETIME) (T.BOOL, error)
 
-	GetTickCount func() T.DWORD
+	GetTickCount func() (T.DWORD, error)
 
 	GetTimeZoneInformation func(
-		timeZoneInformation *T.TIME_ZONE_INFORMATION) T.DWORD
+		timeZoneInformation *T.TIME_ZONE_INFORMATION) (T.DWORD, error)
 
 	GetTokenInformation func(
 		tokenHandle T.HANDLE,
 		tokenInformationClass T.TOKEN_INFORMATION_CLASS,
 		tokenInformation *T.VOID,
 		tokenInformationLength T.DWORD,
-		returnLength *T.DWORD) T.BOOL
+		returnLength *T.DWORD) (T.BOOL, error)
 
-	GetUserName func(buffer OVString, size *T.DWORD) T.BOOL
+	GetUserName func(buffer OVString, size *T.DWORD) (T.BOOL, error)
 
-	GetVersion func() T.DWORD
+	GetVersion func() (T.DWORD, error)
 
-	GetVersionExA func(versionInformation *T.OSVERSIONINFOA) T.BOOL
+	GetVersionExA func(versionInformation *T.OSVERSIONINFOA) (T.BOOL, error)
 
-	GetVersionExW func(versionInformation *T.OSVERSIONINFOW) T.BOOL
+	GetVersionExW func(versionInformation *T.OSVERSIONINFOW) (T.BOOL, error)
 
 	GetVolumeInformation func(
 		rootPathName, volumeNameBuffer VString,
@@ -1460,28 +1460,28 @@ var ( //TODO(t): Verify all
 		volumeSerialNumber, maximumComponentLength,
 		fileSystemFlags *T.DWORD,
 		fileSystemNameBuffer VString,
-		fileSystemNameSize T.DWORD) T.BOOL
+		fileSystemNameSize T.DWORD) (T.BOOL, error)
 
 	GetVolumeNameForVolumeMountPoint func(
 		volumeMountPoint VString,
 		volumeName OVString,
-		bufferLength T.DWORD) T.BOOL
+		bufferLength T.DWORD) (T.BOOL, error)
 
 	GetVolumePathName func(
 		fileName VString,
 		volumePathName OVString,
-		bufferLength T.DWORD) T.BOOL
+		bufferLength T.DWORD) (T.BOOL, error)
 
 	GetVolumePathNamesForVolumeName func(
 		volumeName VString,
 		volumePathNames T.OMVString,
 		bufferLength T.DWORD,
-		returnLength *T.DWORD) T.BOOL
+		returnLength *T.DWORD) (T.BOOL, error)
 
 	GetWindowsAccountDomainSid func(
-		sid, domainSid *T.SID, domainSidl *T.DWORD) T.BOOL
+		sid, domainSid *T.SID, domainSidl *T.DWORD) (T.BOOL, error)
 
-	GetWindowsDirectory func(buffer OVString, size T.UINT) T.UINT
+	GetWindowsDirectory func(buffer OVString, size T.UINT) (T.UINT, error)
 
 	GetWriteWatch func(
 		flags T.DWORD,
@@ -1489,116 +1489,116 @@ var ( //TODO(t): Verify all
 		regionSize T.SIZE_T,
 		addresses **T.VOID,
 		count *T.ULONG_PTR,
-		granularity *T.ULONG) T.UINT
+		granularity *T.ULONG) (T.UINT, error)
 
-	GlobalAddAtom func(s VString) T.ATOM
+	GlobalAddAtom func(s VString) (T.ATOM, error)
 
-	GlobalAlloc func(flags T.UINT, bytes T.SIZE_T) T.HGLOBAL
+	GlobalAlloc func(flags T.UINT, bytes T.SIZE_T) (T.HGLOBAL, error)
 
-	GlobalCompact func(minFree T.DWORD) T.SIZE_T
+	GlobalCompact func(minFree T.DWORD) (T.SIZE_T, error)
 
-	GlobalDeleteAtom func(a T.ATOM) T.ATOM
+	GlobalDeleteAtom func(a T.ATOM) (T.ATOM, error)
 
-	GlobalFindAtom func(s VString) T.ATOM
+	GlobalFindAtom func(s VString) (T.ATOM, error)
 
 	GlobalFix func(mem T.HGLOBAL)
 
-	GlobalFlags func(mem T.HGLOBAL) T.UINT
+	GlobalFlags func(mem T.HGLOBAL) (T.UINT, error)
 
-	GlobalFree func(mem T.HGLOBAL) T.HGLOBAL
+	GlobalFree func(mem T.HGLOBAL) (T.HGLOBAL, error)
 
 	GlobalGetAtomName func(
-		atom T.ATOM, buffer OVString, size int) T.UINT
+		atom T.ATOM, buffer OVString, size int) (T.UINT, error)
 
-	GlobalHandle func(mem *T.VOID) T.HGLOBAL
+	GlobalHandle func(mem *T.VOID) (T.HGLOBAL, error)
 
-	GlobalLock func(mem T.HGLOBAL) *T.VOID
+	GlobalLock func(mem T.HGLOBAL) (*T.VOID, error)
 
 	GlobalMemoryStatus func(buffer *T.MEMORYSTATUS)
 
-	GlobalMemoryStatusEx func(buffer *T.MEMORYSTATUSEX) T.BOOL
+	GlobalMemoryStatusEx func(buffer *T.MEMORYSTATUSEX) (T.BOOL, error)
 
 	GlobalReAlloc func(
-		mem T.HGLOBAL, bytes T.SIZE_T, flags T.UINT) T.HGLOBAL
+		mem T.HGLOBAL, bytes T.SIZE_T, flags T.UINT) (T.HGLOBAL, error)
 
-	GlobalSize func(mem T.HGLOBAL) T.SIZE_T
+	GlobalSize func(mem T.HGLOBAL) (T.SIZE_T, error)
 
 	GlobalUnfix func(mem T.HGLOBAL)
 
-	GlobalUnlock func(mem T.HGLOBAL) T.BOOL
+	GlobalUnlock func(mem T.HGLOBAL) (T.BOOL, error)
 
-	GlobalUnWire func(mem T.HGLOBAL) T.BOOL
+	GlobalUnWire func(mem T.HGLOBAL) (T.BOOL, error)
 
-	GlobalWire func(mem T.HGLOBAL) *T.VOID
+	GlobalWire func(mem T.HGLOBAL) (*T.VOID, error)
 
-	HeapAlloc func(heap T.HANDLE, flags T.DWORD, bytes T.SIZE_T) *T.VOID
+	HeapAlloc func(heap T.HANDLE, flags T.DWORD, bytes T.SIZE_T) (*T.VOID, error)
 
-	HeapCompact func(Heap T.HANDLE, flags T.DWORD) T.SIZE_T
+	HeapCompact func(Heap T.HANDLE, flags T.DWORD) (T.SIZE_T, error)
 
 	HeapCreate func(
-		options T.DWORD, initialSize, maximumSize T.SIZE_T) T.HANDLE
+		options T.DWORD, initialSize, maximumSize T.SIZE_T) (T.HANDLE, error)
 
-	HeapDestroy func(Heap T.HANDLE) T.BOOL
+	HeapDestroy func(Heap T.HANDLE) (T.BOOL, error)
 
-	HeapFree func(Heap T.HANDLE, flags T.DWORD, mem *T.VOID) T.BOOL
+	HeapFree func(Heap T.HANDLE, flags T.DWORD, mem *T.VOID) (T.BOOL, error)
 
-	HeapLock func(Heap T.HANDLE) T.BOOL
+	HeapLock func(Heap T.HANDLE) (T.BOOL, error)
 
 	HeapQueryInformation func(
 		h T.HANDLE,
 		ic T.HEAP_INFORMATION_CLASS,
 		info *T.VOID,
 		infoLength T.SIZE_T,
-		returnLength *T.SIZE_T) T.BOOL
+		returnLength *T.SIZE_T) (T.BOOL, error)
 
 	HeapReAlloc func(
-		heap T.HANDLE, flags T.DWORD, mem *T.VOID, bytes T.SIZE_T) *T.VOID
+		heap T.HANDLE, flags T.DWORD, mem *T.VOID, bytes T.SIZE_T) (*T.VOID, error)
 
 	HeapSetInformation func(
 		h, T.HANDLE,
 		ic T.HEAP_INFORMATION_CLASS,
 		info *T.VOID,
-		infoLength T.SIZE_T) T.BOOL
+		infoLength T.SIZE_T) (T.BOOL, error)
 
-	HeapSize func(heap T.HANDLE, flags T.DWORD, mem *T.VOID) T.SIZE_T
+	HeapSize func(heap T.HANDLE, flags T.DWORD, mem *T.VOID) (T.SIZE_T, error)
 
-	HeapUnlock func(Heap T.HANDLE) T.BOOL
+	HeapUnlock func(Heap T.HANDLE) (T.BOOL, error)
 
-	HeapValidate func(heap T.HANDLE, flags T.DWORD, mem *T.VOID) T.BOOL
+	HeapValidate func(heap T.HANDLE, flags T.DWORD, mem *T.VOID) (T.BOOL, error)
 
-	HeapWalk func(heap T.HANDLE, entry *T.PROCESS_HEAP_ENTRY) T.BOOL
+	HeapWalk func(heap T.HANDLE, entry *T.PROCESS_HEAP_ENTRY) (T.BOOL, error)
 
-	Hread func(file T.HFILE, buffer *T.VOID, bytes long) long
+	Hread func(file T.HFILE, buffer *T.VOID, bytes long) (long, error)
 
-	Hwrite func(file T.HFILE, buffer *T.CH, bytes long) long
+	Hwrite func(file T.HFILE, buffer *T.CH, bytes long) (long, error)
 
-	ImpersonateAnonymousToken func(threadHandle T.HANDLE) T.BOOL
+	ImpersonateAnonymousToken func(threadHandle T.HANDLE) (T.BOOL, error)
 
-	ImpersonateLoggedOnUser func(token T.HANDLE) T.BOOL
+	ImpersonateLoggedOnUser func(token T.HANDLE) (T.BOOL, error)
 
-	ImpersonateNamedPipeClient func(namedPipe T.HANDLE) T.BOOL
+	ImpersonateNamedPipeClient func(namedPipe T.HANDLE) (T.BOOL, error)
 
 	ImpersonateSelf func(
-		impersonationLevel T.SECURITY_IMPERSONATION_LEVEL) T.BOOL
+		impersonationLevel T.SECURITY_IMPERSONATION_LEVEL) (T.BOOL, error)
 
-	InitAtomTable func(size T.DWORD) T.BOOL
+	InitAtomTable func(size T.DWORD) (T.BOOL, error)
 
 	InitializeAcl func(
-		acl *T.ACL, aclLength T.DWORD, aclRevision T.DWORD) T.BOOL
+		acl *T.ACL, aclLength T.DWORD, aclRevision T.DWORD) (T.BOOL, error)
 
 	InitializeCriticalSection func(*T.CRITICAL_SECTION)
 
 	InitializeCriticalSectionAndSpinCount func(
-		cs *T.CRITICAL_SECTION, spinCount T.DWORD) T.BOOL
+		cs *T.CRITICAL_SECTION, spinCount T.DWORD) (T.BOOL, error)
 
 	InitializeSecurityDescriptor func(
 		secDesc *T.SECURITY_DESCRIPTOR,
-		revision T.DWORD) T.BOOL
+		revision T.DWORD) (T.BOOL, error)
 
 	InitializeSid func(
 		sid *T.SID,
 		idAuth *T.SID_IDENTIFIER_AUTHORITY,
-		subAuthorityCount T.BYTE) T.BOOL
+		subAuthorityCount T.BYTE) (T.BOOL, error)
 
 	InitializeSListHead func(listHead T.SLIST_HEADER)
 
@@ -1624,52 +1624,52 @@ var ( //TODO(t): Verify all
 	InterlockedPushEntrySList func(
 		*T.SLIST_HEADER, *T.SLIST_ENTRY) *T.SLIST_ENTRY
 
-	IsBadCodePtr func(T.FARPROC) T.BOOL
+	IsBadCodePtr func(T.FARPROC) (T.BOOL, error)
 
-	IsBadHugeReadPtr func(*T.VOID, T.UINT_PTR) T.BOOL
+	IsBadHugeReadPtr func(*T.VOID, T.UINT_PTR) (T.BOOL, error)
 
-	IsBadHugeWritePtr func(*T.VOID, T.UINT_PTR) T.BOOL
+	IsBadHugeWritePtr func(*T.VOID, T.UINT_PTR) (T.BOOL, error)
 
-	IsBadReadPtr func(*T.VOID, T.UINT_PTR) T.BOOL
+	IsBadReadPtr func(*T.VOID, T.UINT_PTR) (T.BOOL, error)
 
-	IsBadStringPtr func(s VString, max T.UINT_PTR) T.BOOL
+	IsBadStringPtr func(s VString, max T.UINT_PTR) (T.BOOL, error)
 
-	IsBadWritePtr func(*T.VOID, T.UINT_PTR) T.BOOL
+	IsBadWritePtr func(*T.VOID, T.UINT_PTR) (T.BOOL, error)
 
-	IsDebuggerPresent func() T.BOOL
+	IsDebuggerPresent func() (T.BOOL, error)
 
 	IsProcessInJob func(
 		processHandle T.HANDLE,
 		jobHandle T.HANDLE,
-		result *T.BOOL) T.BOOL
+		result *T.BOOL) (T.BOOL, error)
 
-	IsProcessorFeaturePresent func(processorFeature T.DWORD) T.BOOL
+	IsProcessorFeaturePresent func(processorFeature T.DWORD) (T.BOOL, error)
 
-	IsSystemResumeAutomatic func() T.BOOL
+	IsSystemResumeAutomatic func() (T.BOOL, error)
 
-	IsTextUnicode func(v *T.VOID, size int, result *T.INT) T.BOOL
+	IsTextUnicode func(v *T.VOID, size int, result *T.INT) (T.BOOL, error)
 
-	IsTokenRestricted func(token T.HANDLE) T.BOOL
+	IsTokenRestricted func(token T.HANDLE) (T.BOOL, error)
 
-	IsTokenUntrusted func(token T.HANDLE) T.BOOL
+	IsTokenUntrusted func(token T.HANDLE) (T.BOOL, error)
 
-	IsValidAcl func(*T.ACL) T.BOOL
+	IsValidAcl func(*T.ACL) (T.BOOL, error)
 
-	IsValidSecurityDescriptor func(*T.SECURITY_DESCRIPTOR) T.BOOL
+	IsValidSecurityDescriptor func(*T.SECURITY_DESCRIPTOR) (T.BOOL, error)
 
-	IsValidSid func(*T.SID) T.BOOL
+	IsValidSid func(*T.SID) (T.BOOL, error)
 
-	IsWellKnownSid func(*T.SID, T.WELL_KNOWN_SID_TYPE) T.BOOL
+	IsWellKnownSid func(*T.SID, T.WELL_KNOWN_SID_TYPE) (T.BOOL, error)
 
-	IsWow64Process func(process T.HANDLE, wow64Process *T.BOOL) T.BOOL
+	IsWow64Process func(process T.HANDLE, wow64Process *T.BOOL) (T.BOOL, error)
 
-	Lclose func(file T.HFILE) T.HFILE
+	Lclose func(file T.HFILE) (T.HFILE, error)
 
-	Lcreat func(pathName T.AString, attribute int) T.HFILE
+	Lcreat func(pathName T.AString, attribute int) (T.HFILE, error)
 
 	LeaveCriticalSection func(*T.CRITICAL_SECTION)
 
-	Llseek func(file T.HFILE, offset T.LONG, origin int) T.LONG
+	Llseek func(file T.HFILE, offset T.LONG, origin int) (T.LONG, error)
 
 	LoadLibrary func(libFileName VString) (T.HMODULE, error)
 
@@ -1683,47 +1683,47 @@ var ( //TODO(t): Verify all
 		module T.HMODULE, resInfo T.HRSRC) (T.HGLOBAL, error)
 
 	LocalAlloc func(
-		flags T.UINT, bytes T.SIZE_T) T.HLOCAL
+		flags T.UINT, bytes T.SIZE_T) (T.HLOCAL, error)
 
-	LocalCompact func(minFree T.UINT) T.SIZE_T
+	LocalCompact func(minFree T.UINT) (T.SIZE_T, error)
 
 	LocalFileTimeToFileTime func(
-		localFileTime, fileTime *T.FILETIME) T.BOOL
+		localFileTime, fileTime *T.FILETIME) (T.BOOL, error)
 
-	LocalFlags func(mem T.HLOCAL) T.UINT
+	LocalFlags func(mem T.HLOCAL) (T.UINT, error)
 
-	LocalFree func(mem T.HLOCAL) T.HLOCAL
+	LocalFree func(mem T.HLOCAL) (T.HLOCAL, error)
 
-	LocalHandle func(mem *T.VOID) T.HLOCAL
+	LocalHandle func(mem *T.VOID) (T.HLOCAL, error)
 
-	LocalLock func(mem T.HLOCAL) *T.VOID
+	LocalLock func(mem T.HLOCAL) (*T.VOID, error)
 
 	LocalReAlloc func(
-		mem T.HLOCAL, bytes T.SIZE_T, flags T.UINT) T.HLOCAL
+		mem T.HLOCAL, bytes T.SIZE_T, flags T.UINT) (T.HLOCAL, error)
 
-	LocalShrink func(mem T.HLOCAL, newSize T.UINT) T.SIZE_T
+	LocalShrink func(mem T.HLOCAL, newSize T.UINT) (T.SIZE_T, error)
 
-	LocalSize func(mem T.HLOCAL) T.SIZE_T
+	LocalSize func(mem T.HLOCAL) (T.SIZE_T, error)
 
-	LocalUnlock func(mem T.HLOCAL) T.BOOL
+	LocalUnlock func(mem T.HLOCAL) (T.BOOL, error)
 
 	LockFile func(
 		file T.HANDLE,
 		fileOffsetLow, fileOffsetHigh,
-		bytesToLockLow, bytesToLockHigh T.DWORD) T.BOOL
+		bytesToLockLow, bytesToLockHigh T.DWORD) (T.BOOL, error)
 
 	LockFileEx func(
 		file T.HANDLE,
 		flags, reserved,
 		bytesToLockLow, bytesToLockHigh T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
-	LockResource func(resData T.HGLOBAL) *T.VOID
+	LockResource func(resData T.HGLOBAL) (*T.VOID, error)
 
 	LogonUser func(
 		username, domain, password VString,
 		logonType, logonProvider T.DWORD,
-		token *T.HANDLE) T.BOOL
+		token *T.HANDLE) (T.BOOL, error)
 
 	LogonUserEx func(
 		username, domain, password VString,
@@ -1732,7 +1732,7 @@ var ( //TODO(t): Verify all
 		logonSid **T.SID,
 		profileBuffer **T.VOID,
 		profileLength *T.DWORD,
-		quotaLimits *T.QUOTA_LIMITS) T.BOOL
+		quotaLimits *T.QUOTA_LIMITS) (T.BOOL, error)
 
 	LookupAccountName func(
 		systemName VString,
@@ -1741,7 +1741,7 @@ var ( //TODO(t): Verify all
 		nSid *T.DWORD,
 		referencedDomainName OVString,
 		nRefDomName *T.DWORD,
-		use *T.SID_NAME_USE) T.BOOL
+		use *T.SID_NAME_USE) (T.BOOL, error)
 
 	LookupAccountSid func(
 		systemName VString,
@@ -1750,41 +1750,41 @@ var ( //TODO(t): Verify all
 		nName *T.DWORD,
 		referencedDomainName OVString,
 		nRefDomName *T.DWORD,
-		use *T.SID_NAME_USE) T.BOOL
+		use *T.SID_NAME_USE) (T.BOOL, error)
 
 	LookupPrivilegeDisplayName func(
 		systemName, name VString,
 		displayName OVString,
-		nDispName, languageId *T.DWORD) T.BOOL
+		nDispName, languageId *T.DWORD) (T.BOOL, error)
 
 	LookupPrivilegeName func(
 		systemName VString,
 		luid *T.LUID,
 		name OVString,
-		nName *T.DWORD) T.BOOL
+		nName *T.DWORD) (T.BOOL, error)
 
 	LookupPrivilegeValue func(
-		systemName, name VString, luid *T.LUID) T.BOOL
+		systemName, name VString, luid *T.LUID) (T.BOOL, error)
 
-	Lopen func(pathName T.AString, readWrite int) T.HFILE
+	Lopen func(pathName T.AString, readWrite int) (T.HFILE, error)
 
-	Lread func(file T.HFILE, buffer *T.VOID, bytes T.UINT) T.UINT
+	Lread func(file T.HFILE, buffer *T.VOID, bytes T.UINT) (T.UINT, error)
 
-	Lstrcat func(string_1, string_2 VString) VString
+	Lstrcat func(string_1, string_2 VString) (VString, error)
 
-	Lstrcmp func(string_1, string_2 VString) int
+	Lstrcmp func(string_1, string_2 VString) (int, error)
 
-	Lstrcmpi func(string_1, string_2 VString) int
+	Lstrcmpi func(string_1, string_2 VString) (int, error)
 
-	Lstrcpy func(string_1, string_2 VString) VString
+	Lstrcpy func(string_1, string_2 VString) (VString, error)
 
 	Lstrcpyn func(
 		string_1, string_2 VString,
-		maxLength int) VString
+		maxLength int) (VString, error)
 
-	Lstrlen func(string_ VString) int
+	Lstrlen func(string_ VString) (int, error)
 
-	Lwrite func(file T.HFILE, buffer T.CH, bytes T.UINT) T.UINT
+	Lwrite func(file T.HFILE, buffer T.CH, bytes T.UINT) (T.UINT, error)
 
 	MakeAbsoluteSD func(
 		selfRelativeSecurityDescriptor,
@@ -1793,16 +1793,16 @@ var ( //TODO(t): Verify all
 		dacl *T.ACL, daclSize *T.DWORD,
 		sacl *T.ACL, saclSize *T.DWORD,
 		owner *T.SID, ownerSize *T.DWORD,
-		primaryGroup *T.SID, primaryGroupSize *T.DWORD) T.BOOL
+		primaryGroup *T.SID, primaryGroupSize *T.DWORD) (T.BOOL, error)
 
 	MakeAbsoluteSD2 func(
 		selfRelativeSecurityDescriptor *T.SECURITY_DESCRIPTOR,
-		bufferSize *T.DWORD) T.BOOL
+		bufferSize *T.DWORD) (T.BOOL, error)
 
 	MakeSelfRelativeSD func(
 		absoluteSecurityDescriptor,
 		selfRelativeSecurityDescriptor *T.SECURITY_DESCRIPTOR,
-		bufferLength *T.DWORD) T.BOOL
+		bufferLength *T.DWORD) (T.BOOL, error)
 
 	MapGenericMask func(
 		accessMask *T.DWORD, genericMapping *T.GENERIC_MAPPING)
@@ -1810,55 +1810,55 @@ var ( //TODO(t): Verify all
 	MapUserPhysicalPages func(
 		virtualAddress *T.VOID,
 		numberOfPages T.ULONG_PTR,
-		pageArray *T.ULONG_PTR) T.BOOL
+		pageArray *T.ULONG_PTR) (T.BOOL, error)
 
 	MapUserPhysicalPagesScatter func(
 		virtualAddresses **T.VOID,
 		numberOfPages T.ULONG_PTR,
-		pageArray *T.ULONG_PTR) T.BOOL
+		pageArray *T.ULONG_PTR) (T.BOOL, error)
 
 	MapViewOfFile func(
 		fileMappingObject T.HANDLE,
 		desiredAccess, fileOffsetHigh, fileOffsetLow T.DWORD,
-		numberOfBytesToMap T.SIZE_T) *T.VOID
+		numberOfBytesToMap T.SIZE_T) (*T.VOID, error)
 
 	MapViewOfFileEx func(
 		fileMappingObject T.HANDLE,
 		desiredAccess, fileOffsetHigh, fileOffsetLow T.DWORD,
 		numberOfBytesToMap T.SIZE_T,
-		baseAddress *T.VOID) *T.VOID
+		baseAddress *T.VOID) (*T.VOID, error)
 
 	MoveFile func(
-		existingFileName, newFileName VString) T.BOOL
+		existingFileName, newFileName VString) (T.BOOL, error)
 
 	MoveFileEx func(
 		existingFileName, newFileName VString,
-		flags T.DWORD) T.BOOL
+		flags T.DWORD) (T.BOOL, error)
 
 	MoveFileWithProgress func(
 		existingFileName,
 		newFileName VString,
 		progressRoutine T.PROGRESS_ROUTINE,
 		data *T.VOID,
-		flags T.DWORD) T.BOOL
+		flags T.DWORD) (T.BOOL, error)
 
-	MulDiv func(number, numerator, denominator int) int
+	MulDiv func(number, numerator, denominator int) (int, error)
 
 	NeedCurrentDirectoryForExePath func(
-		exeName VString) T.BOOL
+		exeName VString) (T.BOOL, error)
 
 	NotifyChangeEventLog func(
-		eventLog T.HANDLE, event T.HANDLE) T.BOOL
+		eventLog T.HANDLE, event T.HANDLE) (T.BOOL, error)
 
 	ObjectCloseAuditAlarm func(
 		subsystemName VString,
 		handleId *T.VOID,
-		generateOnClose T.BOOL) T.BOOL
+		generateOnClose T.BOOL) (T.BOOL, error)
 
 	ObjectDeleteAuditAlarm func(
 		subsystemName VString,
 		handleId *T.VOID,
-		generateOnClose T.BOOL) T.BOOL
+		generateOnClose T.BOOL) (T.BOOL, error)
 
 	ObjectOpenAuditAlarm func(
 		subsystemName VString,
@@ -1869,7 +1869,7 @@ var ( //TODO(t): Verify all
 		desiredAccess, grantedAccess T.DWORD,
 		privileges *T.PRIVILEGE_SET,
 		objectCreation, accessGranted T.BOOL,
-		generateOnClose *T.BOOL) T.BOOL
+		generateOnClose *T.BOOL) (T.BOOL, error)
 
 	ObjectPrivilegeAuditAlarm func(
 		subsystemName VString,
@@ -1877,72 +1877,72 @@ var ( //TODO(t): Verify all
 		clientToken T.HANDLE,
 		desiredAccess T.DWORD,
 		privileges *T.PRIVILEGE_SET,
-		accessGranted T.BOOL) T.BOOL
+		accessGranted T.BOOL) (T.BOOL, error)
 
 	OpenBackupEventLog func(
-		uncServerName, fileName VString) T.HANDLE
+		uncServerName, fileName VString) (T.HANDLE, error)
 
 	OpenEncryptedFileRaw func(
-		fileName VString, flags T.ULONG, context **T.VOID) T.DWORD
+		fileName VString, flags T.ULONG, context **T.VOID) (T.DWORD, error)
 
 	OpenEvent func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	OpenEventLog func(
-		uncServerName, sourceName VString) T.HANDLE
+		uncServerName, sourceName VString) (T.HANDLE, error)
 
 	OpenFile func(
 		fileName T.AString,
 		reOpenBuff *T.OFSTRUCT,
-		style T.UINT) T.HFILE
+		style T.UINT) (T.HFILE, error)
 
 	OpenFileMapping func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	OpenJobObject func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	OpenMutex func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	OpenProcess func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		processId T.DWORD) T.HANDLE
+		processId T.DWORD) (T.HANDLE, error)
 
 	OpenProcessToken func(
 		processHandle T.HANDLE,
 		desiredAccess T.DWORD,
-		tokenHandle *T.HANDLE) T.BOOL
+		tokenHandle *T.HANDLE) (T.BOOL, error)
 
 	OpenSemaphore func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		name VString) T.HANDLE
+		name VString) (T.HANDLE, error)
 
 	OpenThread func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		threadId T.DWORD) T.HANDLE
+		threadId T.DWORD) (T.HANDLE, error)
 
 	OpenThreadToken func(
 		threadHandle T.HANDLE,
 		desiredAccess T.DWORD,
 		openAsSelf T.BOOL,
-		tokenHandle *T.HANDLE) T.BOOL
+		tokenHandle *T.HANDLE) (T.BOOL, error)
 
 	OpenWaitableTimer func(
 		desiredAccess T.DWORD,
 		inheritHandle T.BOOL,
-		timerName VString) T.HANDLE
+		timerName VString) (T.HANDLE, error)
 
 	OutputDebugString func(
 		outputString VString)
@@ -1952,37 +1952,37 @@ var ( //TODO(t): Verify all
 		buffer *T.VOID,
 		bufferSize T.DWORD,
 		bytesRead, totalBytesAvail *T.DWORD,
-		bytesLeftThisMessage *T.DWORD) T.BOOL
+		bytesLeftThisMessage *T.DWORD) (T.BOOL, error)
 
 	PostQueuedCompletionStatus func(
 		completionPort T.HANDLE,
 		numberOfBytesTransferred T.DWORD,
 		completionKey T.ULONG_PTR,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	PrepareTape func(
 		device T.HANDLE,
 		operation T.DWORD,
-		immediate T.BOOL) T.DWORD
+		immediate T.BOOL) (T.DWORD, error)
 
 	PrivilegeCheck func(
 		clientToken T.HANDLE,
 		requiredPrivileges *T.PRIVILEGE_SET,
-		result *T.BOOL) T.BOOL
+		result *T.BOOL) (T.BOOL, error)
 
 	PrivilegedServiceAuditAlarm func(
 		subsystemName, serviceName VString,
 		clientToken T.HANDLE,
 		privileges *T.PRIVILEGE_SET,
-		accessGranted T.BOOL) T.BOOL
+		accessGranted T.BOOL) (T.BOOL, error)
 
 	ProcessIdToSessionId func(
 		processId T.DWORD,
-		sessionId *T.DWORD) T.BOOL
+		sessionId *T.DWORD) (T.BOOL, error)
 
-	PulseEvent func(event T.HANDLE) T.BOOL
+	PulseEvent func(event T.HANDLE) (T.BOOL, error)
 
-	PurgeComm func(file T.HANDLE, flags T.DWORD) T.BOOL
+	PurgeComm func(file T.HANDLE, flags T.DWORD) (T.BOOL, error)
 
 	QueryActCtxW func(
 		flags T.DWORD,
@@ -1991,38 +1991,38 @@ var ( //TODO(t): Verify all
 		infoClass T.ULONG,
 		buffer *T.VOID,
 		size T.SIZE_T,
-		writtenOrRequired *T.SIZE_T) T.BOOL
+		writtenOrRequired *T.SIZE_T) (T.BOOL, error)
 
-	QueryDepthSList func(listHead *T.SLIST_HEADER) T.USHORT
+	QueryDepthSList func(listHead *T.SLIST_HEADER) (T.USHORT, error)
 
 	QueryDosDevice func(
 		deviceName VString,
 		targetPath OVString,
-		max T.DWORD) T.DWORD
+		max T.DWORD) (T.DWORD, error)
 
 	QueryInformationJobObject func(
 		job T.HANDLE,
 		class T.JOBOBJECTINFOCLASS,
 		info *T.VOID,
 		length T.DWORD,
-		returnLength *T.DWORD) T.BOOL
+		returnLength *T.DWORD) (T.BOOL, error)
 
 	QueryMemoryResourceNotification func(
-		notificationHandle T.HANDLE, state *T.BOOL) T.BOOL
+		notificationHandle T.HANDLE, state *T.BOOL) (T.BOOL, error)
 
 	QueryPerformanceCounter func(
-		performanceCount *T.LARGE_INTEGER) T.BOOL
+		performanceCount *T.LARGE_INTEGER) (T.BOOL, error)
 
 	QueryPerformanceFrequency func(
-		frequency *T.LARGE_INTEGER) T.BOOL
+		frequency *T.LARGE_INTEGER) (T.BOOL, error)
 
 	QueueUserAPC func(
-		apc T.APCFUNC, thread T.HANDLE, data T.ULONG_PTR) T.DWORD
+		apc T.APCFUNC, thread T.HANDLE, data T.ULONG_PTR) (T.DWORD, error)
 
 	QueueUserWorkItem func(
 		function T.THREAD_START_ROUTINE,
 		context *T.VOID,
-		flags T.ULONG) T.BOOL
+		flags T.ULONG) (T.BOOL, error)
 
 	RaiseException func(
 		exceptionCode,
@@ -2038,12 +2038,12 @@ var ( //TODO(t): Verify all
 		notifyFilter T.DWORD,
 		bytesReturned *T.DWORD,
 		overlapped *T.OVERLAPPED,
-		completionRoutine T.OVERLAPPED_COMPLETION_ROUTINE) T.BOOL
+		completionRoutine T.OVERLAPPED_COMPLETION_ROUTINE) (T.BOOL, error)
 
 	ReadEncryptedFileRaw func(
 		exportCallback T.FE_EXPORT_FUNC,
 		callbackContext,
-		context *T.VOID) T.DWORD
+		context *T.VOID) (T.DWORD, error)
 
 	ReadEventLog func(
 		eventLog T.HANDLE,
@@ -2051,77 +2051,77 @@ var ( //TODO(t): Verify all
 		buffer *T.VOID,
 		numberOfBytesToRead T.DWORD,
 		bytesRead *T.DWORD,
-		minNumberOfBytesNeeded *T.DWORD) T.BOOL
+		minNumberOfBytesNeeded *T.DWORD) (T.BOOL, error)
 
 	ReadFile func(
 		file T.HANDLE,
 		buffer *T.VOID,
 		numberOfBytesToRead T.DWORD,
 		numberOfBytesRead *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	ReadFileEx func(
 		file T.HANDLE,
 		buffer *T.VOID,
 		numberOfBytesToRead T.DWORD,
 		overlapped *T.OVERLAPPED,
-		completionRoutine T.OVERLAPPED_COMPLETION_ROUTINE) T.BOOL
+		completionRoutine T.OVERLAPPED_COMPLETION_ROUTINE) (T.BOOL, error)
 
 	ReadFileScatter func(
 		file T.HANDLE,
 		segmentArray *T.FILE_SEGMENT_ELEMENT, // []
 		numberOfBytesToRead T.DWORD,
 		reserved *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	ReadProcessMemory func(
 		process T.HANDLE,
 		baseAddress, buffer *T.VOID,
 		size T.SIZE_T,
-		numberOfBytesRead *T.SIZE_T) T.BOOL
+		numberOfBytesRead *T.SIZE_T) (T.BOOL, error)
 
 	RegisterEventSource func(
-		uncServerName, sourceName VString) T.HANDLE
+		uncServerName, sourceName VString) (T.HANDLE, error)
 
 	RegisterWaitForSingleObject func(
 		newWaitObject *T.HANDLE,
 		object T.HANDLE,
 		callback T.WAITORTIMERCALLBACK,
 		context *T.VOID,
-		milliseconds, flags T.ULONG) T.BOOL
+		milliseconds, flags T.ULONG) (T.BOOL, error)
 
 	RegisterWaitForSingleObjectEx func(
 		object T.HANDLE,
 		callback T.WAITORTIMERCALLBACK,
 		context *T.VOID,
-		milliseconds, flags T.ULONG) T.HANDLE
+		milliseconds, flags T.ULONG) (T.HANDLE, error)
 
 	ReleaseActCtx func(actCtx T.HANDLE)
 
-	ReleaseMutex func(mutex T.HANDLE) T.BOOL
+	ReleaseMutex func(mutex T.HANDLE) (T.BOOL, error)
 
 	ReleaseSemaphore func(
 		semaphore T.HANDLE,
 		releaseCount T.LONG,
-		previousCount *T.LONG) T.BOOL
+		previousCount *T.LONG) (T.BOOL, error)
 
-	RemoveDirectory func(pathName VString) T.BOOL
+	RemoveDirectory func(pathName VString) (T.BOOL, error)
 
-	RemoveVectoredContinueHandler func(Handle *T.VOID) T.ULONG
+	RemoveVectoredContinueHandler func(Handle *T.VOID) (T.ULONG, error)
 
-	RemoveVectoredExceptionHandler func(Handle *T.VOID) T.ULONG
+	RemoveVectoredExceptionHandler func(Handle *T.VOID) (T.ULONG, error)
 
 	ReOpenFile func(
 		originalFile T.HANDLE,
 		desiredAccess, shareMode,
-		flagsAndAttributes T.DWORD) T.HANDLE
+		flagsAndAttributes T.DWORD) (T.HANDLE, error)
 
 	ReplaceFile func(
 		replacedFileName,
 		replacementFileName,
 		backupFileName VString,
 		replaceFlags T.DWORD,
-		exclude, reserved *T.VOID) T.BOOL
+		exclude, reserved *T.VOID) (T.BOOL, error)
 
 	ReportEvent func(
 		eventLog T.HANDLE,
@@ -2131,153 +2131,153 @@ var ( //TODO(t): Verify all
 		numStrings T.WORD,
 		dataSize T.DWORD,
 		string_s T.OMVString,
-		rawData *T.VOID) T.BOOL
+		rawData *T.VOID) (T.BOOL, error)
 
-	RequestDeviceWakeup func(device T.HANDLE) T.BOOL
+	RequestDeviceWakeup func(device T.HANDLE) (T.BOOL, error)
 
-	RequestWakeupLatency func(latency T.LATENCY_TIME) T.BOOL
+	RequestWakeupLatency func(latency T.LATENCY_TIME) (T.BOOL, error)
 
-	ResetEvent func(event T.HANDLE) T.BOOL
+	ResetEvent func(event T.HANDLE) (T.BOOL, error)
 
 	ResetWriteWatch func(
-		baseAddress *T.VOID, regionSize T.SIZE_T) T.UINT
+		baseAddress *T.VOID, regionSize T.SIZE_T) (T.UINT, error)
 
 	RestoreLastError func(errCode T.DWORD)
 
-	ResumeThread func(thread T.HANDLE) T.DWORD
+	ResumeThread func(thread T.HANDLE) (T.DWORD, error)
 
-	RevertToSelf func() T.BOOL
+	RevertToSelf func() (T.BOOL, error)
 
 	SearchPath func(
 		path, fileName, extension VString,
 		bufferLength T.DWORD,
 		buffer OVString,
-		filePart *VString) T.DWORD
+		filePart *VString) (T.DWORD, error)
 
 	SetAclInformation func(
 		acl *T.ACL,
 		aclInformation *T.VOID,
 		aclInformationLength T.DWORD,
-		aclInformationClass T.ACL_INFORMATION_CLASS) T.BOOL
+		aclInformationClass T.ACL_INFORMATION_CLASS) (T.BOOL, error)
 
-	SetCommBreak func(file T.HANDLE) T.BOOL
+	SetCommBreak func(file T.HANDLE) (T.BOOL, error)
 
 	SetCommConfig func(
-		commDev T.HANDLE, cc *T.COMMCONFIG, size T.DWORD) T.BOOL
+		commDev T.HANDLE, cc *T.COMMCONFIG, size T.DWORD) (T.BOOL, error)
 
-	SetCommMask func(file T.HANDLE, evtMask T.DWORD) T.BOOL
+	SetCommMask func(file T.HANDLE, evtMask T.DWORD) (T.BOOL, error)
 
-	SetCommState func(file T.HANDLE, dcb *T.DCB) T.BOOL
+	SetCommState func(file T.HANDLE, dcb *T.DCB) (T.BOOL, error)
 
 	SetCommTimeouts func(
-		file T.HANDLE, commTimeouts *T.COMMTIMEOUTS) T.BOOL
+		file T.HANDLE, commTimeouts *T.COMMTIMEOUTS) (T.BOOL, error)
 
-	SetComputerName func(computerName VString) T.BOOL
+	SetComputerName func(computerName VString) (T.BOOL, error)
 
 	SetComputerNameEx func(
 		nameType T.COMPUTER_NAME_FORMAT,
-		buffer VString) T.BOOL
+		buffer VString) (T.BOOL, error)
 
 	SetCriticalSectionSpinCount func(
 		criticalSection *T.CRITICAL_SECTION,
-		spinCount T.DWORD) T.DWORD
+		spinCount T.DWORD) (T.DWORD, error)
 
-	SetCurrentDirectory func(pathName VString) T.BOOL
+	SetCurrentDirectory func(pathName VString) (T.BOOL, error)
 
 	SetDefaultCommConfig func(
-		name VString, cc *T.COMMCONFIG, size T.DWORD) T.BOOL
+		name VString, cc *T.COMMCONFIG, size T.DWORD) (T.BOOL, error)
 
-	SetDllDirectory func(pathName VString) T.BOOL
+	SetDllDirectory func(pathName VString) (T.BOOL, error)
 
-	SetEndOfFile func(file T.HANDLE) T.BOOL
+	SetEndOfFile func(file T.HANDLE) (T.BOOL, error)
 
-	SetEnvironmentStrings func(newEnvironment T.MVString) T.BOOL
+	SetEnvironmentStrings func(newEnvironment T.MVString) (T.BOOL, error)
 
-	SetEnvironmentVariable func(name, value VString) T.BOOL
+	SetEnvironmentVariable func(name, value VString) (T.BOOL, error)
 
-	SetErrorMode func(mode T.UINT) T.UINT
+	SetErrorMode func(mode T.UINT) (T.UINT, error)
 
-	SetEvent func(event T.HANDLE) T.BOOL
+	SetEvent func(event T.HANDLE) (T.BOOL, error)
 
 	SetFileApisToANSI func()
 
 	SetFileApisToOEM func()
 
-	SetFileAttributes func(name VString, attributes T.DWORD) T.BOOL
+	SetFileAttributes func(name VString, attributes T.DWORD) (T.BOOL, error)
 
 	SetFilePointer func(
 		file T.HANDLE,
 		distanceToMove T.LONG,
 		distanceToMoveHigh *T.LONG,
-		moveMethod T.DWORD) T.DWORD
+		moveMethod T.DWORD) (T.DWORD, error)
 
 	SetFilePointerEx func(
 		file T.HANDLE,
 		distanceToMove T.LARGE_INTEGER,
 		newFilePointer *T.LARGE_INTEGER,
-		moveMethod T.DWORD) T.BOOL
+		moveMethod T.DWORD) (T.BOOL, error)
 
 	SetFileSecurity func(
 		fileName VString,
 		info T.SECURITY_INFORMATION,
-		descriptor *T.SECURITY_DESCRIPTOR) T.BOOL
+		descriptor *T.SECURITY_DESCRIPTOR) (T.BOOL, error)
 
 	SetFileShortName func(
-		file T.HANDLE, shortName VString) T.BOOL
+		file T.HANDLE, shortName VString) (T.BOOL, error)
 
 	SetFileTime func(
 		file T.HANDLE,
 		creationTime, lastAccessTime,
-		lastWriteTime *T.FILETIME) T.BOOL
+		lastWriteTime *T.FILETIME) (T.BOOL, error)
 
 	SetFileValidData func(
-		file T.HANDLE, validDataLength T.LONGLONG) T.BOOL
+		file T.HANDLE, validDataLength T.LONGLONG) (T.BOOL, error)
 
 	SetFirmwareEnvironmentVariable func(
-		name, guid VString, value *T.VOID, size T.DWORD) T.BOOL
+		name, guid VString, value *T.VOID, size T.DWORD) (T.BOOL, error)
 
-	SetHandleCount func(number T.UINT) T.UINT
+	SetHandleCount func(number T.UINT) (T.UINT, error)
 
 	SetHandleInformation func(
-		object T.HANDLE, mask T.DWORD, flags T.DWORD) T.BOOL
+		object T.HANDLE, mask T.DWORD, flags T.DWORD) (T.BOOL, error)
 
 	SetInformationJobObject func(
 		job T.HANDLE,
 		jobObjectInformationClass T.JOBOBJECTINFOCLASS,
 		jobObjectInformation *T.VOID,
-		jobObjectInformationLength T.DWORD) T.BOOL
+		jobObjectInformationLength T.DWORD) (T.BOOL, error)
 
 	SetKernelObjectSecurity func(
 		handle T.HANDLE,
 		securityInformation T.SECURITY_INFORMATION,
-		securityDescriptor *T.SECURITY_DESCRIPTOR) T.BOOL
+		securityDescriptor *T.SECURITY_DESCRIPTOR) (T.BOOL, error)
 
 	SetLastError func(errCode T.DWORD)
 
-	SetLocalTime func(systemTime *T.SYSTEMTIME) T.BOOL
+	SetLocalTime func(systemTime *T.SYSTEMTIME) (T.BOOL, error)
 
 	SetMailslotInfo func(
 		mailslot T.HANDLE,
-		readTimeout T.DWORD) T.BOOL
+		readTimeout T.DWORD) (T.BOOL, error)
 
 	SetMessageWaitingIndicator func(
 		msgIndicator T.HANDLE,
-		msgCount T.ULONG) T.BOOL
+		msgCount T.ULONG) (T.BOOL, error)
 
 	SetNamedPipeHandleState func(
 		namedPipe T.HANDLE,
 		mode, maxCollectionCount,
-		collectDataTimeout *T.DWORD) T.BOOL
+		collectDataTimeout *T.DWORD) (T.BOOL, error)
 
 	SetPriorityClass func(
-		process T.HANDLE, priorityClass T.DWORD) T.BOOL
+		process T.HANDLE, priorityClass T.DWORD) (T.BOOL, error)
 
 	SetPrivateObjectSecurity func(
 		securityInformation T.SECURITY_INFORMATION,
 		modificationDescriptor *T.SECURITY_DESCRIPTOR,
 		objectsSecurityDescriptor **T.SECURITY_DESCRIPTOR,
 		genericMapping *T.GENERIC_MAPPING,
-		token T.HANDLE) T.BOOL
+		token T.HANDLE) (T.BOOL, error)
 
 	SetPrivateObjectSecurityEx func(
 		securityInformation T.SECURITY_INFORMATION,
@@ -2285,75 +2285,75 @@ var ( //TODO(t): Verify all
 		objectsSecurityDescriptor **T.SECURITY_DESCRIPTOR,
 		autoInheritFlags T.ULONG,
 		genericMapping *T.GENERIC_MAPPING,
-		token T.HANDLE) T.BOOL
+		token T.HANDLE) (T.BOOL, error)
 
 	SetProcessAffinityMask func(
-		process T.HANDLE, processAffinityMask T.DWORD_PTR) T.BOOL
+		process T.HANDLE, processAffinityMask T.DWORD_PTR) (T.BOOL, error)
 
 	SetProcessPriorityBoost func(
-		process T.HANDLE, disablePriorityBoost T.BOOL) T.BOOL
+		process T.HANDLE, disablePriorityBoost T.BOOL) (T.BOOL, error)
 
 	SetProcessShutdownParameters func(
-		level, flags T.DWORD) T.BOOL
+		level, flags T.DWORD) (T.BOOL, error)
 
 	SetProcessWorkingSetSize func(
 		process T.HANDLE,
-		minWorkingSetSize, maxWorkingSetSize T.SIZE_T) T.BOOL
+		minWorkingSetSize, maxWorkingSetSize T.SIZE_T) (T.BOOL, error)
 
 	SetProcessWorkingSetSizeEx func(
 		process T.HANDLE,
 		minWorkingSetSize, maxWorkingSetSize T.SIZE_T,
-		flags T.DWORD) T.BOOL
+		flags T.DWORD) (T.BOOL, error)
 
 	SetSecurityDescriptorControl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		controlBitsOfInterest,
-		controlBitsToSet T.SECURITY_DESCRIPTOR_CONTROL) T.BOOL
+		controlBitsToSet T.SECURITY_DESCRIPTOR_CONTROL) (T.BOOL, error)
 
 	SetSecurityDescriptorDacl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		daclPresent T.BOOL,
 		dacl *T.ACL,
-		daclDefaulted T.BOOL) T.BOOL
+		daclDefaulted T.BOOL) (T.BOOL, error)
 
 	SetSecurityDescriptorGroup func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		group *T.SID,
-		groupDefaulted T.BOOL) T.BOOL
+		groupDefaulted T.BOOL) (T.BOOL, error)
 
 	SetSecurityDescriptorOwner func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		owner *T.SID,
-		ownerDefaulted T.BOOL) T.BOOL
+		ownerDefaulted T.BOOL) (T.BOOL, error)
 
 	SetSecurityDescriptorRMControl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
-		rmControl *T.WChar) T.DWORD
+		rmControl *T.WChar) (T.DWORD, error)
 
 	SetSecurityDescriptorSacl func(
 		securityDescriptor *T.SECURITY_DESCRIPTOR,
 		saclPresent T.BOOL,
 		sacl *T.ACL,
-		saclDefaulted T.BOOL) T.BOOL
+		saclDefaulted T.BOOL) (T.BOOL, error)
 
-	SetStdHandle func(stdHandle T.DWORD, handle T.HANDLE) T.BOOL
+	SetStdHandle func(stdHandle T.DWORD, handle T.HANDLE) (T.BOOL, error)
 
 	SetSystemFileCacheSize func(
 		minFileCacheSize, maxFileCacheSize T.SIZE_T,
-		flags T.DWORD) T.BOOL
+		flags T.DWORD) (T.BOOL, error)
 
-	SetSystemPowerState func(suspend, force T.BOOL) T.BOOL
+	SetSystemPowerState func(suspend, force T.BOOL) (T.BOOL, error)
 
-	SetSystemTime func(systemTime *T.SYSTEMTIME) T.BOOL
+	SetSystemTime func(systemTime *T.SYSTEMTIME) (T.BOOL, error)
 
 	SetSystemTimeAdjustment func(
 		timeAdjustment T.DWORD,
-		timeAdjustmentDisabled T.BOOL) T.BOOL
+		timeAdjustmentDisabled T.BOOL) (T.BOOL, error)
 
 	SetTapeParameters func(
 		device T.HANDLE,
 		operation T.DWORD,
-		tapeInformation *T.VOID) T.DWORD
+		tapeInformation *T.VOID) (T.DWORD, error)
 
 	SetTapePosition func(
 		device T.HANDLE,
@@ -2361,60 +2361,60 @@ var ( //TODO(t): Verify all
 		partition,
 		offsetLow,
 		offsetHigh T.DWORD,
-		immediate T.BOOL) T.DWORD
+		immediate T.BOOL) (T.DWORD, error)
 
 	SetThreadAffinityMask func(
 		thread T.HANDLE,
-		affinityMask T.DWORD_PTR) T.DWORD_PTR
+		affinityMask T.DWORD_PTR) (T.DWORD_PTR, error)
 
 	SetThreadContext func(
-		thread T.HANDLE, context *T.CONTEXT) T.BOOL
+		thread T.HANDLE, context *T.CONTEXT) (T.BOOL, error)
 
 	SetThreadExecutionState func(
-		flags T.EXECUTION_STATE) T.EXECUTION_STATE
+		flags T.EXECUTION_STATE) (T.EXECUTION_STATE, error)
 
 	SetThreadIdealProcessor func(
-		thread T.HANDLE, idealProcessor T.DWORD) T.DWORD
+		thread T.HANDLE, idealProcessor T.DWORD) (T.DWORD, error)
 
 	SetThreadPriority func(
-		thread T.HANDLE, priority int) T.BOOL
+		thread T.HANDLE, priority int) (T.BOOL, error)
 
 	SetThreadPriorityBoost func(
-		thread T.HANDLE, disablePriorityBoost T.BOOL) T.BOOL
+		thread T.HANDLE, disablePriorityBoost T.BOOL) (T.BOOL, error)
 
 	SetThreadStackGuarantee func(
-		stackSizeInBytes *T.ULONG) T.BOOL
+		stackSizeInBytes *T.ULONG) (T.BOOL, error)
 
 	SetThreadToken func(
-		thread *T.HANDLE, token T.HANDLE) T.BOOL
+		thread *T.HANDLE, token T.HANDLE) (T.BOOL, error)
 
 	SetTimerQueueTimer func(
 		timerQueue T.HANDLE,
 		callback T.WAITORTIMERCALLBACK,
 		parameter *T.VOID,
 		dueTime, period T.DWORD,
-		preferIo T.BOOL) T.HANDLE
+		preferIo T.BOOL) (T.HANDLE, error)
 
 	SetTimeZoneInformation func(
-		timeZoneInformation *T.TIME_ZONE_INFORMATION) T.BOOL
+		timeZoneInformation *T.TIME_ZONE_INFORMATION) (T.BOOL, error)
 
 	SetTokenInformation func(
 		tokenHandle T.HANDLE,
 		tokenInformationClass T.TOKEN_INFORMATION_CLASS,
 		tokenInformation *T.VOID,
-		tokenInformationLength T.DWORD) T.BOOL
+		tokenInformationLength T.DWORD) (T.BOOL, error)
 
 	SetUnhandledExceptionFilter func(
-		tef *T.TOP_LEVEL_EXCEPTION_FILTER) *T.TOP_LEVEL_EXCEPTION_FILTER
+		tef *T.TOP_LEVEL_EXCEPTION_FILTER) (*T.TOP_LEVEL_EXCEPTION_FILTER, error)
 
 	SetupComm func(
-		file T.HANDLE, inQueue, outQueue T.DWORD) T.BOOL
+		file T.HANDLE, inQueue, outQueue T.DWORD) (T.BOOL, error)
 
 	SetVolumeLabel func(
-		rootPathName, volumeName VString) T.BOOL
+		rootPathName, volumeName VString) (T.BOOL, error)
 
 	SetVolumeMountPoint func(
-		volumeMountPoint, volumeName VString) T.BOOL
+		volumeMountPoint, volumeName VString) (T.BOOL, error)
 
 	SetWaitableTimer func(
 		timer T.HANDLE,
@@ -2422,223 +2422,223 @@ var ( //TODO(t): Verify all
 		period T.LONG,
 		completionRoutine T.TIMERAPCROUTINE,
 		argToCompletionRoutine *T.VOID,
-		resume T.BOOL) T.BOOL
+		resume T.BOOL) (T.BOOL, error)
 
 	SignalObjectAndWait func(
 		objectToSignal, objectToWaitOn T.HANDLE,
 		milliseconds T.DWORD,
-		alertable T.BOOL) T.DWORD
+		alertable T.BOOL) (T.DWORD, error)
 
-	SizeofResource func(module T.HMODULE, resInfo T.HRSRC) T.DWORD
+	SizeofResource func(module T.HMODULE, resInfo T.HRSRC) (T.DWORD, error)
 
 	Sleep func(milliseconds T.DWORD)
 
-	SleepEx func(milliseconds T.DWORD, alertable T.BOOL) T.DWORD
+	SleepEx func(milliseconds T.DWORD, alertable T.BOOL) (T.DWORD, error)
 
-	SuspendThread func(thread T.HANDLE) T.DWORD
+	SuspendThread func(thread T.HANDLE) (T.DWORD, error)
 
 	SwitchToFiber func(fiber *T.VOID)
 
-	SwitchToThread func() T.BOOL
+	SwitchToThread func() (T.BOOL, error)
 
 	SystemTimeToFileTime func(
-		systemTime *T.SYSTEMTIME, fileTime *T.FILETIME) T.BOOL
+		systemTime *T.SYSTEMTIME, fileTime *T.FILETIME) (T.BOOL, error)
 
 	SystemTimeToTzSpecificLocalTime func(
 		timeZoneInformation *T.TIME_ZONE_INFORMATION,
-		universalTime, localTime *T.SYSTEMTIME) T.BOOL
+		universalTime, localTime *T.SYSTEMTIME) (T.BOOL, error)
 
-	TerminateJobObject func(job T.HANDLE, exitCode T.UINT) T.BOOL
+	TerminateJobObject func(job T.HANDLE, exitCode T.UINT) (T.BOOL, error)
 
-	TerminateProcess func(process T.HANDLE, exitCode T.UINT) T.BOOL
+	TerminateProcess func(process T.HANDLE, exitCode T.UINT) (T.BOOL, error)
 
-	TerminateThread func(thread T.HANDLE, exitCode T.DWORD) T.BOOL
+	TerminateThread func(thread T.HANDLE, exitCode T.DWORD) (T.BOOL, error)
 
-	TlsAlloc func() T.DWORD
+	TlsAlloc func() (T.DWORD, error)
 
-	TlsFree func(tlsIndex T.DWORD) T.BOOL
+	TlsFree func(tlsIndex T.DWORD) (T.BOOL, error)
 
-	TlsGetValue func(tlsIndex T.DWORD) *T.VOID
+	TlsGetValue func(tlsIndex T.DWORD) (*T.VOID, error)
 
-	TlsSetValue func(tlsIndex T.DWORD, tlsValue *T.VOID) T.BOOL
+	TlsSetValue func(tlsIndex T.DWORD, tlsValue *T.VOID) (T.BOOL, error)
 
 	TransactNamedPipe func(
 		namedPipe T.HANDLE,
 		inBuffer *T.VOID, inBufferSize T.DWORD,
 		outBuffer *T.VOID, outBufferSize T.DWORD,
 		bytesRead *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
-	TransmitCommChar func(file T.HANDLE, c char) T.BOOL
+	TransmitCommChar func(file T.HANDLE, c char) (T.BOOL, error)
 
 	TryEnterCriticalSection func(
-		criticalSection *T.CRITICAL_SECTION) T.BOOL
+		criticalSection *T.CRITICAL_SECTION) (T.BOOL, error)
 
 	TzSpecificLocalTimeToSystemTime func(
 		timeZoneInformation *T.TIME_ZONE_INFORMATION,
-		local, universal *T.SYSTEMTIME) T.BOOL
+		local, universal *T.SYSTEMTIME) (T.BOOL, error)
 
 	UnlockFile func(
 		file T.HANDLE,
-		offsetLow, offsetHigh, bytesLow, bytesHigh T.DWORD) T.BOOL
+		offsetLow, offsetHigh, bytesLow, bytesHigh T.DWORD) (T.BOOL, error)
 
 	UnlockFileEx func(
 		file T.HANDLE,
 		reserved, bytesLow, bytesHigh T.DWORD,
-		o *T.OVERLAPPED) T.BOOL
+		o *T.OVERLAPPED) (T.BOOL, error)
 
-	UnmapViewOfFile func(baseAddress *T.VOID) T.BOOL
+	UnmapViewOfFile func(baseAddress *T.VOID) (T.BOOL, error)
 
-	UnregisterWait func(waitHandle T.HANDLE) T.BOOL
+	UnregisterWait func(waitHandle T.HANDLE) (T.BOOL, error)
 
 	UnregisterWaitEx func(
-		waitHandle, completionEvent T.HANDLE) T.BOOL
+		waitHandle, completionEvent T.HANDLE) (T.BOOL, error)
 
 	UpdateResource func(
 		update T.HANDLE,
 		typ, name VString,
 		language T.WORD,
 		data *T.VOID,
-		count T.DWORD) T.BOOL
+		count T.DWORD) (T.BOOL, error)
 
 	VerifyVersionInfoA func(
 		versionInformation *T.OSVERSIONINFOEXA,
 		typeMask T.DWORD,
-		conditionMask T.DWORDLONG) T.BOOL
+		conditionMask T.DWORDLONG) (T.BOOL, error)
 
 	VerifyVersionInfoW func(
 		versionInformation *T.OSVERSIONINFOEXW,
 		typeMask T.DWORD,
-		conditionMask T.DWORDLONG) T.BOOL
+		conditionMask T.DWORDLONG) (T.BOOL, error)
 
 	VirtualAlloc func(
 		address *T.VOID,
 		size T.SIZE_T,
-		allocationType, protect T.DWORD) *T.VOID
+		allocationType, protect T.DWORD) (*T.VOID, error)
 
 	VirtualAllocEx func(
 		process T.HANDLE,
 		address *T.VOID,
 		size T.SIZE_T,
-		allocationType, protect T.DWORD) *T.VOID
+		allocationType, protect T.DWORD) (*T.VOID, error)
 
 	VirtualFree func(
-		address *T.VOID, size T.SIZE_T, freeType T.DWORD) T.BOOL
+		address *T.VOID, size T.SIZE_T, freeType T.DWORD) (T.BOOL, error)
 
 	VirtualFreeEx func(
 		process T.HANDLE,
 		address *T.VOID,
 		size T.SIZE_T,
-		freeType T.DWORD) T.BOOL
+		freeType T.DWORD) (T.BOOL, error)
 
-	VirtualLock func(address *T.VOID, size T.SIZE_T) T.BOOL
+	VirtualLock func(address *T.VOID, size T.SIZE_T) (T.BOOL, error)
 
 	VirtualProtect func(
 		address *T.VOID,
 		size T.SIZE_T,
 		newProtect T.DWORD,
-		oldProtect *T.DWORD) T.BOOL
+		oldProtect *T.DWORD) (T.BOOL, error)
 
 	VirtualProtectEx func(
 		process T.HANDLE,
 		address *T.VOID,
 		size T.SIZE_T,
 		newProtect T.DWORD,
-		oldProtect *T.DWORD) T.BOOL
+		oldProtect *T.DWORD) (T.BOOL, error)
 
 	VirtualQuery func(
 		address *T.VOID,
 		buffer *T.MEMORY_BASIC_INFORMATION,
-		length T.SIZE_T) T.SIZE_T
+		length T.SIZE_T) (T.SIZE_T, error)
 
 	VirtualQueryEx func(
 		process T.HANDLE,
 		address *T.VOID,
 		buffer *T.MEMORY_BASIC_INFORMATION,
-		length T.SIZE_T) T.SIZE_T
+		length T.SIZE_T) (T.SIZE_T, error)
 
-	VirtualUnlock func(address *T.VOID, size T.SIZE_T) T.BOOL
+	VirtualUnlock func(address *T.VOID, size T.SIZE_T) (T.BOOL, error)
 
 	WaitCommEvent func(
 		file T.HANDLE,
 		evtMask *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	WaitForDebugEvent func(
 		debugEvent *T.DEBUG_EVENT,
-		milliseconds T.DWORD) T.BOOL
+		milliseconds T.DWORD) (T.BOOL, error)
 
 	WaitForMultipleObjects func(
 		count T.DWORD,
 		handles *T.HANDLE,
 		waitAll T.BOOL,
-		milliseconds T.DWORD) T.DWORD
+		milliseconds T.DWORD) (T.DWORD, error)
 
 	WaitForMultipleObjectsEx func(
 		count T.DWORD,
 		handles *T.HANDLE,
 		waitAll T.BOOL,
 		milliseconds T.DWORD,
-		alertable T.BOOL) T.DWORD
+		alertable T.BOOL) (T.DWORD, error)
 
 	WaitForSingleObject func(
-		handle T.HANDLE, milliseconds T.DWORD) T.DWORD
+		handle T.HANDLE, milliseconds T.DWORD) (T.DWORD, error)
 
 	WaitForSingleObjectEx func(
 		handle T.HANDLE,
 		milliseconds T.DWORD,
-		alertable T.BOOL) T.DWORD
+		alertable T.BOOL) (T.DWORD, error)
 
 	WaitNamedPipe func(
 		namedPipeName VString,
-		timeOut T.DWORD) T.BOOL
+		timeOut T.DWORD) (T.BOOL, error)
 
 	//WinExec is obsolete; instead use:
 	//	CreateProcess
-	WinExec func(cmdLine string, cmdShow T.UINT) T.UINT
+	WinExec func(cmdLine string, cmdShow T.UINT) (T.UINT, error)
 
 	Wow64DisableWow64FsRedirection func(
-		oldValue **T.VOID) T.BOOL
+		oldValue **T.VOID) (T.BOOL, error)
 
 	Wow64EnableWow64FsRedirection func(
-		wow64FsEnableRedirection T.BOOLEAN) T.BOOLEAN
+		wow64FsEnableRedirection T.BOOLEAN) (T.BOOLEAN, error)
 
-	Wow64RevertWow64FsRedirection func(olValue *T.VOID) T.BOOL
+	Wow64RevertWow64FsRedirection func(olValue *T.VOID) (T.BOOL, error)
 
 	WriteEncryptedFileRaw func(
 		importCallback T.FE_IMPORT_FUNC,
-		callbackContext, context *T.VOID) T.DWORD
+		callbackContext, context *T.VOID) (T.DWORD, error)
 
 	WriteFile func(
 		file T.HANDLE,
 		buffer *T.VOID,
 		numberOfBytesToWrite T.DWORD,
 		numberOfBytesWritten *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	WriteFileEx func(
 		file T.HANDLE,
 		buffer *T.VOID,
 		numberOfBytesToWrite T.DWORD,
 		overlapped *T.OVERLAPPED,
-		completionRoutine T.OVERLAPPED_COMPLETION_ROUTINE) T.BOOL
+		completionRoutine T.OVERLAPPED_COMPLETION_ROUTINE) (T.BOOL, error)
 
 	WriteFileGather func(
 		file T.HANDLE,
 		segmentArray *T.FILE_SEGMENT_ELEMENT, // []
 		numberOfBytesToWrite T.DWORD,
 		reserved *T.DWORD,
-		overlapped *T.OVERLAPPED) T.BOOL
+		overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	//WritePrivateProfileSection is obsolete; instead use:
 	//	registry
 	WritePrivateProfileSection func(
-		appName, string_, fileName VString) T.BOOL
+		appName, string_, fileName VString) (T.BOOL, error)
 
 	//WritePrivateProfileString is obsolete; instead use:
 	//	registry
 	WritePrivateProfileString func(
-		appName, keyName, string_, fileName VString) T.BOOL
+		appName, keyName, string_, fileName VString) (T.BOOL, error)
 
 	//WritePrivateProfileStruct is obsolete; instead use:
 	//	registry
@@ -2646,32 +2646,32 @@ var ( //TODO(t): Verify all
 		section, key VString,
 		struct_ *T.VOID,
 		sizeStruct T.UINT,
-		file VString) T.BOOL
+		file VString) (T.BOOL, error)
 
 	WriteProcessMemory func(
 		process T.HANDLE,
 		baseAddress, buffer *T.VOID,
 		size T.SIZE_T,
-		numberOfBytesWritten *T.SIZE_T) T.BOOL
+		numberOfBytesWritten *T.SIZE_T) (T.BOOL, error)
 
 	//WriteProfileSection is obsolete; instead use:
 	//	registry
 	WriteProfileSection func(
-		appName, string_ VString) T.BOOL
+		appName, string_ VString) (T.BOOL, error)
 
 	//WriteProfileString is obsolete; instead use:
 	//	registry
 	WriteProfileString func(
-		appName, keyName, string_ VString) T.BOOL
+		appName, keyName, string_ VString) (T.BOOL, error)
 
 	WriteTapemark func(
 		device T.HANDLE,
 		tapemarkType, tapemarkCount T.DWORD,
-		immediate T.BOOL) T.DWORD
+		immediate T.BOOL) (T.DWORD, error)
 
-	WTSGetActiveConsoleSessionId func() T.DWORD
+	WTSGetActiveConsoleSessionId func() (T.DWORD, error)
 
-	ZombifyActCtx func(actCtx T.HANDLE) T.BOOL
+	ZombifyActCtx func(actCtx T.HANDLE) (T.BOOL, error)
 
 /* TODO(t):AFTER INIT
 InterlockedIncrementAcquire = InterlockedIncrement
