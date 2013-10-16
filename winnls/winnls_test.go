@@ -13,32 +13,35 @@ func init() {
 	//outside.AddApis(WinNlsUnicodeApis)
 }
 
+var tT *testing.T
+
 func callback2(s PVString, l LONG_PTR) BOOL {
 	if l != 123 {
 		return 0
 	}
-	println(*s)
+	tT.Log(*s)
 	return 1
 }
 
 func callback1(s PVString) BOOL {
-	println(*s)
+	tT.Log(*s)
 	return 1
 }
 
-func aTest(*testing.T) {
-	println("=== UIanguages ===")
+func Test(t *testing.T) {
+	tT = t
+	t.Log("=== UIanguages ===")
 	EnumUILanguages(callback2, 0, 123)
-	println("=== Locales ===")
+	t.Log("=== Locales ===")
 	EnumSystemLocales(callback1, 0)
-	println("=== CodePages ===")
+	t.Log("=== CodePages ===")
 	EnumSystemCodePages(callback1, 0)
-	println("=== CalendarInfo ===")
+	t.Log("=== CalendarInfo ===")
 	for i := 1; i <= 0x30; i++ {
 		EnumCalendarInfo(callback1, 0, 0xFFFFFFFF, CALTYPE(i))
 	}
-	println("=== TimeFormat ===")
+	t.Log("=== TimeFormat ===")
 	EnumTimeFormats(callback1, 0, 0)
-	println("=== DateFormat ===")
+	t.Log("=== DateFormat ===")
 	EnumDateFormats(callback1, 0, 0)
 }
