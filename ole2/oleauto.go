@@ -14,33 +14,33 @@ import (
 type ()
 
 var (
-	SysAllocString func(*T.OLECHAR) T.BSTR
+	SysAllocString func(*T.OLECHAR) (T.BSTR, error)
 
-	SysReAllocString func(*T.BSTR, *T.OLECHAR) T.INT
+	SysReAllocString func(*T.BSTR, *T.OLECHAR) (T.INT, error)
 
-	SysAllocStringLen func(*T.OLECHAR, T.UINT) T.BSTR
+	SysAllocStringLen func(*T.OLECHAR, T.UINT) (T.BSTR, error)
 
-	SysReAllocStringLen func(*T.BSTR, *T.OLECHAR, T.UINT) T.INT
+	SysReAllocStringLen func(*T.BSTR, *T.OLECHAR, T.UINT) (T.INT, error)
 
 	SysFreeString func(T.BSTR)
 
-	SysStringLen func(T.BSTR) T.UINT
+	SysStringLen func(T.BSTR) (T.UINT, error)
 
-	SysStringByteLen func(s T.BSTR) T.UINT
+	SysStringByteLen func(s T.BSTR) (T.UINT, error)
 
-	SysAllocStringByteLen func(s T.AString, leng T.UINT) T.BSTR
+	SysAllocStringByteLen func(s T.AString, leng T.UINT) (T.BSTR, error)
 
 	DosDateTimeToVariantTime func(
-		dosDate, dosTime T.USHORT, time *T.DOUBLE) T.INT
+		dosDate, dosTime T.USHORT, time *T.DOUBLE) (T.INT, error)
 
 	VariantTimeToDosDateTime func(
-		time T.DOUBLE, dosDate, dosTime *T.USHORT) T.INT
+		time T.DOUBLE, dosDate, dosTime *T.USHORT) (T.INT, error)
 
 	SystemTimeToVariantTime func(
-		systemTime *T.SYSTEMTIME, time *T.DOUBLE) T.INT
+		systemTime *T.SYSTEMTIME, time *T.DOUBLE) (T.INT, error)
 
 	VariantTimeToSystemTime func(
-		time T.DOUBLE, systemTime *T.SYSTEMTIME) T.INT
+		time T.DOUBLE, systemTime *T.SYSTEMTIME) (T.INT, error)
 
 	SafeArrayAllocDescriptor func(dims T.UINT, out **T.SAFEARRAY)
 
@@ -51,13 +51,13 @@ var (
 
 	SafeArrayCreate func(
 		vt T.VARTYPE, dims T.UINT,
-		saBound *T.SAFEARRAYBOUND) *T.SAFEARRAY
+		saBound *T.SAFEARRAYBOUND) (*T.SAFEARRAY, error)
 
 	SafeArrayCreateEx func(
 		vt T.VARTYPE,
 		dims T.UINT,
 		saBound *T.SAFEARRAYBOUND,
-		pvExtra *T.VOID) *T.SAFEARRAY
+		pvExtra *T.VOID) (*T.SAFEARRAY, error)
 
 	SafeArrayCopyData func(source, target *T.SAFEARRAY)
 
@@ -70,9 +70,9 @@ var (
 	SafeArrayRedim func(
 		sa *T.SAFEARRAY, psaboundNew *T.SAFEARRAYBOUND)
 
-	SafeArrayGetDim func(sa *T.SAFEARRAY) T.UINT
+	SafeArrayGetDim func(sa *T.SAFEARRAY) (T.UINT, error)
 
-	SafeArrayGetElemsize func(sa *T.SAFEARRAY) T.UINT
+	SafeArrayGetElemsize func(sa *T.SAFEARRAY) (T.UINT, error)
 
 	SafeArrayGetUBound func(
 		sa *T.SAFEARRAY, nDim T.UINT, plUbound *T.LONG)
@@ -112,10 +112,10 @@ var (
 	SafeArrayGetVartype func(sa *T.SAFEARRAY, pvt *T.VARTYPE)
 
 	SafeArrayCreateVector func(vt T.VARTYPE,
-		lLbound T.LONG, elements T.ULONG) *T.SAFEARRAY
+		lLbound T.LONG, elements T.ULONG) (*T.SAFEARRAY, error)
 
 	SafeArrayCreateVectorEx func(vt T.VARTYPE, lLbound T.LONG,
-		elements T.ULONG, pvExtra *T.VOID) *T.SAFEARRAY
+		elements T.ULONG, pvExtra *T.VOID) (*T.SAFEARRAY, error)
 
 	VariantInit func(pvarg *T.VARIANTARG)
 
@@ -789,10 +789,10 @@ var (
 		lcid T.LCID, pcbActual *int)
 
 	LHashValOfNameSysA func(
-		syskind T.SYSKIND, lcid T.LCID, szName T.AString) T.ULONG
+		syskind T.SYSKIND, lcid T.LCID, szName T.AString) (T.ULONG, error)
 
 	LHashValOfNameSys func(syskind T.SYSKIND,
-		lcid T.LCID, szName *T.OLECHAR) T.ULONG
+		lcid T.LCID, szName *T.OLECHAR) (T.ULONG, error)
 
 	LoadTypeLib func(szFile *T.OLECHAR, pptlib **T.ITypeLib)
 
@@ -865,7 +865,7 @@ var (
 		uVerMajor, uVerMinor T.ULONG, lcid T.LCID,
 		rGuidTypeInfo T.REFGUID, recInfo **T.IRecordInfo)
 
-	OaBuildVersion func() T.ULONG
+	OaBuildVersion func() (T.ULONG, error)
 
 	ClearCustData func(custData *T.CUSTDATA)
 )

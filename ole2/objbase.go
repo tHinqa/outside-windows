@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	CoBuildVersion func() T.DWORD
+	CoBuildVersion func() (T.DWORD, error)
 
 	CoInitialize func(reserved *T.VOID)
 
@@ -18,7 +18,7 @@ var (
 
 	CoGetMalloc func(memCtx T.DWORD, mAlloc **T.IMalloc)
 
-	CoGetCurrentProcess func() T.DWORD
+	CoGetCurrentProcess func() (T.DWORD, error)
 
 	CoRegisterMallocSpy func(spy *T.IMallocSpy)
 
@@ -41,10 +41,10 @@ var (
 		sdType T.COMSD, sd **T.SECURITY_DESCRIPTOR)
 
 	//NOTE(t):Not implemented in non-debug dll
-	//DebugCoGetRpcFault func(void) T.ULONG
+	//DebugCoGetRpcFault func() (T.ULONG, error)
 
 	//NOTE(t):Not implemented in non-debug dll
-	//DebugCoSetRpcFault func(T.ULONG) void
+	//DebugCoSetRpcFault func(T.ULONG) (void, error)
 
 	CoGetObjectContext func(riid T.REFIID, v **T.VOID)
 
@@ -68,9 +68,9 @@ var (
 
 	CoSuspendClassObjects func()
 
-	CoAddRefServerProcess func() T.ULONG
+	CoAddRefServerProcess func() (T.ULONG, error)
 
-	CoReleaseServerProcess func() T.ULONG
+	CoReleaseServerProcess func() (T.ULONG, error)
 
 	CoGetPSClsid func(riid T.REFIID, clsid *T.CLSID)
 
@@ -132,7 +132,7 @@ var (
 		smexflags T.DWORD,
 		unkInner **T.IUnknown)
 
-	CoIsHandlerConnected func(unk *T.IUnknown) T.BOOL
+	CoIsHandlerConnected func(unk *T.IUnknown) (T.BOOL, error)
 
 	CoMarshalInterThreadInterfaceInStream func(
 		riid T.REFIID, unk *T.IUnknown, stm **T.STREAM)
@@ -143,7 +143,7 @@ var (
 	CoCreateFreeThreadedMarshaler func(
 		outer *T.IUnknown, marshal **T.IUnknown)
 
-	CoLoadLibrary func(libName *T.OLESTR, autoFree T.BOOL) T.HINSTANCE
+	CoLoadLibrary func(libName *T.OLESTR, autoFree T.BOOL) (T.HINSTANCE, error)
 
 	CoFreeLibrary func(inst T.HINSTANCE)
 
@@ -276,7 +276,7 @@ var (
 
 	IIDFromString func(sz *T.OLESTR, iid *T.IID)
 
-	CoIsOle1Class func(rclsid T.REFCLSID) T.BOOL
+	CoIsOle1Class func(rclsid T.REFCLSID) (T.BOOL, error)
 
 	ProgIDFromCLSID func(clsid T.REFCLSID, lplpszProgID **T.OLESTR)
 
@@ -285,15 +285,15 @@ var (
 	CLSIDFromProgIDEx func(szProgID *T.OLESTR, clsid *T.CLSID)
 
 	StringFromGUID2 func(
-		rguid T.REFGUID, lpsz *T.OLESTR, cchMax int) int
+		rguid T.REFGUID, lpsz *T.OLESTR, cchMax int) (int, error)
 
 	CoCreateGuid func(pguid *T.GUID)
 
 	CoFileTimeToDosDateTime func(
-		FileTime *T.FILETIME, DosDate, DosTime *T.WORD) T.BOOL
+		FileTime *T.FILETIME, DosDate, DosTime *T.WORD) (T.BOOL, error)
 
 	CoDosDateTimeToFileTime func(
-		DosDate, DosTime T.WORD, FileTime *T.FILETIME) T.BOOL
+		DosDate, DosTime T.WORD, FileTime *T.FILETIME) (T.BOOL, error)
 
 	CoFileTimeNow func(FileTime *T.FILETIME)
 
@@ -318,13 +318,13 @@ var (
 
 	DllCanUnloadNow func()
 
-	CoTaskMemAlloc func(cb T.SIZE_T) *T.VOID
+	CoTaskMemAlloc func(cb T.SIZE_T) (*T.VOID, error)
 
-	CoTaskMemRealloc func(pv *T.VOID, cb T.SIZE_T) *T.VOID
+	CoTaskMemRealloc func(pv *T.VOID, cb T.SIZE_T) (*T.VOID, error)
 
 	CoTaskMemFree func(pv *T.VOID)
 
-	//CreateDataAdviseHolder func(T.LPDATAADVISEHOLDER *ppDAHolder) T.DUP T.IN T.OLE2
+	//CreateDataAdviseHolder func(T.LPDATAADVISEHOLDER *ppDAHolder) // DUP IN OLE2
 
 	CreateDataCache func(
 		unkOuter *T.IUnknown,

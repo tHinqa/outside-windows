@@ -13,9 +13,9 @@ import (
 )
 
 var (
-	DragQueryFile func(T.HDROP, T.UINT, VString, T.UINT) T.UINT
+	DragQueryFile func(T.HDROP, T.UINT, VString, T.UINT) (T.UINT, error)
 
-	DragQueryPoint func(T.HDROP, *T.POINT) T.BOOL
+	DragQueryPoint func(T.HDROP, *T.POINT) (T.BOOL, error)
 
 	DragFinish func(T.HDROP)
 
@@ -23,41 +23,41 @@ var (
 
 	ShellExecute func(wnd T.HWND,
 		operation, file, parameters, directory VString,
-		showCmd T.INT) T.HINSTANCE
+		showCmd T.INT) (T.HINSTANCE, error)
 
 	FindExecutable func(
-		file, directory VString, result OVString) T.HINSTANCE
+		file, directory VString, result OVString) (T.HINSTANCE, error)
 
 	CommandLineToArgvW func(
-		cmdLine T.WString, numArgs *int) *T.WString
+		cmdLine T.WString, numArgs *int) (*T.WString, error)
 	//TODO(t):*WString was *LPWSTR
 
 	ShellAbout func(
 		wnd T.HWND,
 		app, otherStuff VString,
-		icon T.HICON) T.INT
+		icon T.HICON) (T.INT, error)
 
-	DuplicateIcon func(Inst T.HINSTANCE, icon T.HICON) T.HICON
+	DuplicateIcon func(Inst T.HINSTANCE, icon T.HICON) (T.HICON, error)
 
 	ExtractAssociatedIcon func(
-		inst T.HINSTANCE, iconPath VString, icon *T.WORD) T.HICON
+		inst T.HINSTANCE, iconPath VString, icon *T.WORD) (T.HICON, error)
 
 	ExtractAssociatedIconEx func(
 		inst T.HINSTANCE,
 		iconPath VString,
 		iconIndex *T.WORD,
-		iconId *T.WORD) T.HICON
+		iconId *T.WORD) (T.HICON, error)
 
 	ExtractIcon func(
 		inst T.HINSTANCE,
 		exeFileName VString,
-		iconIndex T.UINT) T.HICON
+		iconIndex T.UINT) (T.HICON, error)
 
 	ExtractIconEx func(
 		file VString,
 		iconIndex int,
 		large, small *T.HICON,
-		icons T.UINT) T.UINT
+		icons T.UINT) (T.UINT, error)
 
 	SHFreeNameMappings func(hNameMappings T.HANDLE)
 
@@ -68,39 +68,39 @@ var (
 		title VString)
 
 	SHCreateProcessAsUserW func(
-		scpi *T.SHCREATEPROCESSINFOW) T.BOOL
+		scpi *T.SHCREATEPROCESSINFOW) (T.BOOL, error)
 
 	SHGetFileInfoA func(
 		path T.AString,
 		fileAttributes T.DWORD,
 		sfi *T.SHFILEINFOA,
-		fileInfo, flags T.UINT) T.DWORD_PTR
+		fileInfo, flags T.UINT) (T.DWORD_PTR, error)
 
 	SHGetFileInfoW func(
 		path T.WString,
 		fileAttributes T.DWORD,
 		sfi *T.SHFILEINFOW,
-		fileInfo, flags T.UINT) T.DWORD_PTR
+		fileInfo, flags T.UINT) (T.DWORD_PTR, error)
 
 	SHGetDiskFreeSpaceEx func(
 		directoryName VString,
 		freeBytesAvailableToCaller,
 		totalNumberOfBytes,
-		totalNumberOfFreeBytes *T.ULARGE_INTEGER) T.BOOL
+		totalNumberOfFreeBytes *T.ULARGE_INTEGER) (T.BOOL, error)
 
 	SHGetNewLinkInfo func(
 		linkTo, dir VString,
 		name OVString,
 		mustCopy *T.BOOL,
-		flags T.UINT) T.BOOL
+		flags T.UINT) (T.BOOL, error)
 
 	SHInvokePrinterCommand func(
 		wnd T.HWND,
 		action T.UINT,
 		buf1, buf2 VString,
-		modal T.BOOL) T.BOOL
+		modal T.BOOL) (T.BOOL, error)
 
-	IsLFNDrive func(Path VString) T.BOOL
+	IsLFNDrive func(Path VString) (T.BOOL, error)
 
 	SHEnumerateUnreadMailAccounts func(
 		keyUser T.HKEY,
@@ -122,7 +122,7 @@ var (
 		shellExecuteCommand T.AString)
 
 	SHTestTokenMembership func(
-		token T.HANDLE, rid T.ULONG) T.BOOL
+		token T.HANDLE, rid T.ULONG) (T.BOOL, error)
 
 	SHGetImageList func(
 		imageList int, riid T.REFIID, Obj **T.VOID)

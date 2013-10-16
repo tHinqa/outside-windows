@@ -12,7 +12,7 @@ import (
 var (
 	CreateDataAdviseHolder func(daHolder **T.IDataAdviseHolder)
 
-	OleBuildVersion func() T.DWORD
+	OleBuildVersion func() (T.DWORD, error)
 
 	ReadClassStg func(stg *T.IStorage, clsId *T.CLSID)
 
@@ -235,7 +235,7 @@ var (
 
 	OleCreateMenuDescriptor func(
 		menuCombined T.HMENU,
-		menuWidths *T.OLEMENUGROUPWIDTHS) T.HOLEMENU
+		menuWidths *T.OLEMENUGROUPWIDTHS) (T.HOLEMENU, error)
 
 	OleSetMenuDescriptor func(
 		olemenu T.HOLEMENU,
@@ -252,7 +252,7 @@ var (
 		msg *T.MSG)
 
 	OleDuplicateData func(
-		src T.HANDLE, format T.CLIPFORMAT, flags T.UINT) T.HANDLE
+		src T.HANDLE, format T.CLIPFORMAT, flags T.UINT) (T.HANDLE, error)
 
 	OleDraw func(
 		unknown *T.IUnknown,
@@ -262,7 +262,7 @@ var (
 
 	OleRun func(unknown *T.IUnknown)
 
-	OleIsRunning func(object *T.IOleObject) T.BOOL
+	OleIsRunning func(object *T.IOleObject) (T.BOOL, error)
 
 	OleLockRunning func(
 		unknown *T.IUnknown,
@@ -291,21 +291,21 @@ var (
 		accel T.HACCEL,
 		accelEntries int,
 		msg *T.MSG,
-		cmd *T.WORD) T.BOOL
+		cmd *T.WORD) (T.BOOL, error)
 
 	OleGetIconOfFile func(
-		path *T.OLESTR, useFileAsLabel T.BOOL) T.HGLOBAL
+		path *T.OLESTR, useFileAsLabel T.BOOL) (T.HGLOBAL, error)
 
 	OleGetIconOfClass func(
 		rClsId T.REFCLSID,
 		label *T.OLESTR,
-		useTypeAsLabel T.BOOL) T.HGLOBAL
+		useTypeAsLabel T.BOOL) (T.HGLOBAL, error)
 
 	OleMetafilePictFromIconAndLabel func(
 		icon T.HICON,
 		label *T.OLESTR,
 		sourceFile *T.OLESTR,
-		iconIndex T.UINT) T.HGLOBAL
+		iconIndex T.UINT) (T.HGLOBAL, error)
 
 	OleRegGetUserType func(
 		clsId T.REFCLSID,

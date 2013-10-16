@@ -15,66 +15,66 @@ import (
 
 var (
 	//GetBitmapBits is obsolete; use GetDIBits
-	GetBitmapBits func(bit T.HBITMAP, c T.LONG, bits *T.VOID) T.LONG
+	GetBitmapBits func(bit T.HBITMAP, c T.LONG, bits *T.VOID) (T.LONG, error)
 
 	//GetCharWidth is obsolete; use GetCharWidth32
-	GetCharWidth func(dc T.HDC, first, last T.UINT, buffer *T.INT) T.BOOL
+	GetCharWidth func(dc T.HDC, first, last T.UINT, buffer *T.INT) (T.BOOL, error)
 
 	//SetBitmapBits is obsolete; use SetDIBits
-	SetBitmapBits func(bm T.HBITMAP, cb T.DWORD, bits *T.VOID) T.LONG
+	SetBitmapBits func(bm T.HBITMAP, cb T.DWORD, bits *T.VOID) (T.LONG, error)
 
-	AddFontResource func(VString) int
+	AddFontResource func(VString) (int, error)
 
 	AnimatePalette func(
 		p T.HPALETTE,
 		startIndex T.UINT,
 		entries T.UINT,
-		pe *T.PALETTEENTRY) T.BOOL
+		pe *T.PALETTEENTRY) (T.BOOL, error)
 
 	Arc func(
-		dc T.HDC, x1, y1, x2, y2, x3, y3, x4, y4 int) T.BOOL
+		dc T.HDC, x1, y1, x2, y2, x3, y3, x4, y4 int) (T.BOOL, error)
 
 	BitBlt func(
 		dc T.HDC,
 		x, y, cx, cy int,
 		src T.HDC,
 		x1, y1 int,
-		rop T.DWORD) T.BOOL
+		rop T.DWORD) (T.BOOL, error)
 
 	CancelDC func(
-		dc T.HDC) T.BOOL
+		dc T.HDC) (T.BOOL, error)
 
 	Chord func(
-		dc T.HDC, x1, y1, x2, y2, x3, y3, x4, y4 int) T.BOOL
+		dc T.HDC, x1, y1, x2, y2, x3, y3, x4, y4 int) (T.BOOL, error)
 
-	ChoosePixelFormat func(T.HDC, *T.PIXELFORMATDESCRIPTOR) int
+	ChoosePixelFormat func(T.HDC, *T.PIXELFORMATDESCRIPTOR) (int, error)
 
-	CloseMetaFile func(T.HDC) T.HMETAFILE
+	CloseMetaFile func(T.HDC) (T.HMETAFILE, error)
 
-	CombineRgn func(dst, src1, src2 T.HRGN, mode int) int
+	CombineRgn func(dst, src1, src2 T.HRGN, mode int) (int, error)
 
-	CopyMetaFile func(T.HMETAFILE, VString) T.HMETAFILE
+	CopyMetaFile func(T.HMETAFILE, VString) (T.HMETAFILE, error)
 
 	CreateBitmap func(
 		width, height int,
 		planes, bitCount T.UINT,
-		bits *T.VOID) T.HBITMAP
+		bits *T.VOID) (T.HBITMAP, error)
 
-	CreateBitmapIndirect func(*T.BITMAP) T.HBITMAP
+	CreateBitmapIndirect func(*T.BITMAP) (T.HBITMAP, error)
 
-	CreateBrushIndirect func(*T.LOGBRUSH) T.HBRUSH
+	CreateBrushIndirect func(*T.LOGBRUSH) (T.HBRUSH, error)
 
-	CreateCompatibleBitmap func(dc T.HDC, cx, cy int) T.HBITMAP
+	CreateCompatibleBitmap func(dc T.HDC, cx, cy int) (T.HBITMAP, error)
 
-	CreateDiscardableBitmap func(dc T.HDC, cx, cy int) T.HBITMAP
+	CreateDiscardableBitmap func(dc T.HDC, cx, cy int) (T.HBITMAP, error)
 
-	CreateCompatibleDC func(dc T.HDC) T.HDC
+	CreateCompatibleDC func(dc T.HDC) (T.HDC, error)
 
 	CreateDCA func(
-		driver, device, port VString, dm *T.DEVMODEA) T.HDC
+		driver, device, port VString, dm *T.DEVMODEA) (T.HDC, error)
 
 	CreateDCW func(
-		driver, device, port VString, dm *T.DEVMODEW) T.HDC
+		driver, device, port VString, dm *T.DEVMODEW) (T.HDC, error)
 
 	CreateDIBitmap func(
 		dc T.HDC,
@@ -82,138 +82,138 @@ var (
 		init T.DWORD,
 		bits *T.VOID,
 		bmi *T.BITMAPINFO,
-		usage T.UINT) T.HBITMAP
+		usage T.UINT) (T.HBITMAP, error)
 
-	CreateDIBPatternBrush func(h T.HGLOBAL, usage T.UINT) T.HBRUSH
+	CreateDIBPatternBrush func(h T.HGLOBAL, usage T.UINT) (T.HBRUSH, error)
 
 	CreateDIBPatternBrushPt func(
-		packedDIB *T.VOID, usage T.UINT) T.HBRUSH
+		packedDIB *T.VOID, usage T.UINT) (T.HBRUSH, error)
 
-	CreateEllipticRgn func(x1, y1, x2, y2 int) T.HRGN
+	CreateEllipticRgn func(x1, y1, x2, y2 int) (T.HRGN, error)
 
-	CreateEllipticRgnIndirect func(*T.RECT) T.HRGN
+	CreateEllipticRgnIndirect func(*T.RECT) (T.HRGN, error)
 
-	CreateFontIndirectA func(*T.LOGFONTA) T.HFONT
+	CreateFontIndirectA func(*T.LOGFONTA) (T.HFONT, error)
 
-	CreateFontIndirectW func(*T.LOGFONTW) T.HFONT
+	CreateFontIndirectW func(*T.LOGFONTW) (T.HFONT, error)
 
 	CreateFont func(
 		height, width, escapement, orientation, weight int,
 		italic, underline, strikeOut, charSet, outPrecision,
 		clipPrecision, quality, pitchAndFamily T.DWORD,
-		faceName VString) T.HFONT
+		faceName VString) (T.HFONT, error)
 
 	CreateHatchBrush func(
 		hatch int,
-		color T.COLORREF) T.HBRUSH
+		color T.COLORREF) (T.HBRUSH, error)
 
 	CreateICA func(
-		driver, device, port VString, dm *T.DEVMODEA) T.HDC
+		driver, device, port VString, dm *T.DEVMODEA) (T.HDC, error)
 
 	CreateICW func(
-		driver, device, port VString, dm *T.DEVMODEW) T.HDC
+		driver, device, port VString, dm *T.DEVMODEW) (T.HDC, error)
 
-	CreateMetaFile func(file VString) T.HDC
+	CreateMetaFile func(file VString) (T.HDC, error)
 
-	CreatePalette func(*T.LOGPALETTE) T.HPALETTE
+	CreatePalette func(*T.LOGPALETTE) (T.HPALETTE, error)
 
-	CreatePen func(style, width int, color T.COLORREF) T.HPEN
+	CreatePen func(style, width int, color T.COLORREF) (T.HPEN, error)
 
-	CreatePenIndirect func(*T.LOGPEN) T.HPEN
+	CreatePenIndirect func(*T.LOGPEN) (T.HPEN, error)
 
 	CreatePolyPolygonRgn func(
-		ptl *T.POINT, c *T.INT, poly, mode int) T.HRGN
+		ptl *T.POINT, c *T.INT, poly, mode int) (T.HRGN, error)
 
-	CreatePatternBrush func(T.HBITMAP) T.HBRUSH
+	CreatePatternBrush func(T.HBITMAP) (T.HBRUSH, error)
 
-	CreateRectRgn func(x1, y1, x2, y2 int) T.HRGN
+	CreateRectRgn func(x1, y1, x2, y2 int) (T.HRGN, error)
 
-	CreateRectRgnIndirect func(*T.RECT) T.HRGN
+	CreateRectRgnIndirect func(*T.RECT) (T.HRGN, error)
 
-	CreateRoundRectRgn func(x1, y1, x2, y2, w, h int) T.HRGN
+	CreateRoundRectRgn func(x1, y1, x2, y2, w, h int) (T.HRGN, error)
 
 	CreateScalableFontResource func(
 		hidden T.DWORD,
-		font, file, path VString) T.BOOL
+		font, file, path VString) (T.BOOL, error)
 
-	CreateSolidBrush func(T.COLORREF) T.HBRUSH
+	CreateSolidBrush func(T.COLORREF) (T.HBRUSH, error)
 
-	DeleteDC func(T.HDC) T.BOOL
+	DeleteDC func(T.HDC) (T.BOOL, error)
 
-	DeleteMetaFile func(T.HMETAFILE) T.BOOL
+	DeleteMetaFile func(T.HMETAFILE) (T.BOOL, error)
 
-	DeleteObject func(T.HGDIOBJ) T.BOOL
+	DeleteObject func(T.HGDIOBJ) (T.BOOL, error)
 
 	DescribePixelFormat func(
 		dc T.HDC,
 		pixelFormat int,
 		bytes T.UINT,
-		pfd *T.PIXELFORMATDESCRIPTOR) int
+		pfd *T.PIXELFORMATDESCRIPTOR) (int, error)
 
 	DeviceCapabilitiesA func(
 		device, port VString,
 		capability T.WORD,
 		output OVString,
-		dm *T.DEVMODEA) int
+		dm *T.DEVMODEA) (int, error)
 
 	DeviceCapabilitiesW func(
 		device, port VString,
 		capability T.WORD,
 		output OVString,
-		dm *T.DEVMODEW) int
+		dm *T.DEVMODEW) (int, error)
 
-	DrawEscape func(dc T.HDC, escape, cIn int, in T.AString) int
+	DrawEscape func(dc T.HDC, escape, cIn int, in T.AString) (int, error)
 
-	Ellipse func(dc T.HDC, left, top, right, bottom int) T.BOOL
+	Ellipse func(dc T.HDC, left, top, right, bottom int) (T.BOOL, error)
 
 	EnumFontFamiliesExA func(
 		dc T.HDC,
 		lf *T.LOGFONTA,
 		p T.FONTENUMPROCA,
 		l T.LPARAM,
-		flags T.DWORD) int
+		flags T.DWORD) (int, error)
 
 	EnumFontFamiliesExW func(
 		dc T.HDC,
 		lf *T.LOGFONTW,
 		p T.FONTENUMPROCW,
 		l T.LPARAM,
-		flags T.DWORD) int
+		flags T.DWORD) (int, error)
 
 	EnumFontFamiliesA func(
 		dc T.HDC,
 		lf T.AString,
 		p T.FONTENUMPROCA,
-		l T.LPARAM) int
+		l T.LPARAM) (int, error)
 
 	EnumFontFamiliesW func(
 		dc T.HDC,
 		lf T.WString,
 		p T.FONTENUMPROCW,
-		l T.LPARAM) int
+		l T.LPARAM) (int, error)
 
 	EnumFontsA func(
 		dc T.HDC,
 		lf T.AString,
 		p T.FONTENUMPROCA,
-		l T.LPARAM) int
+		l T.LPARAM) (int, error)
 
 	EnumFontsW func(
 		dc T.HDC,
 		lf T.WString,
 		p T.FONTENUMPROCW,
-		l T.LPARAM) int
+		l T.LPARAM) (int, error)
 
 	EnumObjects func(
 		dc T.HDC,
 		typ int,
 		p T.GOBJENUMPROC,
-		l T.LPARAM) int
+		l T.LPARAM) (int, error)
 
-	EqualRgn func(rgn1, rgn2 T.HRGN) T.BOOL
+	EqualRgn func(rgn1, rgn2 T.HRGN) (T.BOOL, error)
 
 	Escape func(
-		dc T.HDC, escape, cIn int, in T.AString, out *T.VOID) int
+		dc T.HDC, escape, cIn int, in T.AString, out *T.VOID) (int, error)
 
 	///////////////////////////////////////////////////////
 	ExtEscape func(
@@ -221,64 +221,64 @@ var (
 		escape, input int,
 		inData VString,
 		output int,
-		outData OVString) int
+		outData OVString) (int, error)
 
 	ExcludeClipRect func(
-		dc T.HDC, left, top, right, bottom int) int
+		dc T.HDC, left, top, right, bottom int) (int, error)
 
 	ExtCreateRegion func(
-		x *T.XFORM, count T.DWORD, data *T.RGNDATA) T.HRGN
+		x *T.XFORM, count T.DWORD, data *T.RGNDATA) (T.HRGN, error)
 
-	ExtFloodFill func(dc T.HDC, x, y int, color T.COLORREF, typ T.UINT) T.BOOL
+	ExtFloodFill func(dc T.HDC, x, y int, color T.COLORREF, typ T.UINT) (T.BOOL, error)
 
-	FillRgn func(dc T.HDC, rgn T.HRGN, br T.HBRUSH) T.BOOL
+	FillRgn func(dc T.HDC, rgn T.HRGN, br T.HBRUSH) (T.BOOL, error)
 
-	FloodFill func(dc T.HDC, x, y int, color T.COLORREF) T.BOOL
+	FloodFill func(dc T.HDC, x, y int, color T.COLORREF) (T.BOOL, error)
 
 	FrameRgn func(
-		dc T.HDC, rgn T.HRGN, br T.HBRUSH, w, h int) T.BOOL
+		dc T.HDC, rgn T.HRGN, br T.HBRUSH, w, h int) (T.BOOL, error)
 
-	GetROP2 func(dc T.HDC) int
+	GetROP2 func(dc T.HDC) (int, error)
 
-	GetAspectRatioFilterEx func(dc T.HDC, size *T.SIZE) T.BOOL
+	GetAspectRatioFilterEx func(dc T.HDC, size *T.SIZE) (T.BOOL, error)
 
-	GetBkColor func(dc T.HDC) T.COLORREF
+	GetBkColor func(dc T.HDC) (T.COLORREF, error)
 
-	GetDCBrushColor func(dc T.HDC) T.COLORREF
+	GetDCBrushColor func(dc T.HDC) (T.COLORREF, error)
 
-	GetDCPenColor func(dc T.HDC) T.COLORREF
+	GetDCPenColor func(dc T.HDC) (T.COLORREF, error)
 
-	GetBkMode func(dc T.HDC) int
+	GetBkMode func(dc T.HDC) (int, error)
 
-	GetBitmapDimensionEx func(bit T.HBITMAP, size *T.SIZE) T.BOOL
+	GetBitmapDimensionEx func(bit T.HBITMAP, size *T.SIZE) (T.BOOL, error)
 
-	GetBoundsRect func(dc T.HDC, rect *T.RECT, flags T.UINT) T.UINT
+	GetBoundsRect func(dc T.HDC, rect *T.RECT, flags T.UINT) (T.UINT, error)
 
-	GetBrushOrgEx func(dc T.HDC, pt *T.POINT) T.BOOL
+	GetBrushOrgEx func(dc T.HDC, pt *T.POINT) (T.BOOL, error)
 
 	GetCharWidth32 func(
-		dc T.HDC, first, last T.UINT, buffer *T.INT) T.BOOL
+		dc T.HDC, first, last T.UINT, buffer *T.INT) (T.BOOL, error)
 
 	GetCharWidthFloat func(
-		dc T.HDC, first, last T.UINT, buffer *T.FLOAT) T.BOOL
+		dc T.HDC, first, last T.UINT, buffer *T.FLOAT) (T.BOOL, error)
 
 	GetCharABCWidths func(
-		dc T.HDC, first, last T.UINT, abc *T.ABC) T.BOOL
+		dc T.HDC, first, last T.UINT, abc *T.ABC) (T.BOOL, error)
 
 	GetCharABCWidthsFloat func(
-		dc T.HDC, first T.UINT, last T.UINT, abc *T.ABCFLOAT) T.BOOL
+		dc T.HDC, first T.UINT, last T.UINT, abc *T.ABCFLOAT) (T.BOOL, error)
 
-	GetClipBox func(dc T.HDC, rect *T.RECT) int
+	GetClipBox func(dc T.HDC, rect *T.RECT) (int, error)
 
-	GetClipRgn func(dc T.HDC, rgn T.HRGN) int
+	GetClipRgn func(dc T.HDC, rgn T.HRGN) (int, error)
 
-	GetMetaRgn func(dc T.HDC, rgn T.HRGN) int
+	GetMetaRgn func(dc T.HDC, rgn T.HRGN) (int, error)
 
-	GetCurrentObject func(dc T.HDC, typ T.UINT) T.HGDIOBJ
+	GetCurrentObject func(dc T.HDC, typ T.UINT) (T.HGDIOBJ, error)
 
-	GetCurrentPositionEx func(dc T.HDC, pt *T.POINT) T.BOOL
+	GetCurrentPositionEx func(dc T.HDC, pt *T.POINT) (T.BOOL, error)
 
-	GetDeviceCaps func(dc T.HDC, index int) int
+	GetDeviceCaps func(dc T.HDC, index int) (int, error)
 
 	GetDIBits func(
 		dc T.HDC,
@@ -286,13 +286,13 @@ var (
 		start, lines T.UINT,
 		vBits *T.VOID,
 		bmi *T.BITMAPINFO,
-		usage T.UINT) int
+		usage T.UINT) (int, error)
 
 	GetFontData func(
 		dc T.HDC,
 		Table, Offset T.DWORD,
 		Buffer *T.VOID,
-		cBuffer T.DWORD) T.DWORD
+		cBuffer T.DWORD) (T.DWORD, error)
 
 	GetGlyphOutline func(
 		dc T.HDC,
@@ -301,103 +301,103 @@ var (
 		gm *T.GLYPHMETRICS,
 		cBuffer T.DWORD,
 		Buffer *T.VOID,
-		mat2 *T.MAT2) T.DWORD
+		mat2 *T.MAT2) (T.DWORD, error)
 
-	GetGraphicsMode func(dc T.HDC) int
+	GetGraphicsMode func(dc T.HDC) (int, error)
 
-	GetMapMode func(dc T.HDC) int
+	GetMapMode func(dc T.HDC) (int, error)
 
 	GetMetaFileBitsEx func(
 		MF T.HMETAFILE,
 		cBuffer T.UINT,
-		Data *T.VOID) T.UINT
+		Data *T.VOID) (T.UINT, error)
 
-	GetMetaFile func(Name VString) T.HMETAFILE
+	GetMetaFile func(Name VString) (T.HMETAFILE, error)
 
-	GetNearestColor func(dc T.HDC, color T.COLORREF) T.COLORREF
+	GetNearestColor func(dc T.HDC, color T.COLORREF) (T.COLORREF, error)
 
 	GetNearestPaletteIndex func(
-		h T.HPALETTE, color T.COLORREF) T.UINT
+		h T.HPALETTE, color T.COLORREF) (T.UINT, error)
 
-	GetObjectType func(h T.HGDIOBJ) T.DWORD
+	GetObjectType func(h T.HGDIOBJ) (T.DWORD, error)
 
 	GetOutlineTextMetricsA func(
 		dc T.HDC,
 		cCopy T.UINT,
-		otm *T.OUTLINETEXTMETRICA) T.UINT
+		otm *T.OUTLINETEXTMETRICA) (T.UINT, error)
 
 	GetOutlineTextMetricsW func(
 		dc T.HDC,
 		cCopy T.UINT,
-		otm *T.OUTLINETEXTMETRICW) T.UINT
+		otm *T.OUTLINETEXTMETRICW) (T.UINT, error)
 
 	GetPaletteEntries func(
 		pal T.HPALETTE,
 		start, entries T.UINT,
-		palEntries *T.PALETTEENTRY) T.UINT
+		palEntries *T.PALETTEENTRY) (T.UINT, error)
 
 	GetPixel func(
 		dc T.HDC,
-		x, y int) T.COLORREF
+		x, y int) (T.COLORREF, error)
 
-	GetPixelFormat func(dc T.HDC) int
+	GetPixelFormat func(dc T.HDC) (int, error)
 
-	GetPolyFillMode func(dc T.HDC) int
+	GetPolyFillMode func(dc T.HDC) (int, error)
 
 	GetRasterizerCaps func(
 		raststat *T.RASTERIZER_STATUS,
-		cBytes T.UINT) T.BOOL
+		cBytes T.UINT) (T.BOOL, error)
 
-	GetRandomRgn func(dc T.HDC, rgn T.HRGN, i T.INT) int
+	GetRandomRgn func(dc T.HDC, rgn T.HRGN, i T.INT) (int, error)
 
 	GetRegionData func(
-		rgn T.HRGN, count T.DWORD, rgnData *T.RGNDATA) T.DWORD
+		rgn T.HRGN, count T.DWORD, rgnData *T.RGNDATA) (T.DWORD, error)
 
-	GetRgnBox func(rgn T.HRGN, rc *T.RECT) int
+	GetRgnBox func(rgn T.HRGN, rc *T.RECT) (int, error)
 
-	GetStockObject func(i int) T.HGDIOBJ
+	GetStockObject func(i int) (T.HGDIOBJ, error)
 
-	GetStretchBltMode func(dc T.HDC) int
+	GetStretchBltMode func(dc T.HDC) (int, error)
 
 	GetSystemPaletteEntries func(
 		dc T.HDC,
 		start, entries T.UINT,
-		palEntries *T.PALETTEENTRY) T.UINT
+		palEntries *T.PALETTEENTRY) (T.UINT, error)
 
-	GetSystemPaletteUse func(hdc T.HDC) T.UINT
+	GetSystemPaletteUse func(hdc T.HDC) (T.UINT, error)
 
-	GetTextCharacterExtra func(hdc T.HDC) int
+	GetTextCharacterExtra func(hdc T.HDC) (int, error)
 
-	GetTextAlign func(hdc T.HDC) T.UINT
+	GetTextAlign func(hdc T.HDC) (T.UINT, error)
 
-	GetTextColor func(hdc T.HDC) T.COLORREF
+	GetTextColor func(hdc T.HDC) (T.COLORREF, error)
 
 	GetTextExtentPoint func(
-		dc T.HDC, s VString, c int, sz *T.SIZE) T.BOOL
+		dc T.HDC, s VString, c int, sz *T.SIZE) (T.BOOL, error)
 
 	GetTextExtentPoint32 func(
-		dc T.HDC, s VString, c int, sizl *T.SIZE) T.BOOL
+		dc T.HDC, s VString, c int, sizl *T.SIZE) (T.BOOL, error)
 
 	GetTextExtentExPoint func(
 		dc T.HDC,
 		s VString,
 		cStr, maxExtent int,
 		fit, dx *T.INT,
-		size *T.SIZE) T.BOOL
+		size *T.SIZE) (T.BOOL, error)
 
-	GetTextCharset func(dc T.HDC) int
+	GetTextCharset func(dc T.HDC) (int, error)
 
 	GetTextCharsetInfo func(
 		dc T.HDC,
 		sig *T.FONTSIGNATURE,
-		flags T.DWORD) int
+		flags T.DWORD) (int, error)
 
 	TranslateCharsetInfo func(
 		Src *T.DWORD,
 		Cs *T.CHARSETINFO,
-		Flags T.DWORD) T.BOOL
+		Flags T.DWORD) (T.BOOL, error)
 
-	GetFontLanguageInfo func(dc T.HDC) T.DWORD
+	GetFontLanguageInfo func(dc T.HDC) (T.DWORD, error)
 
 	GetCharacterPlacementA func(
 		dc T.HDC,
@@ -405,7 +405,7 @@ var (
 		Count,
 		MexExtent int,
 		Results *T.GCP_RESULTS,
-		Flags T.DWORD) T.DWORD
+		Flags T.DWORD) (T.DWORD, error)
 
 	GetCharacterPlacementW func(
 		dc T.HDC,
@@ -413,19 +413,19 @@ var (
 		Count,
 		MexExtent int,
 		Results *T.GCP_RESULTS,
-		Flags T.DWORD) T.DWORD
+		Flags T.DWORD) (T.DWORD, error)
 
-	GetFontUnicodeRanges func(dc T.HDC, gs *T.GLYPHSET) T.DWORD
+	GetFontUnicodeRanges func(dc T.HDC, gs *T.GLYPHSET) (T.DWORD, error)
 
 	GetGlyphIndices func(
 		dc T.HDC,
 		str VString,
 		c int,
 		gi *T.WORD,
-		l T.DWORD) T.DWORD
+		l T.DWORD) (T.DWORD, error)
 
 	GetTextExtentPointI func(
-		dc T.HDC, giIn *T.WORD, gi int, size *T.SIZE) T.BOOL
+		dc T.HDC, giIn *T.WORD, gi int, size *T.SIZE) (T.BOOL, error)
 
 	GetTextExtentExPointI func(
 		hdc T.HDC,
@@ -434,59 +434,59 @@ var (
 		nMaxExtent int,
 		lpnFit *T.INT,
 		lpnDx *T.INT,
-		Size *T.SIZE) T.BOOL
+		Size *T.SIZE) (T.BOOL, error)
 
 	GetCharWidthI func(
 		dc T.HDC,
 		giFirst T.UINT,
 		cgi T.UINT,
 		gi *T.WORD,
-		Widths *T.INT) T.BOOL
+		Widths *T.INT) (T.BOOL, error)
 
 	GetCharABCWidthsI func(
 		dc T.HDC,
 		giFirst T.UINT,
 		cgi T.UINT,
 		gi *T.WORD,
-		abc *T.ABC) T.BOOL
+		abc *T.ABC) (T.BOOL, error)
 
 	AddFontResourceEx func(
-		name VString, l T.DWORD, res *T.VOID) int
+		name VString, l T.DWORD, res *T.VOID) (int, error)
 
 	RemoveFontResourceEx func(
-		name VString, l T.DWORD, dv *T.VOID) T.BOOL
+		name VString, l T.DWORD, dv *T.VOID) (T.BOOL, error)
 
 	AddFontMemResourceEx func(
 		fileView *T.VOID,
 		size T.DWORD,
 		_ *T.VOID,
-		numFonts *T.DWORD) T.HANDLE
+		numFonts *T.DWORD) (T.HANDLE, error)
 
-	RemoveFontMemResourceEx func(h T.HANDLE) T.BOOL
+	RemoveFontMemResourceEx func(h T.HANDLE) (T.BOOL, error)
 
-	CreateFontIndirectExA func(*T.ENUMLOGFONTEXDVA) T.HFONT
+	CreateFontIndirectExA func(*T.ENUMLOGFONTEXDVA) (T.HFONT, error)
 
-	CreateFontIndirectExW func(*T.ENUMLOGFONTEXDVW) T.HFONT
+	CreateFontIndirectExW func(*T.ENUMLOGFONTEXDVW) (T.HFONT, error)
 
-	GetViewportExtEx func(dc T.HDC, size *T.SIZE) T.BOOL
+	GetViewportExtEx func(dc T.HDC, size *T.SIZE) (T.BOOL, error)
 
-	GetViewportOrgEx func(dc T.HDC, point *T.POINT) T.BOOL
+	GetViewportOrgEx func(dc T.HDC, point *T.POINT) (T.BOOL, error)
 
-	GetWindowExtEx func(dc T.HDC, size *T.SIZE) T.BOOL
+	GetWindowExtEx func(dc T.HDC, size *T.SIZE) (T.BOOL, error)
 
-	GetWindowOrgEx func(dc T.HDC, point *T.POINT) T.BOOL
+	GetWindowOrgEx func(dc T.HDC, point *T.POINT) (T.BOOL, error)
 
 	IntersectClipRect func(
-		dc T.HDC, left, top, right, bottom int) int
+		dc T.HDC, left, top, right, bottom int) (int, error)
 
-	InvertRgn func(dc T.HDC, rgn T.HRGN) T.BOOL
+	InvertRgn func(dc T.HDC, rgn T.HRGN) (T.BOOL, error)
 
 	LineDDA func(
 		xStart, yStart, xEnd, yEnd int,
 		Proc T.LINEDDAPROC,
-		data T.LPARAM) T.BOOL
+		data T.LPARAM) (T.BOOL, error)
 
-	LineTo func(hdc T.HDC, x, y int) T.BOOL
+	LineTo func(hdc T.HDC, x, y int) (T.BOOL, error)
 
 	MaskBlt func(
 		Dest T.HDC,
@@ -495,7 +495,7 @@ var (
 		xSrc, ySrc int,
 		Mask T.HBITMAP,
 		xMask, yMask int,
-		rop T.DWORD) T.BOOL
+		rop T.DWORD) (T.BOOL, error)
 
 	PlgBlt func(
 		Dest T.HDC,
@@ -503,75 +503,75 @@ var (
 		Src T.HDC,
 		xSrc, ySrc, width, height int,
 		mask T.HBITMAP,
-		xMask, yMask int) T.BOOL
+		xMask, yMask int) (T.BOOL, error)
 
-	OffsetClipRgn func(dc T.HDC, x, y int) int
+	OffsetClipRgn func(dc T.HDC, x, y int) (int, error)
 
-	OffsetRgn func(rgn T.HRGN, x, y int) int
+	OffsetRgn func(rgn T.HRGN, x, y int) (int, error)
 
-	PatBlt func(dc T.HDC, x, y, w, h int, rop T.DWORD) T.BOOL
+	PatBlt func(dc T.HDC, x, y, w, h int, rop T.DWORD) (T.BOOL, error)
 
 	Pie func(
 		hdc T.HDC,
 		left, top, right, bottom,
-		xr1, yr1, xr2, yr2 int) T.BOOL
+		xr1, yr1, xr2, yr2 int) (T.BOOL, error)
 
-	PlayMetaFile func(dc T.HDC, mf T.HMETAFILE) T.BOOL
+	PlayMetaFile func(dc T.HDC, mf T.HMETAFILE) (T.BOOL, error)
 
-	PaintRgn func(dc T.HDC, rgn T.HRGN) T.BOOL
+	PaintRgn func(dc T.HDC, rgn T.HRGN) (T.BOOL, error)
 
 	PolyPolygon func(
-		dc T.HDC, pt *T.POINT, psz *T.INT, sz int) T.BOOL
+		dc T.HDC, pt *T.POINT, psz *T.INT, sz int) (T.BOOL, error)
 
-	PtInRegion func(rgn T.HRGN, x int, y int) T.BOOL
+	PtInRegion func(rgn T.HRGN, x int, y int) (T.BOOL, error)
 
-	PtVisible func(dc T.HDC, x int, y int) T.BOOL
+	PtVisible func(dc T.HDC, x int, y int) (T.BOOL, error)
 
-	RectInRegion func(rgn T.HRGN, rect *T.RECT) T.BOOL
+	RectInRegion func(rgn T.HRGN, rect *T.RECT) (T.BOOL, error)
 
-	RectVisible func(dc T.HDC, rect *T.RECT) T.BOOL
+	RectVisible func(dc T.HDC, rect *T.RECT) (T.BOOL, error)
 
-	Rectangle func(dc T.HDC, left, top, right, bottom int) T.BOOL
+	Rectangle func(dc T.HDC, left, top, right, bottom int) (T.BOOL, error)
 
-	RestoreDC func(dc T.HDC, savedDC int) T.BOOL
+	RestoreDC func(dc T.HDC, savedDC int) (T.BOOL, error)
 
-	ResetDCA func(dc T.HDC, dm *T.DEVMODEA) T.HDC
+	ResetDCA func(dc T.HDC, dm *T.DEVMODEA) (T.HDC, error)
 
-	ResetDCW func(dc T.HDC, dm *T.DEVMODEW) T.HDC
+	ResetDCW func(dc T.HDC, dm *T.DEVMODEW) (T.HDC, error)
 
-	RealizePalette func(dc T.HDC) T.UINT
+	RealizePalette func(dc T.HDC) (T.UINT, error)
 
-	RemoveFontResource func(FileName VString) T.BOOL
+	RemoveFontResource func(FileName VString) (T.BOOL, error)
 
 	RoundRect func(
 		dc T.HDC,
-		left, top, right, bottom, width, height int) T.BOOL
+		left, top, right, bottom, width, height int) (T.BOOL, error)
 
-	ResizePalette func(pal T.HPALETTE, n T.UINT) T.BOOL
+	ResizePalette func(pal T.HPALETTE, n T.UINT) (T.BOOL, error)
 
-	SaveDC func(dc T.HDC) int
+	SaveDC func(dc T.HDC) (int, error)
 
-	SelectClipRgn func(dc T.HDC, rgn T.HRGN) int
+	SelectClipRgn func(dc T.HDC, rgn T.HRGN) (int, error)
 
-	ExtSelectClipRgn func(dc T.HDC, rgn T.HRGN, mode int) int
+	ExtSelectClipRgn func(dc T.HDC, rgn T.HRGN, mode int) (int, error)
 
-	SetMetaRgn func(dc T.HDC) int
+	SetMetaRgn func(dc T.HDC) (int, error)
 
-	SelectObject func(dc T.HDC, h T.HGDIOBJ) T.HGDIOBJ
+	SelectObject func(dc T.HDC, h T.HGDIOBJ) (T.HGDIOBJ, error)
 
 	SelectPalette func(
-		dc T.HDC, pal T.HPALETTE, forceBkgd T.BOOL) T.HPALETTE
+		dc T.HDC, pal T.HPALETTE, forceBkgd T.BOOL) (T.HPALETTE, error)
 
-	SetBkColor func(dc T.HDC, color T.COLORREF) T.COLORREF
+	SetBkColor func(dc T.HDC, color T.COLORREF) (T.COLORREF, error)
 
-	SetDCBrushColor func(dc T.HDC, color T.COLORREF) T.COLORREF
+	SetDCBrushColor func(dc T.HDC, color T.COLORREF) (T.COLORREF, error)
 
-	SetDCPenColor func(dc T.HDC, color T.COLORREF) T.COLORREF
+	SetDCPenColor func(dc T.HDC, color T.COLORREF) (T.COLORREF, error)
 
-	SetBkMode func(dc T.HDC, mode int) int
+	SetBkMode func(dc T.HDC, mode int) (int, error)
 
 	SetBoundsRect func(
-		dc T.HDC, rect *T.RECT, flags T.UINT) T.UINT
+		dc T.HDC, rect *T.RECT, flags T.UINT) (T.UINT, error)
 
 	SetDIBits func(
 		dc T.HDC,
@@ -579,7 +579,7 @@ var (
 		start, lines T.UINT,
 		Bits *T.VOID,
 		bmi *T.BITMAPINFO,
-		ColorUse T.UINT) int
+		ColorUse T.UINT) (int, error)
 
 	SetDIBitsToDevice func(
 		dc T.HDC,
@@ -589,49 +589,49 @@ var (
 		startScan, lines T.UINT,
 		Bits *T.VOID,
 		bmi *T.BITMAPINFO,
-		ColorUse T.UINT) int
+		ColorUse T.UINT) (int, error)
 
-	SetMapperFlags func(dc T.HDC, flags T.DWORD) T.DWORD
+	SetMapperFlags func(dc T.HDC, flags T.DWORD) (T.DWORD, error)
 
-	SetGraphicsMode func(dc T.HDC, mode int) int
+	SetGraphicsMode func(dc T.HDC, mode int) (int, error)
 
-	SetMapMode func(dc T.HDC, mode int) int
+	SetMapMode func(dc T.HDC, mode int) (int, error)
 
-	SetLayout func(dc T.HDC, l T.DWORD) T.DWORD
+	SetLayout func(dc T.HDC, l T.DWORD) (T.DWORD, error)
 
-	GetLayout func(dc T.HDC) T.DWORD
+	GetLayout func(dc T.HDC) (T.DWORD, error)
 
 	SetMetaFileBitsEx func(
-		buffer T.UINT, data *T.BYTE) T.HMETAFILE
+		buffer T.UINT, data *T.BYTE) (T.HMETAFILE, error)
 
 	SetPaletteEntries func(
 		pal T.HPALETTE,
 		start, entries T.UINT,
-		PalEntries *T.PALETTEENTRY) T.UINT
+		PalEntries *T.PALETTEENTRY) (T.UINT, error)
 
 	SetPixel func(
-		dc T.HDC, x, y int, color T.COLORREF) T.COLORREF
+		dc T.HDC, x, y int, color T.COLORREF) (T.COLORREF, error)
 
 	SetPixelV func(
-		hdc T.HDC, x, y int, color T.COLORREF) T.BOOL
+		hdc T.HDC, x, y int, color T.COLORREF) (T.BOOL, error)
 
 	SetPixelFormat func(
 		dc T.HDC,
 		format int,
-		pfd *T.PIXELFORMATDESCRIPTOR) T.BOOL
+		pfd *T.PIXELFORMATDESCRIPTOR) (T.BOOL, error)
 
-	SetPolyFillMode func(dc T.HDC, mode int) int
+	SetPolyFillMode func(dc T.HDC, mode int) (int, error)
 
 	StretchBlt func(
 		Dest T.HDC,
 		xDest, yDest, wDest, hDest int,
 		Src T.HDC,
 		xSrc, ySrc, wSrc, hSrc int,
-		rop T.DWORD) T.BOOL
+		rop T.DWORD) (T.BOOL, error)
 
 	SetRectRgn func(
 		rgn T.HRGN,
-		left, top, right, bottom int) T.BOOL
+		left, top, right, bottom int) (T.BOOL, error)
 
 	StretchDIBits func(
 		hdc T.HDC,
@@ -642,23 +642,23 @@ var (
 		bits *T.VOID,
 		bmi *T.BITMAPINFO,
 		usage T.UINT,
-		rop T.DWORD) int
+		rop T.DWORD) (int, error)
 
-	SetROP2 func(dc T.HDC, rop2 int) int
+	SetROP2 func(dc T.HDC, rop2 int) (int, error)
 
-	SetStretchBltMode func(dc T.HDC, mode int) int
+	SetStretchBltMode func(dc T.HDC, mode int) (int, error)
 
-	SetSystemPaletteUse func(dc T.HDC, use T.UINT) T.UINT
+	SetSystemPaletteUse func(dc T.HDC, use T.UINT) (T.UINT, error)
 
-	SetTextCharacterExtra func(dc T.HDC, extra int) int
+	SetTextCharacterExtra func(dc T.HDC, extra int) (int, error)
 
-	SetTextColor func(dc T.HDC, color T.COLORREF) T.COLORREF
+	SetTextColor func(dc T.HDC, color T.COLORREF) (T.COLORREF, error)
 
-	SetTextAlign func(dc T.HDC, align T.UINT) T.UINT
+	SetTextAlign func(dc T.HDC, align T.UINT) (T.UINT, error)
 
-	SetTextJustification func(dc T.HDC, extra, count int) T.BOOL
+	SetTextJustification func(dc T.HDC, extra, count int) (T.BOOL, error)
 
-	UpdateColors func(hdc T.HDC) T.BOOL
+	UpdateColors func(hdc T.HDC) (T.BOOL, error)
 
 	AlphaBlend func(
 		dest T.HDC,
@@ -667,7 +667,7 @@ var (
 		src T.HDC,
 		xoriginSrc, yoriginSrc,
 		wSrc, hSrc int,
-		ftn T.BLENDFUNCTION) T.BOOL
+		ftn T.BLENDFUNCTION) (T.BOOL, error)
 
 	TransparentBlt func(
 		Dest T.HDC,
@@ -676,7 +676,7 @@ var (
 		Src T.HDC,
 		xoriginSrc, yoriginSrc,
 		wSrc, hSrc int,
-		crTransparent T.UINT) T.BOOL
+		crTransparent T.UINT) (T.BOOL, error)
 
 	GradientFill func(
 		dc T.HDC,
@@ -684,123 +684,123 @@ var (
 		nVertex T.ULONG,
 		Mesh *T.VOID,
 		nMesh T.ULONG,
-		Mode T.ULONG) T.BOOL
+		Mode T.ULONG) (T.BOOL, error)
 
 	PlayMetaFileRecord func(
 		dc T.HDC,
 		HandleTable *T.HANDLETABLE,
 		MR *T.METARECORD,
-		Objs T.UINT) T.BOOL
+		Objs T.UINT) (T.BOOL, error)
 
 	EnumMetaFile func(
 		dc T.HDC,
 		mf T.HMETAFILE,
 		proc T.MFENUMPROC,
-		param T.LPARAM) T.BOOL
+		param T.LPARAM) (T.BOOL, error)
 
 	CloseEnhMetaFile func(
-		dc T.HDC) T.HENHMETAFILE
+		dc T.HDC) (T.HENHMETAFILE, error)
 
 	CopyEnhMetaFile func(
 		Enh T.HENHMETAFILE,
-		FileName VString) T.HENHMETAFILE
+		FileName VString) (T.HENHMETAFILE, error)
 
 	CreateEnhMetaFile func(
 		dc T.HDC,
 		Filename VString,
 		rc *T.RECT,
-		Desc VString) T.HDC
+		Desc VString) (T.HDC, error)
 
-	DeleteEnhMetaFile func(mf T.HENHMETAFILE) T.BOOL
+	DeleteEnhMetaFile func(mf T.HENHMETAFILE) (T.BOOL, error)
 
 	EnumEnhMetaFile func(
 		dc T.HDC,
 		mf T.HENHMETAFILE,
 		proc T.ENHMFENUMPROC,
 		param *T.VOID,
-		Rect *T.RECT) T.BOOL
+		Rect *T.RECT) (T.BOOL, error)
 
-	GetEnhMetaFile func(Name VString) T.HENHMETAFILE
+	GetEnhMetaFile func(Name VString) (T.HENHMETAFILE, error)
 
 	GetEnhMetaFileBits func(
-		emf T.HENHMETAFILE, size T.UINT, data *T.BYTE) T.UINT
+		emf T.HENHMETAFILE, size T.UINT, data *T.BYTE) (T.UINT, error)
 
 	GetEnhMetaFileDescription func(
 		emf T.HENHMETAFILE,
 		cBuffer T.UINT,
-		description OVString) T.UINT
+		description OVString) (T.UINT, error)
 
 	GetEnhMetaFileHeader func(
 		emf T.HENHMETAFILE,
 		size T.UINT,
-		enhMetaHeader *T.ENHMETAHEADER) T.UINT
+		enhMetaHeader *T.ENHMETAHEADER) (T.UINT, error)
 
 	GetEnhMetaFilePaletteEntries func(
 		emf T.HENHMETAFILE,
 		NumEntries T.UINT,
-		PaletteEntries *T.PALETTEENTRY) T.UINT
+		PaletteEntries *T.PALETTEENTRY) (T.UINT, error)
 
 	GetEnhMetaFilePixelFormat func(
 		emf T.HENHMETAFILE,
 		cBuffer T.UINT,
-		pfd *T.PIXELFORMATDESCRIPTOR) T.UINT
+		pfd *T.PIXELFORMATDESCRIPTOR) (T.UINT, error)
 
 	GetWinMetaFileBits func(
 		emf T.HENHMETAFILE,
 		cData16 T.UINT,
 		Data16 *T.BYTE,
 		MapMode T.INT,
-		Ref T.HDC) T.UINT
+		Ref T.HDC) (T.UINT, error)
 
 	PlayEnhMetaFile func(
 		dc T.HDC,
 		mf T.HENHMETAFILE,
-		rect *T.RECT) T.BOOL
+		rect *T.RECT) (T.BOOL, error)
 
 	PlayEnhMetaFileRecord func(
 		dc T.HDC,
 		ht *T.HANDLETABLE,
 		mr *T.ENHMETARECORD,
-		cht T.UINT) T.BOOL
+		cht T.UINT) (T.BOOL, error)
 
 	SetEnhMetaFileBits func(
 		nSize T.UINT,
-		pb *T.BYTE) T.HENHMETAFILE
+		pb *T.BYTE) (T.HENHMETAFILE, error)
 
 	SetWinMetaFileBits func(
 		Size T.UINT,
 		Meta16Data *T.BYTE,
 		Ref T.HDC,
-		MFP *T.METAFILEPICT) T.HENHMETAFILE
+		MFP *T.METAFILEPICT) (T.HENHMETAFILE, error)
 
 	GdiComment func(
 		dc T.HDC,
 		Size T.UINT,
-		Data *T.BYTE) T.BOOL
+		Data *T.BYTE) (T.BOOL, error)
 
-	GetTextMetricsA func(dc T.HDC, tm *T.TEXTMETRICA) T.BOOL
+	GetTextMetricsA func(dc T.HDC, tm *T.TEXTMETRICA) (T.BOOL, error)
 
-	GetTextMetricsW func(dc T.HDC, tm *T.TEXTMETRICW) T.BOOL
+	GetTextMetricsW func(dc T.HDC, tm *T.TEXTMETRICW) (T.BOOL, error)
 
 	AngleArc func(
 		dc T.HDC,
 		x, y int,
 		r T.DWORD,
 		StartAngle T.FLOAT,
-		SweepAngle T.FLOAT) T.BOOL
+		SweepAngle T.FLOAT) (T.BOOL, error)
 
 	PolyPolyline func(
-		dc T.HDC, pt *T.POINT, psz *T.DWORD, sz T.DWORD) T.BOOL
+		dc T.HDC, pt *T.POINT, psz *T.DWORD, sz T.DWORD) (T.BOOL, error)
 
-	GetWorldTransform func(dc T.HDC, xf *T.XFORM) T.BOOL
+	GetWorldTransform func(dc T.HDC, xf *T.XFORM) (T.BOOL, error)
 
-	SetWorldTransform func(dc T.HDC, xf *T.XFORM) T.BOOL
+	SetWorldTransform func(dc T.HDC, xf *T.XFORM) (T.BOOL, error)
 
 	ModifyWorldTransform func(
-		dc T.HDC, xf *T.XFORM, mode T.DWORD) T.BOOL
+		dc T.HDC, xf *T.XFORM, mode T.DWORD) (T.BOOL, error)
 
 	CombineTransform func(
-		out *T.XFORM, xf1, xf2 *T.XFORM) T.BOOL
+		out *T.XFORM, xf1, xf2 *T.XFORM) (T.BOOL, error)
 
 	CreateDIBSection func(
 		dc T.HDC,
@@ -808,92 +808,92 @@ var (
 		usage T.UINT,
 		Bits **T.VOID,
 		Section T.HANDLE,
-		offset T.DWORD) T.HBITMAP
+		offset T.DWORD) (T.HBITMAP, error)
 
 	GetDIBColorTable func(
 		dc T.HDC,
 		Start T.UINT,
 		Entries T.UINT,
-		rgbq *T.RGBQUAD) T.UINT
+		rgbq *T.RGBQUAD) (T.UINT, error)
 
 	SetDIBColorTable func(
 		dc T.HDC,
 		Start T.UINT,
 		Entries T.UINT,
-		rgbq *T.RGBQUAD) T.UINT
+		rgbq *T.RGBQUAD) (T.UINT, error)
 
 	SetColorAdjustment func(
-		dc T.HDC, ca *T.COLORADJUSTMENT) T.BOOL
+		dc T.HDC, ca *T.COLORADJUSTMENT) (T.BOOL, error)
 
 	GetColorAdjustment func(
-		dc T.HDC, ca *T.COLORADJUSTMENT) T.BOOL
+		dc T.HDC, ca *T.COLORADJUSTMENT) (T.BOOL, error)
 
-	CreateHalftonePalette func(dc T.HDC) T.HPALETTE
+	CreateHalftonePalette func(dc T.HDC) (T.HPALETTE, error)
 
-	StartDoc func(dc T.HDC, di *T.DOCINFO) int
+	StartDoc func(dc T.HDC, di *T.DOCINFO) (int, error)
 
-	EndDoc func(dc T.HDC) int
+	EndDoc func(dc T.HDC) (int, error)
 
-	StartPage func(dc T.HDC) int
+	StartPage func(dc T.HDC) (int, error)
 
-	EndPage func(dc T.HDC) int
+	EndPage func(dc T.HDC) (int, error)
 
-	AbortDoc func(dc T.HDC) int
+	AbortDoc func(dc T.HDC) (int, error)
 
-	SetAbortProc func(dc T.HDC, proc T.ABORTPROC) int
+	SetAbortProc func(dc T.HDC, proc T.ABORTPROC) (int, error)
 
-	AbortPath func(hdc T.HDC) T.BOOL
+	AbortPath func(hdc T.HDC) (T.BOOL, error)
 
 	ArcTo func(
 		dc T.HDC,
 		left, top, right, bottom,
-		xr1, yr1, xr2, yr2 int) T.BOOL
+		xr1, yr1, xr2, yr2 int) (T.BOOL, error)
 
-	BeginPath func(dc T.HDC) T.BOOL
+	BeginPath func(dc T.HDC) (T.BOOL, error)
 
-	CloseFigure func(dc T.HDC) T.BOOL
+	CloseFigure func(dc T.HDC) (T.BOOL, error)
 
-	EndPath func(dc T.HDC) T.BOOL
+	EndPath func(dc T.HDC) (T.BOOL, error)
 
-	FillPath func(dc T.HDC) T.BOOL
+	FillPath func(dc T.HDC) (T.BOOL, error)
 
-	FlattenPath func(dc T.HDC) T.BOOL
+	FlattenPath func(dc T.HDC) (T.BOOL, error)
 
-	GetPath func(dc T.HDC, pt *T.POINT, t *T.BYTE, cpt int) int
+	GetPath func(dc T.HDC, pt *T.POINT, t *T.BYTE, cpt int) (int, error)
 
-	PathToRegion func(hdc T.HDC) T.HRGN
+	PathToRegion func(hdc T.HDC) (T.HRGN, error)
 
-	PolyDraw func(dc T.HDC, pt *T.POINT, t *T.BYTE, cpt int) T.BOOL
+	PolyDraw func(dc T.HDC, pt *T.POINT, t *T.BYTE, cpt int) (T.BOOL, error)
 
-	SelectClipPath func(dc T.HDC, mode int) T.BOOL
+	SelectClipPath func(dc T.HDC, mode int) (T.BOOL, error)
 
-	SetArcDirection func(dc T.HDC, dir int) int
+	SetArcDirection func(dc T.HDC, dir int) (int, error)
 
-	SetMiterLimit func(dc T.HDC, limit T.FLOAT, old *T.FLOAT) T.BOOL
+	SetMiterLimit func(dc T.HDC, limit T.FLOAT, old *T.FLOAT) (T.BOOL, error)
 
-	StrokeAndFillPath func(dc T.HDC) T.BOOL
+	StrokeAndFillPath func(dc T.HDC) (T.BOOL, error)
 
-	StrokePath func(dc T.HDC) T.BOOL
+	StrokePath func(dc T.HDC) (T.BOOL, error)
 
-	WidenPath func(dc T.HDC) T.BOOL
+	WidenPath func(dc T.HDC) (T.BOOL, error)
 
 	ExtCreatePen func(
 		PenStyle T.DWORD,
 		Width T.DWORD,
 		LBrush *T.LOGBRUSH,
 		cStyle T.DWORD,
-		Style *T.DWORD) T.HPEN
+		Style *T.DWORD) (T.HPEN, error)
 
-	GetMiterLimit func(dc T.HDC, limit *T.FLOAT) T.BOOL
+	GetMiterLimit func(dc T.HDC, limit *T.FLOAT) (T.BOOL, error)
 
-	GetArcDirection func(dc T.HDC) int
+	GetArcDirection func(dc T.HDC) (int, error)
 
-	GetObject func(h T.HANDLE, c int, v *T.VOID) int
+	GetObject func(h T.HANDLE, c int, v *T.VOID) (int, error)
 
-	MoveToEx func(dc T.HDC, x, y int, pt *T.POINT) T.BOOL
+	MoveToEx func(dc T.HDC, x, y int, pt *T.POINT) (T.BOOL, error)
 
 	TextOut func(
-		dc T.HDC, x, y int, lpString VString, c int) T.BOOL
+		dc T.HDC, x, y int, lpString VString, c int) (T.BOOL, error)
 
 	ExtTextOut func(
 		dc T.HDC,
@@ -902,171 +902,171 @@ var (
 		rect *T.RECT,
 		String VString,
 		c T.UINT,
-		Dx *T.INT) T.BOOL
+		Dx *T.INT) (T.BOOL, error)
 
 	PolyTextOut func(
-		dc T.HDC, pt *T.POLYTEXT, nstrings int) T.BOOL
+		dc T.HDC, pt *T.POLYTEXT, nstrings int) (T.BOOL, error)
 
 	CreatePolygonRgn func(
 		ptl *T.POINT,
 		cPoint int,
-		Mode int) T.HRGN
+		Mode int) (T.HRGN, error)
 
-	DPtoLP func(dc T.HDC, pt *T.POINT, c int) T.BOOL
+	DPtoLP func(dc T.HDC, pt *T.POINT, c int) (T.BOOL, error)
 
-	LPtoDP func(dc T.HDC, pt *T.POINT, c int) T.BOOL
+	LPtoDP func(dc T.HDC, pt *T.POINT, c int) (T.BOOL, error)
 
-	Polygon func(dc T.HDC, pt *T.POINT, cpt int) T.BOOL
+	Polygon func(dc T.HDC, pt *T.POINT, cpt int) (T.BOOL, error)
 
-	Polyline func(dc T.HDC, pt *T.POINT, cpt int) T.BOOL
+	Polyline func(dc T.HDC, pt *T.POINT, cpt int) (T.BOOL, error)
 
-	PolyBezier func(dc T.HDC, pt *T.POINT, cpt T.DWORD) T.BOOL
+	PolyBezier func(dc T.HDC, pt *T.POINT, cpt T.DWORD) (T.BOOL, error)
 
-	PolyBezierTo func(dc T.HDC, pt *T.POINT, cpt T.DWORD) T.BOOL
+	PolyBezierTo func(dc T.HDC, pt *T.POINT, cpt T.DWORD) (T.BOOL, error)
 
-	PolylineTo func(dc T.HDC, pt *T.POINT, cpt T.DWORD) T.BOOL
+	PolylineTo func(dc T.HDC, pt *T.POINT, cpt T.DWORD) (T.BOOL, error)
 
-	SetViewportExtEx func(dc T.HDC, x, y int, sz *T.SIZE) T.BOOL
+	SetViewportExtEx func(dc T.HDC, x, y int, sz *T.SIZE) (T.BOOL, error)
 
-	SetViewportOrgEx func(dc T.HDC, x, y int, pt *T.POINT) T.BOOL
+	SetViewportOrgEx func(dc T.HDC, x, y int, pt *T.POINT) (T.BOOL, error)
 
-	SetWindowExtEx func(dc T.HDC, x, y int, sz *T.SIZE) T.BOOL
+	SetWindowExtEx func(dc T.HDC, x, y int, sz *T.SIZE) (T.BOOL, error)
 
-	SetWindowOrgEx func(dc T.HDC, x, y int, pt *T.POINT) T.BOOL
+	SetWindowOrgEx func(dc T.HDC, x, y int, pt *T.POINT) (T.BOOL, error)
 
-	OffsetViewportOrgEx func(dc T.HDC, x, y int, pt *T.POINT) T.BOOL
+	OffsetViewportOrgEx func(dc T.HDC, x, y int, pt *T.POINT) (T.BOOL, error)
 
-	OffsetWindowOrgEx func(dc T.HDC, x, y int, pt *T.POINT) T.BOOL
+	OffsetWindowOrgEx func(dc T.HDC, x, y int, pt *T.POINT) (T.BOOL, error)
 
 	ScaleViewportExtEx func(
-		hdc T.HDC, xn, xd, yn, yd int, sz *T.SIZE) T.BOOL
+		hdc T.HDC, xn, xd, yn, yd int, sz *T.SIZE) (T.BOOL, error)
 
 	ScaleWindowExtEx func(
-		dc T.HDC, xn, xd, yn, yd int, sz *T.SIZE) T.BOOL
+		dc T.HDC, xn, xd, yn, yd int, sz *T.SIZE) (T.BOOL, error)
 
 	SetBitmapDimensionEx func(
-		bm T.HBITMAP, w, h int, sz *T.SIZE) T.BOOL
+		bm T.HBITMAP, w, h int, sz *T.SIZE) (T.BOOL, error)
 
-	SetBrushOrgEx func(dc T.HDC, x, y int, pt *T.POINT) T.BOOL
+	SetBrushOrgEx func(dc T.HDC, x, y int, pt *T.POINT) (T.BOOL, error)
 
-	GetTextFace func(dc T.HDC, c int, name VString) int
+	GetTextFace func(dc T.HDC, c int, name VString) (int, error)
 
 	GetKerningPairs func(
-		dc T.HDC, pairs T.DWORD, kernPair *T.KERNINGPAIR) T.DWORD
+		dc T.HDC, pairs T.DWORD, kernPair *T.KERNINGPAIR) (T.DWORD, error)
 
-	GetDCOrgEx func(dc T.HDC, pt *T.POINT) T.BOOL
+	GetDCOrgEx func(dc T.HDC, pt *T.POINT) (T.BOOL, error)
 
 	FixBrushOrgEx func(
-		dc T.HDC, x, y int, ptl *T.POINT) T.BOOL
+		dc T.HDC, x, y int, ptl *T.POINT) (T.BOOL, error)
 
-	UnrealizeObject func(h T.HGDIOBJ) T.BOOL
+	UnrealizeObject func(h T.HGDIOBJ) (T.BOOL, error)
 
-	GdiFlush func() T.BOOL
+	GdiFlush func() (T.BOOL, error)
 
-	GdiSetBatchLimit func(dw T.DWORD) T.DWORD
+	GdiSetBatchLimit func(dw T.DWORD) (T.DWORD, error)
 
-	GdiGetBatchLimit func() T.DWORD
+	GdiGetBatchLimit func() (T.DWORD, error)
 
-	SetICMMode func(dc T.HDC, mode int) int
+	SetICMMode func(dc T.HDC, mode int) (int, error)
 
 	CheckColorsInGamut func(
 		dc T.HDC,
 		RGBTriple *T.VOID,
 		Buffer *T.VOID,
-		Count T.DWORD) T.BOOL
+		Count T.DWORD) (T.BOOL, error)
 
-	GetColorSpace func(dc T.HDC) T.HCOLORSPACE
+	GetColorSpace func(dc T.HDC) (T.HCOLORSPACE, error)
 
 	GetLogColorSpaceA func(
 		ColorSpace T.HCOLORSPACE,
 		Buffer *T.LOGCOLORSPACEA,
-		Size T.DWORD) T.BOOL
+		Size T.DWORD) (T.BOOL, error)
 
 	GetLogColorSpaceW func(
 		ColorSpace T.HCOLORSPACE,
 		Buffer *T.LOGCOLORSPACEW,
-		Size T.DWORD) T.BOOL
+		Size T.DWORD) (T.BOOL, error)
 
 	CreateColorSpaceA func(
-		lcs *T.LOGCOLORSPACEA) T.HCOLORSPACE
+		lcs *T.LOGCOLORSPACEA) (T.HCOLORSPACE, error)
 
 	CreateColorSpaceW func(
-		lcs *T.LOGCOLORSPACEW) T.HCOLORSPACE
+		lcs *T.LOGCOLORSPACEW) (T.HCOLORSPACE, error)
 
 	SetColorSpace func(
-		dc T.HDC, cs T.HCOLORSPACE) T.HCOLORSPACE
+		dc T.HDC, cs T.HCOLORSPACE) (T.HCOLORSPACE, error)
 
-	DeleteColorSpace func(cs T.HCOLORSPACE) T.BOOL
+	DeleteColorSpace func(cs T.HCOLORSPACE) (T.BOOL, error)
 
 	GetICMProfile func(
-		dc T.HDC, bufSize *T.DWORD, filename VString) T.BOOL
+		dc T.HDC, bufSize *T.DWORD, filename VString) (T.BOOL, error)
 
-	SetICMProfile func(dc T.HDC, fileName VString) T.BOOL
+	SetICMProfile func(dc T.HDC, fileName VString) (T.BOOL, error)
 
-	GetDeviceGammaRamp func(dc T.HDC, ramp *T.VOID) T.BOOL
+	GetDeviceGammaRamp func(dc T.HDC, ramp *T.VOID) (T.BOOL, error)
 
-	SetDeviceGammaRamp func(dc T.HDC, ramp *T.VOID) T.BOOL
+	SetDeviceGammaRamp func(dc T.HDC, ramp *T.VOID) (T.BOOL, error)
 
 	ColorMatchToTarget func(
-		dc T.HDC, target T.HDC, action T.DWORD) T.BOOL
+		dc T.HDC, target T.HDC, action T.DWORD) (T.BOOL, error)
 
 	EnumICMProfilesA func(
-		dc T.HDC, proc T.ICMENUMPROCA, param T.LPARAM) int
+		dc T.HDC, proc T.ICMENUMPROCA, param T.LPARAM) (int, error)
 
 	EnumICMProfilesW func(
-		dc T.HDC, proc T.ICMENUMPROCW, param T.LPARAM) int
+		dc T.HDC, proc T.ICMENUMPROCW, param T.LPARAM) (int, error)
 
 	UpdateICMRegKey func(
 		reserved T.DWORD,
 		cmid, fileName VString,
-		command T.UINT) T.BOOL
+		command T.UINT) (T.BOOL, error)
 
 	ColorCorrectPalette func(
 		dc T.HDC,
 		pal T.HPALETTE,
 		first T.DWORD,
-		num T.DWORD) T.BOOL
+		num T.DWORD) (T.BOOL, error)
 
-	WglCopyContext func(T.HGLRC, T.HGLRC, T.UINT) T.BOOL
+	WglCopyContext func(T.HGLRC, T.HGLRC, T.UINT) (T.BOOL, error)
 
-	WglCreateContext func(T.HDC) T.HGLRC
+	WglCreateContext func(T.HDC) (T.HGLRC, error)
 
-	WglCreateLayerContext func(T.HDC, int) T.HGLRC
+	WglCreateLayerContext func(T.HDC, int) (T.HGLRC, error)
 
-	WglDeleteContext func(T.HGLRC) T.BOOL
+	WglDeleteContext func(T.HGLRC) (T.BOOL, error)
 
-	WglGetCurrentContext func(T.VOID) T.HGLRC
+	WglGetCurrentContext func(T.VOID) (T.HGLRC, error)
 
-	WglGetCurrentDC func(T.VOID) T.HDC
+	WglGetCurrentDC func(T.VOID) (T.HDC, error)
 
-	WglGetProcAddress func(T.AString) T.PROC
+	WglGetProcAddress func(T.AString) (T.PROC, error)
 
-	WglMakeCurrent func(T.HDC, T.HGLRC) T.BOOL
+	WglMakeCurrent func(T.HDC, T.HGLRC) (T.BOOL, error)
 
-	WglShareLists func(T.HGLRC, T.HGLRC) T.BOOL
+	WglShareLists func(T.HGLRC, T.HGLRC) (T.BOOL, error)
 
-	WglUseFontBitmaps func(T.HDC, T.DWORD, T.DWORD, T.DWORD) T.BOOL
+	WglUseFontBitmaps func(T.HDC, T.DWORD, T.DWORD, T.DWORD) (T.BOOL, error)
 
-	SwapBuffers func(T.HDC) T.BOOL
+	SwapBuffers func(T.HDC) (T.BOOL, error)
 
 	WglUseFontOutlines func(
 		T.HDC, T.DWORD, T.DWORD, T.DWORD,
-		T.FLOAT, T.FLOAT, int, *T.GLYPHMETRICSFLOAT) T.BOOL
+		T.FLOAT, T.FLOAT, int, *T.GLYPHMETRICSFLOAT) (T.BOOL, error)
 
 	WglDescribeLayerPlane func(
-		T.HDC, int, int, T.UINT, *T.LAYERPLANEDESCRIPTOR) T.BOOL
+		T.HDC, int, int, T.UINT, *T.LAYERPLANEDESCRIPTOR) (T.BOOL, error)
 
 	WglSetLayerPaletteEntries func(
-		T.HDC, int, int, int, *T.COLORREF) int
+		T.HDC, int, int, int, *T.COLORREF) (int, error)
 
 	WglGetLayerPaletteEntries func(
-		T.HDC, int, int, int, *T.COLORREF) int
+		T.HDC, int, int, int, *T.COLORREF) (int, error)
 
-	WglRealizeLayerPalette func(T.HDC, int, T.BOOL) T.BOOL
+	WglRealizeLayerPalette func(T.HDC, int, T.BOOL) (T.BOOL, error)
 
-	WglSwapLayerBuffers func(T.HDC, T.WGL_SWAP_FLAG) T.BOOL
+	WglSwapLayerBuffers func(T.HDC, T.WGL_SWAP_FLAG) (T.BOOL, error)
 
-	WglSwapMultipleBuffers func(T.UINT, *T.WGLSWAP) T.DWORD
+	WglSwapMultipleBuffers func(T.UINT, *T.WGLSWAP) (T.DWORD, error)
 )
 
 /*
