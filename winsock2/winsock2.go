@@ -14,174 +14,174 @@ import (
 
 var (
 	Accept func(
-		s T.SOCKET, addr *T.SOCKADDR, addrlen *int) T.SOCKET
+		s T.SOCKET, addr *T.SOCKADDR, addrlen *int) (T.SOCKET, error)
 
-	Bind func(s T.SOCKET, name *T.SOCKADDR, namelen int) int
+	Bind func(s T.SOCKET, name *T.SOCKADDR, namelen int) (int, error)
 
-	Closesocket func(s T.SOCKET) int
+	Closesocket func(s T.SOCKET) (int, error)
 
-	Connect func(s T.SOCKET, name *T.SOCKADDR, namelen int) int
+	Connect func(s T.SOCKET, name *T.SOCKADDR, namelen int) (int, error)
 
-	Ioctlsocket func(s T.SOCKET, cmd T.LONG, argp *T.U_long) int
+	Ioctlsocket func(s T.SOCKET, cmd T.LONG, argp *T.U_long) (int, error)
 
 	Getpeername func(
-		s T.SOCKET, name *T.SOCKADDR, namelen *int) int
+		s T.SOCKET, name *T.SOCKADDR, namelen *int) (int, error)
 
 	Getsockname func(
-		s T.SOCKET, name *T.SOCKADDR, namelen *int) int
+		s T.SOCKET, name *T.SOCKADDR, namelen *int) (int, error)
 
 	Getsockopt func(s T.SOCKET,
-		level, optname int, optval *T.Char, optlen *int) int
+		level, optname int, optval *T.Char, optlen *int) (int, error)
 
-	Htonl func(hostlong T.U_long) T.U_long
+	Htonl func(hostlong T.U_long) (T.U_long, error)
 
-	Htons func(hostshort T.U_short) T.U_short
+	Htons func(hostshort T.U_short) (T.U_short, error)
 
-	Inet_addr func(cp *T.Char) T.Unsigned_long
+	Inet_addr func(cp *T.Char) (T.Unsigned_long, error)
 
-	Inet_ntoa func(in T.IN_ADDR) *T.Char
+	Inet_ntoa func(in T.IN_ADDR) (*T.Char, error)
 
-	Listen func(s T.SOCKET, backlog int) int
+	Listen func(s T.SOCKET, backlog int) (int, error)
 
-	Ntohl func(netlong T.U_long) T.U_long
+	Ntohl func(netlong T.U_long) (T.U_long, error)
 
-	Ntohs func(netshort T.U_short) T.U_short
+	Ntohs func(netshort T.U_short) (T.U_short, error)
 
-	Recv func(s T.SOCKET, buf *T.Char, leng, flags int) int
+	Recv func(s T.SOCKET, buf *T.Char, leng, flags int) (int, error)
 
 	Recvfrom func(s T.SOCKET, buf *T.Char,
-		leng, flags int, from *T.SOCKADDR, fromlen *int) int
+		leng, flags int, from *T.SOCKADDR, fromlen *int) (int, error)
 
 	Select func(nfds int, readfds,
-		writefds, exceptfds *T.FD_SET, timeout *T.TIMEVAL) int
+		writefds, exceptfds *T.FD_SET, timeout *T.TIMEVAL) (int, error)
 
-	Send func(s T.SOCKET, buf *T.Char, len int, flags int) int
+	Send func(s T.SOCKET, buf *T.Char, len int, flags int) (int, error)
 
 	Sendto func(s T.SOCKET, buf *T.Char,
-		leng, flags int, to *T.SOCKADDR, tolen int) int
+		leng, flags int, to *T.SOCKADDR, tolen int) (int, error)
 
 	Setsockopt func(s T.SOCKET,
-		level, optname int, optval *T.Char, optlen int) int
+		level, optname int, optval *T.Char, optlen int) (int, error)
 
-	Shutdown func(s T.SOCKET, how int) int
+	Shutdown func(s T.SOCKET, how int) (int, error)
 
-	Socket func(af, typ, protocol int) T.SOCKET
+	Socket func(af, typ, protocol int) (T.SOCKET, error)
 
-	Gethostbyaddr func(addr *T.Char, leng, typ int) *T.HOSTENT
+	Gethostbyaddr func(addr *T.Char, leng, typ int) (*T.HOSTENT, error)
 
-	Gethostbyname func(name *T.Char) *T.HOSTENT
+	Gethostbyname func(name *T.Char) (*T.HOSTENT, error)
 
-	Gethostname func(name *T.Char, namelen int) int
+	Gethostname func(name *T.Char, namelen int) (int, error)
 
-	Getservbyport func(port int, proto *T.Char) *T.SERVENT
+	Getservbyport func(port int, proto *T.Char) (*T.SERVENT, error)
 
-	Getservbyname func(name, proto *T.Char) *T.SERVENT
+	Getservbyname func(name, proto *T.Char) (*T.SERVENT, error)
 
-	Getprotobynumber func(number int) *T.PROTOENT
+	Getprotobynumber func(number int) (*T.PROTOENT, error)
 
-	Getprotobyname func(name *T.Char) *T.PROTOENT
+	Getprotobyname func(name *T.Char) (*T.PROTOENT, error)
 
 	WSAStartup func(
-		VersionRequested T.WORD, WSAData *T.WSADATA) int
+		VersionRequested T.WORD, WSAData *T.WSADATA) (int, error)
 
-	WSACleanup func() int
+	WSACleanup func() (int, error)
 
 	WSASetLastError func(Error int)
 
-	WSAGetLastError func() int
+	WSAGetLastError func() (int, error)
 
-	WSAIsBlocking func() T.BOOL
+	WSAIsBlocking func() (T.BOOL, error)
 
-	WSAUnhookBlockingHook func() int
+	WSAUnhookBlockingHook func() (int, error)
 
-	WSASetBlockingHook func(BlockFunc T.FARPROC) T.FARPROC
+	WSASetBlockingHook func(BlockFunc T.FARPROC) (T.FARPROC, error)
 
-	WSACancelBlockingCall func() int
+	WSACancelBlockingCall func() (int, error)
 
 	WSAAsyncGetServByName func(Wnd T.HWND, Msg T.U_int,
-		name, proto, buf *T.Char, buflen int) T.HANDLE
+		name, proto, buf *T.Char, buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetServByPort func(Wnd T.HWND, Msg T.U_int,
-		port int, proto, buf *T.Char, buflen int) T.HANDLE
+		port int, proto, buf *T.Char, buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetProtoByName func(Wnd T.HWND,
-		Msg T.U_int, name, buf *T.Char, buflen int) T.HANDLE
+		Msg T.U_int, name, buf *T.Char, buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetProtoByNumber func(Wnd T.HWND, Msg T.U_int,
-		number int, buf *T.Char, buflen int) T.HANDLE
+		number int, buf *T.Char, buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetHostByName func(Wnd T.HWND, Msg T.U_int,
-		name *T.Char, buf *T.Char, buflen int) T.HANDLE
+		name *T.Char, buf *T.Char, buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetHostByAddr func(Wnd T.HWND, Msg T.U_int, addr *T.Char,
-		leng, typ int, buf *T.Char, buflen int) T.HANDLE
+		leng, typ int, buf *T.Char, buflen int) (T.HANDLE, error)
 
-	WSACancelAsyncRequest func(AsyncTaskHandle T.HANDLE) int
+	WSACancelAsyncRequest func(AsyncTaskHandle T.HANDLE) (int, error)
 
 	WSAAsyncSelect func(
-		s T.SOCKET, Wnd T.HWND, Msg T.U_int, lEvent T.LONG) int
+		s T.SOCKET, Wnd T.HWND, Msg T.U_int, lEvent T.LONG) (int, error)
 
 	WSAAccept func(
 		s T.SOCKET,
 		addr *T.SOCKADDR,
 		addrlen *T.INT,
 		fnCondition *T.CONDITIONPROC,
-		CallbackData T.DWORD_PTR) T.SOCKET
+		CallbackData T.DWORD_PTR) (T.SOCKET, error)
 
-	WSACloseEvent func(Event T.WSAEVENT) T.BOOL
+	WSACloseEvent func(Event T.WSAEVENT) (T.BOOL, error)
 
 	WSAConnect func(s T.SOCKET, name *T.SOCKADDR,
 		namelen int,
 		CallerData, CalleeData *T.WSABUF,
-		SQOS, GQOS *T.QOS) int
+		SQOS, GQOS *T.QOS) (int, error)
 
-	WSACreateEvent func() T.WSAEVENT
+	WSACreateEvent func() (T.WSAEVENT, error)
 
 	WSADuplicateSocketA func(
 		s T.SOCKET,
 		ProcessId T.DWORD,
-		ProtocolInfo *T.WSAPROTOCOL_INFOA) int
+		ProtocolInfo *T.WSAPROTOCOL_INFOA) (int, error)
 
 	WSADuplicateSocketW func(
 		s T.SOCKET,
 		ProcessId T.DWORD,
-		ProtocolInfo *T.WSAPROTOCOL_INFOW) int
+		ProtocolInfo *T.WSAPROTOCOL_INFOW) (int, error)
 
 	WSAEnumNetworkEvents func(
 		s T.SOCKET,
 		EventObject T.WSAEVENT,
-		NetworkEvents *T.WSANETWORKEVENTS) int
+		NetworkEvents *T.WSANETWORKEVENTS) (int, error)
 
 	WSAEnumProtocolsA func(
 		Protocols *T.INT,
 		ProtocolBuffer *T.WSAPROTOCOL_INFOA,
-		BufferLength *T.DWORD) int
+		BufferLength *T.DWORD) (int, error)
 
 	WSAEnumProtocolsW func(
 		Protocols *T.INT,
 		ProtocolBuffer *T.WSAPROTOCOL_INFOW,
-		BufferLength *T.DWORD) int
+		BufferLength *T.DWORD) (int, error)
 
 	WSAEventSelect func(
 		s T.SOCKET,
 		EventObject T.WSAEVENT,
-		NetworkEvents T.LONG) int
+		NetworkEvents T.LONG) (int, error)
 
 	WSAGetOverlappedResult func(
 		s T.SOCKET,
 		Overlapped *T.WSAOVERLAPPED,
 		Transfer *T.DWORD,
 		fWait T.BOOL,
-		Flags *T.DWORD) T.BOOL
+		Flags *T.DWORD) (T.BOOL, error)
 
 	WSAGetQOSByName func(
-		s T.SOCKET, QOSName *T.WSABUF, QOS *T.QOS) T.BOOL
+		s T.SOCKET, QOSName *T.WSABUF, QOS *T.QOS) (T.BOOL, error)
 
 	WSAHtonl func(
-		s T.SOCKET, hostlong T.U_long, netlong *T.U_long) int
+		s T.SOCKET, hostlong T.U_long, netlong *T.U_long) (int, error)
 
 	WSAHtons func(
-		s T.SOCKET, hostshort T.U_short, netshort *T.U_short) int
+		s T.SOCKET, hostshort T.U_short, netshort *T.U_short) (int, error)
 
 	//TODO(t):Callback indirection
 
@@ -194,27 +194,27 @@ var (
 		sOutBuffer T.DWORD,
 		BytesReturned *T.DWORD,
 		Overlapped *T.WSAOVERLAPPED,
-		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) int
+		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) (int, error)
 
 	WSAJoinLeaf func(s T.SOCKET, name *T.SOCKADDR, namelen int,
 		CallerData, CalleeData *T.WSABUF,
-		SQOS, GQOS *T.QOS, Flags T.DWORD) T.SOCKET
+		SQOS, GQOS *T.QOS, Flags T.DWORD) (T.SOCKET, error)
 
 	WSANtohl func(
-		s T.SOCKET, netlong T.U_long, hostlong *T.U_long) int
+		s T.SOCKET, netlong T.U_long, hostlong *T.U_long) (int, error)
 
 	WSANtohs func(
-		s T.SOCKET, netshort T.U_short, hostshort *T.U_short) int
+		s T.SOCKET, netshort T.U_short, hostshort *T.U_short) (int, error)
 
 	//TODO(t):Callback indirection
 
 	WSARecv func(s T.SOCKET, Buffers *T.WSABUF,
 		BufferCount T.DWORD, NumberOfBytesRecvd, Flags *T.DWORD,
 		Overlapped *T.WSAOVERLAPPED,
-		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) int
+		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) (int, error)
 
 	WSARecvDisconnect func(s T.SOCKET,
-		InboundDisconnectData *T.WSABUF) int
+		InboundDisconnectData *T.WSABUF) (int, error)
 
 	//TODO(t):Callback indirection
 
@@ -227,9 +227,9 @@ var (
 		From *T.SOCKADDR,
 		Fromlen *T.INT,
 		Overlapped *T.WSAOVERLAPPED,
-		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) int
+		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) (int, error)
 
-	WSAResetEvent func(Event T.WSAEVENT) T.BOOL
+	WSAResetEvent func(Event T.WSAEVENT) (T.BOOL, error)
 
 	//TODO(t):Callback indirection
 
@@ -240,10 +240,10 @@ var (
 		NumberOfBytesSent *T.DWORD,
 		Flags T.DWORD,
 		Overlapped *T.WSAOVERLAPPED,
-		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) int
+		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) (int, error)
 
 	WSASendDisconnect func(
-		s T.SOCKET, OutboundDisconnectData *T.WSABUF) int
+		s T.SOCKET, OutboundDisconnectData *T.WSABUF) (int, error)
 
 	//TODO(t):Callback indirection
 
@@ -256,66 +256,66 @@ var (
 		To *T.SOCKADDR,
 		iTolen int,
 		Overlapped *T.WSAOVERLAPPED,
-		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) int
+		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) (int, error)
 
-	WSASetEvent func(Event T.WSAEVENT) T.BOOL
+	WSASetEvent func(Event T.WSAEVENT) (T.BOOL, error)
 
 	WSASocketA func(
 		af, typ, protocol int,
 		ProtocolInfo *T.WSAPROTOCOL_INFOA,
 		g T.GROUP,
-		Flags T.DWORD) T.SOCKET
+		Flags T.DWORD) (T.SOCKET, error)
 	WSASocketW func(
 		af, typ, protocol int,
 		ProtocolInfo *T.WSAPROTOCOL_INFOW,
 		g T.GROUP,
-		Flags T.DWORD) T.SOCKET
+		Flags T.DWORD) (T.SOCKET, error)
 
 	WSAWaitForMultipleEvents func(
 		nEvents T.DWORD,
 		Events *T.WSAEVENT,
 		WaitAll T.BOOL,
 		Timeout T.DWORD,
-		Alertable T.BOOL) T.DWORD
+		Alertable T.BOOL) (T.DWORD, error)
 
 	WSAAddressToStringA func(
 		Address *T.SOCKADDR,
 		AddressLength T.DWORD,
 		ProtocolInfo *T.WSAPROTOCOL_INFOA,
 		AddressString OVString,
-		AddressStringLength *T.DWORD) T.INT
+		AddressStringLength *T.DWORD) (T.INT, error)
 
 	WSAAddressToStringW func(
 		Address *T.SOCKADDR,
 		AddressLength T.DWORD,
 		ProtocolInfo *T.WSAPROTOCOL_INFOW,
 		AddressString OVString,
-		AddressStringLength *T.DWORD) T.INT
+		AddressStringLength *T.DWORD) (T.INT, error)
 
 	WSAStringToAddressA func(
 		AddressString VString,
 		AddressFamily T.INT,
 		ProtocolInfo *T.WSAPROTOCOL_INFOA,
 		Address *T.SOCKADDR,
-		AddressLength *T.INT) T.INT
+		AddressLength *T.INT) (T.INT, error)
 
 	WSAStringToAddressW func(
 		AddressString VString,
 		AddressFamily T.INT,
 		ProtocolInfo *T.WSAPROTOCOL_INFOW,
 		Address *T.SOCKADDR,
-		AddressLength *T.INT) T.INT
+		AddressLength *T.INT) (T.INT, error)
 
 	WSALookupServiceBegin func(
 		Restrictions *T.WSAQUERYSET,
 		ControlFlags T.DWORD,
-		Lookup *T.HANDLE) T.INT
+		Lookup *T.HANDLE) (T.INT, error)
 
 	WSALookupServiceNext func(
 		Lookup T.HANDLE,
 		ControlFlags T.DWORD,
 		BufferLength *T.DWORD,
-		Results *T.WSAQUERYSET) T.INT
+		Results *T.WSAQUERYSET) (T.INT, error)
 
 	WSANSPIoctl func(
 		Lookup T.HANDLE,
@@ -325,41 +325,41 @@ var (
 		OutBuffer *T.VOID,
 		sOutBuffer T.DWORD,
 		BytesReturned *T.DWORD,
-		Completion *T.WSACOMPLETION) T.INT
+		Completion *T.WSACOMPLETION) (T.INT, error)
 
-	WSALookupServiceEnd func(Lookup T.HANDLE) T.INT
+	WSALookupServiceEnd func(Lookup T.HANDLE) (T.INT, error)
 
 	WSAInstallServiceClass func(
-		ServiceClassInfo *T.WSASERVICECLASSINFO) T.INT
+		ServiceClassInfo *T.WSASERVICECLASSINFO) (T.INT, error)
 
-	WSARemoveServiceClass func(ServiceClassId *T.GUID) T.INT
+	WSARemoveServiceClass func(ServiceClassId *T.GUID) (T.INT, error)
 
 	WSAGetServiceClassInfo func(
 		ProviderId *T.GUID,
 		ServiceClassId *T.GUID,
 		BufSize *T.DWORD,
-		ServiceClassInfo *T.WSASERVICECLASSINFO) T.INT
+		ServiceClassInfo *T.WSASERVICECLASSINFO) (T.INT, error)
 
 	WSAEnumNameSpaceProviders func(
 		BufferLength *T.DWORD,
-		Buffer *T.WSANAMESPACE_INFO) T.INT
+		Buffer *T.WSANAMESPACE_INFO) (T.INT, error)
 
 	WSAGetServiceClassNameByClassId func(
 		ServiceClassId *T.GUID,
 		ServiceClassName OVString,
-		BufferLength *T.DWORD) T.INT
+		BufferLength *T.DWORD) (T.INT, error)
 
 	WSASetService func(
 		RegInfo *T.WSAQUERYSET,
 		essoperation T.WSAESETSERVICEOP,
-		ControlFlags T.DWORD) T.INT
+		ControlFlags T.DWORD) (T.INT, error)
 
 	//TODO(t):Callback indirection
 
 	WSAProviderConfigChange func(
 		NotificationHandle *T.HANDLE,
 		Overlapped *T.WSAOVERLAPPED,
-		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) T.INT
+		CompletionRoutine *T.WSAOVERLAPPED_COMPLETION_ROUTINE) (T.INT, error)
 )
 
 var WinSock2ANSIApis = outside.Apis{

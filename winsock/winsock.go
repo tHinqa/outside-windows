@@ -28,66 +28,66 @@ type (
 )
 
 var (
-	WSAFDIsSet func(T.SOCKET, *fd_set) int
+	WSAFDIsSet func(T.SOCKET, *fd_set) (int, error)
 
 	Accept func(
 		s T.SOCKET,
 		addr *sockaddr,
-		addrlen *int) T.SOCKET
+		addrlen *int) (T.SOCKET, error)
 
 	Bind func(
 		s T.SOCKET,
 		addr *sockaddr,
-		namelen int) int
+		namelen int) (int, error)
 
-	Closesocket func(s T.SOCKET) int
+	Closesocket func(s T.SOCKET) (int, error)
 
 	Connect func(
 		s T.SOCKET,
 		name *sockaddr,
-		namelen int) int
+		namelen int) (int, error)
 
 	Ioctlsocket func(
 		s T.SOCKET,
 		cmd long,
-		argp *u_long) int
+		argp *u_long) (int, error)
 
 	Getpeername func(
 		s T.SOCKET,
 		name *sockaddr,
-		namelen *int) int
+		namelen *int) (int, error)
 
 	Getsockname func(
 		s T.SOCKET,
 		name *sockaddr,
-		namelen *int) int
+		namelen *int) (int, error)
 
 	Getsockopt func(
 		s T.SOCKET,
 		level int,
 		optname int,
 		optval *char,
-		optlen *int) int
+		optlen *int) (int, error)
 
-	Htonl func(hostlong u_long) u_long
+	Htonl func(hostlong u_long) (u_long, error)
 
-	Htons func(hostshort u_short) u_short
+	Htons func(hostshort u_short) (u_short, error)
 
-	Inet_addr func(cp *char) unsigned_long
+	Inet_addr func(cp *char) (unsigned_long, error)
 
-	Inet_ntoa func(in in_addr) *char
+	Inet_ntoa func(in in_addr) (*char, error)
 
-	Listen func(s T.SOCKET, backlog int) int
+	Listen func(s T.SOCKET, backlog int) (int, error)
 
-	Ntohl func(netlong u_long) u_long
+	Ntohl func(netlong u_long) (u_long, error)
 
-	Ntohs func(netshort u_short) u_short
+	Ntohs func(netshort u_short) (u_short, error)
 
 	Recv func(
 		s T.SOCKET,
 		buf *char,
 		len int,
-		flags int) int
+		flags int) (int, error)
 
 	Recvfrom func(
 		s T.SOCKET,
@@ -95,20 +95,20 @@ var (
 		len int,
 		flags int,
 		from *sockaddr,
-		fromlen *int) int
+		fromlen *int) (int, error)
 
 	Select func(
 		fds int,
 		readfds *fd_set,
 		writefds *fd_set,
 		exceptfds *fd_set,
-		timeout *timeval) int
+		timeout *timeval) (int, error)
 
 	Send func(
 		s T.SOCKET,
 		buf *char,
 		len int,
-		flags int) int
+		flags int) (int, error)
 
 	Sendto func(
 		s T.SOCKET,
@@ -116,69 +116,69 @@ var (
 		len int,
 		flags int,
 		to *sockaddr,
-		tolen int) int
+		tolen int) (int, error)
 
 	Setsockopt func(
 		s T.SOCKET,
 		level int,
 		optname int,
 		optval *char,
-		optlen int) int
+		optlen int) (int, error)
 
 	Shutdown func(
 		s T.SOCKET,
-		how int) int
+		how int) (int, error)
 
 	Socket func(
 		af int,
 		typ int,
-		protocol int) T.SOCKET
+		protocol int) (T.SOCKET, error)
 
 	Gethostbyaddr func(
 		addr *char,
 		len int,
-		typ int) *hostent
+		typ int) (*hostent, error)
 
 	Gethostbyname func(
-		name *char) *hostent
+		name *char) (*hostent, error)
 
 	Gethostname func(
 		name *char,
-		namelen int) int
+		namelen int) (int, error)
 
 	Getservbyport func(
 		port int,
-		proto *char) *servent
+		proto *char) (*servent, error)
 
 	Getservbyname func(
 		name *char,
-		proto *char) *servent
+		proto *char) (*servent, error)
 
 	Getprotobynumber func(
-		proto int) *protoent
+		proto int) (*protoent, error)
 
 	Getprotobyname func(
-		name *char) *protoent
+		name *char) (*protoent, error)
 
 	WSAStartup func(
 		VersionRequired T.WORD,
-		WSAData *T.WSADATA) int
+		WSAData *T.WSADATA) (int, error)
 
-	WSACleanup func() int
+	WSACleanup func() (int, error)
 
 	WSASetLastError func(
 		iError int)
 
-	WSAGetLastError func() int
+	WSAGetLastError func() (int, error)
 
-	WSAIsBlocking func() T.BOOL
+	WSAIsBlocking func() (T.BOOL, error)
 
-	WSAUnhookBlockingHook func() int
+	WSAUnhookBlockingHook func() (int, error)
 
 	WSASetBlockingHook func(
-		BlockFunc T.FARPROC) T.FARPROC
+		BlockFunc T.FARPROC) (T.FARPROC, error)
 
-	WSACancelBlockingCall func() int
+	WSACancelBlockingCall func() (int, error)
 
 	WSAAsyncGetServByName func(
 		Wnd T.HWND,
@@ -186,7 +186,7 @@ var (
 		name *char,
 		proto *char,
 		buf *char,
-		buflen int) T.HANDLE
+		buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetServByPort func(
 		Wnd T.HWND,
@@ -194,28 +194,28 @@ var (
 		port int,
 		proto *char,
 		buf *char,
-		buflen int) T.HANDLE
+		buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetProtoByName func(
 		Wnd T.HWND,
 		Msg u_int,
 		name *char,
 		buf *char,
-		buflen int) T.HANDLE
+		buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetProtoByNumber func(
 		Wnd T.HWND,
 		Msg u_int,
 		number int,
 		buf *char,
-		buflen int) T.HANDLE
+		buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetHostByName func(
 		Wnd T.HWND,
 		Msg u_int,
 		name *char,
 		buf *char,
-		buflen int) T.HANDLE
+		buflen int) (T.HANDLE, error)
 
 	WSAAsyncGetHostByAddr func(
 		Wnd T.HWND,
@@ -224,21 +224,21 @@ var (
 		len int,
 		typ int,
 		buf *char,
-		buflen int) T.HANDLE
+		buflen int) (T.HANDLE, error)
 
-	WSACancelAsyncRequest func(hAsyncTaskHandle T.HANDLE) int
+	WSACancelAsyncRequest func(hAsyncTaskHandle T.HANDLE) (int, error)
 
 	WSAAsyncSelect func(
 		s T.SOCKET,
 		Wnd T.HWND,
 		Msg u_int,
-		lEvent long) int
+		lEvent long) (int, error)
 
 	WSARecvEx func(
 		s T.SOCKET,
 		buf *char,
 		len int,
-		flags *int) int
+		flags *int) (int, error)
 
 	TransmitFile func(
 		Socket T.SOCKET,
@@ -247,7 +247,7 @@ var (
 		NumberOfBytesPerSend T.DWORD,
 		Overlapped *T.OVERLAPPED,
 		TransmitBuffers *T.TRANSMIT_FILE_BUFFERS,
-		Reserved T.DWORD) T.BOOL
+		Reserved T.DWORD) (T.BOOL, error)
 
 	AcceptEx func(
 		ListenSocket T.SOCKET,
@@ -257,7 +257,7 @@ var (
 		LocalAddressLength T.DWORD,
 		RemoteAddressLength T.DWORD,
 		BytesReceived *T.DWORD,
-		Overlapped *T.OVERLAPPED) T.BOOL
+		Overlapped *T.OVERLAPPED) (T.BOOL, error)
 
 	GetAcceptExSockaddrs func(
 		OutputBuffer *T.VOID,

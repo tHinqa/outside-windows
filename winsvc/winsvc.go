@@ -24,19 +24,19 @@ var (
 		Dependencies,
 		ServiceStartName,
 		Password,
-		DisplayName VString) T.BOOL
+		DisplayName VString) (T.BOOL, error)
 
 	ChangeServiceConfig2 func(
 		Service T.SC_HANDLE,
 		InfoLevel T.DWORD,
-		Info *T.VOID) T.BOOL
+		Info *T.VOID) (T.BOOL, error)
 
-	CloseServiceHandle func(SCObject T.SC_HANDLE) T.BOOL
+	CloseServiceHandle func(SCObject T.SC_HANDLE) (T.BOOL, error)
 
 	ControlService func(
 		Service T.SC_HANDLE,
 		Control T.DWORD,
-		ServiceStatus *T.SERVICE_STATUS) T.BOOL
+		ServiceStatus *T.SERVICE_STATUS) (T.BOOL, error)
 
 	CreateService func(
 		SCManager T.SC_HANDLE,
@@ -51,9 +51,9 @@ var (
 		TagId *T.DWORD,
 		Dependencies,
 		ServiceStartName,
-		Password VString) T.SC_HANDLE
+		Password VString) (T.SC_HANDLE, error)
 
-	DeleteService func(Service T.SC_HANDLE) T.BOOL
+	DeleteService func(Service T.SC_HANDLE) (T.BOOL, error)
 
 	EnumDependentServices func(
 		Service T.SC_HANDLE,
@@ -61,7 +61,7 @@ var (
 		Services *T.ENUM_SERVICE_STATUS,
 		BufSize T.DWORD,
 		BytesNeeded,
-		ServicesReturned *T.DWORD) T.BOOL
+		ServicesReturned *T.DWORD) (T.BOOL, error)
 
 	EnumServicesStatus func(
 		SCManager T.SC_HANDLE,
@@ -71,7 +71,7 @@ var (
 		BufSize T.DWORD,
 		BytesNeeded,
 		ServicesReturned,
-		ResumeHandle *T.DWORD) T.BOOL
+		ResumeHandle *T.DWORD) (T.BOOL, error)
 
 	EnumServicesStatusEx func(
 		SCManager T.SC_HANDLE,
@@ -83,98 +83,98 @@ var (
 		BytesNeeded,
 		ServicesReturned,
 		ResumeHandle *T.DWORD,
-		pszGroupName VString) T.BOOL
+		pszGroupName VString) (T.BOOL, error)
 
 	GetServiceKeyName func(
 		SCManager T.SC_HANDLE,
 		DisplayName VString,
 		ServiceName OVString,
-		cBuffer *T.DWORD) T.BOOL
+		cBuffer *T.DWORD) (T.BOOL, error)
 
 	GetServiceDisplayName func(
 		SCManager T.SC_HANDLE,
 		ServiceName VString,
 		DisplayName OVString,
-		cBuffer *T.DWORD) T.BOOL
+		cBuffer *T.DWORD) (T.BOOL, error)
 
-	LockServiceDatabase func(SCManager T.SC_HANDLE) T.SC_LOCK
+	LockServiceDatabase func(SCManager T.SC_HANDLE) (T.SC_LOCK, error)
 
-	NotifyBootConfigStatus func(BootAcceptable T.BOOL) T.BOOL
+	NotifyBootConfigStatus func(BootAcceptable T.BOOL) (T.BOOL, error)
 
 	OpenSCManager func(
 		MachineName,
 		DatabaseName VString,
-		DesiredAccess T.DWORD) T.SC_HANDLE
+		DesiredAccess T.DWORD) (T.SC_HANDLE, error)
 
 	OpenService func(
 		SCManager T.SC_HANDLE,
 		ServiceName VString,
-		DesiredAccess T.DWORD) T.SC_HANDLE
+		DesiredAccess T.DWORD) (T.SC_HANDLE, error)
 
 	QueryServiceConfig func(
 		Service T.SC_HANDLE,
 		ServiceConfig *T.QUERY_SERVICE_CONFIG,
 		BufSize T.DWORD,
-		BytesNeeded *T.DWORD) T.BOOL
+		BytesNeeded *T.DWORD) (T.BOOL, error)
 
 	QueryServiceConfig2 func(
 		Service T.SC_HANDLE,
 		InfoLevel T.DWORD,
 		Buffer *T.BYTE,
 		BufSize T.DWORD,
-		BytesNeeded *T.DWORD) T.BOOL
+		BytesNeeded *T.DWORD) (T.BOOL, error)
 
 	QueryServiceLockStatus func(
 		SCManager T.SC_HANDLE,
 		LockStatus *T.QUERY_SERVICE_LOCK_STATUS,
 		BufSize T.DWORD,
-		BytesNeeded *T.DWORD) T.BOOL
+		BytesNeeded *T.DWORD) (T.BOOL, error)
 
 	QueryServiceObjectSecurity func(
 		Service T.SC_HANDLE,
 		SecurityInformation T.SECURITY_INFORMATION,
 		SecurityDescriptor *T.SECURITY_DESCRIPTOR,
 		BufSize T.DWORD,
-		BytesNeeded *T.DWORD) T.BOOL
+		BytesNeeded *T.DWORD) (T.BOOL, error)
 
 	QueryServiceStatus func(
 		Service T.SC_HANDLE,
-		ServiceStatus *T.SERVICE_STATUS) T.BOOL
+		ServiceStatus *T.SERVICE_STATUS) (T.BOOL, error)
 
 	QueryServiceStatusEx func(
 		Service T.SC_HANDLE,
 		InfoLevel T.SC_STATUS_TYPE,
 		Buffer *T.BYTE,
 		BufSize T.DWORD,
-		BytesNeeded *T.DWORD) T.BOOL
+		BytesNeeded *T.DWORD) (T.BOOL, error)
 
 	RegisterServiceCtrlHandler func(
 		ServiceName VString,
-		HandlerProc *T.HANDLER_FUNCTION) T.SERVICE_STATUS_HANDLE
+		HandlerProc *T.HANDLER_FUNCTION) (T.SERVICE_STATUS_HANDLE, error)
 
 	RegisterServiceCtrlHandlerEx func(
 		ServiceName VString,
 		HandlerProc *T.HANDLER_FUNCTION_EX,
-		Context *T.VOID) T.SERVICE_STATUS_HANDLE
+		Context *T.VOID) (T.SERVICE_STATUS_HANDLE, error)
 
 	SetServiceObjectSecurity func(
 		Service T.SC_HANDLE,
 		SecurityInformation T.SECURITY_INFORMATION,
-		SecurityDescriptor *T.SECURITY_DESCRIPTOR) T.BOOL
+		SecurityDescriptor *T.SECURITY_DESCRIPTOR) (T.BOOL, error)
 
 	SetServiceStatus func(
 		ServiceStatusH T.SERVICE_STATUS_HANDLE,
-		ServiceStatus *T.SERVICE_STATUS) T.BOOL
+		ServiceStatus *T.SERVICE_STATUS) (T.BOOL, error)
 
 	StartServiceCtrlDispatcher func(
-		ServiceStartTable *T.SERVICE_TABLE_ENTRY) T.BOOL
+		ServiceStartTable *T.SERVICE_TABLE_ENTRY) (T.BOOL, error)
 
 	StartService func(
 		Service T.SC_HANDLE,
 		NumServiceArgs T.DWORD,
-		ServiceArgVectors *VString) T.BOOL
+		ServiceArgVectors *VString) (T.BOOL, error)
 
-	UnlockServiceDatabase func(ScLock T.SC_LOCK) T.BOOL
+	UnlockServiceDatabase func(ScLock T.SC_LOCK) (T.BOOL, error)
 )
 
 var WinSvcANSIApis = outside.Apis{

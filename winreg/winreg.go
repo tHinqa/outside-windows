@@ -13,34 +13,34 @@ import (
 )
 
 var (
-	RegCloseKey func(Key T.HKEY) T.LONG
+	RegCloseKey func(Key T.HKEY) (T.LONG, error)
 
-	RegOverridePredefKey func(Key T.HKEY, NewHKey T.HKEY) T.LONG
+	RegOverridePredefKey func(Key T.HKEY, NewHKey T.HKEY) (T.LONG, error)
 
 	RegOpenUserClassesRoot func(
 		Token T.HANDLE,
 		Options T.DWORD,
 		SamDesired T.REGSAM,
-		Result *T.HKEY) T.LONG
+		Result *T.HKEY) (T.LONG, error)
 
 	RegOpenCurrentUser func(
-		SamDesired T.REGSAM, Result *T.HKEY) T.LONG
+		SamDesired T.REGSAM, Result *T.HKEY) (T.LONG, error)
 
-	RegDisablePredefinedCache func() T.LONG
+	RegDisablePredefinedCache func() (T.LONG, error)
 
 	RegConnectRegistry func(
 		MachineName VString,
 		Key T.HKEY,
-		Result *T.HKEY) T.LONG
+		Result *T.HKEY) (T.LONG, error)
 
 	RegConnectRegistryEx func(
 		MachineName VString,
 		Key T.HKEY,
 		Flags T.ULONG,
-		Result *T.HKEY) T.LONG
+		Result *T.HKEY) (T.LONG, error)
 
 	RegCreateKey func(
-		Key T.HKEY, SubKey VString, Result *T.HKEY) T.LONG
+		Key T.HKEY, SubKey VString, Result *T.HKEY) (T.LONG, error)
 
 	RegCreateKeyEx func(
 		Key T.HKEY,
@@ -51,30 +51,30 @@ var (
 		SamDesired T.REGSAM,
 		SecurityAttributes *T.SECURITY_ATTRIBUTES,
 		Result *T.HKEY,
-		Disposition *T.DWORD) T.LONG
+		Disposition *T.DWORD) (T.LONG, error)
 
-	RegDeleteKey func(Key T.HKEY, SubKey VString) T.LONG
+	RegDeleteKey func(Key T.HKEY, SubKey VString) (T.LONG, error)
 
 	RegDeleteKeyEx func(
 		Key T.HKEY,
 		SubKey VString,
 		SamDesired T.REGSAM,
-		Reserved T.DWORD) T.LONG
+		Reserved T.DWORD) (T.LONG, error)
 
-	RegDisableReflectionKey func(Base T.HKEY) T.LONG
+	RegDisableReflectionKey func(Base T.HKEY) (T.LONG, error)
 
-	RegEnableReflectionKey func(Base T.HKEY) T.LONG
+	RegEnableReflectionKey func(Base T.HKEY) (T.LONG, error)
 
 	RegQueryReflectionKey func(
-		Base T.HKEY, IsReflectionDisabled *T.BOOL) T.LONG
+		Base T.HKEY, IsReflectionDisabled *T.BOOL) (T.LONG, error)
 
-	RegDeleteValue func(Key T.HKEY, ValueName VString) T.LONG
+	RegDeleteValue func(Key T.HKEY, ValueName VString) (T.LONG, error)
 
 	RegEnumKey func(
 		Key T.HKEY,
 		Index T.DWORD,
 		Name OVString,
-		cName T.DWORD) T.LONG
+		cName T.DWORD) (T.LONG, error)
 
 	RegEnumKeyEx func(
 		Key T.HKEY,
@@ -84,7 +84,7 @@ var (
 		Reserved *T.DWORD,
 		Class OVString,
 		cClass *T.DWORD,
-		LastWriteTime *T.FILETIME) T.LONG
+		LastWriteTime *T.FILETIME) (T.LONG, error)
 
 	RegEnumValue func(
 		Key T.HKEY,
@@ -94,35 +94,35 @@ var (
 		Reserved *T.DWORD,
 		Type *T.DWORD,
 		Data *T.BYTE,
-		cData *T.DWORD) T.LONG
+		cData *T.DWORD) (T.LONG, error)
 
-	RegFlushKey func(Key T.HKEY) T.LONG
+	RegFlushKey func(Key T.HKEY) (T.LONG, error)
 
 	RegGetKeySecurity func(
 		Key T.HKEY,
 		SecurityInformation T.SECURITY_INFORMATION,
 		SecurityDescriptor *T.SECURITY_DESCRIPTOR,
-		cSecurityDescriptor *T.DWORD) T.LONG
+		cSecurityDescriptor *T.DWORD) (T.LONG, error)
 
 	RegLoadKey func(
-		Key T.HKEY, SubKey, File VString) T.LONG
+		Key T.HKEY, SubKey, File VString) (T.LONG, error)
 
 	RegNotifyChangeKeyValue func(
 		Key T.HKEY,
 		WatchSubtree T.BOOL,
 		NotifyFilter T.DWORD,
 		Event T.HANDLE,
-		Asynchronous T.BOOL) T.LONG
+		Asynchronous T.BOOL) (T.LONG, error)
 
 	RegOpenKey func(
-		Key T.HKEY, SubKey VString, Result *T.HKEY) T.LONG
+		Key T.HKEY, SubKey VString, Result *T.HKEY) (T.LONG, error)
 
 	RegOpenKeyEx func(
 		Key T.HKEY,
 		SubKey VString,
 		Options T.DWORD,
 		SamDesired T.REGSAM,
-		Result *T.HKEY) T.LONG
+		Result *T.HKEY) (T.LONG, error)
 
 	RegQueryInfoKey func(
 		Key T.HKEY,
@@ -136,20 +136,20 @@ var (
 		MaxValueNameLen,
 		MaxValueLen,
 		SecurityDescriptor *T.DWORD,
-		LastWriteTime *T.FILETIME) T.LONG
+		LastWriteTime *T.FILETIME) (T.LONG, error)
 
 	RegQueryValue func(
 		Key T.HKEY,
 		SubKey VString,
 		Data OVString,
-		cData *T.LONG) T.LONG
+		cData *T.LONG) (T.LONG, error)
 
 	RegQueryMultipleValues func(
 		Key T.HKEY,
 		ValList *T.VALENT,
 		NumVals T.DWORD,
 		ValueBuf VString,
-		TotSize *T.DWORD) T.LONG
+		TotSize *T.DWORD) (T.LONG, error)
 
 	RegQueryValueEx func(
 		Key T.HKEY,
@@ -157,30 +157,30 @@ var (
 		Reserved,
 		Type *T.DWORD,
 		Data *T.BYTE,
-		cData *T.DWORD) T.LONG
+		cData *T.DWORD) (T.LONG, error)
 
 	RegReplaceKey func(
-		Key T.HKEY, SubKey, NewFile, OldFile VString) T.LONG
+		Key T.HKEY, SubKey, NewFile, OldFile VString) (T.LONG, error)
 
 	RegRestoreKey func(
-		Key T.HKEY, File VString, Flags T.DWORD) T.LONG
+		Key T.HKEY, File VString, Flags T.DWORD) (T.LONG, error)
 
 	RegSaveKey func(
 		Key T.HKEY,
 		File VString,
-		SecurityAttributes *T.SECURITY_ATTRIBUTES) T.LONG
+		SecurityAttributes *T.SECURITY_ATTRIBUTES) (T.LONG, error)
 
 	RegSetKeySecurity func(
 		Key T.HKEY,
 		SecurityInformation T.SECURITY_INFORMATION,
-		pSecurityDescriptor *T.SECURITY_DESCRIPTOR) T.LONG
+		pSecurityDescriptor *T.SECURITY_DESCRIPTOR) (T.LONG, error)
 
 	RegSetValue func(
 		Key T.HKEY,
 		SubKey VString,
 		Type T.DWORD,
 		Data VString,
-		cbData T.DWORD) T.LONG
+		cbData T.DWORD) (T.LONG, error)
 
 	RegSetValueEx func(
 		Key T.HKEY,
@@ -188,9 +188,9 @@ var (
 		Reserved,
 		Type T.DWORD,
 		Data *T.BYTE,
-		cData T.DWORD) T.LONG
+		cData T.DWORD) (T.LONG, error)
 
-	RegUnLoadKey func(Key T.HKEY, SubKey VString) T.LONG
+	RegUnLoadKey func(Key T.HKEY, SubKey VString) (T.LONG, error)
 
 	RegGetValue func(
 		Key T.HKEY,
@@ -198,30 +198,30 @@ var (
 		Flags T.DWORD,
 		Type *T.DWORD,
 		Data *T.VOID,
-		cData *T.DWORD) T.LONG
+		cData *T.DWORD) (T.LONG, error)
 
 	InitiateSystemShutdown func(
 		MachineName, Message VString,
 		Timeout T.DWORD,
-		ForceAppsClosed, RebootAfterShutdown T.BOOL) T.BOOL
+		ForceAppsClosed, RebootAfterShutdown T.BOOL) (T.BOOL, error)
 
 	AbortSystemShutdown func(
-		MachineName VString) T.BOOL
+		MachineName VString) (T.BOOL, error)
 
 	InitiateSystemShutdownEx func(
 		MachineName, Message VString,
 		Timeout T.DWORD,
 		ForceAppsClosed, RebootAfterShutdown T.BOOL,
-		Reason T.DWORD) T.BOOL
+		Reason T.DWORD) (T.BOOL, error)
 
 	RegSaveKeyEx func(
 		Key T.HKEY,
 		File VString,
 		SecurityAttributes *T.SECURITY_ATTRIBUTES,
-		Flags T.DWORD) T.LONG
+		Flags T.DWORD) (T.LONG, error)
 
 	Wow64Win32ApiEntry func(
-		FuncNumber T.DWORD, Flag T.DWORD, Res T.DWORD) T.LONG
+		FuncNumber T.DWORD, Flag T.DWORD, Res T.DWORD) (T.LONG, error)
 )
 
 var WinRegANSIApis = outside.Apis{
