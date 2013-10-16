@@ -13,25 +13,25 @@ import (
 )
 
 var (
-	LZStart func() T.INT
+	LZStart func() (T.INT, error)
 
-	LZDone func() T.VOID
+	LZDone func() (T.VOID, error)
 
-	CopyLZFile func(T.INT, T.INT) T.LONG
+	CopyLZFile func(T.INT, T.INT) (T.LONG, error)
 
-	LZCopy func(T.INT, T.INT) T.LONG
+	LZCopy func(T.INT, T.INT) (T.LONG, error)
 
-	LZInit func(T.INT) T.INT
+	LZInit func(T.INT) (T.INT, error)
 
-	GetExpandedName func(VString, OVString) T.INT
+	GetExpandedName func(VString, OVString) (T.INT, error)
 
-	LZOpenFile func(OVString, *T.OFSTRUCT, T.WORD) T.INT
+	LZOpenFile func(OVString, *T.OFSTRUCT, T.WORD) (T.INT, error)
 
-	LZSeek func(T.INT, T.LONG, T.INT) T.LONG
+	LZSeek func(T.INT, T.LONG, T.INT) (T.LONG, error)
 
-	LZRead func(T.INT, T.AString, T.INT) T.INT
+	LZRead func(T.INT, T.AString, T.INT) (T.INT, error)
 
-	LZClose func(T.INT) T.VOID
+	LZClose func(T.INT) (T.VOID, error)
 )
 
 var LZExpandANSIApis = outside.Apis{

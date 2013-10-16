@@ -15,44 +15,44 @@ import (
 var (
 	InitMUILanguage func(uiLang T.LANGID)
 
-	GetMUILanguage func() T.LANGID
+	GetMUILanguage func() (T.LANGID, error)
 
 	InitCommonControls func()
 
-	InitCommonControlsEx func(*T.INITCOMMONCONTROLSEX) T.BOOL
+	InitCommonControlsEx func(*T.INITCOMMONCONTROLSEX) (T.BOOL, error)
 
 	ImageList_Create func(
-		x, y int, flags T.UINT, initial, grow int) T.HIMAGELIST
+		x, y int, flags T.UINT, initial, grow int) (T.HIMAGELIST, error)
 
-	ImageList_Destroy func(iml T.HIMAGELIST) T.BOOL
+	ImageList_Destroy func(iml T.HIMAGELIST) (T.BOOL, error)
 
-	ImageList_GetImageCount func(iml T.HIMAGELIST) int
+	ImageList_GetImageCount func(iml T.HIMAGELIST) (int, error)
 
 	ImageList_SetImageCount func(
-		iml T.HIMAGELIST, newCount T.UINT) T.BOOL
+		iml T.HIMAGELIST, newCount T.UINT) (T.BOOL, error)
 
 	ImageList_Add func(
-		iml T.HIMAGELIST, image T.HBITMAP, mask T.HBITMAP) int
+		iml T.HIMAGELIST, image T.HBITMAP, mask T.HBITMAP) (int, error)
 
 	ImageList_ReplaceIcon func(
-		iml T.HIMAGELIST, i int, icon T.HICON) int
+		iml T.HIMAGELIST, i int, icon T.HICON) (int, error)
 
 	ImageList_SetBkColor func(
-		iml T.HIMAGELIST, clrBk T.COLORREF) T.COLORREF
+		iml T.HIMAGELIST, clrBk T.COLORREF) (T.COLORREF, error)
 
-	ImageList_GetBkColor func(iml T.HIMAGELIST) T.COLORREF
+	ImageList_GetBkColor func(iml T.HIMAGELIST) (T.COLORREF, error)
 
 	ImageList_SetOverlayImage func(
-		iml T.HIMAGELIST, T.Image, Overlay int) T.BOOL
+		iml T.HIMAGELIST, T.Image, Overlay int) (T.BOOL, error)
 
 	ImageList_Draw func(
-		iml T.HIMAGELIST, i int, dst T.HDC, x, y int, style T.UINT) T.BOOL
+		iml T.HIMAGELIST, i int, dst T.HDC, x, y int, style T.UINT) (T.BOOL, error)
 
 	ImageList_Replace func(
-		iml T.HIMAGELIST, i int, image T.HBITMAP, mask T.HBITMAP) T.BOOL
+		iml T.HIMAGELIST, i int, image T.HBITMAP, mask T.HBITMAP) (T.BOOL, error)
 
 	ImageList_AddMasked func(
-		iml T.HIMAGELIST, image T.HBITMAP, mask T.COLORREF) int
+		iml T.HIMAGELIST, image T.HBITMAP, mask T.COLORREF) (int, error)
 
 	ImageList_DrawEx func(
 		iml T.HIMAGELIST,
@@ -60,66 +60,66 @@ var (
 		dst T.HDC,
 		x, y, dx, dy int,
 		bk, fg T.COLORREF,
-		style T.UINT) T.BOOL
+		style T.UINT) (T.BOOL, error)
 
 	ImageList_DrawIndirect func(
-		imldp *T.IMAGELISTDRAWPARAMS) T.BOOL
+		imldp *T.IMAGELISTDRAWPARAMS) (T.BOOL, error)
 
-	ImageList_Remove func(iml T.HIMAGELIST, i int) T.BOOL
+	ImageList_Remove func(iml T.HIMAGELIST, i int) (T.BOOL, error)
 
 	ImageList_GetIcon func(
-		himl T.HIMAGELIST, i int, flags T.UINT) T.HICON
+		himl T.HIMAGELIST, i int, flags T.UINT) (T.HICON, error)
 
 	ImageList_LoadImage func(
 		i T.HINSTANCE,
 		bmp VString,
 		cx, grow int,
 		mask T.COLORREF,
-		typ, flags T.UINT) T.HIMAGELIST
+		typ, flags T.UINT) (T.HIMAGELIST, error)
 
 	ImageList_BeginDrag func(
-		imlTrack T.HIMAGELIST, Track, xHotspot, yHotspot int) T.BOOL
+		imlTrack T.HIMAGELIST, Track, xHotspot, yHotspot int) (T.BOOL, error)
 
 	ImageList_EndDrag func()
 
-	ImageList_DragEnter func(lock T.HWND, x, y int) T.BOOL
+	ImageList_DragEnter func(lock T.HWND, x, y int) (T.BOOL, error)
 
-	ImageList_DragLeave func(lock T.HWND) T.BOOL
+	ImageList_DragLeave func(lock T.HWND) (T.BOOL, error)
 
-	ImageList_DragMove func(x, y int) T.BOOL
+	ImageList_DragMove func(x, y int) (T.BOOL, error)
 
 	ImageList_SetDragCursorImage func(
-		imlDrag T.HIMAGELIST, drag, xHotspot, yHotspot int) T.BOOL
+		imlDrag T.HIMAGELIST, drag, xHotspot, yHotspot int) (T.BOOL, error)
 
-	ImageList_DragShowNolock func(show T.BOOL) T.BOOL
+	ImageList_DragShowNolock func(show T.BOOL) (T.BOOL, error)
 
 	ImageList_GetDragImage func(
-		pt, hotspot *T.POINT) T.HIMAGELIST
+		pt, hotspot *T.POINT) (T.HIMAGELIST, error)
 
-	ImageList_Read func(stm *T.STREAM) T.HIMAGELIST
+	ImageList_Read func(stm *T.STREAM) (T.HIMAGELIST, error)
 
-	ImageList_Write func(iml T.HIMAGELIST, stm *T.STREAM) T.BOOL
+	ImageList_Write func(iml T.HIMAGELIST, stm *T.STREAM) (T.BOOL, error)
 
 	ImageList_ReadEx func(
-		flags T.DWORD, stm *T.STREAM, riid T.REFIID, v **T.VOID) T.HRESULT
+		flags T.DWORD, stm *T.STREAM, riid T.REFIID, v **T.VOID) (T.HRESULT, error)
 
 	ImageList_WriteEx func(
-		iml T.HIMAGELIST, flags T.DWORD, stm *T.STREAM) T.HRESULT
+		iml T.HIMAGELIST, flags T.DWORD, stm *T.STREAM) (T.HRESULT, error)
 
-	ImageList_GetIconSize func(iml T.HIMAGELIST, x, y *int) T.BOOL
+	ImageList_GetIconSize func(iml T.HIMAGELIST, x, y *int) (T.BOOL, error)
 
-	ImageList_SetIconSize func(iml T.HIMAGELIST, x, y int) T.BOOL
+	ImageList_SetIconSize func(iml T.HIMAGELIST, x, y int) (T.BOOL, error)
 
 	ImageList_GetImageInfo func(
-		iml T.HIMAGELIST, i int, imageInfo *T.IMAGEINFO) T.BOOL
+		iml T.HIMAGELIST, i int, imageInfo *T.IMAGEINFO) (T.BOOL, error)
 
 	ImageList_Merge func(iml1 T.HIMAGELIST,
-		i1 int, iml2 T.HIMAGELIST, i2, x, y int) T.HIMAGELIST
+		i1 int, iml2 T.HIMAGELIST, i2, x, y int) (T.HIMAGELIST, error)
 
-	ImageList_Duplicate func(iml T.HIMAGELIST) T.HIMAGELIST
+	ImageList_Duplicate func(iml T.HIMAGELIST) (T.HIMAGELIST, error)
 
 	ImageList_Copy func(dst T.HIMAGELIST, iDst int,
-		src T.HIMAGELIST, iSrc int, flags T.UINT) T.BOOL
+		src T.HIMAGELIST, iSrc int, flags T.UINT) (T.BOOL, error)
 
 	CreateToolbarEx func(
 		wnd T.HWND,
@@ -134,20 +134,20 @@ var (
 		yButton,
 		xBitmap,
 		yBitmap int,
-		structSize T.UINT) T.HWND
+		structSize T.UINT) (T.HWND, error)
 
 	CreateMappedBitmap func(
 		instance T.HINSTANCE,
 		bitmap T.INT_PTR,
 		flags T.UINT,
 		colorMap *T.COLORMAP,
-		NumMaps int) T.HBITMAP
+		NumMaps int) (T.HBITMAP, error)
 
 	DrawStatusText func(
 		dc T.HDC, rc *T.RECT, text VString, flags T.UINT)
 
 	CreateStatusWindow func(
-		style T.LONG, text VString, parent T.HWND, id T.UINT) T.HWND
+		style T.LONG, text VString, parent T.HWND, id T.UINT) (T.HWND, error)
 
 	MenuHelp func(
 		msg T.UINT,
@@ -158,15 +158,15 @@ var (
 		status T.HWND,
 		ids *T.UINT)
 
-	ShowHideMenuCtl func(wnd T.HWND, flags T.UINT_PTR, info *T.INT) T.BOOL
+	ShowHideMenuCtl func(wnd T.HWND, flags T.UINT_PTR, info *T.INT) (T.BOOL, error)
 
 	GetEffectiveClientRect func(wnd T.HWND, rc *T.RECT, info *T.INT)
 
-	MakeDragList func(lb T.HWND) T.BOOL
+	MakeDragList func(lb T.HWND) (T.BOOL, error)
 
 	DrawInsert func(parent, lb T.HWND, item int)
 
-	LBItemFromPt func(lb T.HWND, pt T.POINT, autoScroll T.BOOL) int
+	LBItemFromPt func(lb T.HWND, pt T.POINT, autoScroll T.BOOL) (int, error)
 
 	CreateUpDownControl func(
 		style T.DWORD,
@@ -175,26 +175,26 @@ var (
 		id int,
 		inst T.HINSTANCE,
 		buddy T.HWND,
-		upper, lower, pos int) T.HWND
+		upper, lower, pos int) (T.HWND, error)
 
-	DSA_Create func(item , itemGrow int) T.HDSA
+	DSA_Create func(item , itemGrow int) (T.HDSA, error)
 
-	DSA_Destroy func(dsa T.HDSA) T.BOOL
+	DSA_Destroy func(dsa T.HDSA) (T.BOOL, error)
 
 	DSA_DestroyCallback func(
 		dsa T.HDSA, cb *T.FNDSAENUMCALLBACK, data *T.VOID)
 
-	DSA_GetItemPtr func(dsa T.HDSA, i int) *T.VOID
+	DSA_GetItemPtr func(dsa T.HDSA, i int) (*T.VOID, error)
 
-	DSA_InsertItem func(dsa T.HDSA, i int, pitem *T.VOID) int
+	DSA_InsertItem func(dsa T.HDSA, i int, pitem *T.VOID) (int, error)
 
-	DPA_Create func(itemGrow int) T.HDPA
+	DPA_Create func(itemGrow int) (T.HDPA, error)
 
-	DPA_Destroy func(dpa T.HDPA) T.BOOL
+	DPA_Destroy func(dpa T.HDPA) (T.BOOL, error)
 
-	DPA_DeletePtr func(dpa T.HDPA, i int) *T.VOID
+	DPA_DeletePtr func(dpa T.HDPA, i int) (*T.VOID, error)
 
-	DPA_DeleteAllPtrs func(dpa T.HDPA) T.BOOL
+	DPA_DeleteAllPtrs func(dpa T.HDPA) (T.BOOL, error)
 
 	DPA_EnumCallback func(
 		dpa T.HDPA, cb *T.FNDPAENUMCALLBACK, data *T.VOID)
@@ -202,14 +202,14 @@ var (
 	DPA_DestroyCallback func(
 		dpa T.HDPA, cb *T.FNDPAENUMCALLBACK, data *T.VOID)
 
-	DPA_SetPtr func(dpa T.HDPA, i int, p *T.VOID) T.BOOL
+	DPA_SetPtr func(dpa T.HDPA, i int, p *T.VOID) (T.BOOL, error)
 
-	DPA_InsertPtr func(dpa T.HDPA, i int, p *T.VOID) int
+	DPA_InsertPtr func(dpa T.HDPA, i int, p *T.VOID) (int, error)
 
-	DPA_GetPtr func(dpa T.HDPA, i T.INT_PTR) *T.VOID
+	DPA_GetPtr func(dpa T.HDPA, i T.INT_PTR) (*T.VOID, error)
 
 	DPA_Sort func(
-		dpa T.HDPA, compare *T.FNDPACOMPARE, lParam T.LPARAM) T.BOOL
+		dpa T.HDPA, compare *T.FNDPACOMPARE, lParam T.LPARAM) (T.BOOL, error)
 
 	DPA_Search func(
 		dpa T.HDPA,
@@ -217,68 +217,68 @@ var (
 		start int,
 		compare *T.FNDPACOMPARE,
 		lParam T.LPARAM,
-		options T.UINT) int
+		options T.UINT) (int, error)
 
 	Str_SetPtrW func(
 		ps *T.WString, //TODO(t):This gets free'd !!!
-		s T.WString) T.BOOL
+		s T.WString) (T.BOOL, error)
 
 	//Was named _TrackMouseEvent and TrackMouseEvent
 	//clashes with winuser.TrackMouseEvent
 	TrackMouseEvent_ func(
-		EventTrack *T.TRACKMOUSEEVENT) T.BOOL
+		EventTrack *T.TRACKMOUSEEVENT) (T.BOOL, error)
 
-	FlatSB_EnableScrollBar func(T.HWND, int, T.UINT) T.BOOL
+	FlatSB_EnableScrollBar func(T.HWND, int, T.UINT) (T.BOOL, error)
 
-	FlatSB_ShowScrollBar func(w T.HWND, code int, f T.BOOL) T.BOOL
+	FlatSB_ShowScrollBar func(w T.HWND, code int, f T.BOOL) (T.BOOL, error)
 
-	FlatSB_GetScrollRange func(w T.HWND, code int, s, e *T.INT) T.BOOL
+	FlatSB_GetScrollRange func(w T.HWND, code int, s, e *T.INT) (T.BOOL, error)
 
 	FlatSB_GetScrollInfo func(
-		w T.HWND, code int, si *T.SCROLLINFO) T.BOOL
+		w T.HWND, code int, si *T.SCROLLINFO) (T.BOOL, error)
 
-	FlatSB_GetScrollPos func(w T.HWND, code int) int
+	FlatSB_GetScrollPos func(w T.HWND, code int) (int, error)
 
-	FlatSB_GetScrollProp func(w T.HWND, propIndex int, p *T.INT) T.BOOL
+	FlatSB_GetScrollProp func(w T.HWND, propIndex int, p *T.INT) (T.BOOL, error)
 
 	FlatSB_SetScrollPos func(
-		w T.HWND, code, pos int, fRedraw T.BOOL) int
+		w T.HWND, code, pos int, fRedraw T.BOOL) (int, error)
 
 	FlatSB_SetScrollInfo func(
-		w T.HWND, code int, si *T.SCROLLINFO, fRedraw T.BOOL) int
+		w T.HWND, code int, si *T.SCROLLINFO, fRedraw T.BOOL) (int, error)
 
 	FlatSB_SetScrollRange func(
-		w T.HWND, code, min, max int, fRedraw T.BOOL) int
+		w T.HWND, code, min, max int, fRedraw T.BOOL) (int, error)
 
 	FlatSB_SetScrollProp func(
-		w T.HWND, index T.UINT, newValue T.INT_PTR, f T.BOOL) T.BOOL
+		w T.HWND, index T.UINT, newValue T.INT_PTR, f T.BOOL) (T.BOOL, error)
 
-	InitializeFlatSB func(T.HWND) T.BOOL
+	InitializeFlatSB func(T.HWND) (T.BOOL, error)
 
-	UninitializeFlatSB func(T.HWND) T.HRESULT
+	UninitializeFlatSB func(T.HWND) (T.HRESULT, error)
 
 	SetWindowSubclass func(
 		Wnd T.HWND,
 		Subclass T.SUBCLASSPROC,
 		IdSubclass T.UINT_PTR,
-		RefData T.DWORD_PTR) T.BOOL
+		RefData T.DWORD_PTR) (T.BOOL, error)
 
 	GetWindowSubclass func(
 		Wnd T.HWND,
 		Subclass T.SUBCLASSPROC,
 		IdSubclass T.UINT_PTR,
-		RefData *T.DWORD_PTR) T.BOOL
+		RefData *T.DWORD_PTR) (T.BOOL, error)
 
 	RemoveWindowSubclass func(
 		hWnd T.HWND,
 		Subclass T.SUBCLASSPROC,
-		IdSubclass T.UINT_PTR) T.BOOL
+		IdSubclass T.UINT_PTR) (T.BOOL, error)
 
 	DefSubclassProc func(
 		Wnd T.HWND,
 		Msg T.UINT,
 		WParam T.WPARAM,
-		LParam T.LPARAM) T.LRESULT
+		LParam T.LPARAM) (T.LRESULT, error)
 
 	DrawShadowText func(
 		dc T.HDC,
@@ -287,7 +287,7 @@ var (
 		rc *T.RECT,
 		Flags T.DWORD,
 		clrText, clrShadow T.COLORREF,
-		xOffset, yOffset int) int
+		xOffset, yOffset int) (int, error)
 )
 
 /*

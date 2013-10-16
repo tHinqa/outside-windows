@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	Netbios func(pncb *T.NCB) T.UCHAR
+	Netbios func(pncb *T.NCB) (T.UCHAR, error)
 )
 
 var Nb30Apis = Apis{{"Netbios", &Netbios}}

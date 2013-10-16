@@ -15,33 +15,33 @@ var (
 	DdeSetQualityOfService func(
 		Client T.HWND,
 		QosNew *T.SECURITY_QUALITY_OF_SERVICE,
-		QosPrev *T.SECURITY_QUALITY_OF_SERVICE) T.BOOL
+		QosPrev *T.SECURITY_QUALITY_OF_SERVICE) (T.BOOL, error)
 
 	ImpersonateDdeClientWindow func(
 		Client T.HWND,
-		Server T.HWND) T.BOOL
+		Server T.HWND) (T.BOOL, error)
 
 	PackDDElParam func(
 		Msg T.UINT,
 		Lo T.UINT_PTR,
-		Hi T.UINT_PTR) T.LPARAM
+		Hi T.UINT_PTR) (T.LPARAM, error)
 
 	UnpackDDElParam func(
 		Msg T.UINT,
 		LParam T.LPARAM,
 		Lo *T.UINT_PTR,
-		Hi *T.UINT_PTR) T.BOOL
+		Hi *T.UINT_PTR) (T.BOOL, error)
 
 	FreeDDElParam func(
 		Msg T.UINT,
-		LParam T.LPARAM) T.BOOL
+		LParam T.LPARAM) (T.BOOL, error)
 
 	ReuseDDElParam func(
 		LParam T.LPARAM,
 		In T.UINT,
 		Out T.UINT,
 		Lo T.UINT_PTR,
-		Hi T.UINT_PTR) T.LPARAM
+		Hi T.UINT_PTR) (T.LPARAM, error)
 )
 
 var DdeANSIApis = Apis{

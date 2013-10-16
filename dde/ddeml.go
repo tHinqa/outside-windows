@@ -14,53 +14,53 @@ var (
 		Inst *DWORD,
 		Callback *FNCALLBACK,
 		Cmd DWORD,
-		Res DWORD) UINT
+		Res DWORD) (UINT, error)
 
-	DdeUninitialize func(Inst DWORD) BOOL
+	DdeUninitialize func(Inst DWORD) (BOOL, error)
 
 	DdeConnectList func(
 		Inst DWORD,
 		Service HSZ,
 		Topic HSZ,
 		ConvList HCONVLIST,
-		CC *CONVCONTEXT) HCONVLIST
+		CC *CONVCONTEXT) (HCONVLIST, error)
 
 	DdeQueryNextServer func(
-		ConvList HCONVLIST, ConvPrev HCONV) HCONV
+		ConvList HCONVLIST, ConvPrev HCONV) (HCONV, error)
 
-	DdeDisconnectList func(ConvList HCONVLIST) BOOL
+	DdeDisconnectList func(ConvList HCONVLIST) (BOOL, error)
 
 	DdeConnect func(
 		Inst DWORD,
 		Service HSZ,
 		Topic HSZ,
-		CC *CONVCONTEXT) HCONV
+		CC *CONVCONTEXT) (HCONV, error)
 
-	DdeDisconnect func(Conv HCONV) BOOL
+	DdeDisconnect func(Conv HCONV) (BOOL, error)
 
-	DdeReconnect func(Conv HCONV) HCONV
+	DdeReconnect func(Conv HCONV) (HCONV, error)
 
 	DdeQueryConvInfo func(
 		Conv HCONV,
 		Transaction DWORD,
-		ConvInfo *CONVINFO) UINT
+		ConvInfo *CONVINFO) (UINT, error)
 
 	DdeSetUserHandle func(
-		Conv HCONV, Id DWORD, User DWORD_PTR) BOOL
+		Conv HCONV, Id DWORD, User DWORD_PTR) (BOOL, error)
 
 	DdeAbandonTransaction func(
-		Inst DWORD, Conv HCONV, Transaction DWORD) BOOL
+		Inst DWORD, Conv HCONV, Transaction DWORD) (BOOL, error)
 
 	DdePostAdvise func(
-		Inst DWORD, Topic HSZ, Item HSZ) BOOL
+		Inst DWORD, Topic HSZ, Item HSZ) (BOOL, error)
 
 	DdeEnableCallback func(
-		Inst DWORD, Conv HCONV, Cmd UINT) BOOL
+		Inst DWORD, Conv HCONV, Cmd UINT) (BOOL, error)
 
-	DdeImpersonateClient func(Conv HCONV) BOOL
+	DdeImpersonateClient func(Conv HCONV) (BOOL, error)
 
 	DdeNameService func(
-		Inst DWORD, S1 HSZ, S2 HSZ, Cmd UINT) HDDEDATA
+		Inst DWORD, S1 HSZ, S2 HSZ, Cmd UINT) (HDDEDATA, error)
 
 	DdeClientTransaction func(
 		Data *BYTE,
@@ -70,7 +70,7 @@ var (
 		Fmt UINT,
 		Type UINT,
 		Timeout DWORD,
-		Result *DWORD) HDDEDATA
+		Result *DWORD) (HDDEDATA, error)
 
 	DdeCreateDataHandle func(
 		Inst DWORD,
@@ -79,42 +79,42 @@ var (
 		Off DWORD,
 		Item HSZ,
 		Fmt UINT,
-		Cmd UINT) HDDEDATA
+		Cmd UINT) (HDDEDATA, error)
 
 	DdeAddData func(
 		Data HDDEDATA,
 		Src *BYTE,
 		C DWORD,
-		Off DWORD) HDDEDATA
+		Off DWORD) (HDDEDATA, error)
 
 	DdeGetData func(
 		Data HDDEDATA,
 		Dst *BYTE,
 		Max DWORD,
-		Off DWORD) DWORD
+		Off DWORD) (DWORD, error)
 
 	DdeAccessData func(
-		Data HDDEDATA, DataSize *DWORD) *BYTE
+		Data HDDEDATA, DataSize *DWORD) (*BYTE, error)
 
-	DdeUnaccessData func(Data HDDEDATA) BOOL
+	DdeUnaccessData func(Data HDDEDATA) (BOOL, error)
 
-	DdeFreeDataHandle func(Data HDDEDATA) BOOL
+	DdeFreeDataHandle func(Data HDDEDATA) (BOOL, error)
 
-	DdeGetLastError func(Inst DWORD) UINT
+	DdeGetLastError func(Inst DWORD) (UINT, error)
 
 	DdeCreateStringHandle func(
-		Inst DWORD, S VString, CodePage int) HSZ
+		Inst DWORD, S VString, CodePage int) (HSZ, error)
 
 	DdeQueryString func(
 		Inst DWORD,
 		S HSZ,
 		OS OVString,
 		hMax DWORD,
-		CodePage int) DWORD
+		CodePage int) (DWORD, error)
 
-	DdeFreeStringHandle func(Inst DWORD, S HSZ) BOOL
+	DdeFreeStringHandle func(Inst DWORD, S HSZ) (BOOL, error)
 
-	DdeKeepStringHandle func(Inst DWORD, S HSZ) BOOL
+	DdeKeepStringHandle func(Inst DWORD, S HSZ) (BOOL, error)
 
-	DdeCmpStringHandles func(S1 HSZ, S2 HSZ) int
+	DdeCmpStringHandles func(S1 HSZ, S2 HSZ) (int, error)
 )
