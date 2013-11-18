@@ -15,7 +15,7 @@ func init() {
 
 var tT *testing.T
 
-func callback2(s PVString, l LONG_PTR) BOOL {
+func callback2(s *VString, l LONG_PTR) BOOL {
 	if l != 123 {
 		return 0
 	}
@@ -23,7 +23,7 @@ func callback2(s PVString, l LONG_PTR) BOOL {
 	return 1
 }
 
-func callback1(s PVString) BOOL {
+func callback1(s *VString) BOOL {
 	tT.Log(*s)
 	return 1
 }

@@ -229,9 +229,9 @@ type FILETIME struct {
 
 type STARTUPINFO struct {
 	Len           DWORD
-	_             *VOID // RESERVED POVString
-	Desktop       POVString
-	Title         POVString
+	_             *VOID // RESERVED *OVString
+	Desktop       *OVString
+	Title         *OVString
 	X             DWORD
 	Y             DWORD
 	XSize         DWORD
@@ -513,12 +513,12 @@ type SYSTEM_POWER_STATUS struct {
 type ACTCTX struct {
 	Size                  ULONG
 	Flags                 DWORD
-	Source                PVString
+	Source                *VString
 	ProcessorArchitecture USHORT
 	LangId                LANGID
-	AssemblyDirectory     PVString
-	ResourceName          PVString
-	ApplicationName       PVString
+	AssemblyDirectory     *VString
+	ResourceName          *VString
+	ApplicationName       *VString
 	Module                HMODULE
 }
 
@@ -861,17 +861,17 @@ const (
 
 type ENUMRESLANGPROC func(
 	Module, HMODULE,
-	Type, Name PVString,
+	Type, Name *VString,
 	Language WORD,
 	Param LONG_PTR) BOOL
 
 type ENUMRESTYPEPROC func(
-	Module HMODULE, Type PVString, Param LONG_PTR) BOOL
+	Module HMODULE, Type *VString, Param LONG_PTR) BOOL
 
 type ENUMRESNAMEPROC func(
 	Module HMODULE,
-	Type PVString,
-	Name PVString, //TODO(t):???? LPSTR
+	Type *VString,
+	Name *VString, //TODO(t):???? LPSTR
 	// lagId WORD missing?
 	Param LONG_PTR) BOOL
 
@@ -1405,7 +1405,7 @@ const (
 
 type WNDENUMPROC func(HWND, LPARAM) BOOL
 
-type NAMEENUMPROC func(PVString, LPARAM) BOOL
+type NAMEENUMPROC func(*VString, LPARAM) BOOL
 
 type WINSTAENUMPROC NAMEENUMPROC
 type DESKTOPENUMPROC NAMEENUMPROC
@@ -1478,8 +1478,8 @@ type WNDCLASS struct {
 	Icon       HICON
 	Cursor     HCURSOR
 	Background HBRUSH
-	MenuName   PVString
-	ClassName  PVString
+	MenuName   *VString
+	ClassName  *VString
 }
 
 type WNDCLASSEX struct {
@@ -1492,8 +1492,8 @@ type WNDCLASSEX struct {
 	Icon       HICON
 	Cursor     HCURSOR
 	Background HBRUSH
-	MenuName   PVString
-	ClassName  PVString
+	MenuName   *VString
+	ClassName  *VString
 	IconSm     HICON
 }
 
@@ -1932,7 +1932,7 @@ type MENUITEMINFO struct {
 	Checked      HBITMAP
 	Unchecked    HBITMAP
 	ItemData     ULONG_PTR
-	TypeData     POVString
+	TypeData     *OVString
 	TypeDataSize UINT
 	Item         HBITMAP
 }
@@ -1943,10 +1943,10 @@ type MSGBOXPARAMS struct {
 	Size           UINT
 	Owner          HWND
 	Instance       HINSTANCE
-	Text           PVString
-	Caption        PVString
+	Text           *VString
+	Caption        *VString
 	Style          MSGBOX_TYPE
-	Icon           PVString
+	Icon           *VString
 	ContextHelpId  DWORD_PTR
 	MsgBoxCallback MSGBOXCALLBACK
 	LanguageId     DWORD
@@ -2523,12 +2523,12 @@ type OUTLINETEXTMETRICW struct {
 
 type GCP_RESULTS struct {
 	StructSize  DWORD
-	OutString   POVString
+	OutString   *OVString
 	Order       *UINT
 	Dx          *int
 	CaretPos    *int
 	Class       AString
-	Glyphs      POVString
+	Glyphs      *OVString
 	GlyphsCount UINT
 	MaxFit      int
 }
@@ -2607,9 +2607,9 @@ type CIEXYZ struct{ X, Y, Z FXPT2DOT30 }
 
 type DOCINFO struct {
 	Size     int
-	DocName  PVString
-	Output   PVString
-	Datatype PVString
+	DocName  *VString
+	Output   *VString
+	Datatype *VString
 	Type     DWORD
 }
 
@@ -2617,7 +2617,7 @@ type POLYTEXT struct {
 	X     int
 	Y     int
 	n     UINT
-	Str   PVString
+	Str   *VString
 	Flags UINT
 	Rect  RECT
 	DX    *int
@@ -3256,8 +3256,8 @@ type SHFILEINFOW struct {
 }
 
 type ENUM_SERVICE_STATUS struct {
-	ServiceName   PVString
-	DisplayName   PVString
+	ServiceName   *VString
+	DisplayName   *VString
 	ServiceStatus SERVICE_STATUS
 }
 
@@ -3275,22 +3275,22 @@ type QUERY_SERVICE_CONFIG struct {
 	ServiceType      DWORD
 	StartType        DWORD
 	ErrorControl     DWORD
-	BinaryPathName   PVString
-	LoadOrderGroup   PVString
+	BinaryPathName   *VString
+	LoadOrderGroup   *VString
 	TagId            DWORD
-	Dependencies     PVString
-	ServiceStartName PVString
-	DisplayName      PVString
+	Dependencies     *VString
+	ServiceStartName *VString
+	DisplayName      *VString
 }
 
 type QUERY_SERVICE_LOCK_STATUS struct {
 	IsLocked     DWORD
-	LockOwner    PVString
+	LockOwner    *VString
 	LockDuration DWORD
 }
 
 type SERVICE_TABLE_ENTRY struct {
-	ServiceName PVString
+	ServiceName *VString
 	ServiceProc *SERVICE_MAIN_FUNCTION
 	//TODO(t):*SERVICE_MAIN_FUNCTIONW
 }
@@ -3340,7 +3340,7 @@ type TRANSMIT_FILE_BUFFERS struct {
 }
 
 type VALENT struct {
-	Valuename PVString
+	Valuename *VString
 	Valuelen  DWORD
 	Valueptr  DWORD_PTR
 	Type      DWORD
@@ -3377,8 +3377,8 @@ type NUMBERFMT struct {
 	NumDigits     UINT
 	LeadingZero   UINT
 	Grouping      UINT
-	DecimalSep    PVString
-	ThousandSep   PVString
+	DecimalSep    *VString
+	ThousandSep   *VString
 	NegativeOrder UINT
 }
 
@@ -3386,33 +3386,33 @@ type CURRENCYFMT struct {
 	NumDigits      UINT
 	LeadingZero    UINT
 	Grouping       UINT
-	DecimalSep     PVString
-	ThousandSep    PVString
+	DecimalSep     *VString
+	ThousandSep    *VString
 	NegativeOrder  UINT
 	PositiveOrder  UINT
-	CurrencySymbol PVString
+	CurrencySymbol *VString
 }
 
-type CALINFO_ENUMPROC func(PVString) BOOL
+type CALINFO_ENUMPROC func(*VString) BOOL
 
-type CALINFO_ENUMPROCEX func(PVString, CALID) BOOL
+type CALINFO_ENUMPROCEX func(*VString, CALID) BOOL
 
-type DATEFMT_ENUMPROC func(PVString) BOOL
+type DATEFMT_ENUMPROC func(*VString) BOOL
 
-type DATEFMT_ENUMPROCEX func(PVString, CALID) BOOL
+type DATEFMT_ENUMPROCEX func(*VString, CALID) BOOL
 
-type TIMEFMT_ENUMPROC func(PVString) BOOL
+type TIMEFMT_ENUMPROC func(*VString) BOOL
 
-//TODO(t):*PVString not handled yet (multiple)
-type LANGUAGEGROUP_ENUMPROC func(LGRPID, *PVString, *PVString, DWORD, LONG_PTR) BOOL
+//TODO(t):**VString not handled yet (multiple)
+type LANGUAGEGROUP_ENUMPROC func(LGRPID, **VString, **VString, DWORD, LONG_PTR) BOOL
 
-type LANGGROUPLOCALE_ENUMPROC func(LGRPID, LCID, *PVString, LONG_PTR) BOOL
+type LANGGROUPLOCALE_ENUMPROC func(LGRPID, LCID, **VString, LONG_PTR) BOOL
 
-type UILANGUAGE_ENUMPROC func(PVString, LONG_PTR) BOOL
+type UILANGUAGE_ENUMPROC func(*VString, LONG_PTR) BOOL
 
-type LOCALE_ENUMPROC func(PVString) BOOL
+type LOCALE_ENUMPROC func(*VString) BOOL
 
-type CODEPAGE_ENUMPROC func(PVString) BOOL
+type CODEPAGE_ENUMPROC func(*VString) BOOL
 
 type GEO_ENUMPROC func(GEOID) BOOL
 
@@ -3427,10 +3427,10 @@ type NETRESOURCE struct {
 	Type        DWORD
 	DisplayType DWORD
 	Usage       DWORD
-	LocalName   PVString
-	RemoteName  PVString
-	Comment     PVString
-	Provider    PVString
+	LocalName   *VString
+	RemoteName  *VString
+	Comment     *VString
+	Provider    *VString
 }
 
 type NETINFOSTRUCT struct {
@@ -4051,16 +4051,16 @@ type SOCKADDR struct {
 //TODO(t):Check VStrings for i/o
 type WSAQUERYSET struct {
 	Size                DWORD
-	ServiceInstanceName PVString
+	ServiceInstanceName *VString
 	ServiceClassId      *GUID
 	Version             *WSAVERSION
-	Comment             PVString
+	Comment             *VString
 	NameSpace           DWORD
 	NSProviderId        *GUID
-	Context             PVString
+	Context             *VString
 	NumberOfProtocols   DWORD
 	AfpProtocols        *AFPROTOCOLS
-	QueryString         PVString
+	QueryString         *VString
 	NumberOfCsAddrs     DWORD
 	SaBuffer            *CSADDR_INFO
 	OutputFlags         DWORD
@@ -4103,13 +4103,13 @@ type SOCKET_ADDRESS struct {
 
 type WSASERVICECLASSINFO struct {
 	ServiceClassId   *GUID
-	ServiceClassName POVString
+	ServiceClassName *OVString
 	Count            DWORD
 	ClassInfos       *WSANSCLASSINFO
 }
 
 type WSANSCLASSINFO struct {
-	Name      PVString
+	Name      *VString
 	NameSpace DWORD
 	ValueType DWORD
 	ValueSize DWORD
@@ -4181,7 +4181,7 @@ type WSANAMESPACE_INFO struct {
 	NameSpace    DWORD
 	Active       BOOL
 	Version      DWORD
-	Identifier   PVString
+	Identifier   *VString
 }
 
 type CONDITIONPROC func(
@@ -4314,8 +4314,8 @@ const (
 	CAL_ITWODIGITYEARMAX
 )
 
-func MAKEINTRESOURCE(i WORD) PVString {
-	return (PVString)(unsafe.Pointer(uintptr(i)))
+func MAKEINTRESOURCE(i WORD) *VString {
+	return (*VString)(unsafe.Pointer(uintptr(i)))
 }
 
 type WINDOW_STYLE DWORD
@@ -5017,12 +5017,12 @@ const (
 )
 
 var ( // Cannot be const as they are pseudo-*string
-	IDI_APPLICATION = (PVString)(unsafe.Pointer(uintptr(32512)))
-	IDI_HAND        = (PVString)(unsafe.Pointer(uintptr(32513)))
-	IDI_QUESTION    = (PVString)(unsafe.Pointer(uintptr(32514)))
-	IDI_EXCLAMATION = (PVString)(unsafe.Pointer(uintptr(32515)))
-	IDI_ASTERISK    = (PVString)(unsafe.Pointer(uintptr(32516)))
-	IDI_WINLOGO     = (PVString)(unsafe.Pointer(uintptr(32517)))
+	IDI_APPLICATION = (*VString)(unsafe.Pointer(uintptr(32512)))
+	IDI_HAND        = (*VString)(unsafe.Pointer(uintptr(32513)))
+	IDI_QUESTION    = (*VString)(unsafe.Pointer(uintptr(32514)))
+	IDI_EXCLAMATION = (*VString)(unsafe.Pointer(uintptr(32515)))
+	IDI_ASTERISK    = (*VString)(unsafe.Pointer(uintptr(32516)))
+	IDI_WINLOGO     = (*VString)(unsafe.Pointer(uintptr(32517)))
 	IDI_WARNING     = IDI_EXCLAMATION
 	IDI_ERROR       = IDI_HAND
 	IDI_INFORMATION = IDI_ASTERISK
@@ -5419,39 +5419,39 @@ const (
 )
 
 var (
-	OCR_NORMAL      = (PVString)(unsafe.Pointer(uintptr(32512)))
-	OCR_IBEAM       = (PVString)(unsafe.Pointer(uintptr(32513)))
-	OCR_WAIT        = (PVString)(unsafe.Pointer(uintptr(32514)))
-	OCR_CROSS       = (PVString)(unsafe.Pointer(uintptr(32515)))
-	OCR_UP          = (PVString)(unsafe.Pointer(uintptr(32516)))
-	OCR_SIZENWSE    = (PVString)(unsafe.Pointer(uintptr(32642)))
-	OCR_SIZENESW    = (PVString)(unsafe.Pointer(uintptr(32643)))
-	OCR_SIZEWE      = (PVString)(unsafe.Pointer(uintptr(32644)))
-	OCR_SIZENS      = (PVString)(unsafe.Pointer(uintptr(32645)))
-	OCR_SIZEALL     = (PVString)(unsafe.Pointer(uintptr(32646)))
-	OCR_NO          = (PVString)(unsafe.Pointer(uintptr(32648)))
-	OCR_HAND        = (PVString)(unsafe.Pointer(uintptr(32649)))
-	OCR_APPSTARTING = (PVString)(unsafe.Pointer(uintptr(32650)))
+	OCR_NORMAL      = (*VString)(unsafe.Pointer(uintptr(32512)))
+	OCR_IBEAM       = (*VString)(unsafe.Pointer(uintptr(32513)))
+	OCR_WAIT        = (*VString)(unsafe.Pointer(uintptr(32514)))
+	OCR_CROSS       = (*VString)(unsafe.Pointer(uintptr(32515)))
+	OCR_UP          = (*VString)(unsafe.Pointer(uintptr(32516)))
+	OCR_SIZENWSE    = (*VString)(unsafe.Pointer(uintptr(32642)))
+	OCR_SIZENESW    = (*VString)(unsafe.Pointer(uintptr(32643)))
+	OCR_SIZEWE      = (*VString)(unsafe.Pointer(uintptr(32644)))
+	OCR_SIZENS      = (*VString)(unsafe.Pointer(uintptr(32645)))
+	OCR_SIZEALL     = (*VString)(unsafe.Pointer(uintptr(32646)))
+	OCR_NO          = (*VString)(unsafe.Pointer(uintptr(32648)))
+	OCR_HAND        = (*VString)(unsafe.Pointer(uintptr(32649)))
+	OCR_APPSTARTING = (*VString)(unsafe.Pointer(uintptr(32650)))
 	// OCR_SIZE   32640   OBSOLETE: use OCR_SIZEALL
 	// OCR_ICON   32641   OBSOLETE: use OCR_NORMAL
 	// OCR_ICOCUR 32647   OBSOLETE: use OIC_WINLOGO
 )
 
 var (
-	IDC_ARROW       = (PVString)(unsafe.Pointer(uintptr(32512))) // MAKEINTRESOURCE(32512)
-	IDC_IBEAM       = (PVString)(unsafe.Pointer(uintptr(32513)))
-	IDC_WAIT        = (PVString)(unsafe.Pointer(uintptr(32514)))
-	IDC_CROSS       = (PVString)(unsafe.Pointer(uintptr(32515)))
-	IDC_UPARROW     = (PVString)(unsafe.Pointer(uintptr(32516)))
-	IDC_SIZENWSE    = (PVString)(unsafe.Pointer(uintptr(32642)))
-	IDC_SIZENESW    = (PVString)(unsafe.Pointer(uintptr(32643)))
-	IDC_SIZEWE      = (PVString)(unsafe.Pointer(uintptr(32644)))
-	IDC_SIZENS      = (PVString)(unsafe.Pointer(uintptr(32645)))
-	IDC_SIZEALL     = (PVString)(unsafe.Pointer(uintptr(32646)))
-	IDC_NO          = (PVString)(unsafe.Pointer(uintptr(32648)))
-	IDC_HAND        = (PVString)(unsafe.Pointer(uintptr(32649)))
-	IDC_APPSTARTING = (PVString)(unsafe.Pointer(uintptr(32650)))
-	IDC_HELP        = (PVString)(unsafe.Pointer(uintptr(32651)))
+	IDC_ARROW       = (*VString)(unsafe.Pointer(uintptr(32512))) // MAKEINTRESOURCE(32512)
+	IDC_IBEAM       = (*VString)(unsafe.Pointer(uintptr(32513)))
+	IDC_WAIT        = (*VString)(unsafe.Pointer(uintptr(32514)))
+	IDC_CROSS       = (*VString)(unsafe.Pointer(uintptr(32515)))
+	IDC_UPARROW     = (*VString)(unsafe.Pointer(uintptr(32516)))
+	IDC_SIZENWSE    = (*VString)(unsafe.Pointer(uintptr(32642)))
+	IDC_SIZENESW    = (*VString)(unsafe.Pointer(uintptr(32643)))
+	IDC_SIZEWE      = (*VString)(unsafe.Pointer(uintptr(32644)))
+	IDC_SIZENS      = (*VString)(unsafe.Pointer(uintptr(32645)))
+	IDC_SIZEALL     = (*VString)(unsafe.Pointer(uintptr(32646)))
+	IDC_NO          = (*VString)(unsafe.Pointer(uintptr(32648)))
+	IDC_HAND        = (*VString)(unsafe.Pointer(uintptr(32649)))
+	IDC_APPSTARTING = (*VString)(unsafe.Pointer(uintptr(32650)))
+	IDC_HELP        = (*VString)(unsafe.Pointer(uintptr(32651)))
 	// IDC_SIZE 32640  OBSOLETE: use IDC_SIZEALL
 	// IDC_ICON 32641  OBSOLETE: use IDC_ARROW
 )

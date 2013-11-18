@@ -45,7 +45,7 @@ var W uint32
 
 var tT *testing.T
 
-func wscallback(c PVString, l LPARAM) BOOL {
+func wscallback(c *VString, l LPARAM) BOOL {
 	if l != 123 {
 		return 0
 	}

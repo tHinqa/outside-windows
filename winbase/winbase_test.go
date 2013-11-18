@@ -30,7 +30,6 @@ func Test(t *testing.T) {
 	t.Logf("%v %v %v %v\n", GetSystemTimeAdjustment(&a, &i, &b), a, i, b)
 
 	GetStartupInfo(&SI)
-	GetStartupInfo(&SI)
 	t.Logf("%+v\n%s\n%s\n", SI, *SI.Desktop, *SI.Title)
 
 	GetLocalTime(&ST)

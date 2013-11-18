@@ -947,7 +947,7 @@ var (
 
 	LoadBitmap func(i T.HINSTANCE, bitmapName VString) T.HBITMAP
 
-	LoadCursor func(i T.HINSTANCE, cursorName PVString) T.HCURSOR
+	LoadCursor func(i T.HINSTANCE, cursorName *VString) T.HCURSOR
 
 	LoadCursorFromFile func(fileName VString) T.HCURSOR
 
@@ -1480,7 +1480,7 @@ var (
 		command T.UINT,
 		data T.ULONG_PTR) T.BOOL
 
-	//Wsprintf func(POVString, VString, ...VArg) int
+	//Wsprintf func(*OVString, VString, ...VArg) int
 	Wsprintf func(*T.WChar, VString, ...VArg) int
 
 	Wvsprintf func(VString, VString, va_list) int
