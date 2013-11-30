@@ -3,6 +3,7 @@ package winbase
 import (
 	. "github.com/tHinqa/outside"
 	. "github.com/tHinqa/outside-windows/types"
+	. "github.com/tHinqa/outside/types"
 	"syscall"
 	"testing"
 )
@@ -59,9 +60,9 @@ func BenchmarkVanillaStartupInfo(b *testing.B) {
 	defer d.Release()
 	for i := 0; i < b.N; i++ {
 		syscall.Syscall(G.Addr(), 1, (uintptr)(Pointer(&SI)), 0, 0)
-		s := CStrToString((uintptr)(Pointer(SI.Desktop)))
+		s := OVString(CStrToString((uintptr)(Pointer(SI.Desktop))))
 		SI.Desktop = &s
-		s = CStrToString((uintptr)(Pointer(SI.Title)))
+		s = OVString(CStrToString((uintptr)(Pointer(SI.Title))))
 		SI.Title = &s
 	}
 }
