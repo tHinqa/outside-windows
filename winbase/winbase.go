@@ -323,7 +323,7 @@ var ( //TODO(t): Verify all
 	AreAnyAccessesGranted func(
 		grantedAccess, desiredAccess T.DWORD) T.BOOL
 
-	AreFileApisANSI func()
+	AreFileApisANSI func() T.BOOL
 
 	AssignProcessToJobObject func(job, process T.HANDLE) T.BOOL
 
